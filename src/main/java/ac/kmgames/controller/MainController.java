@@ -1,7 +1,5 @@
 package ac.kmgames.controller;
 
-import ac.kmgames.model.entity.User;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +14,11 @@ public class MainController{
     @GetMapping("/home")
     public String home(){
         return "home";
+    }
+
+    @GetMapping("/my_page")
+    public String myPage(){
+        return "my_page";
     }
 
     @ResponseBody
