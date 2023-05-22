@@ -50,7 +50,7 @@
                     <label for="email" class="form-label">이메일</label>
                     <input class="text-input" id="email" type="text" name="email" minlength="5" required/>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="checkEmail(this)">중복 확인</button>
+                <button type="button" class="btn" onclick="checkEmail(this)">중복 확인</button>
                 <div class="form-input">
                     <label for="name" class="form-label">이름</label>
                     <input class="text-input" id="name" type="text" name="name" required/>
@@ -99,7 +99,7 @@
                         </span>
                     </div>
                 </div>
-                <button class="btn btn-primary">가입하기</button>
+                <button class="btn">가입하기</button>
             </form>
         </div>
     </section>
