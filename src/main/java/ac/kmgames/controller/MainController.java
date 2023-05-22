@@ -14,7 +14,6 @@ public class MainController{
 
     @GetMapping("/home")
     public String home(HttpSession session){
-        var userData = session.getAttribute("user");
-        return userData instanceof User user && user.getEmail().length() > 4 ? "home-login" : "home";
+        return "home";
     }
 }

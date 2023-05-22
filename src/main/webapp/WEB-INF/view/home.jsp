@@ -1,6 +1,16 @@
+<%@ page import="ac.kmgames.model.entity.User" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<!doctype html>
+<%
+    User user = null;
+    Object obj = session.getAttribute("user");
+    if(obj instanceof User){
+        user = (User) obj;
+    }
+    pageContext.setAttribute("user", user);
+%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="utf-8">
@@ -94,37 +104,65 @@
                 </div>
             </div>
 
-            <div class="col-5">
-                <!-- <div style="width:100%; height: 350px; border: 1px solid black;">
-                    <div class="text-center">로그인</div>
-                    <div class="d-flex">
-                    <div>id찾기</div>
-                    <div>pw찾기</div>
-                    <div>회원가입</div>
-                </div> -->
-                <div style="width:470px; height: 350px; border: 1px solid black; font-size: 15px; font-weight: bold;">
-                    <div style="width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10%;">
-                        <a>
-                            <div>KM GAMES 로그인</div>
-                        </a>
-                    </div>
-                    <div class="d-flex">
-                        <div style="width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 13%;  margin-top:10px; display: flex; align-items: center; justify-content: center;">
-                            <a><div>KM ID 찾기</div></a>
+            <c:choose>
+                <c:when test="${empty user}">
+                    <div class="col-5">
+                        <!-- <div style="width:100%; height: 350px; border: 1px solid black;">
+                            <div class="text-center">로그인</div>
+                            <div class="d-flex">
+                            <div>id찾기</div>
+                            <div>pw찾기</div>
+                            <div>회원가입</div>
+                        </div> -->
+                        <div style="width:470px; height: 350px; border: 1px solid black; font-size: 15px; font-weight: bold;">
+                            <div style="width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10%;">
+                                <a>
+                                    <div>KM GAMES 로그인</div>
+                                </a>
+                            </div>
+                            <div class="d-flex">
+                                <div style="width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 13%;  margin-top:10px; display: flex; align-items: center; justify-content: center;">
+                                    <a><div>KM ID 찾기</div></a>
+                                </div>
+                                <div style="width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 1px; margin-top:10px; display: flex; align-items: center; justify-content: center;">
+                                    <a><div>비밀번호 찾기</div></a>
+                                </div>
+                            </div>
+                            <div style="width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10px;">
+                                <a><div>회원가입</div></a>
+                            </div>
+                            <div class="d-flex">
+                                <div style="margin:auto; margin-top: 10px; font-style: italic;">아이디 찾기</div>
+                                <div style="margin:auto; margin-top: 10px; font-style: italic;">비밀번호 찾기</div>
+                            </div>
                         </div>
-                        <div style="width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 1px; margin-top:10px; display: flex; align-items: center; justify-content: center;">
-                            <a><div>비밀번호 찾기</div></a>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="col-4">
+                        <div style="width: 100%; height: 100%; border: 1px solid black; font-size: 15px;">
+                            <div class="d-flex flex-row" style="margin-left: 50px; margin-top: 30px; font-size: 20px;">
+                                <div>내정보</div>
+                                <div style="padding-left:10%">쿠폰함</div>
+                                <div style="padding-left:10%;">로그아웃</div>
+                            </div>
+                            <div>
+                                <div style="padding-left: 50px; padding-top:25px;">
+                                    <div class="d-flex flex-row"
+                                         style="width: 100%; height: 175px; font-size:20px;">
+                                        <div>넥슨 캐시</div>
+                                        <div style="margin-left: 30px;">222</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-secondary" style="width: 200px;">충전</button>
+                            </div>
                         </div>
                     </div>
-                    <div style="width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10px;">
-                        <a><div>회원가입</div></a>
-                    </div>
-                    <div class="d-flex">
-                        <div style="margin:auto; margin-top: 10px; font-style: italic;">아이디 찾기</div>
-                        <div style="margin:auto; margin-top: 10px; font-style: italic;">비밀번호 찾기</div>
-                    </div>
-                </div>
-            </div>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
     <!-- 카드컨테이너종료 -->
