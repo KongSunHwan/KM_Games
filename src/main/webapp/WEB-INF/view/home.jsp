@@ -106,6 +106,7 @@
 
             <c:choose>
                 <c:when test="${empty user}">
+                    <!-- 로그인 상태가 아니라면 -->
                     <div class="col-5">
                         <!-- <div style="width:100%; height: 350px; border: 1px solid black;">
                             <div class="text-center">로그인</div>
@@ -139,6 +140,7 @@
                     </div>
                 </c:when>
                 <c:otherwise>
+                    <!-- 로그인 상태라면 -->
                     <div class="col-4">
                         <div style="width: 100%; height: 100%; border: 1px solid black; font-size: 15px;">
                             <div class="d-flex flex-row" style="margin-left: 50px; margin-top: 30px; font-size: 20px;">
