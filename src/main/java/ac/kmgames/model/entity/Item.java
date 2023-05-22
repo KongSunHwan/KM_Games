@@ -12,7 +12,7 @@ public class Item{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(length = 255)
+    @Column
     private String name;
 
     @Column

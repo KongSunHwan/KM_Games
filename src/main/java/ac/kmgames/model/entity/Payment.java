@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @NoArgsConstructor
-public class Order{
+public class Payment{
     @Id
     @GeneratedValue
     private int id;
@@ -23,7 +23,7 @@ public class Order{
     @Column
     private String details;
 
-    @Column
+    @Column(insertable = false)
     private Timestamp date;
 
 }

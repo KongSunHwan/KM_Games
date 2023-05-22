@@ -23,6 +23,6 @@ public class Cash{
     @Column
     private String method;
 
-    @Column(name = "payment_date")
+    @Column(name = "payment_date", insertable = false)
     private Timestamp paymentDate;
 }
