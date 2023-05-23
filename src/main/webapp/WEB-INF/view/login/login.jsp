@@ -17,37 +17,6 @@
     			margin-bottom: 20px;
     		}
 
-    		body {
-    			font-family: Arial, sans-serif;
-    		}
-
-    		.form-group {
-    			margin-bottom: 15px;
-    		}
-
-    		label {
-    			display: block;
-    			font-weight: bold;
-    			margin-bottom: 5px;
-    		}
-
-    		#emailok {
-    			width: 100%;
-    			padding: 10px;
-    			border-radius: 3px;
-    			border: 1px solid #ccc;
-    			box-sizing: border-box;
-    		}
-
-    		#emailok {
-    			background-color: #4caf50;
-    			color: #fff;
-    			cursor: pointer;
-    		}
-
-    		#emailok:hover {
-    			background-color: #45a049;
-    		}
     	</style>
 </head>
 <body>
@@ -107,10 +76,6 @@
 						<div class="mb-3">
 							<label for="recipient-email" class="col-form-label">이메일 :</label>
 							<input type="text" class="form-control" id="recipient-email">
-						</div>
-
-						<div class="form-group">
-							<input type="submit" id="emailok" value="이메일 중복 확인">
 						</div>
 					</form>
 				</div>
