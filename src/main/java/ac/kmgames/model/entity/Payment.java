@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 @Data
-@Entity
+@Entity(name = "payment_history")
 @NoArgsConstructor
 public class Payment{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
@@ -25,5 +25,4 @@ public class Payment{
 
     @Column(insertable = false)
     private Timestamp date;
-
 }

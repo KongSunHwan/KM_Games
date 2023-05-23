@@ -1,6 +1,7 @@
 package ac.kmgames.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,9 @@ import java.sql.Timestamp;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class User{
+    public final static User NULL = new User(-1, "", "", "", "", 0, null);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int number;
@@ -31,6 +34,10 @@ public class User{
 
     @Column(name = "register_date", insertable = false)
     private Timestamp registerDate;
+
+    public boolean isValid(){
+        return number > 0 && email.length() > 4 && registerDate != null;
+    }
 
     public void addCash(int amount){
         if(amount <= 0){
