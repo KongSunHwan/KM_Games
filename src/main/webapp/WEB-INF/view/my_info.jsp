@@ -129,7 +129,7 @@
       </blockquote>
 
       <div class="d-flex">
-        <img src="resources/static/img/item06.png" class="img-thumbnail" alt="..." style="width: 250px; height: 250px;">
+        <img src="/resources/img/item06.png" class="img-thumbnail" alt="..." style="width: 250px; height: 250px;">
         &nbsp;&nbsp;
         <table summary="This table shows how to create responsive tables using Datatables' extended functionality"
           class="table table-bordered .table-hover dt-responsive">
