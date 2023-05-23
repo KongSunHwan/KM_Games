@@ -20,6 +20,11 @@ public class CashController{
         this.paymentService = paymentService;
     }
 
+    @GetMapping("/shop")
+    public String shop(){
+        return "cash/shop";
+    }
+
     @GetMapping("/payment_history")
     public String myPage(HttpSession session, HttpServletRequest request, Integer page){
         var obj = session.getAttribute("user");
