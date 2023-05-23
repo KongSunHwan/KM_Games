@@ -115,26 +115,24 @@
                             <div>pw찾기</div>
                             <div>회원가입</div>
                         </div> -->
-                        <div style="width:470px; height: 350px; border: 1px solid black; font-size: 15px; font-weight: bold;">
-                            <div style="width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10%;">
-                                <a>
-                                    <div>KM GAMES 로그인</div>
-                                </a>
+                        <div style="cursor:pointer; width:470px; height: 350px; border: 1px solid black; font-size: 15px; font-weight: bold;">
+                            <div style="width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10%;"
+                            onclick="location='#.jsp'">
+                                <div>KM GAMES 로그인</div>
                             </div>
                             <div class="d-flex">
-                                <div style="width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 13%;  margin-top:10px; display: flex; align-items: center; justify-content: center;">
-                                    <a><div>KM ID 찾기</div></a>
+                                <div style="cursor:pointer; width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 13%;  margin-top:10px; display: flex; align-items: center; justify-content: center;"
+                                onclick="location='#.jsp'">
+                                    <div>KM ID 찾기</div>
                                 </div>
-                                <div style="width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 1px; margin-top:10px; display: flex; align-items: center; justify-content: center;">
-                                    <a><div>비밀번호 찾기</div></a>
+                                <div style="cursor:pointer; width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 1px; margin-top:10px; display: flex; align-items: center; justify-content: center;"
+                                onclick="location='#.jsp'">
+                                    <div>비밀번호 찾기</div>
                                 </div>
                             </div>
-                            <div style="width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10px;">
-                                <a><div>회원가입</div></a>
-                            </div>
-                            <div class="d-flex">
-                                <div style="margin:auto; margin-top: 10px; font-style: italic;">아이디 찾기</div>
-                                <div style="margin:auto; margin-top: 10px; font-style: italic;">비밀번호 찾기</div>
+                            <div style="cursor:pointer; width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10px;"
+                            onclick="location='#.jsp'">
+                                <div>회원가입</div>
                             </div>
                         </div>
                     </div>
@@ -144,15 +142,15 @@
                     <div class="col-4">
                         <div style="width: 100%; height: 100%; border: 1px solid black; font-size: 15px;">
                             <div class="d-flex flex-row" style="margin-left: 50px; margin-top: 30px; font-size: 20px;">
-                                <div>내정보</div>
-                                <div style="padding-left:10%">쿠폰함</div>
-                                <div style="padding-left:10%;">로그아웃</div>
+                                <button class="btn btn-primary">내정보</button>
+                                <button class="btn-primary" style="padding-left:10%">쿠폰함</button>
+                                <button class="btn-primary" style="padding-left:10%;">로그아웃</button>
                             </div>
                             <div>
                                 <div style="padding-left: 50px; padding-top:25px;">
                                     <div class="d-flex flex-row"
                                          style="width: 100%; height: 175px; font-size:20px;">
-                                        <div>넥슨 캐시</div>
+                                        <div><b>넥슨 캐시</b></div>
                                         <div style="margin-left: 30px;">222</div>
                                     </div>
 
