@@ -1,4 +1,4 @@
-<%@ page import="ac.kmgames.model.entity.User" %>
+ <%@ page import="ac.kmgames.model.entity.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -63,76 +63,62 @@
         <h2>추천게임</h2> <br>
         <div class="text-info" style="margin-bottom: 10px;">#인기있는 게임</div>
         <div class="row">
-            <div class="col">
-                <div class="card" style=" height: 350px;">
+            <div class="col-2">
+                <div class="card" style=" height: 300px;">
                     <a href="https://kartrush.nexon.com/2023/event_230303-launching">
-                        <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진" style="width:100% ;"></a>
+                        <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진" style="height:90%"></a>
                     <div class="card-body">
-                        <p class="card-text">카트라이더 </p>
+                        <p class="card-text" style="width:100%; text-align:center;">카트라이더 </p>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
-                <div class="card" style="height: 350px;">
-                    <a href="https://kartrush.nexon.com/2023/event_230303-launching">
-                        <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진"></a>
-                    <div class="card-body">
-                        <p class="card-text">카트라이더 </p>
-                    </div>
-                </div>
-            </div>
+            <div class="col-2">
+                            <div class="card" style=" height: 300px;">
+                                <a href="https://kartrush.nexon.com/2023/event_230303-launching">
+                                    <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진" style="height:90%"></a>
+                                <div class="card-body">
+                                    <p class="card-text" style="width:100%; text-align:center;">카트라이더 </p>
+                                </div>
+                            </div>
+                        </div>
 
+              <div class="col-2">
+                              <div class="card" style=" height: 300px;">
+                                  <a href="https://kartrush.nexon.com/2023/event_230303-launching">
+                                      <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진" style="height:90%"></a>
+                                  <div class="card-body">
+                                      <p class="card-text" style="width:100%; text-align:center;">카트라이더 </p>
+                                  </div>
+                              </div>
+                          </div>
 
-            <div class="col">
-                <div class="card" style="height: 350px;">
-                    <a href="https://kartrush.nexon.com/2023/event_230303-launching">
-                        <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진"></a>
-                    <div class="card-body">
-                        <p class="card-text">카트라이더 </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card" style="height: 350px;">
-                    <a href="https://kartrush.nexon.com/2023/event_230303-launching">
-                        <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진"></a>
-                    <div class="card-body">
-                        <p class="card-text">카트라이더 </p>
-                    </div>
-                </div>
-            </div>
-
+              <div class="col-2">
+                  <div class="card" style=" height: 300px;">
+                      <a href="https://kartrush.nexon.com/2023/event_230303-launching">
+                           <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진" style="height:90%"></a>
+                            <div class="card-body">
+                                   <p class="card-text" style="width:100%; text-align:center;">카트라이더 </p>
+                                </div>
+                        </div>
+              </div>
             <c:choose>
                 <c:when test="${empty user}">
                     <!-- 로그인 상태가 아니라면 -->
-                    <div class="col-5">
-                        <!-- <div style="width:100%; height: 350px; border: 1px solid black;">
-                            <div class="text-center">로그인</div>
-                            <div class="d-flex">
-                            <div>id찾기</div>
-                            <div>pw찾기</div>
-                            <div>회원가입</div>
-                        </div> -->
-                        <div style="cursor:pointer; width:470px; height: 350px; border: 1px solid black; font-size: 15px; font-weight: bold;">
-                            <div style="width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10%;"
-                            onclick="location='#.jsp'">
-                                <div>KM GAMES 로그인</div>
-                            </div>
-                            <div class="d-flex">
-                                <div style="cursor:pointer; width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 13%;  margin-top:10px; display: flex; align-items: center; justify-content: center;"
-                                onclick="location='#.jsp'">
-                                    <div>KM ID 찾기</div>
+                    <div class="col-4">
+                        <div style="width:400px; height: 300px; border: 1px solid black; font-size: 15px; font-weight: bold;">
+                           <div class="d-flex justify-content-center">
+                             <div style="cursor:pointer; width:350px; font-size:25px; text-align:center; padding-top: 4%; height:80px; background-color: black; color:white; margin-top: 15%;"
+                                onclick="location='#.jsp'">KMG 로그인</div>
+                           </div>
+                            <div class="d-flex justify-content-center" style="margin-top:15px;">
+                                <div>
+                                    <a>비밀번호 찾기 </a>
+                                    <div class="vr"></div>&nbsp
                                 </div>
-                                <div style="cursor:pointer; width:174px; height:60px; background-color: black; color:aliceblue; margin-left: 1px; margin-top:10px; display: flex; align-items: center; justify-content: center;"
-                                onclick="location='#.jsp'">
-                                    <div>비밀번호 찾기</div>
-                                </div>
-                            </div>
-                            <div style="cursor:pointer; width:350px; height:60px; background-color: black; color:aliceblue; display: flex; align-items: center; justify-content: center; margin-left: 13%; margin-top: 10px;"
-                            onclick="location='#.jsp'">
-                                <div>회원가입</div>
+                                <div>
+                                     <a>회원가입</a>
+                                 </div>
                             </div>
                         </div>
                     </div>
