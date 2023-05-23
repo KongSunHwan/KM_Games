@@ -39,26 +39,31 @@
                         </c:otherwise>
                     </c:choose>
                 </a>
+                <ul class="dropdown-menu text-small">
                 <c:choose>
                     <c:when test="${empty user}">
-                        <ul class="dropdown-menu text-small" style="display: none">
+                        <li>
+                            <a class="dropdown-item" href="/login"><i class="bi bi-box-arrow-left"></i> 로그인</a>
+                        </li>
                     </c:when>
                     <c:otherwise>
-                        <ul class="dropdown-menu text-small">
+                        <li>
+                            <a class="dropdown-item" href="/my_info"><i class="bi bi-house-fill"></i> 마이페이지</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/wip"><i class="bi bi-cash-coin"></i> 캐시 충전</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/cash_history"><i class="bi bi-cash-coin"></i> 충전 내역</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/payment_history"><i class="bi bi-cart-check"></i> 결제 내역</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i> 로그아웃</a>
+                        </li>
                     </c:otherwise>
                 </c:choose>
-                    <li>
-                        <a class="dropdown-item" href="/my_page"><i class="bi bi-house-fill"></i> 마이페이지</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/purchase_cash"><i class="bi bi-cash-coin"></i> 캐시 충전</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/cash_history"><i class="bi bi-cart-check"></i> 결제 내역</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i> 로그아웃</a>
-                    </li>
                 </ul>
             </div>
         </div>
