@@ -33,20 +33,15 @@
                         <span>로그인</span>
                     </button>
                 </div>
-                <div class="button-wrap">
-                    <button class="login-button" type="button" onclick="location.href='/register'">
-                        <span>회원가입</span>
-                    </button>
-                </div>
             </div>
         </form>
         <br>
         <div class="d-flex justify-content-center">
-            <div style="margin-right: 8px">
-                <button type="button" class="btn btn-primary">아이디 찾기</button>
+            <div>
+                <button type="button" class="btn btn-primary m-1">비밀번호 찾기</button>
             </div>
             <div>
-                <button type="button" class="btn btn-primary">비밀번호 찾기</button>
+                <button type="button" class="btn btn-primary m-1" onclick="location.href='/register'">회원가입</button>
             </div>
         </div>
         <div class="text-wrapper">
