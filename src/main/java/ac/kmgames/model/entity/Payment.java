@@ -12,16 +12,14 @@ import java.sql.Timestamp;
 public class Payment{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int number;
 
     @Column
     private String email;
 
-    @Column
-    private int itemId;
-
-    @Column
-    private String details;
+    @OneToOne
+    @JoinColumn(name="item_id")
+    private Item item;
 
     @Column(insertable = false)
     private Timestamp date;
