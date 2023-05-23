@@ -18,7 +18,7 @@ final public class UserService{
     }
 
     public User getUserByEmail(String email){
-        return userRepository.findByEmail(email).orElse(null);
+        return userRepository.findByEmail(email).orElse(User.NULL);
     }
 
     public boolean save(User user){
