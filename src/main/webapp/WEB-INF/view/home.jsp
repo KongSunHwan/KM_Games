@@ -109,15 +109,15 @@
                         <div style="width:400px; height: 300px; border: 1px solid black; font-size: 15px; font-weight: bold;">
                            <div class="d-flex justify-content-center">
                              <div style="cursor:pointer; width:350px; font-size:25px; text-align:center; padding-top: 4%; height:80px; background-color: black; color:white; margin-top: 15%;"
-                                onclick="location='#.jsp'">KMG 로그인</div>
+                                onclick="location='/login'">KMG 로그인</div>
                            </div>
                             <div class="d-flex justify-content-center" style="margin-top:15px;">
                                 <div>
-                                    <a>비밀번호 찾기 </a>
+                                    <a href="/login" class="link-secondary" style=" text-decoration: none;">비밀번호 찾기 </a>
                                     <div class="vr"></div>&nbsp
                                 </div>
                                 <div>
-                                     <a>회원가입</a>
+                                     <a href="/register" class="link-secondary" style=" text-decoration: none;">회원가입</a>
                                  </div>
                             </div>
                         </div>
