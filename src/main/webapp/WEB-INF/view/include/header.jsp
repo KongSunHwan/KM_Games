@@ -49,7 +49,7 @@
                             <a class="dropdown-item" href="/my_info"><i class="bi bi-house-fill"></i> 마이페이지</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/wip"><i class="bi bi-cash-coin"></i> 캐시 충전</a>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#purchaseCash"><i class="bi bi-cash-coin"></i> 캐시 충전</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="/cash_history"><i class="bi bi-cash-coin"></i> 충전 내역</a>
@@ -67,3 +67,4 @@
         </div>
     </div>
 </header>
+<jsp:include page="cash_modal.jsp"></jsp:include>
