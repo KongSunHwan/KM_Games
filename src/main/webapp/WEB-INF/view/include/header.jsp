@@ -19,11 +19,9 @@
                 <li><a href="#" class="nav-link px-4 link-dark">
                     <i class="bi bi-grid-3x3-gap-fill"></i>&nbsp;전체게임
                 </a></li>
-                <li><a href="#" class="nav-link px-4 link-dark">고스톱</a></li>
-                <li><a href="#" class="nav-link px-4 link-dark">바둑</a></li>
-                <li><a href="#" class="nav-link px-4 link-dark">캐쥬얼</a></li>
-                <li><a href="#" class="nav-link px-4 link-dark">공지사항</a></li>
-                <li><a href="#" class="nav-link px-4 link-dark">고객지원</a></li>
+                <li><a href="/shop" class="nav-link px-4 link-dark">캐시 상점</a></li>
+                <li><a href="/qna" class="nav-link px-4 link-dark">Q&A</a></li>
+                <li><a href="/support" class="nav-link px-4 link-dark">고객지원</a></li>
             </ul>
 
             <div class="dropdown text-end">
