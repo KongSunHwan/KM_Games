@@ -12,7 +12,10 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User{
-    public final static User NULL = new User(-1, "", "", "", "", 0, null);
+    public static User NULL(){
+        return new User(-1, "", "", "", "", 0, null);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int number;
