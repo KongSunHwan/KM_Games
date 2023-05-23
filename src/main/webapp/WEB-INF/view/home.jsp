@@ -114,7 +114,7 @@
                             <div class="d-flex justify-content-center" style="margin-top:15px;">
                                 <div>
                                     <a href="/login" class="link-secondary" style=" text-decoration: none;">비밀번호 찾기 </a>
-                                    <div class="vr"></div>&nbsp
+                                    <div class="vr"></div>&nbsp;
                                 </div>
                                 <div>
                                      <a href="/register" class="link-secondary" style=" text-decoration: none;">회원가입</a>
