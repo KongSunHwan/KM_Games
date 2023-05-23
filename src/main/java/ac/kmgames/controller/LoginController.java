@@ -42,10 +42,7 @@ public class LoginController{
     @PostMapping("/request_login")
     public String requestLogin(HttpSession session, User input){
         var user = userService.getUserByEmail(input.getEmail());
-        if(
-            user == null ||
-            !passwordEncoder.matches(input.getPassword(), user.getPassword())
-        ){
+        if(!passwordEncoder.matches(input.getPassword(), user.getPassword())){
             return
                 "<script>" +
                     "alert('아이디 혹은 비밀번호가 잘못되었습니다');" +
