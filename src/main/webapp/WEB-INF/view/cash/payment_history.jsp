@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="ac.kmgames.model.entity.User" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
     User user;
@@ -121,26 +123,21 @@
                 <p>사용내역</p>
             </blockquote>
             <div>
-                <!-- TODO: get cash history -->
                 <table class="table">
                     <tr>
                         <th scope="col">번호</th>
-                        <th scope="col">일시</th>
-                        <th scope="col">캐시</th>
-                        <th scope="col">상세내역</th>
+                        <th scope="col">구매 내역</th>
+                        <th scope="col">사용 금액</th>
+                        <th scope="col">구매 날짜</th>
                     </tr>
-                    <tr>
-                        <td style="font-weight: bold">1</td>
-                        <td>2023-05-02</td>
-                        <td>5000Cash</td>
-                        <td>게임아바타</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>2023-05-02</td>
-                        <td>10000Cash</td>
-                        <td>닉네임변경권</td>
-                    </tr>
+                    <c:forEach var="payment" items="${payment_history}">
+                        <tr>
+                            <td style="font-weight: bold">${payment.number}</td>
+                            <td>${payment.item.name}</td>
+                            <td>${payment.item.price}캐시</td>
+                            <td>${fn:substringBefore(payment.date, ".0")}</td>
+                        </tr>
+                    </c:forEach>
                 </table>
             </div>
         </div>

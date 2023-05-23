@@ -21,11 +21,14 @@ public class CashController{
     }
 
     @GetMapping("/payment_history")
-    public String myPage(HttpSession session, HttpServletRequest request){
+    public String myPage(HttpSession session, HttpServletRequest request, Integer page){
         var obj = session.getAttribute("user");
         if(obj instanceof User user){
-            request.setAttribute("payment_history", paymentService.getAllHistoryByEmail(user.getEmail()));
+            request.setAttribute(
+                "payment_history",
+                paymentService.getAllHistoryByEmail(user.getEmail(), page == null ? 1 : Math.abs(page))
+            );
         }
-        return "my_page";
+        return "cash/payment_history";
     }
 }
