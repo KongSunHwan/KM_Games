@@ -28,7 +28,7 @@ public class CashController{
 
     @GetMapping("/payment_history")
     public String myPage(HttpSession session, HttpServletRequest request,
-                         @RequestParam(value = "page", defaultValue = "1") int page) {
+                         @RequestParam(value = "page", defaultValue = "1") int page){
         var obj = session.getAttribute("user");
         page = Math.max(page - 1, 0);
 
