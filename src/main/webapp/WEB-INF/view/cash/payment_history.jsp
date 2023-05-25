@@ -17,6 +17,11 @@
     }
     user = (User) obj;
     pageContext.setAttribute("user", user);
+
+    int startPage;
+    int currentPage = (int) request.getAttribute("current_page");
+    pageContext.setAttribute("start_page", startPage = ((currentPage - 1) / 5) * 5 + 1);
+    pageContext.setAttribute("end_page", Math.min(startPage + 4, (int) request.getAttribute("page_count")));
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -141,10 +146,6 @@
                 </table>
             </div>
         </div>
-
-        <c:set var="start_page" value="${Math.floor((current_page - 1) / 5) * 5 + 1}"></c:set>
-        <c:set var="end_page" value="${Math.min(start_page + 4, page_count)}"></c:set>
-
         <div class="d-flex justify-content-center">
             <nav aria-label="Page navigation">
                 <ul class="pagination" style="text-align: center;">
