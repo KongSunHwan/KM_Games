@@ -14,8 +14,9 @@ public class Payment{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int number;
 
-    @Column
-    private String email;
+    @ManyToOne
+    @JoinColumn(name = "email", referencedColumnName = "email")
+    private User user;
 
     @OneToOne
     @JoinColumn(name="item_id")

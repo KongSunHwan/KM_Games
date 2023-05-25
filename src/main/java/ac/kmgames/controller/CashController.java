@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CashController{
@@ -26,12 +27,20 @@ public class CashController{
     }
 
     @GetMapping("/payment_history")
-    public String myPage(HttpSession session, HttpServletRequest request, Integer page){
+    public String myPage(HttpSession session, HttpServletRequest request,
+                         @RequestParam(value = "page", defaultValue = "1") int page) {
         var obj = session.getAttribute("user");
+        page = Math.max(page - 1, 0);
+
         if(obj instanceof User user){
+            request.setAttribute("current_page", page + 1);
+            request.setAttribute(
+                "page_count",
+                Math.max(paymentService.getHistoryCountByEmail(user.getEmail()) / 10, 1)
+            );
             request.setAttribute(
                 "payment_history",
-                paymentService.getAllHistoryByEmail(user.getEmail(), page == null ? 1 : Math.abs(page))
+                paymentService.getHistoryListByEmail(user.getEmail(), page)
             );
         }
         return "cash/payment_history";

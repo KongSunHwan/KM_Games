@@ -107,7 +107,7 @@
                 <div class="bd-example">
                     <blockquote class="blockquote">
                         <p>KM 캐시 이용 내역</p>
-                        <footer class="blockquote-footer">현재 사용 가능한 KM캐시
+                        <footer class="blockquote-footer">현재 보유중인 KM캐시
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                                 <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
@@ -125,14 +125,14 @@
             <div>
                 <table class="table">
                     <tr>
-                        <th scope="col">번호</th>
+                        <th scope="col">순번</th>
                         <th scope="col">구매 내역</th>
                         <th scope="col">사용 금액</th>
                         <th scope="col">구매 날짜</th>
                     </tr>
-                    <c:forEach var="payment" items="${payment_history}">
+                    <c:forEach var="payment" items="${payment_history}" varStatus="status">
                         <tr>
-                            <td style="font-weight: bold">${payment.number}</td>
+                            <td style="font-weight: bold">${(current_page - 1) * 10 + status.index + 1}</td>
                             <td>${payment.item.name}</td>
                             <td>${payment.item.price}캐시</td>
                             <td>${fn:substringBefore(payment.date, ".0")}</td>
@@ -141,14 +141,29 @@
                 </table>
             </div>
         </div>
+
+        <c:set var="start_page" value="${Math.floor((current_page - 1) / 5) * 5 + 1}"></c:set>
+        <c:set var="end_page" value="${Math.min(start_page + 4, page_count)}"></c:set>
+
         <div class="d-flex justify-content-center">
-            <nav aria-label="Page navigation example">
+            <nav aria-label="Page navigation">
                 <ul class="pagination" style="text-align: center;">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <c:if test="${current_page > 5}">
+                        <li class="page-item"><a class="page-link" href="?page=${start_page - 1}">Prev</a></li>
+                    </c:if>
+                    <c:forEach var="item" begin="${start_page}" end="${end_page}">
+                        <c:choose>
+                            <c:when test="${item == current_page}">
+                                <li class="page-item"><a class="page-link disabled" href="#">${item}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="?page=${item}">${item}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    <c:if test="${page_count - current_page > 5}">
+                        <li class="page-item"><a class="page-link" href="?page=${end_page+ 1}">Next</a></li>
+                    </c:if>
                 </ul>
             </nav>
         </div>

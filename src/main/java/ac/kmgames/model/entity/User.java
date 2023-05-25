@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.NaturalId;
 
 import java.sql.Timestamp;
 
@@ -20,7 +21,7 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int number;
 
-    @Column(unique = true)
+    @NaturalId
     private String email;
 
     @Column
