@@ -19,6 +19,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        .card{
+            -webkit-transition: all .4s ease;
+            -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+            -o-transition: all .4s ease;
+            transition: all .4s ease;
+            vertical-align: middle;
+        }
+
+        .card:hover{
+            cursor: pointer;
+            transform: scale(1.12);
+            -ms-transform: scale(1.12); /* IE 9 */
+            -moz-transform:scale(1.12); /* Firefox */
+            -webkit-transform:scale(1.12); /* Safari and Chrome */
+            -o-transform:scale(1.12); /* Opera */
+        }
+    </style>
 </head>
 <body>
     <jsp:include page="include/header.jsp"></jsp:include>
@@ -62,89 +81,42 @@
     <div class="container">
         <h2>추천게임</h2> <br>
         <div class="text-info" style="margin-bottom: 10px;">#인기있는 게임</div>
-        <div class="row">
-            <div class="col-2">
-                <div class="card" style=" height: 300px;">
-                    <a href="https://kartrush.nexon.com/2023/event_230303-launching">
-                        <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진" style="height:90%"></a>
-                    <div class="card-body">
-                        <p class="card-text" style="width:100%; text-align:center;">카트라이더 </p>
+        <div class="row g-0">
+            <c:forEach var="i" begin="1" end="4">
+                <div class="col-2" style="padding-right: 1rem">
+                    <div class="card" style="height: 300px;" onclick="location.href='https://kartdrift.nexon.com/kartdrift/ko/main'">
+                        <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더">
+                        <div class="card-body">
+                            <p class="card-text fw-bold">${i}트라이더</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-2">
-                            <div class="card" style=" height: 300px;">
-                                <a href="https://kartrush.nexon.com/2023/event_230303-launching">
-                                    <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진" style="height:90%"></a>
-                                <div class="card-body">
-                                    <p class="card-text" style="width:100%; text-align:center;">카트라이더 </p>
-                                </div>
-                            </div>
-                        </div>
-
-              <div class="col-2">
-                              <div class="card" style=" height: 300px;">
-                                  <a href="https://kartrush.nexon.com/2023/event_230303-launching">
-                                      <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진" style="height:90%"></a>
-                                  <div class="card-body">
-                                      <p class="card-text" style="width:100%; text-align:center;">카트라이더 </p>
-                                  </div>
-                              </div>
-                          </div>
-
-              <div class="col-2">
-                  <div class="card" style=" height: 300px;">
-                      <a href="https://kartrush.nexon.com/2023/event_230303-launching">
-                           <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더사진" style="height:90%"></a>
-                            <div class="card-body">
-                                   <p class="card-text" style="width:100%; text-align:center;">카트라이더 </p>
-                                </div>
-                        </div>
-              </div>
+            </c:forEach>
             <c:choose>
                 <c:when test="${empty user}">
                     <!-- 로그인 상태가 아니라면 -->
-                    <div class="col-4">
-                        <div style="width:400px; height: 300px; border: 1px solid black; font-size: 15px; font-weight: bold;">
-                           <div class="d-flex justify-content-center">
-                             <div style="cursor:pointer; width:350px; font-size:25px; text-align:center; padding-top: 4%; height:80px; background-color: black; color:white; margin-top: 15%;"
-                                onclick="location='/login'">KMG 로그인</div>
-                           </div>
-                            <div class="d-flex justify-content-center" style="margin-top:15px;">
-                                <div>
-                                    <a href="/login" class="link-secondary" style=" text-decoration: none;">비밀번호 찾기 </a>
-                                    <div class="vr"></div>&nbsp;
-                                </div>
-                                <div>
-                                     <a href="/register" class="link-secondary" style=" text-decoration: none;">회원가입</a>
-                                 </div>
+                    <div class="col-4" style="border: 1px solid black; padding: 6rem 1.8rem">
+                        <div class="d-grid gap-2 align-content-center text-center">
+                            <button class="btn btn-lg btn-dark p-3 fw-bold" onclick="location.href='/login'">KM 로그인</button>
+                            <div class="d-flex justify-content-between">
+                                <a href="/login" class="m-1 link-secondary" style="text-decoration: none;">비밀번호 찾기 </a>
+                                <a href="/register" class="m-1 link-secondary" style="text-decoration: none;">회원가입</a>
                             </div>
                         </div>
                     </div>
                 </c:when>
                 <c:otherwise>
                     <!-- 로그인 상태라면 -->
-                    <div class="col-4">
-                        <div style="width: 100%; height: 100%; border: 1px solid black; font-size: 15px;">
-                            <div class="d-flex flex-row" style="margin-left: 50px; margin-top: 30px; font-size: 20px;">
-                                <button class="btn btn-primary">내정보</button>
-                                <button class="btn-primary" style="padding-left:10%">쿠폰함</button>
-                                <button class="btn-primary" style="padding-left:10%;">로그아웃</button>
+                    <div class="col-4 p-4" style="border: 1px solid black">
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary">내정보</button>
+                            <button class="btn btn-primary">쿠폰함</button>
+                            <button class="btn btn-primary">로그아웃</button>
+                            <div class="d-flex justify-content-between" style="font-size:20px;">
+                                <div><b>KM 캐시: </b></div>
+                                <div class="fw-bold">${user.cash}</div>
                             </div>
-                            <div>
-                                <div style="padding-left: 50px; padding-top:25px;">
-                                    <div class="d-flex flex-row"
-                                         style="width: 100%; height: 175px; font-size:20px;">
-                                        <div><b>넥슨 캐시</b></div>
-                                        <div style="margin-left: 30px;">222</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-secondary" style="width: 200px;">충전</button>
-                            </div>
+                            <button type="button" class="btn btn-secondary">캐시 충전</button>
                         </div>
                     </div>
                 </c:otherwise>
