@@ -162,7 +162,7 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
-                    <c:if test="${page_count - current_page > 5}">
+                    <c:if test="${page_count - start_page > 5}">
                         <li class="page-item"><a class="page-link" href="?page=${end_page+ 1}">Next</a></li>
                     </c:if>
                 </ul>
