@@ -20,12 +20,12 @@
                             <input class="form-control" list="datalistOptions" id="exampleDataList"
                                    placeholder="0&nbsp;원">
                             <datalist id="datalistOptions">
-                                <option value="1,000원">
-                                <option value="3,000원">
-                                <option value="5,000원">
-                                <option value="10,000원">
-                                <option value="50,000원">
-                                <option value="100,000원">
+                                <option value="1000">
+                                <option value="3000">
+                                <option value="5000">
+                                <option value="10000">
+                                <option value="50000">
+                                <option value="100000">
                             </datalist>
                         </div>
                         <div class="col-md-8 ms-auto">
