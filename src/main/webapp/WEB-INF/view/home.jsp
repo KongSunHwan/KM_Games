@@ -82,12 +82,12 @@
         <h2>추천게임</h2> <br>
         <div class="text-info" style="margin-bottom: 10px;">#인기있는 게임</div>
         <div class="row g-0">
-            <c:forEach var="i" begin="1" end="4">
+            <c:forEach var="game" items="${game_list}">
                 <div class="col-2" style="padding-right: 1rem">
-                    <div class="card" style="height: 300px;" onclick="location.href='https://kartdrift.nexon.com/kartdrift/ko/main'">
-                        <img src="/resources/img/kart.png" class="card-img-top" alt="카트라이더">
+                    <div class="card" style="height: 300px;" onclick="location.href='${game.url}'">
+                        <img src="/resources/img/game/${game.imageUrl}" class="card-img-top" alt="${game.name}">
                         <div class="card-body">
-                            <p class="card-text fw-bold">${i}트라이더</p>
+                            <p class="card-text fw-bold">${game.name}</p>
                         </div>
                     </div>
                 </div>
