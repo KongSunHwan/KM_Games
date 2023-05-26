@@ -23,7 +23,7 @@
         <section class="login-wrapper">
             <form action="/request_login" method="post" class="login-wrap">
                 <h1 class="title">
-                    <a href="home"> <img src="/resources/img/KM_GAMES_logo.png" width="250" height="250" /></a>
+                    <a href="home"> <img src="/resources/img/KM_GAMES_logo.png"/></a>
                 </h1>
                 <div class="input-wrapper">
                     <div class="input-wrap">
