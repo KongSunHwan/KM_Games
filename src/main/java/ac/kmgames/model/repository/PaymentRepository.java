@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface PaymentRepository extends PagingAndSortingRepository<Payment, Integer>{
-    int countAllByUser_Email(@Param("userEmail") String email);
+    int countAllByUserEmail(@Param("userEmail") String email);
 
-    List<Payment> findAllByUser_EmailOrderByNumberDesc(@Param("userEmail") String email, Pageable pageable);
+    List<Payment> findAllByUserEmail(@Param("userEmail") String email, Pageable pageable);
 }
