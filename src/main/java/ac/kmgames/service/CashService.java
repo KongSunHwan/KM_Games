@@ -4,6 +4,7 @@ import ac.kmgames.model.entity.Cash;
 import ac.kmgames.model.repository.CashRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,13 @@ final public class CashService{
     }
 
     public List<Cash> getHistoryListByEmail(String email, int page){
-        return repository.findAllByUser_EmailOrderByNumberDesc(email, PageRequest.of(page * 10, (page+1) * 10));
+        return repository.findAllByUserEmail(
+            email,
+            PageRequest.of(page, 20, Sort.by("number").descending())
+        );
+    }
+
+    public int getHistoryCountByEmail(String email){
+        return repository.countAllByUserEmail(email);
     }
 }

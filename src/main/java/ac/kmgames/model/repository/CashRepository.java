@@ -8,5 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CashRepository extends PagingAndSortingRepository<Cash, Integer>{
-    List<Cash> findAllByUser_EmailOrderByNumberDesc(@Param("userEmail") String email, Pageable pageable);
+    int countAllByUserEmail(@Param("userEmail") String email);
+
+    List<Cash> findAllByUserEmail(@Param("userEmail") String email, Pageable pageable);
 }
