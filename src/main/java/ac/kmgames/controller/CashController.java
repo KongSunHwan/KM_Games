@@ -35,8 +35,8 @@ public class CashController{
         if(obj instanceof User user){
             request.setAttribute("current_page", page + 1);
             request.setAttribute(
-                "page_count",
-                Math.max(paymentService.getHistoryCountByEmail(user.getEmail()) / 20, 1)
+                "history_count",
+                paymentService.getHistoryCountByEmail(user.getEmail())
             );
             request.setAttribute(
                 "payment_history",

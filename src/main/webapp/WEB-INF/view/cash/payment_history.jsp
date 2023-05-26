@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="ac.kmgames.model.entity.User" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
@@ -18,10 +19,12 @@
     user = (User) obj;
     pageContext.setAttribute("user", user);
 
-    int startPage;
     int currentPage = (int) request.getAttribute("current_page");
-    pageContext.setAttribute("start_page", startPage = ((currentPage - 1) / 5) * 5 + 1);
-    pageContext.setAttribute("end_page", Math.min(startPage + 4, (int) request.getAttribute("page_count")));
+    int startPage = ((currentPage - 1) / 5) * 5 + 1;
+    int pageCount = (int) Math.ceil((int) request.getAttribute("history_count") / 20.0);
+    pageContext.setAttribute("page_count", pageCount);
+    pageContext.setAttribute("start_page", startPage);
+    pageContext.setAttribute("end_page", Math.min(startPage + 4, pageCount));
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -137,9 +140,9 @@
                     </tr>
                     <c:forEach var="payment" items="${payment_history}" varStatus="status">
                         <tr>
-                            <td class="fw-bold">${(current_page - 1) * 10 + status.index + 1}</td>
+                            <td class="fw-bold">${history_count - (current_page - 1) * 20 - status.index}</td>
                             <td>${payment.item.name}</td>
-                            <td>${payment.item.price}캐시</td>
+                            <td><span class="fw-bold"><fmt:formatNumber type="number" value="${payment.item.price}"/></span> 캐시</td>
                             <td>${fn:substringBefore(payment.date, ".0")}</td>
                         </tr>
                     </c:forEach>
