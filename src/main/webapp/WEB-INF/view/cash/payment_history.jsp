@@ -137,7 +137,7 @@
                     </tr>
                     <c:forEach var="payment" items="${payment_history}" varStatus="status">
                         <tr>
-                            <td style="font-weight: bold">${(current_page - 1) * 10 + status.index + 1}</td>
+                            <td class="fw-bold">${(current_page - 1) * 10 + status.index + 1}</td>
                             <td>${payment.item.name}</td>
                             <td>${payment.item.price}캐시</td>
                             <td>${fn:substringBefore(payment.date, ".0")}</td>
