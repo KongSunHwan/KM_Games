@@ -16,7 +16,7 @@ final public class CashService{
         this.repository = repository;
     }
 
-    public List<Cash> getAllHistoryByEmail(String email, int page){
+    public List<Cash> getHistoryListByEmail(String email, int page){
         return repository.findAllByUser_EmailOrderByNumberDesc(email, PageRequest.of(page * 10, (page+1) * 10));
     }
 }
