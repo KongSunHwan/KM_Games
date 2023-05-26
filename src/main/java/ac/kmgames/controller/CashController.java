@@ -36,7 +36,7 @@ public class CashController{
             request.setAttribute("current_page", page + 1);
             request.setAttribute(
                 "page_count",
-                Math.max(paymentService.getHistoryCountByEmail(user.getEmail()) / 10, 1)
+                Math.max(paymentService.getHistoryCountByEmail(user.getEmail()) / 20, 1)
             );
             request.setAttribute(
                 "payment_history",
