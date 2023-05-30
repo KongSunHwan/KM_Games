@@ -32,10 +32,10 @@
         .card:hover{
             cursor: pointer;
             transform: scale(1.12);
+            -o-transform:scale(1.12); /* Opera */
             -ms-transform: scale(1.12); /* IE 9 */
             -moz-transform:scale(1.12); /* Firefox */
             -webkit-transform:scale(1.12); /* Safari and Chrome */
-            -o-transform:scale(1.12); /* Opera */
         }
     </style>
 
