@@ -79,11 +79,15 @@
     </main>
     <br>
     <!-- 카드컨테이너시작 -->
-    <c:choose>
-                    <c:when test="${empty user}">
-                        <!-- 로그인 상태가 아니라면 -->
     <div class="container">
-        <h2>추천게임</h2> <br>
+        <c:choose>
+            <c:when test="${empty user}">
+            </c:when>
+            <c:otherwise>
+                <h2>${user.getName()} 님 환영합니다!</h2>
+            </c:otherwise>
+        </c:choose>
+        <br>
         <div class="text-info" style="margin-bottom: 10px;">#인기있는 게임</div>
         <div class="row g-0">
             <c:forEach var="game" items="${game_list}">
@@ -96,6 +100,9 @@
                     </div>
                 </div>
             </c:forEach>
+            <c:choose>
+                <c:when test="${empty user}">
+                    <!-- 로그인 상태가 아니라면 -->
                     <div class="col-4" style="border: 1px solid black; padding: 6rem 1.8rem">
                         <div class="d-grid gap-2 align-content-center text-center">
                             <button class="btn btn-lg btn-dark p-3 fw-bold" onclick="location.href='/login'">KM 로그인</button>
@@ -108,20 +115,6 @@
                 </c:when>
                 <c:otherwise>
                     <!-- 로그인 상태라면 -->
-                    <div class="container">
-                            <h2>${user.getName()} 님 환영합니다!</h2> <br>
-                            <div class="text-info" style="margin-bottom: 10px;">#인기있는 게임</div>
-                            <div class="row g-0">
-                                <c:forEach var="game" items="${game_list}">
-                                    <div class="col-2" style="padding-right: 1rem">
-                                        <div class="card" style="height: 300px;" onclick="location.href='${game.url}'">
-                                            <img src="/resources/img/game/${game.imageUrl}" class="card-img-top" alt="${game.name}">
-                                            <div class="card-body">
-                                                <p class="card-text fw-bold">${game.name}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
                     <div class="col-4 p-4" style="border: 1px solid black">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" onclick="location.href='/my_info'">내정보</button>
