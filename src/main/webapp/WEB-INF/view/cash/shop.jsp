@@ -15,137 +15,163 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>캐시 상점</title>
 </head>
+
+<script>
+    function change(num) {
+        var x = document.forms[0];
+        var y = Number(x.count.value) + num;
+        if (y < 1) y = 1;
+        x.count.value = y;
+    }
+</script>
+
 <body>
     <jsp:include page="../include/header.jsp"></jsp:include>
-    <main>
-        <div class="album py-5">
-            <h2 style="text-align: center;">캐시 상점</h2>
+     <main>
+        <div class="album py-5 bg-body-tertiary">
+          <div>
+            <h2 style="text-align: center;">웹 상점
+          </div>
+          <br>
         </div>
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/resources/img/item1.png" role="img"
-                             aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>100 장기알</title>
-                        <rect width="100%" height="100%" fill="#55595c" />
-                        </img>
-                        <div class="card-body">
-                            <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;100원</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group" style="margin: auto;">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/resources/img/item02.png" role="img"
-                             aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>500 장기알</title>
-                        <rect width="100%" height="100%" fill="#55595c" />
-                        </img>
-                        <div class="card-body">
-                            <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;500원</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group" style="margin: auto;">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/resources/img/item03.png" role="img"
-                             aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>1,000 장기알</title>
-                        <rect width="100%" height="100%" fill="#55595c" />
-                        </img>
-                        <div class="card-body">
-                            <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;1,000원</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group" style="margin: auto;">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/resources/img/item05.png" role="img"
-                        aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>추억의 왕게임</title>
-                        <rect width="100%" height="100%" fill="#55595c" />
-                        </img>
-                        <div class="card-body">
-                            <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;10,000원</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group" style="margin: auto;">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
-                                </div>
-                            </div>
-                        </div>
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="resources/img/item1.png" role="img"
+                  aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>100 장기알</title>
+                <rect width="100%" height="100%" fill="#55595c" />
+                </img>
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center; font-size: 18px;">&nbsp;<b>100 장기알</b></p>
+                  <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;100원</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group" style="margin: auto;">
+                      <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">구매</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
                     </div>
+                  </div>
                 </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/resources/img/item06.png" role="img"
-                             aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>장기 달인 아바타</title>
-                        <rect width="100%" height="100%" fill="#55595c" />
-                        </img>
-                        <div class="card-body">
-                            <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;10,000원</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group" style="margin: auto;">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/resources/img/item07.png" role="img"
-                             aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <title>장기 공주 아바타</title>
-                        <rect width="100%" height="100%" fill="#55595c" />
-                        </img>
-                        <div class="card-body">
-                            <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;10,000원</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group" style="margin: auto;">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="padding-top: 30px; margin: auto;" class="d-flex justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
-                </div>
+              </div>
             </div>
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="resources/img/item02.png" role="img"
+                  aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>500 장기알</title>
+                <rect width="100%" height="100%" fill="#55595c" />
+                </img>
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center; font-size: 18px;">&nbsp;<b>500 장기알</b></p>
+                  <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;500원</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group" style="margin: auto;">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="resources/img/item03.png" role="img"
+                  aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>1,000 장기알</title>
+                <rect width="100%" height="100%" fill="#55595c" />
+                </img>
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center; font-size: 18px;">&nbsp;<b>1,000 장기알</b></p>
+                  <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;1,000원</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group" style="margin: auto;">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="resources/img/item05.png" role="img"
+                  aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>추억의 왕게임</title>
+                <rect width="100%" height="100%" fill="#55595c" />
+                </img>
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center; font-size: 18px;">&nbsp;<b>추억의 왕게임</b></p>
+                  <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;10,000원</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group" style="margin: auto;">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="resources/img/item06.png" role="img"
+                  aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>장기 달인 아바타</title>
+                <rect width="100%" height="100%" fill="#55595c" />
+                </img>
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center; font-size: 18px;">&nbsp;<b>장기 달인 아바타</b></p>
+                  <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;10,000원</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group" style="margin: auto;">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="resources/img/item07.png" role="img"
+                  aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>장기 공주 아바타</title>
+                <rect width="100%" height="100%" fill="#55595c" />
+                </img>
+                <div class="card-body">
+                  <p class="card-text" style="text-align: center; font-size: 18px;">&nbsp;<b>장기 공주 아바타</b></p>
+                  <p class="card-text" style="text-align: center;"><i class="bi bi-cash-coin"></i>&nbsp;10,000원</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group" style="margin: auto;">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">구매</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">상세내용</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding-top: 30px; margin: auto;" class="d-flex justify-content-center">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
         </div>
-    </main>
+      </main>
     <div style="z-index: 999999" class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
                 aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
@@ -194,6 +220,57 @@
         </ul>
     </div>
     <jsp:include page="../include/footer.jsp"></jsp:include>
+
+    <form>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">아이템 구매하기</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h4 style="text-align: center;"><b>장기 달인 아바타</b></h4>
+                            <div style="text-align: center; font-size: 13px;" class="text-black-50">상품을 구매하시겠습니까?</div>
+                            <hr>
+                            <div class="d-flex">
+                                * 구매수량
+                                <div style="margin-top: -5px; margin-left: 50px;">
+                                    <button type="button" class="btn btn-dark btn-sm" onclick="change(-1)">감소</button>
+                                    <input type="text" name="count" value="1" style="width: 30px;" />
+                                    <button type="button" class="btn btn-dark btn-sm" onclick="change(1)">증가</button>
+                                </div>
+                                <div style="margin-left: 80px;" class="text-primary">9,500 KM 캐시</div>
+                            </div>
+                            <hr>
+                            <table class="table table-striped-columns table-bordered">
+                                <tr>
+                                    <th scope="row" style="width: 30%; text-align: center;">보유 캐시</th>
+                                    <td style="text-align: center;">&nbsp;&nbsp;2,945</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="width: 30%; text-align: center;" class="text-danger">차감 캐시</th>
+                                    <td style="text-align: center;" class="text-danger">- 9,500</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="width: 30%; text-align: center;" class="text-primary">잔여 캐시</th>
+                                    <td style="text-align: center;" class="text-primary">- 6,555</td>
+                                </tr>
+                            </table>
+                            <div class="text-black-50">
+                                <div style="font-size: 12px;">결제 완료 즉시 아이템 지급이 진행되며, 청약철회가 불가능합니다.</div>
+                                <div style="font-size: 12px;">아이템은 게임 내 [아이템] 으로 지급되며, 최대 30분까지 지급이 지연될 수 있습니다.</div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">결제하기</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
     <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
             crossorigin="anonymous"></script>
