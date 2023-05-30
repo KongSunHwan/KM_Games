@@ -38,6 +38,7 @@
             -o-transform:scale(1.12); /* Opera */
         }
     </style>
+
 </head>
 <body>
     <jsp:include page="include/header.jsp"></jsp:include>
@@ -109,9 +110,9 @@
                     <!-- 로그인 상태라면 -->
                     <div class="col-4 p-4" style="border: 1px solid black">
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary">내정보</button>
-                            <button class="btn btn-primary">쿠폰함</button>
-                            <button class="btn btn-primary">로그아웃</button>
+                            <button class="btn btn-primary" onclick="location.href='/my_info'">내정보</button>
+                            <button class="btn btn-primary" >쿠폰함</button>
+                            <button class="btn btn-primary" onclick="location.href='/logout'">로그아웃</button>
                             <div class="d-flex justify-content-between" style="font-size:20px;">
                                 <div><b>KM 캐시: </b></div>
                                 <div class="fw-bold">${user.cash}</div>
