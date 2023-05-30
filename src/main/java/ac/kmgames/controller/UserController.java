@@ -1,11 +1,14 @@
 package ac.kmgames.controller;
 
+import ac.kmgames.model.entity.User;
 import ac.kmgames.service.GameService;
 import ac.kmgames.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -44,4 +47,25 @@ public class UserController{
                 "history.back();" +
             "</script>";
     }
+
+    //test
+    @GetMapping("/my_info2")
+    public String my_page_nav(){
+        return "my_page/my_info2";
+    }
+    //test
+    @GetMapping("/change_pw")
+    public String change_pw(){
+        return "my_page/change_pw";
+    }
+
+    //test
+    @GetMapping("/usage_detail")
+    public String usage_detail(){
+        return "my_page/usage_detail";
+    }
+
+
+
+
 }
