@@ -32,10 +32,10 @@
         .card:hover{
             cursor: pointer;
             transform: scale(1.12);
+            -o-transform:scale(1.12); /* Opera */
             -ms-transform: scale(1.12); /* IE 9 */
             -moz-transform:scale(1.12); /* Firefox */
             -webkit-transform:scale(1.12); /* Safari and Chrome */
-            -o-transform:scale(1.12); /* Opera */
         }
     </style>
 
@@ -80,7 +80,14 @@
     <br>
     <!-- 카드컨테이너시작 -->
     <div class="container">
-        <h2>추천게임</h2> <br>
+        <c:choose>
+            <c:when test="${empty user}">
+            </c:when>
+            <c:otherwise>
+                <h2>${user.getName()} 님 환영합니다!</h2>
+            </c:otherwise>
+        </c:choose>
+        <br>
         <div class="text-info" style="margin-bottom: 10px;">#인기있는 게임</div>
         <div class="row g-0">
             <c:forEach var="game" items="${game_list}">
