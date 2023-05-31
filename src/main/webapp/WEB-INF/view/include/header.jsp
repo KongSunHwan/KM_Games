@@ -16,9 +16,6 @@
                 <img src="/resources/img/KM_GAMES_logo.png" style="height: 80px;">
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-4 link-dark">
-                    <i class="bi bi-grid-3x3-gap-fill"></i>&nbsp;전체게임
-                </a></li>
                 <li><a href="/shop" class="nav-link px-4 link-dark">캐시 상점</a></li>
                 <li><a href="/qna" class="nav-link px-4 link-dark">Q&A</a></li>
                 <li><a href="/support" class="nav-link px-4 link-dark">고객지원</a></li>
