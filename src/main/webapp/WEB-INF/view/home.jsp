@@ -19,6 +19,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
     <style>
         .card{
             -webkit-transition: all .4s ease;
@@ -38,7 +40,7 @@
             -webkit-transform:scale(1.12); /* Safari and Chrome */
         }
     </style>
-
+    <link rel="icon" href="/resources/icon/KM_GAMES_logo_icon.png" />
 </head>
 <body>
     <jsp:include page="include/header.jsp"></jsp:include>
@@ -132,6 +134,8 @@
         </div>
     </div>
     <!-- 카드컨테이너종료 -->
+    
+      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <jsp:include page="include/footer.jsp"></jsp:include>
     <jsp:include page="include/cash_modal.jsp"></jsp:include>
 
