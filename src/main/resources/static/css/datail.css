@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+body {
+	/*     font-family: 'NanumBarunGothic';*/
+	font-family: "Nanum Barun Gothic";
+	font-weight: 300;
+	font-size: 15px;
+	overflow-y: hidden;
+}
+
+/*reset css*/
+* {
+	margin: 0;
+	padding: 0;
+}
+
+ul li,
+ol li {
+	list-style: none;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+	outline: none;
+}
+
+a:hover,
+a:active {
+	color: black;
+	text-decoration: none;
+}
+
+.center {
+	position: absolute;
+	left: 50%;
+}
+
+/*전체 배경 이미지*/
+#wrapper {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: url(../img/back.jpg) no-repeat;
+	position: absolute;
+	margin-bottom: 20px;
+}
+
+/*각 영역*/
+#wrapper > section {
+	width: 100%;
+	height: 100%;
+	float: left;
+	position: relative;
+}
+
+#main > .login {
+	position: fixed;
+	right: 1%;
+	top: 3%;
+	z-index: 9999;
+}
+
+#main > .login ul {
+	font-weight: 600;
+	font-size: 16px;
+	position: relative;
+}
+
+#main > .login ul li {
+	float: left;
+	width: 80px;
+	height: 20px;
+	text-align: center;
+	padding: 8px;
+	position: relative;
+}
+
+#main > .login ul li:nth-child(1):after,
+#main > .login ul li:nth-child(2):after {
+	color: rgba(255, 255, 255, 0.5);
+	position: absolute;
+	top: 24%;
+	right: -3%;
+	content: "|";
+}
+
+#main > .login ul li a {
+	color: rgba(255, 255, 255, 0.9);
+	width: 80px;
+	height: 20px;
+	display: block;
+}
+
+#main > .login ul li a:hover {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+
+/* 메인 페이지 */
+
+#main .main_logo {
+	width: 775px;
+	height: 700px;
+	top: 6%;
+	margin-left: -387.5px;
+	text-indent: -9999px;
+}
+
+#main .logo {
+    margin-left: -279px;
+    margin-top: 38px;
+    background: url(../img/KM_GAMES_logo.png);
+    width: 409px;
+    height: 173px;
+}
+
+#main .video_frame {
+	top: 40%;
+	margin-left: -225px;
+}
+
+#main .game_start {
+    display: block;
+    width: 463px;
+    height: 182px;
+    background: url(../img/btn_start.png);
+    top: 85%;
+    margin-left: -236px;
+    animation: start 7s steps(22) infinite;
+    opacity: 0.9;
+}
+
+
+
