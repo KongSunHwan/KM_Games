@@ -57,13 +57,12 @@ a:active {
 #main > .login {
 	position: fixed;
 	right: 1%;
-	top: 3%;
 	z-index: 9999;
 }
 
 #main > .login ul {
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 20px;
 	position: relative;
 }
 
@@ -96,6 +95,20 @@ a:active {
 	color: rgba(255, 255, 255, 0.5);
 }
 
+/*로고*/
+#main > .games_logo {
+    text-indent: -9973px;
+    background: url(../img/Play_logo.png) no-repeat;
+    background-size: contain;
+    width: 500px;
+    height: 400px;
+    position: fixed;
+    top: 1%;
+    display: block;
+    z-index: 9999;
+    margin-left: -90px;
+    margin-top: -50px;
+}
 
 /* 메인 페이지 */
 
@@ -113,6 +126,15 @@ a:active {
     background: url(../img/KM_GAMES_logo.png);
     width: 409px;
     height: 173px;
+}
+
+#main .video {
+	width: 775px;
+	height: 398px;
+	top: 30%;
+	position: absolute;
+	margin-left: 10px;
+	background: url(../img/main_video.png);
 }
 
 #main .video_frame {

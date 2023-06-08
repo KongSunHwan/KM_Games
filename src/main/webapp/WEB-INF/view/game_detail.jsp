@@ -8,7 +8,6 @@
 	<title>KM_Games 장기게임</title>
 	<link rel="icon" href="img/KM_GAMES_logo.png" type="image/x-icon" sizes="36x36" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<script src="js/jquery.mousewheel.js"></script>
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -19,12 +18,30 @@
 		rel="stylesheet" type="text/css" />
 
 	<link rel="stylesheet" type="text/css" href="resources/css/datail.css" />
+	<style>
+    		.game_start {
+    			transition: transform 0.2s ease-in-out;
+    		}
+
+    		.game_start:hover {
+    			transform: scale(1.1);
+    		}
+    	</style>
+
+    	<script>
+    		$(document).ready(function () {
+    			$(".game_start").click(function () {
+    				$(this).toggleClass("blur");
+    			});
+    		});
+    	</script>
 </head>
 
 <body>
 <jsp:include page="include/header_detail.jsp"></jsp:include>
 	<div id="wrapper">
 		<section id="main">
+		<a class="games_logo" href="#">장기왕</a>
 
 			<div class="login">
 				<ul>
@@ -50,7 +67,7 @@
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 					allowfullscreen>
 				</iframe>
-				<div style="background-color: blueviolet;">
+				<div>
 					<a class="game_start center" href="#">
 						게임 시작
 					</a>
