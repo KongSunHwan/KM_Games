@@ -30,6 +30,11 @@ public class MainController{
         return "home";
     }
 
+    @GetMapping("/game")
+    public String game(){
+        return "game_detail";
+    }
+
     @ResponseBody
     @GetMapping("*")
     public String preparedFeature(){

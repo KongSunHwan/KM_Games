@@ -94,7 +94,7 @@
         <div class="row g-0">
             <c:forEach var="game" items="${game_list}">
                 <div class="col-2" style="padding-right: 1rem">
-                    <div class="card" style="height: 300px;" onclick="location.href='/game_detail'">
+                    <div class="card" style="height: 300px;" onclick="location.href='${game.url}'">
                         <img src="/resources/img/game/${game.imageUrl}" class="card-img-top" alt="${game.name}">
                         <div class="card-body">
                             <p class="card-text fw-bold">${game.name}</p>
