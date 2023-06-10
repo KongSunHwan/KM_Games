@@ -1,7 +1,6 @@
  <%@ page import="ac.kmgames.model.entity.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     User user = null;
     Object obj = session.getAttribute("user");
@@ -95,7 +94,7 @@
             <c:forEach var="game" items="${game_list}">
                 <div class="col-2" style="padding-right: 1rem">
                     <div class="card" style="height: 300px;" onclick="location.href='${game.url}'">
-                        <img src="/resources/img/game/${game.imageUrl}" class="card-img-top" alt="${game.name}">
+                        <img src="/resources/img/game/${game.imageUrl}" class="card-img-top"">
                         <div class="card-body">
                             <p class="card-text fw-bold">${game.name}</p>
                         </div>

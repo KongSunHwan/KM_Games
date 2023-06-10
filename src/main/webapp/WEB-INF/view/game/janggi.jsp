@@ -38,7 +38,7 @@
 </head>
 
 <body>
-<jsp:include page="include/header_detail.jsp"></jsp:include>
+<jsp:include page="../include/header_detail.jsp"></jsp:include>
 	<div id="wrapper">
 		<section id="main">
 		<a class="games_logo" href="#">장기왕</a>
@@ -68,7 +68,7 @@
 					allowfullscreen>
 				</iframe>
 				<div>
-					<a class="game_start center" href="#">
+					<a class="game_start center" onclick="alert('장기는 현재 준비중입니다'); return false;">
 						게임 시작
 					</a>
 				</div>

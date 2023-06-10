@@ -22,6 +22,6 @@ public class GameController{
 
     @GetMapping("/2048")
     public String game_2048(){
-        return "game/2048";
+        return "web_game/2048_ingame";
     }
 }
