@@ -91,10 +91,15 @@
         <br>
         <div class="text-info" style="margin-bottom: 10px;">#인기있는 게임</div>
         <div class="row g-0">
-            <c:forEach var="game" items="${game_list}">
+            <c:forEach var="game" items="${game_list}" end="3">
                 <div class="col-2" style="padding-right: 1rem">
+                <c:if test="${empty game.url}">
+                    <div class="card" style="height: 300px;" onclick="alert('현재 준비중입니다.');">
+                </c:if>
+                <c:if test="${!empty game.url}">
                     <div class="card" style="height: 300px;" onclick="location.href='${game.url}'">
-                        <img src="/resources/img/game/${game.imageUrl}" class="card-img-top"">
+                </c:if>
+                        <img src="/resources/img/game/${game.imageUrl}" class="card-img-top" onerror="this.onerror=null; this.src='/resources/img/game/wip.png';">
                         <div class="card-body">
                             <p class="card-text fw-bold">${game.name}</p>
                         </div>
