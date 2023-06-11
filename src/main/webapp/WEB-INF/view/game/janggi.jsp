@@ -68,7 +68,7 @@
 					allowfullscreen>
 				</iframe>
 				<div>
-					<a class="game_start center" onclick="alert('장기는 현재 준비중입니다'); return false;">
+					<a class="game_start center" onclick="alert('오픈 준비중입니다'); return false;">
 						게임 시작
 					</a>
 				</div>
