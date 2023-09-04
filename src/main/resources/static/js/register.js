@@ -27,7 +27,7 @@ function checkEmail(element){
 
     $.ajax({
         type: 'POST',
-        url: '/exists_email',
+        url: '/exists_user',
         data: {email: document.getElementById('email').value},
         success: function(data){
             if(data){

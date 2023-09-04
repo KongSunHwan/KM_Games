@@ -8,7 +8,9 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class InformationController{
@@ -44,5 +46,25 @@ public class InformationController{
             );
         }
         return "my_info/payment_history";
+    }
+
+    @GetMapping("/cash_history")
+    public String cashHistory(HttpSession session, HttpServletRequest request,
+                         @RequestParam(value = "page", defaultValue = "1") int page){
+        var obj = session.getAttribute("user");
+        page = Math.max(page - 1, 0);
+
+        if(obj instanceof User user){
+            request.setAttribute("current_page", page + 1);
+            request.setAttribute(
+                "history_count",
+                cashService.getHistoryCountByEmail(user.getEmail())
+            );
+            request.setAttribute(
+                "payment_history",
+                    cashService.getHistoryListByEmail(user.getEmail(), page)
+            );
+        }
+        return "my_info/cash_history";
     }
 }

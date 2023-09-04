@@ -18,8 +18,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-
     <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
     <style>
         .card{
             -webkit-transition: all .4s ease;
@@ -124,7 +125,7 @@
                     <div class="col-4 p-4" style="border: 1px solid black">
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" onclick="location.href='/my_info'">내정보</button>
-                            <button class="btn btn-primary" >쿠폰함</button>
+                            <button class="btn btn-primary" onclick="alert('현재 준비중인 기능입니다.')">쿠폰함</button>
                             <button class="btn btn-primary" onclick="location.href='/logout'">로그아웃</button>
                             <div class="d-flex justify-content-between" style="font-size:20px;">
                                 <div><b>KM 캐시: </b></div>
@@ -144,7 +145,7 @@
     <jsp:include page="include/cash_modal.jsp"></jsp:include>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-            crossorigin="anonymous"></script>
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
 </body>
 </html>

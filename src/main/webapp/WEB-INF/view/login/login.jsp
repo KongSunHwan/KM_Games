@@ -10,6 +10,7 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="/resources/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
     <style>
         .error-wrapper {
             color: red;
@@ -17,6 +18,68 @@
             margin-bottom: 20px;
         }
     </style>
+    <script>
+        let currentEmail;
+        function checkUser(){
+            const name = $('#recipient-name');
+            const email = $('#recipient-email');
+            $.ajax({
+                type: 'POST',
+                url: '/exists_user',
+                data: {
+                    name: name.val(),
+                    email: email.val(),
+                },
+                success: function(data){
+                    if(data){
+                        document.getElementById('lblName').innerText = "비밀번호";
+                        document.getElementById('lblEmail').innerText = "비밀번호 확인";
+
+                        currentEmail = email.val();
+
+                        name.val('');
+                        email.val('');
+                        name.attr('type', 'password');
+                        email.attr('type', 'password');
+                        $('#btnConfirm').attr('onclick', 'checkPw()');
+                    }else{
+                        alert('해당 정보에 해당되는 계정이 존재하지 않습니다');
+                    }
+                },
+                error: function(request, status, thrown){}
+            });
+        }
+
+        function checkPw(){
+            const pw = document.getElementById('recipient-name').value;
+            if(pw.length < 4){
+                alert("비밀번호가 너무 짧습니다");
+                return false;
+            }
+            if(pw !== document.getElementById('recipient-email').value){
+                alert("비밀번호를 확인 후 다시 입력해주세요");
+                return false;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/change_password_without_login',
+                data: {
+                    email: currentEmail,
+                    password: pw
+                },
+                success: function(data){
+                    if(data){
+                        alert('비밀번호가 변경되었습니다');
+                    }else{
+                        alert('비밀번호가 올바르지 않습니다');
+                    }
+                    location.reload();
+                },
+                error: function(request, status, thrown){}
+            });
+            return true;
+        }
+    </script>
 </head>
 <body>
     <main>
@@ -69,17 +132,17 @@
 				<div class="modal-body">
 					<form>
 						<div class="mb-3">
-							<label for="recipient-name" class="col-form-label">이름 :</label>
-							<input type="text" class="form-control" id="recipient-name">
+							<label for="recipient-name" class="col-form-label" id="lblName">이름 :</label>
+							<input type="text" class="form-control" id="recipient-name" required>
 						</div>
 						<div class="mb-3">
-							<label for="recipient-email" class="col-form-label">이메일 :</label>
-							<input type="text" class="form-control" id="recipient-email">
+							<label for="recipient-email" class="col-form-label" id="lblEmail">이메일 :</label>
+							<input type="email" class="form-control" id="recipient-email" required>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">확인</button>
+					<button type="button" class="btn btn-primary" onclick="checkUser()" id="btnConfirm">확인</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 				</div>
 			</div>

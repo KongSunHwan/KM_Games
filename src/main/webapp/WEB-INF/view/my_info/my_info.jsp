@@ -28,6 +28,57 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    <script>
+        function changePassword(){
+            const pw = document.getElementById('password').value;
+            if(pw.length < 4){
+                alert("비밀번호가 너무 짧습니다");
+                return;
+            }
+            if(pw !== document.getElementById('password-confirm').value){
+                alert("비밀번호를 확인 후 다시 입력해주세요");
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/change_password',
+                data: {password: pw},
+                success: function(data){
+                    if(data){
+                        alert('비밀번호가 변경되었습니다.');
+                        location.reload();
+                    }else{
+                        alert('비밀번호 변경에 실패하였습니다.');
+                    }
+                },
+                error: function(request, status, thrown){}
+            });
+        }
+
+        function changeNickname(){
+            const nick = $('#nickname').val();
+            if(nick.length < 2){
+                alert('닉네임 길이가 너무 짧습니다.');
+                return;
+            }
+            
+            $.ajax({
+                type: 'POST',
+                url: '/change_nickname',
+                data: {nickname: nick},
+                success: function(data){
+                    if(data){
+                        alert('닉네임이 변경되었습니다.');
+                        location.reload();
+                    }else{
+                        alert('닉네임 변경에 실패하였습니다.');
+                    }
+                },
+                error: function(request, status, thrown){}
+            });
+        }
+    </script>
 </head>
 <body>
     <%@ include file="../include/my_info_navbar.jsp"%>
@@ -40,34 +91,28 @@
             &nbsp;&nbsp;
             <table summary="This table shows how to create responsive tables using Datatables' extended functionality"
                    class="table table-bordered .table-hover dt-responsive">
-                <thead>
                 <tr style="text-align: center">
                     <th class="email" colspan="4">개인정보 조회 & 변경</th>
                 </tr>
-                </thead>
-                <tbody>
                 <tr>
                     <td style="width: 20%; text-align: center;"><b>이메일</b></td>
-                    <td>
-                        a**@gmail.com
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                data-bs-whatever="@mdo">변경</button>
-                        <button class="btn btn-primary btn-sm">삭제</button>
-                    </td>
+                    <td>${user.email}</td>
                 </tr>
                 <tr>
                     <td style="width: 20%; text-align: center;"><b>이름</b></td>
-                    <td>
-                        김경민&nbsp;
-                        <button class="btn btn-primary btn-sm">개명</button>
-                    </td>
+                    <td>${user.name}</td>
                 </tr>
                 <tr>
                     <td style="width: 20%; text-align: center;"><b>닉네임</b></td>
                     <td>
-                        경민게임즈&nbsp;
-                        <button class="btn btn-primary btn-sm">변경</button>
-                        <button class="btn btn-primary btn-sm">삭제</button>
+                        ${user.nickname}&nbsp;
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#changeNickname">변경</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 20%; text-align: center;"><b>비밀번호</b></td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#changePassword">비밀번호 변경</button>
                     </td>
                 </tr>
                 <tr>
@@ -75,53 +120,71 @@
                     <td>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                   value="option1">
+                                   value="option1" checked>
                             <label class="form-check-label" for="inlineRadio1">5년</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                   value="option2">
+                                   value="option2" disabled>
                             <label class="form-check-label" for="inlineRadio2">1년</label>
                         </div>
-                        <button class="btn btn-primary btn-sm">변경</button>
+                        <button class="btn btn-primary btn-sm disabled">변경</button>
                     </td>
                 </tr>
-                </tbody>
             </table>
         </div>
     </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="lblPw" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">이메일 변경하기</h1>
+                    <h1 class="modal-title fs-5" id="lblPw">비밀번호 변경</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label for="recipient-email" class="col-form-label">이메일 :</label>
-                            <input type="text" class="form-control" id="recipient-email" placeholder="asd@gmail.com">
+                            <label for="password" class="col-form-label">변경할 비밀번호</label>
+                            <input type="password" class="form-control" id="password">
                         </div>
-
                         <div class="mb-3">
-                            <label for="recipient-password" class="col-form-label">비밀번호 :</label>
-                            <input type="password" class="form-control" id="recipient-password">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="recipient-password-check" class="col-form-label">비밀번호 확인 :</label>
-                            <input type="password" class="form-control" id="recipient-password-check">
+                            <label for="password-confirm" class="col-form-label">비밀번호 확인</label>
+                            <input type="password" class="form-control" id="password-confirm">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">확인</button>
+                    <button type="button" class="btn btn-primary" onclick="changePassword()">확인</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="changeNickname" tabindex="-1" aria-labelledby="lblNick" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="lblNick">닉네임 변경</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="nickname" class="col-form-label">변경할 닉네임</label>
+                            <input type="text" class="form-control" id="nickname">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="changeNickname()">확인</button>
+                    <button id="btnClosePw" type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>

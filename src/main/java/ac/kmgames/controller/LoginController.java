@@ -6,10 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController{
@@ -55,9 +52,59 @@ public class LoginController{
     }
 
     @ResponseBody
-    @PostMapping("/exists_email")
-    public boolean isExistsEmail(String email){
-        return userService.existsByEmail(email);
+    @PostMapping("/exists_user")
+    public boolean isExistsEmail(String email, @RequestParam(defaultValue = "") String name){
+        if(name.isEmpty()){
+            return userService.existsByEmail(email);
+        }else{
+            var user = userService.getUserByEmail(email);
+            return user.isValid() && user.getName().equals(name);
+        }
+    }
+
+    @ResponseBody
+    @PostMapping("/change_nickname")
+    public boolean changeNickname(HttpSession session, String nickname){
+        var obj = session.getAttribute("user");
+        if(!(obj instanceof User user)){
+            return false;
+        }
+
+        var current = userService.getUserByEmail(user.getEmail());
+        current.setNickname(nickname);
+        if(userService.save(current)){
+            session.setAttribute("user", current);
+            return true;
+        }
+        return false;
+    }
+
+    @ResponseBody
+    @PostMapping("/change_password")
+    public boolean changePassword(HttpSession session, String password){
+        var obj = session.getAttribute("user");
+        if(!(obj instanceof User user)){
+            return false;
+        }
+
+        var current = userService.getUserByEmail(user.getEmail());
+        current.setPassword(passwordEncoder.encode(password));
+        if(userService.save(current)){
+            session.setAttribute("user", current);
+            return true;
+        }
+        return false;
+    }
+
+    @ResponseBody
+    @PostMapping("/change_password_without_login")
+    public boolean changePasswordWithoutLogin(String email, String password){
+        var user = userService.getUserByEmail(email);
+        if(!user.isValid()){
+            return false;
+        }
+        user.setPassword(passwordEncoder.encode(password));
+        return userService.save(user);
     }
 
     @ResponseBody

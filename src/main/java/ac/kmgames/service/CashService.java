@@ -1,6 +1,7 @@
 package ac.kmgames.service;
 
 import ac.kmgames.model.entity.Cash;
+import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.CashRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -26,5 +27,14 @@ final public class CashService{
 
     public int getHistoryCountByEmail(String email){
         return repository.countAllByUserEmail(email);
+    }
+
+    public boolean save(Cash cash){
+        try{
+            repository.save(cash);
+            return true;
+        }catch(Exception ignored){
+            return false;
+        }
     }
 }
