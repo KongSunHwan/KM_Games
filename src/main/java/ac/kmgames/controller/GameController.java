@@ -24,4 +24,23 @@ public class GameController{
     public String game_2048(){
         return "web_game/2048_ingame";
     }
+
+    @GetMapping("/game_add")
+    public String game_add() {
+        return "game_add/game_add";
+    }
+    @GetMapping("/game_detail")
+    public String game_detail() {
+        return "game_detail/game_detail";
+    }
+
+    @GetMapping("/introl_main")
+    public String introl_main() {
+        return "introl_main/introl_main";
+    }
+
+    @GetMapping("/main_list")
+    public String main_list() {
+        return "main/main_list";
+    }
 }
