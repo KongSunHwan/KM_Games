@@ -49,8 +49,18 @@ public class GameController{
         return "order_detail/order_detail";
     }
 
-    @GetMapping("/contract_deposit")
-    public String contract_deposit() {
-        return "contract_deposit/contract_deposit";
+    @GetMapping("/order_receipt")
+    public String order_receipt() {
+        return "order_receipt/order_receipt";
+    }
+
+    @GetMapping("/order_history")
+    public String order_history() {
+        return "order_history/order_history";
+    }
+
+    @GetMapping("/order_basket")
+    public String order_basket() {
+        return "order_basket/order_basket";
     }
 }
