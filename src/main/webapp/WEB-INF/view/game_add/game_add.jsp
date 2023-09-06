@@ -160,11 +160,11 @@
                                 placeholder="게임 버전을 입력해주세요.">
                         </td>
                         <td rowspan="1" class="align-middle text-center" style="width:15%;">
-                            게임 키</td>
+                            플랫폼 종류</td>
                         <td style="width: 35%;" class="align-middle">
                             <select class="form-select">
-                                <option value="생성">생성</option>
-                                <option value="미생성">미생성</option>
+                                <option value="PC용">PC용</option>
+                                <option value="모바일">모바일용</option>
                             </select>
                         </td>
                     </tr>

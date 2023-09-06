@@ -188,11 +188,11 @@
                 <div class="payArea">
                     <div class="payment">
                         <div style="padding: 18px 10px; font-size: 10pt; border-bottom: solid 1px #e0e0eb;">
-                            <input type="radio" name="cardradio" checked /><label>카드결제</label>&nbsp;&nbsp;
-                            <input type="radio" name="cardradio" checked /><label>실시간 계좌이체</label>&nbsp;&nbsp;
-                            <input type="radio" name="cardradio" checked /><label>휴대폰 결제</label>&nbsp;&nbsp;
-                            <input type="radio" name="cardradio" checked /><label>무통장 입금</label>&nbsp;&nbsp;
-                            <input type="radio" name="cardradio" checked /><label>에스크로(가상계좌)</label>&nbsp;&nbsp;
+                            <input type="radio" name="cardradio" checked />&nbsp;<label>카드결제</label>&nbsp;&nbsp;
+                            <input type="radio" name="cardradio" checked />&nbsp;<label>실시간 계좌이체</label>&nbsp;&nbsp;
+                            <input type="radio" name="cardradio" checked />&nbsp;<label>휴대폰 결제</label>&nbsp;&nbsp;
+                            <input type="radio" name="cardradio" checked />&nbsp;<label>무통장 입금</label>&nbsp;&nbsp;
+                            <input type="radio" name="cardradio" checked />&nbsp;<label>에스크로(가상계좌)</label>&nbsp;&nbsp;
                         </div>
 
                         <div align="left">

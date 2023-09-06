@@ -39,4 +39,14 @@ public class MainController{
                 "history.back();" +
             "</script>";
     }
+
+    @GetMapping("/introl_main")
+    public String introl_main() {
+        return "introl_main/introl_main";
+    }
+
+    @GetMapping("/main_list")
+    public String main_list() {
+        return "main/main_list";
+    }
 }

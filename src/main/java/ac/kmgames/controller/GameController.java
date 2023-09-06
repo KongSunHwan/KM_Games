@@ -34,33 +34,4 @@ public class GameController{
         return "game_detail/game_detail";
     }
 
-    @GetMapping("/introl_main")
-    public String introl_main() {
-        return "introl_main/introl_main";
-    }
-
-    @GetMapping("/main_list")
-    public String main_list() {
-        return "main/main_list";
-    }
-
-    @GetMapping("/order_detail")
-    public String order_detail() {
-        return "order_detail/order_detail";
-    }
-
-    @GetMapping("/order_receipt")
-    public String order_receipt() {
-        return "order_receipt/order_receipt";
-    }
-
-    @GetMapping("/order_history")
-    public String order_history() {
-        return "order_history/order_history";
-    }
-
-    @GetMapping("/order_basket")
-    public String order_basket() {
-        return "order_basket/order_basket";
-    }
 }
