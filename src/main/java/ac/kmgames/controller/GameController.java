@@ -48,4 +48,9 @@ public class GameController{
     public String order_detail() {
         return "order_detail/order_detail";
     }
+
+    @GetMapping("/contract_deposit")
+    public String contract_deposit() {
+        return "contract_deposit/contract_deposit";
+    }
 }
