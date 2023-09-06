@@ -43,4 +43,9 @@ public class GameController{
     public String main_list() {
         return "main/main_list";
     }
+
+    @GetMapping("/order_detail")
+    public String order_detail() {
+        return "order_detail/order_detail";
+    }
 }
