@@ -12,13 +12,14 @@
 <header class="p-6 mb-2 border-bottom">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/home" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
                 <img src="/resources/img/KM_GAMES_logo.png" style="height: 80px;">
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/shop" class="nav-link px-4 link-dark">캐시 상점</a></li>
+                <%-- <li><a href="/shop" class="nav-link px-4 link-dark">캐시 상점</a></li> --%>
                 <li><a href="/qna" class="nav-link px-4 link-dark">Q&A</a></li>
                 <li><a href="/support" class="nav-link px-4 link-dark">고객지원</a></li>
+                <li><a href="/order_basket" class="nav-link px-4 link-dark">장바구니</a></li>
             </ul>
 
             <c:choose>

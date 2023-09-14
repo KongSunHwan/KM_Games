@@ -27,7 +27,7 @@ public class LoginController{
     @RequestMapping("/logout")
     public String logout(HttpSession session){
         session.removeAttribute("user");
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @GetMapping("/register")
@@ -48,7 +48,7 @@ public class LoginController{
         }
 
         session.setAttribute("user", user);
-        return "<script>location.href = '/home';</script>";
+        return "<script>location.href = '/';</script>";
     }
 
     @ResponseBody

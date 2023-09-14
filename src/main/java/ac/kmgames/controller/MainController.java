@@ -1,8 +1,10 @@
 package ac.kmgames.controller;
 
+import ac.kmgames.model.entity.User;
 import ac.kmgames.service.GameService;
 import ac.kmgames.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +22,19 @@ public class MainController{
     }
 
     @GetMapping("/")
-    public String index(){
-        return "redirect:/home";
+    public String index(HttpSession session){
+        if(session.getAttribute("user") instanceof User user){
+            return "main/index";
+        }else{
+            return "main/index_login";
+        }
     }
 
-    @GetMapping("/home")
+    /*@GetMapping("/home")
     public String home(HttpServletRequest request){
         request.setAttribute("game_list", gameService.getGameList());
         return "home";
-    }
+    }*/
 
     @ResponseBody
     @GetMapping("*")

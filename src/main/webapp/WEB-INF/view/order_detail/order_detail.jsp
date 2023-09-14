@@ -209,7 +209,7 @@
                         <span style="display: inline-block; padding: 20px 10px;">카드결제 최종결제 금액</span><br />
                         <span style="font-size: 25pt; font-weight: bold; padding: 0px  10px;">0원</span><br /><br />
                         <button type="button" class="btn default"
-                            style="width: 90%; height: 60px; margin-right: 10px; font-size: 20px;">결제하기</button>
+                            style="width: 90%; height: 60px; margin-right: 10px; font-size: 20px;" onclick="location.href='/order_receipt'">결제하기</button>
                     </div>
                 </div>
                 <br /><br />

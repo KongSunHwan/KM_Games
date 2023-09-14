@@ -1,7 +1,6 @@
 package ac.kmgames.service;
 
 import ac.kmgames.model.entity.Cash;
-import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.CashRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

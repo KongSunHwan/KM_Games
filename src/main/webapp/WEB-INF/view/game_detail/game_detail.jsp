@@ -391,7 +391,7 @@
           <div>
             <h4>FPS 레전드</h4>
           </div>
-          <button type="button" style="width: 200px; margin-top: 10px;" class="btn btn-primary">게임 구매</button>
+          <button type="button" style="width: 200px; margin-top: 10px;" class="btn btn-primary" onclick="location.href='/order_detail'">게임 구매</button>
           <div style="margin-top: 10px;">
             <button type="button" style="width: 200px;" class="btn btn-outline-secondary">장바구니 추가</button>
           </div>

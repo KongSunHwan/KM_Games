@@ -11,7 +11,7 @@
 <div class="b-example-divider b-example-vr"></div>
 <div style="width: 100%;">
     <div class="flex-shrink-0 p-3" style="width: 280px; float: left; height: 100%;">
-        <a href="/home" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
             <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
             <span class="fs-5 fw-semibold">KM Games</span>
         </a>
