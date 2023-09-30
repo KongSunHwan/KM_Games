@@ -1,6 +1,6 @@
 package ac.kmgames.service;
 
-import ac.kmgames.model.entity.Payment;
+import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +17,7 @@ final public class PaymentService{
         this.repository = repository;
     }
 
-    public List<Payment> getHistoryListByEmail(String email, int page){
+    public List<PaymentHistory> getHistoryListByEmail(String email, int page){
         return repository.findAllByUserEmail(
             email,
             PageRequest.of(page, 20, Sort.by("number").descending())

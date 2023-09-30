@@ -1,6 +1,6 @@
 package ac.kmgames.controller;
 
-import ac.kmgames.model.entity.Cash;
+import ac.kmgames.model.entity.CashHistory;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.service.CashService;
 import ac.kmgames.service.UserService;
@@ -36,7 +36,7 @@ public class CashController{
             return false;
         }
 
-        var cash = new Cash();
+        var cash = new CashHistory();
         cash.setUser(user);
         cash.setAmount(amount);
         cash.setMethod(method);

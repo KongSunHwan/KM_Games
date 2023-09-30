@@ -19,7 +19,7 @@ public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int number;
+    private int id;
 
     @NaturalId
     private String email;
@@ -40,7 +40,7 @@ public class User{
     private Timestamp registerDate;
 
     public boolean isValid(){
-        return number > 0 && email.length() > 4 && registerDate != null;
+        return id > 0 && email.length() > 4 && registerDate != null;
     }
 
     public void addCash(int amount){

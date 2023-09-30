@@ -1,6 +1,6 @@
 package ac.kmgames.service;
 
-import ac.kmgames.model.entity.Cash;
+import ac.kmgames.model.entity.CashHistory;
 import ac.kmgames.model.repository.CashRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +17,7 @@ final public class CashService{
         this.repository = repository;
     }
 
-    public List<Cash> getHistoryListByEmail(String email, int page){
+    public List<CashHistory> getHistoryListByEmail(String email, int page){
         return repository.findAllByUserEmail(
             email,
             PageRequest.of(page, 20, Sort.by("number").descending())
@@ -28,7 +28,7 @@ final public class CashService{
         return repository.countAllByUserEmail(email);
     }
 
-    public boolean save(Cash cash){
+    public boolean save(CashHistory cash){
         try{
             repository.save(cash);
             return true;

@@ -9,10 +9,10 @@ import java.sql.Timestamp;
 @Data
 @Entity(name = "cash_history")
 @NoArgsConstructor
-public class Cash{
+public class CashHistory{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int number;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "email", referencedColumnName = "email")
@@ -24,6 +24,6 @@ public class Cash{
     @Column
     private String method;
 
-    @Column(name = "payment_date", insertable = false)
-    private Timestamp paymentDate;
+    @Column(insertable = false)
+    private Timestamp date;
 }

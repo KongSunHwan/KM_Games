@@ -7,21 +7,18 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 @Data
-@Entity(name = "payment_history")
+@Entity
 @NoArgsConstructor
-public class Payment{
+public class Basket{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int number;
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "email", referencedColumnName = "email")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name="item_id")
-    private Item item;
-
-    @Column(insertable = false)
-    private Timestamp date;
+    @ManyToOne
+    @JoinColumn(name = "game_id", referencedColumnName = "id")
+    private Game game;
 }
