@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Game{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column
     private String name;
@@ -21,10 +21,16 @@ public class Game{
     @Column
     private String genre;
 
-    @Column(name = "thumb_url")
-    private String thumbUrl;
+    @Column
+    private String description;
+
+    @Column
+    private int age;
 
     @Column
     private int price;
+
+    @Column(name = "thumb_url")
+    private String thumbUrl;
 
 }

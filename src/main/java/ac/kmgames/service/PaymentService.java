@@ -17,14 +17,14 @@ final public class PaymentService{
         this.repository = repository;
     }
 
-    public List<PaymentHistory> getHistoryListByEmail(String email, int page){
-        return repository.findAllByUserEmail(
-            email,
-            PageRequest.of(page, 20, Sort.by("number").descending())
+    public List<PaymentHistory> getAllByUserId(long id, int page){
+        return repository.findAllByUserId(
+            id,
+            PageRequest.of(page, 20, Sort.by("id").descending())
         );
     }
 
-    public int getHistoryCountByEmail(String email){
-        return repository.countAllByUserEmail(email);
+    public int getCountByUserId(long id){
+        return repository.countAllByUserId(id);
     }
 }

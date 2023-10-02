@@ -1,29 +1,33 @@
 package ac.kmgames.model.entity;
 
+import java.sql.Timestamp;
+
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
-
 @Data
-@Entity(name = "cash_history")
+@Entity
 @NoArgsConstructor
-public class CashHistory{
+public class GameReview{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "email", referencedColumnName = "email")
+    @JoinColumn(name = "game_id", referencedColumnName = "id")
+    private Game game;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @Column
-    private int amount;
+    private int rate;
+    
+    @Column
+    private String comment;
 
     @Column
-    private String method;
-
-    @Column(insertable = false)
     private Timestamp date;
 }
