@@ -10,4 +10,6 @@ public interface PaymentRepository extends PagingAndSortingRepository<PaymentHis
     int countAllByUserId(long id);
     
     List<PaymentHistory> findAllByUserId(long id, Pageable pageable);
+
+    List<PaymentHistory> findAdminByUserId(long id);
 }

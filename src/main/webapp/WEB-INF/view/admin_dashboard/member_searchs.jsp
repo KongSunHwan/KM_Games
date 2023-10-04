@@ -1,4 +1,11 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    int currentPage = (int) request.getAttribute("current_page");
+    int startPage = ((currentPage - 1) / 5) * 5 + 1;
+    pageContext.setAttribute("start_page", startPage);
+    pageContext.setAttribute("end_page", Math.min(startPage + 4, (long) request.getAttribute("user_page")));
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -67,14 +74,14 @@
                     <div class="table-responsive">
                         <br>
                         <h5 style="text-align:center"><b>회원 권한부여/검색</b></h5>
-                        <h6 style="font-size: 15px; color:gray; text-align:center">총 관리자 권한이 있는 대상만 회원 권한부여/조회 할 수 있습니다.
+                        <h6 style="font-size: 15px; color:#808080; text-align:center">총 관리자 권한이 있는 대상만 회원 권한부여/조회 할 수 있습니다.
                         </h6>
                         <br>
-                        <form class="form-inline">
+                        <form class="form-inline" action="/member_searchs">
                             <div class="input-group">
-                                <input class="form-control" type="search"
+                                <input class="form-control" type="text" name="searches"
                                     placeholder="회원의 이메일 또는 닉네임으로 검색하여 추가할 수 있습니다." aria-label="Search">
-                                <button class="btn btn-outline-primary" type="button">
+                                <button class="btn btn-outline-primary" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -85,34 +92,37 @@
                                 <tr>
                                     <th class="text-center">권한</th>
                                     <th class="text-center">이메일</th>
+                                    <th class="text-center">이름</th>
                                     <th class="text-center">닉네임</th>
                                     <th class="text-center">날짜</th>
                                     <th class="text-center">설정</th>
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:forEach var="user" items="${userlist}">
                                 <tr>
                                     <td class="text-center">
                                         일반 회원
                                     </td>
-
                                     <td class="text-center">
-                                        neha******@gmail.com
+                                        ${user.email}
                                     </td>
 
                                     <td class="text-center">
-                                        공선환
+                                        ${user.name}
                                     </td>
-
-
                                     <td class="text-center">
-                                        <span class="badge bg-primary">2023-05-16</span>
+                                            ${user.nickname}
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-primary">
+                                            ${user.registerDate}</span>
                                     </td>
 
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <button type="button" class="btn" data-bs-toggle="dropdown"
-                                                data-bs-display="static" aria-expanded="false">
+                                                    data-bs-display="static" aria-expanded="false">
                                                 <i class="mdi mdi-dots-horizontal"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-lg-end">
@@ -122,58 +132,28 @@
                                         </div>
                                     </td>
                                 </tr>
-
-
-                                <tr>
-                                    <td class="text-center">
-                                        일반 회원
-                                    </td>
-
-                                    <td class="text-center">
-                                        neha******@gmail.com
-                                    </td>
-
-                                    <td class="text-center">
-                                        공선환
-                                    </td>
-
-
-                                    <td class="text-center">
-                                        <span class="badge bg-primary">2023-05-16</span>
-                                    </td>
-
-                                    <td class="text-center">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn" data-bs-toggle="dropdown"
-                                                data-bs-display="static" aria-expanded="false">
-                                                <i class="mdi mdi-dots-horizontal"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-lg-end">
-                                                <li><button class="dropdown-item" type="button">수정</button></li>
-                                                <li><button class="dropdown-item" type="button">삭제</button></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination" style="justify-content: center;">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
+                        <ul class="pagination mt-2" style="justify-content : center;">
+                            <c:if test="${current_page > 5}">
+                                <li class="page-item"><a class="page-link" href="?page=${start_page - 1}">Prev</a></li>
+                            </c:if>
+                            <c:forEach var="item" begin="${start_page}" end="${end_page}">
+                                <c:choose>
+                                    <c:when test="${item == current_page}">
+                                        <li class="page-item"><a class="page-link disabled" href="#">${item}</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li class="page-item"><a class="page-link" href="?page=${item}">${item}</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            <c:if test="${page_count - start_page > 3}">
+                                <li class="page-item"><a class="page-link" href="?page=${end_page+ 1}">Next</a></li>
+                            </c:if>
                         </ul>
                     </nav>
                 </div>

@@ -27,4 +27,8 @@ final public class PaymentService{
     public int getCountByUserId(long id){
         return repository.countAllByUserId(id);
     }
+
+    public List<PaymentHistory> getAll(long id){
+        return repository.findAdminByUserId(id);
+    }
 }

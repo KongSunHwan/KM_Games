@@ -1,17 +1,20 @@
 package ac.kmgames.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.data.repository.cdi.Eager;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class User{
     public static User NULL(){
         return new User(-1, "", "", "", "", 0, null);

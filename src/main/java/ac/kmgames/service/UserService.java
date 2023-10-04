@@ -1,10 +1,18 @@
 package ac.kmgames.service;
 
+import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
+@Slf4j
 @Service
 final public class UserService{
     private final UserRepository userRepository;
@@ -28,5 +36,19 @@ final public class UserService{
         }catch(Exception ignored){
             return false;
         }
+    }
+
+    public List<User> getAll(int page){
+        return userRepository.findAll(PageRequest.of(page, 5)).getContent();
+    }
+
+    public long getCount(){
+        return userRepository.count();
+    }
+
+    public long getUserByName(String names){
+        Optional<User> optionalUser = userRepository.findByNickname(names);
+        User users = optionalUser.get();
+        return users.getId();
     }
 }
