@@ -1,7 +1,6 @@
 package ac.kmgames.controller;
 
 import ac.kmgames.model.entity.User;
-import ac.kmgames.service.GameReviewService;
 import ac.kmgames.service.GameService;
 import ac.kmgames.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
