@@ -66,15 +66,15 @@
                 <table class="table">
                     <tr>
                         <th scope="col">순번</th>
-                        <th scope="col">구매 내역</th>
-                        <th scope="col">사용 금액</th>
+                        <th scope="col">게임 구매 내역</th>
+                        <th scope="col">게임 가격</th>
                         <th scope="col">구매 날짜</th>
                     </tr>
                     <c:forEach var="payment" items="${payment_history}" varStatus="status">
                         <tr>
                             <td class="fw-bold">${history_count - (current_page - 1) * 20 - status.index}</td>
-                            <td>${payment.item.name}</td>
-                            <td><span class="fw-bold"><fmt:formatNumber type="number" value="${payment.item.price}"/></span> 캐시</td>
+                            <td>${payment.game.name}</td>
+                            <td><span class="fw-bold"><fmt:formatNumber type="number" value="${payment.game.price}"/></span> 캐시</td>
                             <td>${fn:substringBefore(payment.date, ".0")}</td>
                         </tr>
                     </c:forEach>
