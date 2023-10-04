@@ -31,7 +31,7 @@
                             <a href="/cash_history" class="link-body-emphasis d-inline-flex text-decoration-none limagin rounded">캐시 충전 내역</a>
                         </li>
                         <li>
-                            <a href="/payment_history" class="link-body-emphasis d-inline-flex text-decoration-none limagin rounded">아이템 구매 내역</a>
+                            <a href="/payment_history" class="link-body-emphasis d-inline-flex text-decoration-none limagin rounded">게임 구매 내역</a>
                         </li>
                     </ul>
                 </div>
