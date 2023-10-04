@@ -15,7 +15,7 @@ public class CashHistory{
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "email", referencedColumnName = "email")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @Column

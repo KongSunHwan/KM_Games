@@ -17,15 +17,15 @@ final public class CashService{
         this.repository = repository;
     }
 
-    public List<CashHistory> getHistoryListByEmail(String email, int page){
-        return repository.findAllByUserEmail(
-            email,
-            PageRequest.of(page, 20, Sort.by("number").descending())
+    public List<CashHistory> getAllByUserId(long id, int page){
+        return repository.findAllByUserId(
+            id,
+            PageRequest.of(page, 20, Sort.by("id").descending())
         );
     }
 
-    public int getHistoryCountByEmail(String email){
-        return repository.countAllByUserEmail(email);
+    public int getCountByUserId(long id){
+        return repository.countAllByUserId(id);
     }
 
     public boolean save(CashHistory cash){

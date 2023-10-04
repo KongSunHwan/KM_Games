@@ -56,11 +56,11 @@ public class InformationController{
             request.setAttribute("current_page", page + 1);
             request.setAttribute(
                 "history_count",
-                cashService.getHistoryCountByEmail(user.getEmail())
+                cashService.getCountByUserId(user.getId())
             );
             request.setAttribute(
                 "payment_history",
-                    cashService.getHistoryListByEmail(user.getEmail(), page)
+                    cashService.getAllByUserId(user.getId(), page)
             );
         }
         return "my_info/cash_history";
