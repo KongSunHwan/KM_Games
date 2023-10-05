@@ -367,6 +367,11 @@
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
+                <c:if test="${empty review_list}">
+                    <li class="list-group-item">
+                        <div class="fw-bolder text-center">현재 작성된 리뷰가 없습니다</div>
+                    </li>
+                </c:if>
                 <c:forEach var="review" items="${review_list}" varStatus="status">
                     <li class="list-group-item">
                         <div class="form-inline mb-2">
