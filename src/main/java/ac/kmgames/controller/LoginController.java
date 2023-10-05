@@ -47,6 +47,14 @@ public class LoginController{
                 "</script>";
         }
 
+        if(user.isBan()){
+            return
+                "<script>" +
+                    "alert('접근할 수 없는 계정입니다.');" +
+                    "history.back();" +
+                "</script>";
+        }
+
         session.setAttribute("user", user);
         return "<script>location.href = '/';</script>";
     }
