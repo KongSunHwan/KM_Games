@@ -29,6 +29,14 @@ final public class UserService{
         return userRepository.findByEmail(email).orElse(User.NULL());
     }
 
+    public List<User> getUsersByName(String name){
+        return userRepository.findByNameContains(name);
+    }
+
+    public List<User> getUsersByNickname(String name){
+        return userRepository.findByNicknameContains(name);
+    }
+
     public boolean save(User user){
         try{
             userRepository.save(user);
@@ -39,16 +47,10 @@ final public class UserService{
     }
 
     public List<User> getAll(int page){
-        return userRepository.findAll(PageRequest.of(page, 5)).getContent();
+        return userRepository.findAll(PageRequest.of(page, 10)).getContent();
     }
 
     public long getCount(){
         return userRepository.count();
-    }
-
-    public long getUserByName(String names){
-        Optional<User> optionalUser = userRepository.findByNickname(names);
-        User users = optionalUser.get();
-        return users.getId();
     }
 }

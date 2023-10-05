@@ -11,4 +11,5 @@ public interface GameReviewRepository extends Repository<GameReview, Long>{
 
     List<GameReview> findAll();
     List<GameReview> findAllByGameId(long id);
+    List<GameReview> findAllByUserId(long id);
 }

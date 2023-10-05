@@ -17,7 +17,7 @@ import java.util.List;
 @ToString
 public class User{
     public static User NULL(){
-        return new User(-1, "", "", "", "", 0, null);
+        return new User(-1, "", "", "", "", 0, null, null, null, null);
     }
 
     @Id
@@ -41,6 +41,15 @@ public class User{
 
     @Column(name = "register_date", insertable = false)
     private Timestamp registerDate;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<GameReview> gameReviews;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<CashHistory> cashHistories;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<PaymentHistory> paymentHistories;
 
     public boolean isValid(){
         return id > 0 && email.length() > 4 && registerDate != null;
