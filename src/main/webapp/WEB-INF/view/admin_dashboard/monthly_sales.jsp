@@ -68,9 +68,9 @@
                     <div class="card mb-15">
                         <div class="card-body">
                             <span class="badge bg-success float-right">이번달</span>
-                            <h6 class="card-title text-muted">회원 증가</h6>
-                            <h3 class="mb-10">100,234 명</h3>
-                            <p class="text-muted mb-0">이전달 : 50,233명
+                            <h6 class="card-title text-muted">판매 증가</h6>
+                            <h3 class="mb-10">100,234 개</h3>
+                            <p class="text-muted mb-0">이전달 : 50,233개
                                 <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.1%</span>
                             </p>
                         </div>
@@ -81,7 +81,7 @@
                     <div class="card mb-15">
                         <div class="card-body">
                             <span class="badge bg-success float-right">이번달</span>
-                            <h6 class="card-title text-muted">매물 증가</h6>
+                            <h6 class="card-title text-muted">게임 증가</h6>
                             <h3 class="mb-10">1,027 개</h3>
                             <p class="text-muted mb-0">이전달: 502개
                                 <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.5%</span>
@@ -94,9 +94,9 @@
                     <div class="card mb-15">
                         <div class="card-body">
                             <span class="badge bg-success float-right">이번달</span>
-                            <h6 class="card-title text-muted">부동산 계약</h6>
-                            <h3 class="mb-10">1,234 개</h3>
-                            <p class="text-muted mb-0">이전달: 608개
+                            <h6 class="card-title text-muted">게임 플레이</h6>
+                            <h3 class="mb-10">1,234 증가</h3>
+                            <p class="text-muted mb-0">이전달: 608 증가
                                 <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 47.5%</span>
                             </p>
 
@@ -135,7 +135,7 @@
                 <div class="col-lg-4 col-12">
 
                     <div class="card mb-15">
-                        <div class="card-header bg-transparent py-15">매물 Top 5 지역 순위</div>
+                        <div class="card-header bg-transparent py-15">게임 Top 5 지역 순위</div>
 
                         <div class="card-body">
 
@@ -144,7 +144,7 @@
                             </div>
 
                             <div class="mb-15">
-                                <a href="#" class="text-body">강남구</a>
+                                <a href="#" class="text-body">서든어택</a>
                                 <div class="float-right text-muted">
                                     30.5%
                                 </div>
@@ -154,7 +154,7 @@
                             </div>
 
                             <div class="mb-15">
-                                <a href="#" class="text-body">은평구</a>
+                                <a href="#" class="text-body">서든어택</a>
                                 <div class="float-right text-muted">
                                     25.5%
                                 </div>
@@ -164,7 +164,7 @@
                             </div>
 
                             <div class="mb-15">
-                                <a href="#" class="text-body">마포구</a>
+                                <a href="#" class="text-body">서든어택</a>
                                 <div class="float-right text-muted">
                                     16%
                                 </div>
@@ -176,7 +176,7 @@
 
 
                             <div class="mb-15">
-                                <a href="#" class="text-body">양천구</a>
+                                <a href="#" class="text-body">서든어택</a>
                                 <div class="float-right text-muted">
                                     8%
                                 </div>
@@ -187,7 +187,7 @@
 
 
                             <div class="mb-15">
-                                <a href="#" class="text-body">서초구</a>
+                                <a href="#" class="text-body">서든어택</a>
                                 <div class="float-right text-muted">
                                     4%
                                 </div>
@@ -208,7 +208,7 @@
                 <div class="col-lg-8 col-md-12">
 
                     <div class="card mb-15">
-                        <div class="card-header bg-transparent py-15">최근 부동산 구매</div>
+                        <div class="card-header bg-transparent py-15">최근 게임 구매</div>
 
                         <div class="table-responsive">
                             <table class="table text-center">
@@ -216,8 +216,8 @@
                                 <thead>
                                     <tr>
                                         <th>이메일</th>
-                                        <th>매물 이름</th>
-                                        <th>계약 종류</th>
+                                        <th>게임 이름</th>
+                                        <th>게임 종류</th>
                                         <th class="text-center">시간</th>
                                         <th class="text-center">현재 상태</th>
                                         <th class="text-right">옵션</th>
@@ -230,11 +230,11 @@
                                         </td>
 
                                         <td>
-                                            서울시 서초구 성진빌라 303호
+                                            휴먼 폴 플랫
                                         </td>
 
                                         <td>
-                                            월세
+                                            아케이드
                                         </td>
 
                                         <td class="text-right">
@@ -268,11 +268,11 @@
                                         </td>
 
                                         <td>
-                                            서울시 서초구 성진빌라 303호
+                                            휴먼 폴 플랫
                                         </td>
 
                                         <td>
-                                            월세
+                                            아케이드
                                         </td>
 
                                         <td class="text-right">
@@ -286,11 +286,11 @@
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <button class="btn btn-default btn-sm btn-icon btn-transparent font-xl"
-                                                    type="button" id="d350ad" data-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                        type="button" id="d350ad" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
                                                     <i class="mdi mdi-dots-horizontal"></i>
                                                     <div class="dropdown-menu dropdown-menu-right"
-                                                        aria-labelledby="d350ad">
+                                                         aria-labelledby="d350ad">
                                                         <a class="dropdown-item" href="#">보기</a>
                                                         <a class="dropdown-item" href="#">수정</a>
                                                         <a class="dropdown-item" href="#">삭제</a>
@@ -306,11 +306,11 @@
                                         </td>
 
                                         <td>
-                                            서울시 서초구 성진빌라 303호
+                                            휴먼 폴 플랫
                                         </td>
 
                                         <td>
-                                            월세
+                                            아케이드
                                         </td>
 
                                         <td class="text-right">
@@ -324,11 +324,11 @@
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <button class="btn btn-default btn-sm btn-icon btn-transparent font-xl"
-                                                    type="button" id="d350ad" data-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                        type="button" id="d350ad" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
                                                     <i class="mdi mdi-dots-horizontal"></i>
                                                     <div class="dropdown-menu dropdown-menu-right"
-                                                        aria-labelledby="d350ad">
+                                                         aria-labelledby="d350ad">
                                                         <a class="dropdown-item" href="#">보기</a>
                                                         <a class="dropdown-item" href="#">수정</a>
                                                         <a class="dropdown-item" href="#">삭제</a>
@@ -344,11 +344,11 @@
                                         </td>
 
                                         <td>
-                                            서울시 서초구 성진빌라 303호
+                                            휴먼 폴 플랫
                                         </td>
 
                                         <td>
-                                            월세
+                                            아케이드
                                         </td>
 
                                         <td class="text-right">
@@ -362,11 +362,11 @@
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <button class="btn btn-default btn-sm btn-icon btn-transparent font-xl"
-                                                    type="button" id="d350ad" data-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                        type="button" id="d350ad" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
                                                     <i class="mdi mdi-dots-horizontal"></i>
                                                     <div class="dropdown-menu dropdown-menu-right"
-                                                        aria-labelledby="d350ad">
+                                                         aria-labelledby="d350ad">
                                                         <a class="dropdown-item" href="#">보기</a>
                                                         <a class="dropdown-item" href="#">수정</a>
                                                         <a class="dropdown-item" href="#">삭제</a>
@@ -382,11 +382,11 @@
                                         </td>
 
                                         <td>
-                                            서울시 서초구 성진빌라 303호
+                                            휴먼 폴 플랫
                                         </td>
 
                                         <td>
-                                            월세
+                                            아케이드
                                         </td>
 
                                         <td class="text-right">
@@ -400,11 +400,11 @@
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <button class="btn btn-default btn-sm btn-icon btn-transparent font-xl"
-                                                    type="button" id="d350ad" data-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                        type="button" id="d350ad" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
                                                     <i class="mdi mdi-dots-horizontal"></i>
                                                     <div class="dropdown-menu dropdown-menu-right"
-                                                        aria-labelledby="d350ad">
+                                                         aria-labelledby="d350ad">
                                                         <a class="dropdown-item" href="#">보기</a>
                                                         <a class="dropdown-item" href="#">수정</a>
                                                         <a class="dropdown-item" href="#">삭제</a>
@@ -431,7 +431,7 @@
                             <div class="mb-15">
                                 <div class="d-flex">
                                     <a href="javascript://" class="avatar avatar-lg mr-20">
-                                        <img src="/img/ROPF2fQ.png">
+                                        <img src="resources/img/ROPF2fQ.png">
                                     </a>
                                     <div class="flex-fill">
                                         <div class="float-right mt-10">
@@ -446,14 +446,14 @@
                             <div class="mb-15">
                                 <div class="d-flex">
                                     <a href="javascript://" class="avatar avatar-lg mr-20">
-                                        <img src="/img/ROPF2fQ.png">
+                                        <img src="resources/img/ROPF2fQ.png">
                                     </a>
                                     <div class="flex-fill">
                                         <div class="float-right mt-10">
                                             <button class="btn btn-outline-primary btn-sm">채팅하기</button>
                                         </div>
-                                        <h6 class="my-3">한민서</h6>
-                                        <small class="text-muted">Han***@gmail.com</small>
+                                        <h6 class="my-3">노승원</h6>
+                                        <small class="text-muted">No***@gmail.com</small>
                                     </div>
                                 </div>
                             </div>
@@ -461,7 +461,7 @@
                             <div class="mb-15">
                                 <div class="d-flex">
                                     <a href="javascript://" class="avatar avatar-lg mr-20">
-                                        <img src="/img/ROPF2fQ.png">
+                                        <img src="resources/img/ROPF2fQ.png">
                                     </a>
                                     <div class="flex-fill">
                                         <div class="float-right mt-10">
@@ -476,7 +476,7 @@
                             <div class="mb-15">
                                 <div class="d-flex">
                                     <a href="javascript://" class="avatar avatar-lg mr-20">
-                                        <img src="/img/ROPF2fQ.png">
+                                        <img src="resources/img/ROPF2fQ.png">
                                     </a>
                                     <div class="flex-fill">
                                         <div class="float-right mt-10">
@@ -603,24 +603,24 @@
                     name: '비율',
                     colorByPoint: true,
                     data: [{
-                        name: '강남구',
+                        name: '게임1',
                         y: 30.5,
                         sliced: true,
                         // selected: true
                     }, {
-                        name: '은평구',
+                        name: '게임2',
                         y: 25.5
                     }, {
-                        name: '마포구',
+                        name: '게임3',
                         y: 16
                     }, {
-                        name: '양천구',
+                        name: '게임4',
                         y: 8
                     }, {
-                        name: '서초구',
+                        name: '게임5',
                         y: 4
                     }, {
-                        name: '헤네시스',
+                        name: '게임6',
                         y: 7.05
                     }]
                 }]
