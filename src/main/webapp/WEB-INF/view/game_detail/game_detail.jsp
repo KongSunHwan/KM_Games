@@ -1,7 +1,23 @@
+<%@ page import="ac.kmgames.model.entity.User" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    User user;
+    Object obj = session.getAttribute("user");
+    if(!(obj instanceof User)){
+        out.println(
+            "<script>" +
+                "alert('로그인 후 이용해주세요');" +
+                "location.href = '/login';" +
+            "</script>"
+        );
+        return;
+    }
+    user = (User) obj;
+    pageContext.setAttribute("user", user);
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -332,32 +348,35 @@
         </div>
         </div>
 
-        <div class="card mb-2">
-        <div class="card-header bg-light">
-            <i class="fa fa-comment fa"></i>&nbsp;리뷰 남기기
-        </div>
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <div class="form-inline mb-2">
-
+        <form method="post" action="/game_review">
+            <input type="hidden" name="game_id" value="${game.id}" hidden>
+            <input type="hidden" name="user_id" value="${user.id}" hidden>
+            <div class="card mb-2">
+                <div class="card-header bg-light">
+                    <i class="fa fa-comment fa"></i>&nbsp;리뷰 남기기
                 </div>
-                <form name="myform" id="myform" method="#" action="#">
-                <fieldset>
-                    <legend>별점을 선택해주세요</legend>
-                    <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-                    <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-                    <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-                    <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-                    <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-                </fieldset>
-                </form>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                <button type="button" class="btn btn-dark mt-3">등록</button>
-            </li>
-            </ul>
-        </div>
-        </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="form-inline mb-2">
+                        </div>
+                        <form name="myform" id="myform" method="#" action="#">
+                        <fieldset>
+                            <legend>별점을 선택해주세요</legend>
+                            <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+                            <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+                            <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+                            <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+                            <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+                        </fieldset>
+                        </form>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
+                        <button type="submit" class="btn btn-dark mt-3">등록</button>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
 
         <hr>
 

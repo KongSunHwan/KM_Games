@@ -39,4 +39,15 @@ final public class GameReviewService{
         }
         return sum / list.size();
     }
+    
+
+    public boolean save(GameReview review){
+        try{
+            repository.save(review);
+            return true;
+        }catch(Exception ignored){
+            ignored.printStackTrace();
+            return false;
+        }
+    }
 }
