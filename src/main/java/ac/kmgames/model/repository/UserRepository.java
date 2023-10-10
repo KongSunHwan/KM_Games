@@ -18,4 +18,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
     long count();
 
     Optional<User> findByNickname(String nickName);
+
+    User findAllById(int id);
 }

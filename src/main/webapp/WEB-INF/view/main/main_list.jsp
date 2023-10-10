@@ -293,29 +293,29 @@
                     </div>
 
                     <div class="card-back mb-2 col-lg-3" style="cursor:pointer;">
-                        <div class="card-img">
-                            <img src="resources/img/game/game_img2.jpg" style="width: 230px; height:150px;">
-                        </div>
-                        <div class="card-teacher">
-                            <b class="text-muted" style="font-size: 13px;">퍼즐 • PC</b>
-                        </div>
-                        <div class="card-title">
-                            <div class="fw-bold fs-5">휴먼 폴 플랫</div>
-                        </div>
-                        <div class="card-text">
-                            <b style="font-size: 12px;">만 12세 이상</b>
-                        </div>
-                        <div class="card-text2">
-                            <b style="font-size: 17px;">9,000원</b>
-                        </div>
-                        <div class="card-text2">
-                            &#x2B50&#x2B50&#x2B50&#x2B50&#x2B50 (48)
-                        </div>
-                        <div class="card-under"><span class="badge bg-secondary text-white" style="margin-top:10px;">좋아요
-                                +15</span></div>
-                    </div>
-
+                <div class="card-img">
+                    <img src="resources/img/game/game_img2.jpg" style="width: 230px; height:150px;">
                 </div>
+                <div class="card-teacher">
+                    <b class="text-muted" style="font-size: 13px;">퍼즐 • PC</b>
+                </div>
+                <div class="card-title">
+                    <div class="fw-bold fs-5">휴먼 폴 플랫</div>
+                </div>
+                <div class="card-text">
+                    <b style="font-size: 12px;">만 12세 이상</b>
+                </div>
+                <div class="card-text2">
+                    <b style="font-size: 17px;">9,000원</b>
+                </div>
+                <div class="card-text2">
+                    &#x2B50&#x2B50&#x2B50&#x2B50&#x2B50 (48)
+                </div>
+                <div class="card-under"><span class="badge bg-secondary text-white" style="margin-top:10px;">좋아요
+                                +15</span></div>
+            </div>
+
+            </div>
 
 
                 <ul class="pagination mt-2" style="justify-content : center;">

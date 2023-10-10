@@ -1,21 +1,16 @@
 package ac.kmgames.controller;
 
+import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
-import ac.kmgames.service.CashService;
-import ac.kmgames.service.GameService;
-import ac.kmgames.service.PaymentService;
-import ac.kmgames.service.UserService;
+import ac.kmgames.service.*;
 import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +21,13 @@ import java.util.List;
 public class AdminController {
     private final UserService userService;
     private final PaymentService paymentService;
-    private final CashService cashService;
+    private final GameReviewService gameReviewService;
 
     @Autowired
-    public AdminController(UserService userService, PaymentService paymentService,CashService cashService){
+    public AdminController(UserService userService, PaymentService paymentService,GameReviewService gameReviewService){
         this.userService = userService;
         this.paymentService = paymentService;
-        this.cashService = cashService;
+        this.gameReviewService = gameReviewService;
     }
     @GetMapping("game_management")
     public String game_management() {
@@ -95,5 +90,27 @@ public class AdminController {
             log.info("payment={}", paymentService.getAll(name));
         }
         return "admin_dashboard/member_searchs";
+    }
+
+    //회원상세정보
+    @GetMapping(value = "member_detail.do")
+    public String member_detail(@RequestParam int id, HttpServletRequest request,
+                                @RequestParam(value = "page", defaultValue = "1") int page) {
+        User select_user = userService.findAllById(id);
+        List<PaymentHistory> user_payment = paymentService.findAllByUser(page,select_user);
+        List<GameReview> user_review = gameReviewService.findAllByUser(select_user);
+        request.setAttribute("user_review",user_review);
+        request.setAttribute("user_payment",user_payment);
+//        request.setAttribute("current_page", page + 1);
+//        request.setAttribute("payment_page", (long)Math.ceil(paymentService.countAllByUser(select_user) / 5.0));
+        request.setAttribute("select_user",select_user);
+        System.out.println(user_review);
+
+        return "admin_dashboard/member_detail";
+    }
+
+    @GetMapping("main_list")
+    public String main_list() {
+        return "main/main_list";
     }
 }

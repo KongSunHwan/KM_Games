@@ -126,7 +126,8 @@
                                                 <i class="mdi mdi-dots-horizontal"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-lg-end">
-                                                <li><button class="dropdown-item" type="button">수정</button></li>
+                                                <li><a href="member_detail.do?id=${user.id}">
+                                                    <button class="dropdown-item" type="button">상세내역</button></a></li>
                                                 <li><button class="dropdown-item" type="button">삭제</button></li>
                                             </ul>
                                         </div>

@@ -1,6 +1,7 @@
 package ac.kmgames.service;
 
 import ac.kmgames.model.entity.GameReview;
+import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.GameReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,9 @@ final public class GameReviewService{
             sum += review.getRate();
         }
         return sum / list.size();
+    }
+
+    public List<GameReview> findAllByUser(User selectUser) {
+        return repository.findAllByUser(selectUser);
     }
 }
