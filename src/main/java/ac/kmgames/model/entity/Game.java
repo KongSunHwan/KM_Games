@@ -1,12 +1,14 @@
 package ac.kmgames.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Game{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

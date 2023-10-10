@@ -75,20 +75,25 @@ public class AdminController {
     }
     @GetMapping("member_searchs")
     public String member_searchs(HttpServletRequest request,
-                                 @RequestParam(value = "page", defaultValue = "1") int page,
-                                 @RequestParam(value = "searches", required = false) String id) {
-        System.out.println("searches : " + id);
-
+        @RequestParam(value = "page", defaultValue = "1") int page,
+        @RequestParam(value = "searches", required = false) String id) {
         page = Math.max(page -1, 0);
-        request.setAttribute("userlist", userService.getAll(page));
-        request.setAttribute("current_page", page + 1);
-        request.setAttribute("user_page", (long)Math.ceil(userService.getCount() / 5.0));
-        if(id != null && id != ""){
-            //이름 또는 닉네임을 long id로 변환해서 payment를 뽑아내자
-            long name = userService.getUserByName(id);
-            request.setAttribute("payment", paymentService.getAll(name));
-            log.info("payment={}", paymentService.getAll(name));
+        List<User> users;
+        if(id == null){
+            users = userService.getAll(page);
+        }else{
+            users = userService.getUsersByName(id);
+            //users.add(userService.getUserByEmail(id));
+            //users.addAll(userService.getUsersByNickname(id));
         }
+        /*for(var user : users){
+            for(var payment : user.getPaymentHistories()){
+                System.out.println("구매한 게임: " + payment.getGame().getName());
+            }
+        }*/
+        request.setAttribute("userlist", users);
+        request.setAttribute("current_page", page + 1);
+        request.setAttribute("user_page", (long) Math.ceil(userService.getCount() / 10.0));
         return "admin_dashboard/member_searchs";
     }
 

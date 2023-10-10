@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 final public class GameService{
@@ -18,6 +19,10 @@ final public class GameService{
 
     public List<Game> getAll(int page){
         return repository.findAll(PageRequest.of(page, 16)).getContent();
+    }
+
+    public Optional<Game> getGameById(long id){
+        return repository.findById(id);
     }
 
     public long getCount(){

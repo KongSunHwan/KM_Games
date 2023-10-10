@@ -3,10 +3,8 @@ package ac.kmgames.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
-import org.springframework.data.repository.cdi.Eager;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -17,7 +15,7 @@ import java.util.List;
 @ToString
 public class User{
     public static User NULL(){
-        return new User(-1, "", "", "", "", 0, null);
+        return new User(-1, "", "", "", "", 0, null, false, null, null, null);
     }
 
     @Id
@@ -41,6 +39,18 @@ public class User{
 
     @Column(name = "register_date", insertable = false)
     private Timestamp registerDate;
+
+    @Column
+    private boolean ban;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<GameReview> gameReviews;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<CashHistory> cashHistories;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<PaymentHistory> paymentHistories;
 
     public boolean isValid(){
         return id > 0 && email.length() > 4 && registerDate != null;
