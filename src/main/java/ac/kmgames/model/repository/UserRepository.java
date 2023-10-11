@@ -1,6 +1,8 @@
 package ac.kmgames.model.repository;
 
 import ac.kmgames.model.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
@@ -14,7 +16,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
     long count();
 
     Optional<User> findByEmail(String email);
-    List<User> findByNameContains(String name);
+
     List<User> findByNicknameContains(String nickname);
 
     Optional<User> findByNickname(String names);
@@ -22,4 +24,6 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
     User findAllById(int id);
 
     List<User> getUsersByName(String id);
+
+    Page<User> findByNameContains(String name, Pageable pageable);
 }

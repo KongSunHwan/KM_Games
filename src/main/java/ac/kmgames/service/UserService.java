@@ -5,7 +5,9 @@ import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -56,7 +58,11 @@ final public class UserService{
         return userRepository.findAllById(id);
     }
 
-    public List<User> getUsersByName(String id) {
-        return userRepository.getUsersByName(id);
+//    public List<User> getUsersByName(String id) {
+//        return userRepository.getUsersByName(id);
+//    }
+
+    public Page<User> getFindByName(String keyword, Pageable pageable) {
+        return userRepository.findByNameContains(keyword, pageable);
     }
 }

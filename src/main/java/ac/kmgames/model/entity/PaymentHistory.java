@@ -2,11 +2,14 @@ package ac.kmgames.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
-@Data
+@Getter
+@Setter
 @Entity(name = "payment_history")
 @NoArgsConstructor
 public class PaymentHistory{

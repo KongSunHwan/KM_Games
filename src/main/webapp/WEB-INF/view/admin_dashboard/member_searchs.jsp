@@ -80,7 +80,7 @@
                         <br>
                         <form class="form-inline" action="/member_searchs">
                             <div class="input-group">
-                                <input class="form-control" type="text" name="searches"
+                                <input class="form-control" type="text" name="keyword"
                                     placeholder="회원의 이메일 또는 닉네임으로 검색하여 추가할 수 있습니다." aria-label="Search">
                                 <button class="btn btn-outline-primary" type="submit">
                                     <i class="fas fa-search"></i>

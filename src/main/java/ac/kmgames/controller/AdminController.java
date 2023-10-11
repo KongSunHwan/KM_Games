@@ -9,6 +9,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -76,24 +80,23 @@ public class AdminController {
     @GetMapping("member_searchs")
     public String member_searchs(HttpServletRequest request,
         @RequestParam(value = "page", defaultValue = "1") int page,
-        @RequestParam(value = "searches", required = false) String id) {
+        @RequestParam(value = "keyword", required = false) String keyword,
+        @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         page = Math.max(page -1, 0);
         List<User> users;
-        if(id == null){
+        if(keyword == null){
             users = userService.getAll(page);
+            request.setAttribute("userlist", users);
+            request.setAttribute("current_page", page + 1);
+            request.setAttribute("user_page", (long) Math.ceil(userService.getCount() / 10.0));
         }else{
-            users = userService.getUsersByName(id);
-            //users.add(userService.getUserByEmail(id));
-            //users.addAll(userService.getUsersByNickname(id));
+            //검색조건 + pageing, list로 변환해야 jsp에서 쓸 수 있음.
+            Page<User> pages = userService.getFindByName(keyword, pageable);
+            List<User> content = pages.getContent();
+            request.setAttribute("userlist", content);
+            request.setAttribute("current_page", pages.getNumber() + 1);
+            request.setAttribute("user_page", (long) Math.ceil(pages.getTotalElements() / 10.0));
         }
-        /*for(var user : users){
-            for(var payment : user.getPaymentHistories()){
-                System.out.println("구매한 게임: " + payment.getGame().getName());
-            }
-        }*/
-        request.setAttribute("userlist", users);
-        request.setAttribute("current_page", page + 1);
-        request.setAttribute("user_page", (long) Math.ceil(userService.getCount() / 10.0));
         return "admin_dashboard/member_searchs";
     }
 
