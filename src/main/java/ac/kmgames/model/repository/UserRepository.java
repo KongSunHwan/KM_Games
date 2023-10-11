@@ -16,4 +16,10 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
     Optional<User> findByEmail(String email);
     List<User> findByNameContains(String name);
     List<User> findByNicknameContains(String nickname);
+
+    Optional<User> findByNickname(String names);
+
+    User findAllById(int id);
+
+    List<User> getUsersByName(String id);
 }

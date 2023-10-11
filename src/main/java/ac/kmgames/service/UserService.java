@@ -51,4 +51,12 @@ final public class UserService{
         User users = optionalUser.get();
         return users.getId();
     }
+
+    public User findAllById(int id) {
+        return userRepository.findAllById(id);
+    }
+
+    public List<User> getUsersByName(String id) {
+        return userRepository.getUsersByName(id);
+    }
 }

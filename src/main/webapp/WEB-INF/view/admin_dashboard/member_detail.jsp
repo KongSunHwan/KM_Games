@@ -196,8 +196,7 @@
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">${user_review.game.name} &nbsp;
-                                                                            <div class="card-text2">&#x2B50&#x2B50&#x2B50&#x2B50&#x2B50 (${user_review.rate})</div>
+                                                                        <h5 class="card-title">${user_review.game.name} &nbsp; &#x2B50(${user_review.rate}점)
                                                                        </h5>
                                                                         <p class="card-text">${user_review.comment}</p>
                                                                         <p class="card-text"><small class="text-body-secondary">${user_review.date}</small></p>
