@@ -1,10 +1,11 @@
 package ac.kmgames.controller;
 
+import ac.kmgames.dto.GameReviewDTO;
+import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.service.*;
-import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,10 +15,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -26,12 +29,14 @@ public class AdminController {
     private final UserService userService;
     private final PaymentService paymentService;
     private final GameReviewService gameReviewService;
+    private final GameService gameService;
 
     @Autowired
-    public AdminController(UserService userService, PaymentService paymentService,GameReviewService gameReviewService){
+    public AdminController(UserService userService, PaymentService paymentService,GameReviewService gameReviewService,GameService gameService){
         this.userService = userService;
         this.paymentService = paymentService;
         this.gameReviewService = gameReviewService;
+        this.gameService = gameService;
     }
     @GetMapping("game_management")
     public String game_management() {
@@ -39,7 +44,9 @@ public class AdminController {
     }
 
     @GetMapping("game_review")
-    public String game_review() {
+    public String game_review(Model model) {
+        List<GameReviewDTO> gameReviews = gameReviewService.getAllGameReviewsDTO();
+        model.addAttribute("gameReviews", gameReviews);
         return "admin_dashboard/game_review";
     }
 

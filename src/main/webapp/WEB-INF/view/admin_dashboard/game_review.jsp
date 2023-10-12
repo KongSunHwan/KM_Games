@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +53,7 @@
         <div class="container-fluid mt-15">
             <div class="card mb-15">
                 <div class="card-body">
-                    <h4 class="card-title"><b>회원 별 리뷰내역</b></h4>
+                    <h4 class="card-title"><b>최근 게임 리뷰내역</b></h4>
                     <div class="row">
                         <div class="col-12">
                             <div class="col-12">
@@ -70,33 +71,18 @@
                                                         <th scope="col">날짜</th>
                                                     </tr>
                                                 </thead>
+
                                                 <tbody>
+                                                <c:forEach items="${gameReviews}" var="review">
                                                     <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>휴먼 폴 플랫</td>
-                                                        <td>tjsghks78@gmail.com</td>
-                                                        <td>정말 좋아요!</td>
-                                                        <td>&#x2B50&#x2B50&#x2B50&#x2B50&#x2B50 (5.0)</td>
-                                                        <td>2023-05-16 AM 11:05</td>
+                                                        <th scope="row">${review.id}</th>
+                                                        <td>${review.gameTitle}</td>
+                                                        <td>${review.userEmail}</td>
+                                                        <td>${review.comment}</td>
+                                                        <td>${review.rate}</td>
+                                                        <td>${review.date}</td>
                                                     </tr>
-
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>휴먼 폴 플랫</td>
-                                                        <td>tjsghks78@gmail.com</td>
-                                                        <td>정말 좋아요!</td>
-                                                        <td>&#x2B50&#x2B50&#x2B50&#x2B50&#x2B50 (5.0)</td>
-                                                        <td>2023-05-16 AM 11:05</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>휴먼 폴 플랫</td>
-                                                        <td>tjsghks78@gmail.com</td>
-                                                        <td>정말 좋아요!</td>
-                                                        <td>&#x2B50&#x2B50&#x2B50&#x2B50&#x2B50 (5.0)</td>
-                                                        <td>2023-05-16 AM 11:05</td>
-                                                    </tr>
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
