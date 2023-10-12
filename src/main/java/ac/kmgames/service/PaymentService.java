@@ -30,17 +30,17 @@ final public class PaymentService{
         return repository.countAllByUserId(id);
     }
 
-    public List<PaymentHistory> getAll(long id){
-        return repository.findAdminByUserId(id);
-    }
-
-
     public List<PaymentHistory> findAllByUser(int page, User selectUser) {
-//        return repository.findAllByUser(PageRequest.of( page,5),selectUser);
         return repository.findAllByUser(selectUser);
-
     }
 
+    public double getCount() {
+        return repository.count();
+    }
+
+    public List<PaymentHistory> getAll(int page){
+        return repository.findAllByOrderByDateDesc(PageRequest.of(page, 5));
+    }
 
 
 }

@@ -61,7 +61,16 @@ public class AdminController {
     }
 
     @GetMapping("member_order")
-    public String member_order() {
+    public String member_order(HttpServletRequest request,
+                               @RequestParam(value = "page", defaultValue = "1") int page,
+                               @PageableDefault(sort = "date", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        List<PaymentHistory> payment_list = paymentService.getAll(page);
+        request.setAttribute("current_page", page);
+        request.setAttribute("payment_list", payment_list);
+        request.setAttribute("payment_page", (long) Math.ceil(paymentService.getCount() /5.0));
+        System.out.println(payment_list);
+
         return "admin_dashboard/member_order";
     }
 

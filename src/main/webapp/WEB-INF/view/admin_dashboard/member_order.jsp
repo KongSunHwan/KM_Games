@@ -1,4 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+    int currentPage = (int) request.getAttribute("current_page");
+    int startPage = ((currentPage - 1) / 5) * 5 + 1;
+    pageContext.setAttribute("start_page", startPage);
+    pageContext.setAttribute("end_page", Math.min(startPage + 4, (long) request.getAttribute("payment_page")));
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -51,7 +59,7 @@
         <div class="container-fluid mt-15">
             <div class="card mb-15">
                 <div class="card-body">
-                    <h4 class="card-title"><b>회원 별 주문 내역</b></h4>
+                    <h4 class="card-title"><b>주문 내역</b></h4>
                     <div class="row">
                         <div class="col-12">
                             <div class="col-12">
@@ -61,57 +69,76 @@
                                             <table class="table text-center">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">회원 번호</th>
-                                                        <th scope="col">게임 제목</th>
+                                                        <th scope="col">주문 번호</th>
                                                         <th scope="col">회원 이메일</th>
+                                                        <th scope="col">게임</th>
                                                         <th scope="col">결제금액</th>
-                                                        <th scope="col">결제종류</th>
                                                         <th scope="col">날짜</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>휴먼 폴 플랫</td>
-                                                        <td>tjsghks78@gmail.com</td>
-                                                        <td>10,000원</td>
-                                                        <td>카드 결제</td>
-                                                        <td>2023-05-16 AM 11:05</td>
+                                                <c:forEach var="payment_list" items="${payment_list}">
+                                                <tr>
+                                                        <th scope="row">${payment_list.id}</th>
+                                                        <td>${payment_list.user.email}</td>
+                                                        <td>${payment_list.game.name}</td>
+                                                        <td>${payment_list.game.price}</td>
+                                                        <td>${payment_list.date}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>휴먼 폴 플랫</td>
-                                                        <td>tjsghks78@gmail.com</td>
-                                                        <td>10,000원</td>
-                                                        <td>카드 결제</td>
-                                                        <td>2023-05-16 AM 11:05</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>휴먼 폴 플랫</td>
-                                                        <td>tjsghks78@gmail.com</td>
-                                                        <td>10,000원</td>
-                                                        <td>카드 결제</td>
-                                                        <td>2023-05-16 AM 11:05</td>
-                                                    </tr>
+                                                </c:forEach>
+
+                                                <%--                                                    <tr>--%>
+<%--                                                        <th scope="row">1</th>--%>
+<%--                                                        <td>휴먼 폴 플랫</td>--%>
+<%--                                                        <td>tjsghks78@gmail.com</td>--%>
+<%--                                                        <td>10,000원</td>--%>
+<%--                                                        <td>카드 결제</td>--%>
+<%--                                                        <td>2023-05-16 AM 11:05</td>--%>
+<%--                                                    </tr>--%>
+<%--                                                    <tr>--%>
+<%--                                                        <th scope="row">1</th>--%>
+<%--                                                        <td>휴먼 폴 플랫</td>--%>
+<%--                                                        <td>tjsghks78@gmail.com</td>--%>
+<%--                                                        <td>10,000원</td>--%>
+<%--                                                        <td>카드 결제</td>--%>
+<%--                                                        <td>2023-05-16 AM 11:05</td>--%>
+<%--                                                    </tr>--%>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <nav aria-label="Page navigation example">
-                                            <ul class="pagination" style="justify-content: center;">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
-                                                </li>
+<%--                                            <ul class="pagination" style="justify-content: center;">--%>
+<%--                                                <li class="page-item">--%>
+<%--                                                    <a class="page-link" href="#" aria-label="Previous">--%>
+<%--                                                        <span aria-hidden="true">&laquo;</span>--%>
+<%--                                                    </a>--%>
+<%--                                                </li>--%>
+<%--                                                <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
+<%--                                                <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
+<%--                                                <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
+<%--                                                <li class="page-item">--%>
+<%--                                                    <a class="page-link" href="#" aria-label="Next">--%>
+<%--                                                        <span aria-hidden="true">&raquo;</span>--%>
+<%--                                                    </a>--%>
+<%--                                                </li>--%>
+<%--                                            </ul>--%>
+                                            <ul class="pagination mt-2" style="justify-content : center;">
+                                                <c:if test="${current_page > 5}">
+                                                    <li class="page-item"><a class="page-link" href="?page=${start_page - 1}">Prev</a></li>
+                                                </c:if>
+                                                <c:forEach var="item" begin="${start_page}" end="${end_page}">
+                                                    <c:choose>
+                                                        <c:when test="${item == current_page}">
+                                                            <li class="page-item"><a class="page-link disabled" href="#">${item}</a></li>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <li class="page-item"><a class="page-link" href="?page=${item}">${item}</a></li>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:forEach>
+                                                <c:if test="${page_count - start_page > 3}">
+                                                    <li class="page-item"><a class="page-link" href="?page=${end_page+ 1}">Next</a></li>
+                                                </c:if>
                                             </ul>
                                         </nav>
                                     </div>
