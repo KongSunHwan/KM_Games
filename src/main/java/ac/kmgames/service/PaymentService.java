@@ -5,7 +5,6 @@ import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -34,13 +33,9 @@ final public class PaymentService{
         return repository.findAdminByUserId(id);
     }
 
-
     public List<PaymentHistory> findAllByUser(int page, User selectUser) {
 //        return repository.findAllByUser(PageRequest.of( page,5),selectUser);
         return repository.findAllByUser(selectUser);
 
     }
-
-
-
 }

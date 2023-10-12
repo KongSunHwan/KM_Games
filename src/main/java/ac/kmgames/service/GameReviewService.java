@@ -1,13 +1,11 @@
 package ac.kmgames.service;
 
-import ac.kmgames.dto.GameReviewDTO;
 import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.GameReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
