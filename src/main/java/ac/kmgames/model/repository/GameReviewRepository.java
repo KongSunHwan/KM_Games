@@ -1,10 +1,8 @@
 package ac.kmgames.model.repository;
 
-import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.entity.GameReview;
 
 import java.util.List;
-import java.util.Optional;
 
 import ac.kmgames.model.entity.User;
 import org.springframework.data.repository.Repository;
