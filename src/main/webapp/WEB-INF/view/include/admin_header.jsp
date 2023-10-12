@@ -91,30 +91,30 @@
                     <li class="menu-item">
                         <a href="/member_searchs" class="menu-link">
                             <i class="menu-icon mdi mdi-account-search"></i>
-                            <span class="menu-label">회원 검색</span>
+                            <span class="menu-label" style="text-align">회원 관리</span>
                         </a>
                     </li>
 
-                    <li class="menu-item">
-                        <a href="/member_stop" class="menu-link">
-                            <i class="menu-icon mdi mdi-account-edit"></i>
-                            <span class="menu-label">회원 정지</span>
-                        </a>
-                    </li>
+<%--                    <li class="menu-item">--%>
+<%--                        <a href="/member_stop" class="menu-link">--%>
+<%--                            <i class="menu-icon mdi mdi-account-edit"></i>--%>
+<%--                            <span class="menu-label">회원 정지</span>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
 
-                    <li class="menu-item">
-                        <a href="/member_withdrawal" class="menu-link">
-                            <i class="menu-icon mdi mdi-account-remove"></i>
-                            <span class="menu-label">회원 탈퇴</span>
-                        </a>
-                    </li>
+<%--                    <li class="menu-item">--%>
+<%--                        <a href="/member_withdrawal" class="menu-link">--%>
+<%--                            <i class="menu-icon mdi mdi-account-remove"></i>--%>
+<%--                            <span class="menu-label">회원 탈퇴</span>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
 
-                    <li class="menu-item">
-                        <a href="/member_manag_information" class="menu-link">
-                            <i class="menu-icon mdi mdi-account-remove"></i>
-                            <span class="menu-label">회원 수정</span>
-                        </a>
-                    </li>
+<%--                    <li class="menu-item">--%>
+<%--                        <a href="/member_manag_information" class="menu-link">--%>
+<%--                            <i class="menu-icon mdi mdi-account-remove"></i>--%>
+<%--                            <span class="menu-label">회원 수정</span>--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
                 </ul>
 
             </li>
