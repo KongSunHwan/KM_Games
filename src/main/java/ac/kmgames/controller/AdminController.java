@@ -45,8 +45,7 @@ public class AdminController {
 
     @GetMapping("game_review")
     public String game_review(Model model) {
-        List<GameReviewDTO> gameReviews = gameReviewService.getAllGameReviewsDTO();
-        model.addAttribute("gameReviews", gameReviews);
+        model.addAttribute("gameReviews", gameReviewService.getAll());
         return "admin_dashboard/game_review";
     }
 

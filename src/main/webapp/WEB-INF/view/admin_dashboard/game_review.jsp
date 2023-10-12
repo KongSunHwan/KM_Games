@@ -76,8 +76,8 @@
                                                 <c:forEach items="${gameReviews}" var="review">
                                                     <tr>
                                                         <th scope="row">${review.id}</th>
-                                                        <td>${review.gameTitle}</td>
-                                                        <td>${review.userEmail}</td>
+                                                        <td>${review.game.name}</td>
+                                                        <td>${review.user.email}</td>
                                                         <td>${review.comment}</td>
                                                         <td>${review.rate}</td>
                                                         <td>${review.date}</td>
