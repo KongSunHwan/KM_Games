@@ -43,12 +43,15 @@ public class User{
     @Column
     private boolean ban;
 
+    @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<GameReview> gameReviews;
 
+    @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<CashHistory> cashHistories;
 
+    @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<PaymentHistory> paymentHistories;
 

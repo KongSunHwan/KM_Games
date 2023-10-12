@@ -3,8 +3,7 @@ package ac.kmgames.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,5 +32,4 @@ public class Game{
 
     @Column(name = "thumb_url")
     private String thumbUrl;
-
 }

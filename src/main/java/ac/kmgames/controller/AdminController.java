@@ -1,13 +1,10 @@
 package ac.kmgames.controller;
 
-import ac.kmgames.dto.GameReviewDTO;
-import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.service.*;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,13 +15,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
-@Controller
 @Slf4j
+@Controller
 public class AdminController {
     private final UserService userService;
     private final PaymentService paymentService;
@@ -38,6 +33,7 @@ public class AdminController {
         this.gameReviewService = gameReviewService;
         this.gameService = gameService;
     }
+
     @GetMapping("game_management")
     public String game_management() {
         return "admin_dashboard/game_management";
@@ -45,8 +41,7 @@ public class AdminController {
 
     @GetMapping("game_review")
     public String game_review(Model model) {
-        List<GameReviewDTO> gameReviews = gameReviewService.getAllGameReviewsDTO();
-        model.addAttribute("gameReviews", gameReviews);
+        model.addAttribute("gameReviews", gameReviewService.getAll());
         return "admin_dashboard/game_review";
     }
 
@@ -93,6 +88,7 @@ public class AdminController {
     public String monthly_sales() {
         return "admin_dashboard/monthly_sales";
     }
+
     @GetMapping("member_searchs")
     public String member_searchs(HttpServletRequest request,
         @RequestParam(value = "page", defaultValue = "1") int page,
