@@ -91,7 +91,7 @@
                     <li class="menu-item">
                         <a href="/member_searchs" class="menu-link">
                             <i class="menu-icon mdi mdi-account-search"></i>
-                            <span class="menu-label" style="text-align">회원 관리</span>
+                            <span class="menu-label">회원 관리</span>
                         </a>
                     </li>
 
