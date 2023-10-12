@@ -2,14 +2,12 @@ package ac.kmgames.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Timestamp;
 
-@Getter
-@Setter
+@Data
 @Entity(name = "payment_history")
 @NoArgsConstructor
 public class PaymentHistory{
@@ -17,11 +15,13 @@ public class PaymentHistory{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @ManyToOne
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "game_id", referencedColumnName = "id")
     private Game game;
 
