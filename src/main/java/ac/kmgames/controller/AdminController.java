@@ -55,11 +55,19 @@ public class AdminController {
             request.setAttribute("game_page", (long) Math.ceil(pages.getTotalElements() / 16.0));
         }
 
-//        page = Math.max(page - 1, 0);
-//        request.setAttribute("current_page", page + 1);
-//        request.setAttribute("game_list", gameService.getAll(page));
-//        request.setAttribute("game_page", (long) Math.ceil(gameService.getCount() / 16.0));
         return "admin_dashboard/game_management";
+    }
+
+    @GetMapping(value = "game_detail_manage.do")
+    public String game_manage(@RequestParam int id) {
+
+
+        return "admin_dashboard/game_detail_manage";
+    }
+
+    @GetMapping(value = "game_detail_manage")
+    public String game_manag1e() {
+        return "admin_dashboard/game_detail_manage";
     }
 
     @GetMapping("game_review")

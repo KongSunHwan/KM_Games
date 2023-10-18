@@ -85,7 +85,7 @@
                                                 <div class="card-back mb-2 col-lg-3" style="cursor:pointer;">
 
                                                     <div class="card-img">
-                                                        <img src="/resources/img/game/${game.thumbUrl}" style="width: 230px; height:150px;" onerror="this.onerror=null; this.src='/resources/img/game/wip.png';"  onclick="location.href = '/game_manage?id=${game.id}'">
+                                                        <img src="/resources/img/game/${game.thumbUrl}" style="width: 230px; height:150px;" onerror="this.onerror=null; this.src='/resources/img/game/wip.png';"  onclick="location.href = '/game_detail_manage?id=${game.id}'">
                                                     </div>
 
                                                     <div class="card-title">
