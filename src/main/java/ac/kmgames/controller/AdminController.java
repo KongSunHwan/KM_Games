@@ -1,5 +1,6 @@
 package ac.kmgames.controller;
 
+import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
@@ -35,7 +36,29 @@ public class AdminController {
     }
 
     @GetMapping("game_management")
-    public String game_management() {
+    public String game_management(HttpServletRequest request,@RequestParam(value = "keyword", required = false) String keyword,
+                                  @RequestParam(value = "page", defaultValue = "1") int page,
+                                  @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+
+        page = Math.max(page -1, 0);
+
+        if(keyword == null){
+            request.setAttribute("current_page", page + 1);
+            request.setAttribute("game_list", gameService.getAll(page));
+            request.setAttribute("game_page", (long) Math.ceil(gameService.getCount() / 16.0));
+        }else{
+            //검색조건 + pageing, list로 변환해야 jsp에서 쓸 수 있음.
+            Page<Game> pages = gameService.getFindByName(keyword, pageable);
+            List<Game> content = pages.getContent();
+            request.setAttribute("game_list", content);
+            request.setAttribute("current_page", pages.getNumber() + 1);
+            request.setAttribute("game_page", (long) Math.ceil(pages.getTotalElements() / 16.0));
+        }
+
+//        page = Math.max(page - 1, 0);
+//        request.setAttribute("current_page", page + 1);
+//        request.setAttribute("game_list", gameService.getAll(page));
+//        request.setAttribute("game_page", (long) Math.ceil(gameService.getCount() / 16.0));
         return "admin_dashboard/game_management";
     }
 
@@ -57,14 +80,14 @@ public class AdminController {
 
     @GetMapping("member_order")
     public String member_order(HttpServletRequest request,
-                               @RequestParam(value = "page", defaultValue = "1") int page,
-                               @PageableDefault(sort = "date", direction = Sort.Direction.DESC) Pageable pageable) {
+                               @RequestParam(value = "page", defaultValue = "1") int page) {
 
-        List<PaymentHistory> payment_list = paymentService.getAll(page);
-        request.setAttribute("current_page", page);
-        request.setAttribute("payment_list", payment_list);
-        request.setAttribute("payment_page", (long) Math.ceil(paymentService.getCount() /5.0));
-        System.out.println(payment_list);
+        List<PaymentHistory> payment = paymentService.getAll(page);
+        request.setAttribute("payment_list", payment);
+        request.setAttribute("current_page", page );
+        request.setAttribute("payment_page", (long) Math.ceil(paymentService.getCount() / 5.0));
+
+
 
         return "admin_dashboard/member_order";
     }

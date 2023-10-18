@@ -110,7 +110,10 @@
                                                                 <input type="text" id="nickName_text" class="form-control" value="${select_user.nickname}">
                                                             </div>
 
-                                                            <button type="submit" class="btn btn-primary">수정</button> &nbsp;    <button type="submit" class="btn btn-primary">비밀번호 초기화</button>
+                                                            <button type="submit" class="btn btn-primary">수정</button> &nbsp;<button type="submit" class="btn btn-primary">비밀번호 초기화</button>&nbsp;
+                                                            <button type="button" class="btn btn-danger">비활성화</button>&nbsp;    <button type="button" class="btn btn-danger">삭제</button>
+
+
                                                         </form>
 
                                                     </div>

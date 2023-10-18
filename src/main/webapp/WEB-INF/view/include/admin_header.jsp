@@ -132,7 +132,7 @@
                     <li class="menu-item">
                         <a href="/member_order" class="menu-link">
                             <i class="menu-icon mdi mdi-format-list-bulleted-square"></i>
-                            <span class="menu-label">회원 별 주문 내역</span>
+                            <span class="menu-label">최근 주문 내역</span>
                         </a>
                     </li>
 

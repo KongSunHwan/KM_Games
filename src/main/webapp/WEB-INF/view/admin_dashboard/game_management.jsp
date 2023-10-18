@@ -1,4 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    int currentPage = (int) request.getAttribute("current_page");
+    int startPage = ((currentPage - 1) / 5) * 5 + 1;
+    pageContext.setAttribute("start_page", startPage);
+    pageContext.setAttribute("end_page", Math.min(startPage + 4, (long) request.getAttribute("game_page")));
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -58,8 +66,58 @@
                                 <div class="row no-gutters">
                                     <div class="col-12">
                                         <div class="card-body">
-                                            <h2>업데이트 준비중...</h2>
+                                            <form class="form-inline" action="/game_management">
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" name="keyword"
+                                                           placeholder="게임 이름으로 검색이 가능합니다." aria-label="Search">
+                                                    <button class="btn btn-outline-primary" type="submit">
+                                                        <i class="fas fa-search"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+
+                                            <br>
+
+                                            <c:forEach var="game" items="${game_list}" varStatus="status">
+                                                <c:if test="${status.index % 4 == 0}">
+                                                    <div class="row" style="margin-top:10px;">
+                                                </c:if>
+                                                <div class="card-back mb-2 col-lg-3" style="cursor:pointer;">
+
+                                                    <div class="card-img">
+                                                        <img src="/resources/img/game/${game.thumbUrl}" style="width: 230px; height:150px;" onerror="this.onerror=null; this.src='/resources/img/game/wip.png';"  onclick="location.href = '/game_manage?id=${game.id}'">
+                                                    </div>
+
+                                                    <div class="card-title">
+                                                        <div class="fw-bold fs-5">${game.name}</div>
+                                                    </div>
+
+                                                </div>
+                                                <c:if test="${status.index % 4 == 3}">
+                                                    </div>
+                                                </c:if>
+                                            </c:forEach>
+
+
                                         </div>
+                                        <ul class="pagination mt-2" style="justify-content : center;">
+                                            <c:if test="${current_page > 5}">
+                                                <li class="page-item"><a class="page-link" href="?page=${start_page - 1}">Prev</a></li>
+                                            </c:if>
+                                            <c:forEach var="item" begin="${start_page}" end="${end_page}">
+                                                <c:choose>
+                                                    <c:when test="${item == current_page}">
+                                                        <li class="page-item"><a class="page-link disabled" href="#">${item}</a></li>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <li class="page-item"><a class="page-link" href="?page=${item}">${item}</a></li>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                            <c:if test="${page_count - start_page > 5}">
+                                                <li class="page-item"><a class="page-link" href="?page=${end_page+ 1}">Next</a></li>
+                                            </c:if>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

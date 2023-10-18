@@ -56,9 +56,6 @@ final public class UserService{
         return userRepository.findAllById(id);
     }
 
-//    public List<User> getUsersByName(String id) {
-//        return userRepository.getUsersByName(id);
-//    }
 
     public Page<User> getFindByName(String keyword, Pageable pageable) {
         return userRepository.findByNameContains(keyword, pageable);
