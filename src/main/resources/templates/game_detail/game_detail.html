@@ -279,7 +279,7 @@
         <!-- 총평리뷰 시작 -->
         <hr>
         <div>
-        <h4><b>총 평점</b></h2>
+        <h2><b>총 평점</b></h2>
         </div>
 
         <div class="card mb-3" style="max-width: 540px;">
@@ -330,7 +330,7 @@
         </div>
         </div>
 
-        <form method="post" action="/game_review">
+        <form id="myform" method="post" action="/game_review">
             <input type="hidden" name="game_id" value="#" hidden>
             <input type="hidden" name="user_id" value="#" hidden>
             <div class="card mb-2">
@@ -339,22 +339,18 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="form-inline mb-2">
-                        </div>
-                        <form name="myform" id="myform" method="#" action="#">
-                        <fieldset>
-                            <legend>별점을 선택해주세요</legend>
-                            <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-                            <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-                            <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-                            <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-                            <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-                        </fieldset>
-                        </form>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
-                        <button type="submit" class="btn btn-dark mt-3">등록</button>
-                    </li>
+                        <li class="list-group-item">
+                            <fieldset>
+                                <legend>별점을 선택해주세요</legend>
+                                <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
+                                <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
+                                <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
+                                <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
+                                <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
+                            </fieldset>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"></textarea>
+                            <button type="submit" class="btn btn-dark mt-3">등록</button>
+                        </li>
                     </ul>
                 </div>
             </div>
