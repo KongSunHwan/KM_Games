@@ -1,18 +1,19 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="resources/img/KM_GAMES_logo_icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="resources/img/KM_GAMES_logo_icon">
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/img/KM_GAMES_logo_icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/KM_GAMES_logo_icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/KM_GAMES_logo_icon">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/KM_GAMES_logo_icon">
     <link rel="manifest" href="https://i.morioh.com/favicon/site.webmanifest">
-    <link rel="mask-icon" href="resources/img/KM_GAMES_logo_icon" color="#262521">
-    <link rel="shortcut icon" href="resources/img/KM_GAMES_logo_icon">
+    <link rel="mask-icon" href="/img/KM_GAMES_logo_icon" color="#262521">
+    <link rel="shortcut icon" href="/img/KM_GAMES_logo_icon">
     <meta name="msapplication-TileColor" content="#faa700">
     <meta name="theme-color" content="#ffffff">>
 
@@ -24,12 +25,12 @@
 
     <title>관리자 페이지</title>
     <meta itemprop="description" content="Morioh Theme is Bootstrap responsive template free download">
-    <meta itemprop="image" content="resources/img/KM_GAMES_logo_icon">
+    <meta itemprop="image" content="/img/KM_GAMES_logo_icon">
 
     <meta name="description" content="Morioh Theme is Bootstrap responsive template free download">
-    <meta name="image" content="resources/img/KM_GAMES_logo_icon">
+    <meta name="image" content="/img/KM_GAMES_logo_icon">
 
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/KM_GAMES_logo_icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css">
@@ -49,7 +50,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="resources/css/morioh.css">
+    <link rel="stylesheet" href="/css/morioh.css">
 
 
 </head>
@@ -58,7 +59,9 @@
 <body class="menubar-enabled navbar-top-fixed">
     <div class="wrapper">
 
-        <jsp:include page="../include/admin_header.jsp"></jsp:include>
+        <!-- header 시작 -->
+        <header th:replace="~{include/admin_header}"></header>
+        <!-- header 끝 -->
 
         <div class="container-fluid mt-15">
 
@@ -410,7 +413,7 @@
                             <div class="mb-15">
                                 <div class="d-flex">
                                     <a href="javascript://" class="avatar avatar-lg mr-20">
-                                        <img src="resources/img/ROPF2fQ.png">
+                                        <img src="/img/ROPF2fQ.png">
                                     </a>
                                     <div class="flex-fill">
                                         <div class="float-right mt-10">
@@ -425,7 +428,7 @@
                             <div class="mb-15">
                                 <div class="d-flex">
                                     <a href="javascript://" class="avatar avatar-lg mr-20">
-                                        <img src="resources/img/ROPF2fQ.png">
+                                        <img src="/img/ROPF2fQ.png">
                                     </a>
                                     <div class="flex-fill">
                                         <div class="float-right mt-10">
@@ -440,7 +443,7 @@
                             <div class="mb-15">
                                 <div class="d-flex">
                                     <a href="javascript://" class="avatar avatar-lg mr-20">
-                                        <img src="resources/img/ROPF2fQ.png">
+                                        <img src="/img/ROPF2fQ.png">
                                     </a>
                                     <div class="flex-fill">
                                         <div class="float-right mt-10">
@@ -473,7 +476,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-sparkline@2.4.0/jquery.sparkline.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/peity@3.3.0/jquery.peity.min.js"></script>
 
-    <script src="resources/js/morioh.js"></script>
+    <script src="/js/morioh.js"></script>
 
 
     <!-- Global site tag (gtag.js) - Google Analytics -->

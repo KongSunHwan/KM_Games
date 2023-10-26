@@ -1,13 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%
-//    int currentPage = (int) request.getAttribute("current_page");
-//    int startPage = ((currentPage) / 5) * 5 +1;
-//    pageContext.setAttribute("start_page", startPage);
-//    pageContext.setAttribute("end_page", Math.min(startPage + 4, (long) request.getAttribute("payment_page")));
-%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
 
@@ -15,31 +9,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="resources/img/KM_GAMES_logo_icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="resources/img/KM_GAMES_logo_icon">
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/img/KM_GAMES_logo_icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/KM_GAMES_logo_icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/KM_GAMES_logo_icon">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/KM_GAMES_logo_icon">
     <link rel="manifest" href="https://i.morioh.com/favicon/site.webmanifest">
-    <link rel="mask-icon" href="resources/img/KM_GAMES_logo_icon" color="#262521">
-    <link rel="shortcut icon" href="resources/img/KM_GAMES_logo_icon">
+    <link rel="mask-icon" href="/img/KM_GAMES_logo_icon" color="#262521">
+    <link rel="shortcut icon" href="/img/KM_GAMES_logo_icon">
     <meta name="msapplication-TileColor" content="#faa700">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/KM_GAMES_logo_icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
 
     <meta property="og:title" content="Morioh Responsive Template with Bootstrap 4, HTML5 and Vue.js">
-    <meta property="og:image" content="resources/img/KM_GAMES_logo_icon">
+    <meta property="og:image" content="/img/KM_GAMES_logo_icon">
     <meta property="og:description" content="Morioh Theme is Bootstrap responsive template free download">
     <meta property="og:image:width" content="1280">
     <meta property="og:image:height" content="720">
 
     <title>관리자 페이지</title>
     <meta itemprop="description" content="Morioh Theme is Bootstrap responsive template free download">
-    <meta itemprop="image" content="resources/img/KM_GAMES_logo_icon">
+    <meta itemprop="image" content="/img/KM_GAMES_logo_icon">
 
     <meta name="description" content="Morioh Theme is Bootstrap responsive template free download">
-    <meta name="image" content="resources/img/KM_GAMES_logo_icon">
+    <meta name="image" content="/img/KM_GAMES_logo_icon">
 
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/KM_GAMES_logo_icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css">
@@ -59,7 +53,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="resources/css/morioh.css">
+    <link rel="stylesheet" href="/css/morioh.css">
     <link rel="stylesheet" href="/css/style.css" />
 
 
@@ -70,11 +64,9 @@
 
 <div class="wrapper">
 
-    <jsp:include page="../include/admin_header.jsp"></jsp:include>
-
-            <!-- header 시작 -->
-<%--            <header th:replace="~{header/header}"></header>--%>
-            <!-- header 끝 -->
+    <!-- header 시작 -->
+    <header th:replace="~{include/admin_header}"></header>
+    <!-- header 끝 -->
 
 
     <div class="container-fluid mt-15">
@@ -98,16 +90,16 @@
 
                                                             <div class="mb-3">
                                                                 <label for="emailText" class="form-label">Email</label>
-                                                                <input type="text" id="emailText" class="form-control" value="${select_user.email}" disabled>
+                                                                <input type="text" id="emailText" class="form-control" value="#" disabled>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="name_text" class="form-label">Name</label>
-                                                                <input id="name_text" type="text" class="form-control" name="name" value="${select_user.name}" aria-describedby="emailHelp">
+                                                                <input id="name_text" type="text" class="form-control" name="name" value="#" aria-describedby="emailHelp">
                                                             </div>
 
                                                             <div class="mb-3">
                                                                 <label for="nickName_text" class="form-label">NickName</label>
-                                                                <input type="text" id="nickName_text" class="form-control" value="${select_user.nickname}">
+                                                                <input type="text" id="nickName_text" class="form-control" value="#">
                                                             </div>
 
                                                             <button type="submit" class="btn btn-primary">수정</button> &nbsp;<button type="submit" class="btn btn-primary">비밀번호 초기화</button>&nbsp;
@@ -136,38 +128,24 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <c:forEach var="user_payment" items="${user_payment}" varStatus="status">
                                                             <tr>
-                                                                <th scope="row">${user_payment.id}</th>
-                                                                <td>${user_payment.game.name}</td>
-                                                                <td>${user_payment.game.genre}</td>
-                                                                <td>${user_payment.game.developer}</td>
-                                                                <td>${user_payment.game.price}원</td>
-                                                                <td>${user_payment.date}</td>
+                                                                <th scope="row">결제 번호</th>
+                                                                <td>게임</td>
+                                                                <td>장르</td>
+                                                                <td>개발자</td>
+                                                                <td>가격</td>
+                                                                <td>날짜</td>
                                                             </tr>
-                                                            </c:forEach>
                                                             </tbody>
                                                         </table>
 
 
                                                         <nav aria-label="Page navigation example">
                                                             <ul class="pagination mt-2" style="justify-content : center;">
-<%--                                                                <c:if test="${current_page > 5}">--%>
-<%--                                                                    <li class="page-item"><a class="page-link" href="?page=${start_page - 1}">Prev</a></li>--%>
-<%--                                                                </c:if>--%>
-<%--                                                                <c:forEach var="item" begin="${start_page}" end="${end_page}">--%>
-<%--                                                                    <c:choose>--%>
-<%--                                                                        <c:when test="${item == current_page}">--%>
-<%--                                                                            <li class="page-item"><a class="page-link disabled" href="#">${item}</a></li>--%>
-<%--                                                                        </c:when>--%>
-<%--                                                                        <c:otherwise>--%>
-<%--                                                                            <li class="page-item"><a class="page-link" href="?page=${item}">${item}</a></li>--%>
-<%--                                                                        </c:otherwise>--%>
-<%--                                                                    </c:choose>--%>
-<%--                                                                </c:forEach>--%>
-<%--                                                                <c:if test="${page_count - start_page > 5}">--%>
-<%--                                                                    <li class="page-item"><a class="page-link" href="?page=${end_page+ 1}">Next</a></li>--%>
-<%--                                                                </c:if>--%>
+                                                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                                                                            <li class="page-item"><a class="page-link disabled" href="#">이전</a></li>
+                                                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                                    <li class="page-item"><a class="page-link" href="#">다음</a></li>
                                                             </ul>
                                                         </nav>
                                                     </div>
@@ -190,24 +168,21 @@
                                                     <div class="card-body">
                                                         <h5 class="card-title">리뷰 내역</h5>
 
-                                                        <c:forEach var="user_review" items="${user_review}" varStatus="status">
-
                                                         <div class="card mb-3" style="max-width: 540px;">
                                                             <div class="row g-0">
                                                                 <div class="col-md-4">
-                                                                    <img src="/resources/img/game/${user_review.game.thumbUrl}" style="width: 150px; height:125px;" onerror="this.onerror=null; this.src='/resources/img/game/wip.png';">
+                                                                    <img src="/img/" style="width: 150px; height:125px;">
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <div class="card-body">
-                                                                        <h5 class="card-title">${user_review.game.name} &nbsp; &#x2B50(${user_review.rate}점)
+                                                                        <h5 class="card-title">게임제목 &nbsp; &#x2B50(평점)
                                                                        </h5>
-                                                                        <p class="card-text">${user_review.comment}</p>
-                                                                        <p class="card-text"><small class="text-body-secondary">${user_review.date}</small></p>
+                                                                        <p class="card-text">리뷰</p>
+                                                                        <p class="card-text"><small class="text-body-secondary">날짜</small></p>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        </c:forEach>
 
                                                         <nav aria-label="Page navigation example">
                                                         <ul class="pagination" style="justify-content: center;">
@@ -267,7 +242,7 @@
 
 
 
-        <script src="resources/js/morioh.js"></script>
+        <script src="/js/morioh.js"></script>
 
 </body>
 

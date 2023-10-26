@@ -1,45 +1,38 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%
-    int currentPage = (int) request.getAttribute("current_page");
-    int startPage = ((currentPage - 1) / 5) * 5 + 1;
-    pageContext.setAttribute("start_page", startPage);
-    pageContext.setAttribute("end_page", Math.min(startPage + 4, (long) request.getAttribute("user_page")));
-%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="resources/img/KM_GAMES_logo_icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="resources/img/KM_GAMES_logo_icon">
-    <link rel="icon" type="image/png" sizes="16x16" href="resources/img/KM_GAMES_logo_icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/KM_GAMES_logo_icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/KM_GAMES_logo_icon">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/KM_GAMES_logo_icon">
     <link rel="manifest" href="https://i.morioh.com/favicon/site.webmanifest">
-    <link rel="mask-icon" href="resources/img/KM_GAMES_logo_icon" color="#262521">
-    <link rel="shortcut icon" href="resources/img/KM_GAMES_logo_icon">
+    <link rel="mask-icon" href="/img/KM_GAMES_logo_icon" color="#262521">
+    <link rel="shortcut icon" href="/img/KM_GAMES_logo_icon">
     <meta name="msapplication-TileColor" content="#faa700">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/KM_GAMES_logo_icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
 
     <meta property="og:title" content="Morioh Responsive Template with Bootstrap 4, HTML5 and Vue.js">
-    <meta property="og:image" content="resources/img/KM_GAMES_logo_icon">
+    <meta property="og:image" content="/img/KM_GAMES_logo_icon">
     <meta property="og:description" content="Morioh Theme is Bootstrap responsive template free download">
     <meta property="og:image:width" content="1280">
     <meta property="og:image:height" content="720">
 
     <title>관리자 페이지</title>
     <meta itemprop="description" content="Morioh Theme is Bootstrap responsive template free download">
-    <meta itemprop="image" content="resources/img/KM_GAMES_logo_icon">
+    <meta itemprop="image" content="/img/KM_GAMES_logo_icon">
 
     <meta name="description" content="Morioh Theme is Bootstrap responsive template free download">
-    <meta name="image" content="resources/img/KM_GAMES_logo_icon">
+    <meta name="image" content="/img/KM_GAMES_logo_icon">
 
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/KM_GAMES_logo_icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css">
@@ -59,7 +52,7 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="resources/css/morioh.css">
+    <link rel="stylesheet" href="/css/morioh.css">
 
 </head>
 
@@ -67,7 +60,9 @@
 
     <div class="wrapper">
 
-        <jsp:include page="../include/admin_header.jsp"></jsp:include>
+        <!-- header 시작 -->
+        <header th:replace="~{include/admin_header}"></header>
+        <!-- header 끝 -->
 
         <div class="row">
             <div class="col-lg-13 col-md-12">
@@ -100,23 +95,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="user" items="${userlist}">
                                 <tr>
                                     <td class="text-center">
                                         일반 회원
                                     </td>
                                     <td class="text-center">
-                                        ${user.email}
+                                        이메일
                                     </td>
 
                                     <td class="text-center">
-                                        ${user.name}
+                                        이름
                                     </td>
                                     <td class="text-center">
-                                            ${user.nickname}
+                                        닉네임
                                     </td>
                                     <td class="text-center">
-                                        <span class="badge bg-primary">${fn:substringBefore(user.registerDate, ".0")}</span>
+                                        <span class="badge bg-primary">날짜</span>
                                     </td>
 
                                     <td class="text-center">
@@ -126,35 +120,22 @@
                                                 <i class="mdi mdi-dots-horizontal"></i>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-lg-end">
-                                                <li><a href="member_detail.do?id=${user.id}">
+                                                <li><a href="#">
                                                     <button class="dropdown-item" type="button">상세내역</button></a></li>
                                                 <li><button class="dropdown-item" type="button">삭제</button></li>
                                             </ul>
                                         </div>
                                     </td>
                                 </tr>
-                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination mt-2" style="justify-content : center;">
-                            <c:if test="${current_page > 5}">
-                                <li class="page-item"><a class="page-link" href="?page=${start_page - 1}">Prev</a></li>
-                            </c:if>
-                            <c:forEach var="item" begin="${start_page}" end="${end_page}">
-                                <c:choose>
-                                    <c:when test="${item == current_page}">
-                                        <li class="page-item"><a class="page-link disabled" href="#">${item}</a></li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li class="page-item"><a class="page-link" href="?page=${item}">${item}</a></li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                            <c:if test="${page_count - start_page > 3}">
-                                <li class="page-item"><a class="page-link" href="?page=${end_page+ 1}">Next</a></li>
-                            </c:if>
+                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                                        <li class="page-item"><a class="page-link disabled" href="#">#</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">#</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -182,7 +163,7 @@
 
 
 
-        <script src="resources/js/morioh.js"></script>
+        <script src="/js/morioh.js"></script>
 
 
 </body>
