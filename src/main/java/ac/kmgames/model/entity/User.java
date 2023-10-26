@@ -7,8 +7,7 @@ import org.hibernate.annotations.NaturalId;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
