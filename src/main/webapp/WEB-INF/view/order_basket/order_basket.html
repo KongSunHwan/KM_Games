@@ -1,6 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
-<html lang="ko">
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="utf-8">
@@ -12,9 +13,9 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="resources/css/footer.css" />
-    <link href="resources/css/contract_in.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/KM_GAMES_logo_icon.png" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link href="/css/contract_in.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
 
     <style>
         .bd-placeholder-img {
@@ -74,7 +75,9 @@
 
 <body>
 
-<jsp:include page="../include/header.jsp"></jsp:include>
+<!-- header 시작 -->
+<header th:replace="~{include/header}"></header>
+<!-- header 끝 -->
 
     <main>
         <div class="container py-4">
@@ -120,7 +123,7 @@
                                                 value="option2" style="width: 20px; height: 20px;">
                                         </div>
                                         <a href="#">
-                                            <img src="resources/img/game/game_img2.jpg">
+                                            <img src="/img/game/game_img2.jpg">
                                         </a>
                                     </div>
                                 </div>
@@ -176,7 +179,7 @@
     </main>
 
 <!--footer 시작-->
-<jsp:include page="../include/footer.jsp"></jsp:include>
+<header th:replace="~{include/footer}"></header>
 <!--footer 종료-->
 
 
