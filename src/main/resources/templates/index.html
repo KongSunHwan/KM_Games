@@ -129,7 +129,7 @@
                 <th:block th:each="game, index : ${game_list}">
                     <div class="card-back mb-2 col-lg-3" style="cursor:pointer;" th:onclick="|location.href = '/game_detail?id=${game.id}'|">
                         <div class="card-img">
-                            <img th:src="|/resources/img/game/${game.thumbUrl}|" style="width: 230px; height:150px;" onerror="this.onerror=null; this.src='/resources/img/game/wip.png';">
+                            <img th:src="|/img/game/${game.thumbUrl}|" style="width: 230px; height:150px;" onerror="this.onerror=null; this.src='/img/game/wip.png';">
                         </div>
                         <div class="card-title">
                             <div class="fw-bold fs-5" th:text="${game.name}"></div>
