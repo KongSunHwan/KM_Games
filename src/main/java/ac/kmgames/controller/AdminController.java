@@ -6,7 +6,7 @@ import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.service.*;
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-@Slf4j
 @Controller
 public class AdminController {
     private final UserService userService;
@@ -58,15 +56,10 @@ public class AdminController {
         return "admin_dashboard/game_management";
     }
 
-    @GetMapping(value = "game_detail_manage.do")
-    public String game_manage(@RequestParam int id) {
-
-
-        return "admin_dashboard/game_detail_manage";
-    }
-
     @GetMapping(value = "game_detail_manage")
-    public String game_manag1e() {
+    public String gameManagement(HttpSession session, HttpServletRequest request,
+        @RequestParam(value = "id", defaultValue = "1") long id){
+        request.setAttribute("game", gameService.getGameById(id).get());
         return "admin_dashboard/game_detail_manage";
     }
 
@@ -87,16 +80,15 @@ public class AdminController {
     }
 
     @GetMapping("member_order")
-    public String member_order(HttpServletRequest request,
-                               @RequestParam(value = "page", defaultValue = "1") int page) {
-
-        List<PaymentHistory> payment = paymentService.getAll(page);
-        request.setAttribute("payment_list", payment);
-        request.setAttribute("current_page", page );
+    public String member_order(
+        HttpServletRequest request,
+        @RequestParam(value = "page", defaultValue = "1") int page
+    ){
+        page = Math.max(page - 1, 0);
+        var payment = paymentService.getAll(page);
+        request.setAttribute("payment_list", payment.getContent());
+        request.setAttribute("current_page", page + 1);
         request.setAttribute("payment_page", (long) Math.ceil(paymentService.getCount() / 5.0));
-
-
-
         return "admin_dashboard/member_order";
     }
 
@@ -158,10 +150,5 @@ public class AdminController {
         System.out.println(user_review);
 
         return "admin_dashboard/member_detail";
-    }
-
-    @GetMapping("main_list")
-    public String main_list() {
-        return "main/main_list";
     }
 }
