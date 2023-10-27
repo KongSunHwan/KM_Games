@@ -1,9 +1,11 @@
 package ac.kmgames.controller;
 
+import ac.kmgames.model.dto.ResponsePageDTO;
 import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
+import ac.kmgames.model.utils.Criteria;
 import ac.kmgames.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -121,25 +123,10 @@ public class AdminController {
     }
 
     @GetMapping("member_searchs")
-    public String member_searchs(HttpServletRequest request,
-        @RequestParam(value = "page", defaultValue = "1") int page,
-        @RequestParam(value = "keyword", required = false) String keyword,
-        @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        page = Math.max(page -1, 0);
-        List<User> users;
-        if(keyword == null){
-            users = userService.getAll(page);
-            request.setAttribute("userlist", users);
-            request.setAttribute("current_page", page + 1);
-            request.setAttribute("user_page", (long) Math.ceil(userService.getCount() / 10.0));
-        }else{
-            //검색조건 + pageing, list로 변환해야 jsp에서 쓸 수 있음.
-            Page<User> pages = userService.getFindByName(keyword, pageable);
-            List<User> content = pages.getContent();
-            request.setAttribute("userlist", content);
-            request.setAttribute("current_page", pages.getNumber() + 1);
-            request.setAttribute("user_page", (long) Math.ceil(pages.getTotalElements() / 10.0));
-        }
+    public String member_searchs(Criteria criteria, Model model) {
+        ResponsePageDTO.ResponseUser list = userService.getUserListAdmin(criteria);
+        model.addAttribute("pageList", list);
+        log.info("list={}", list);
         return "admin_dashboard/member_searchs";
     }
 

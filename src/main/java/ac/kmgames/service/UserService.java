@@ -1,9 +1,14 @@
 package ac.kmgames.service;
 
+import ac.kmgames.model.dto.ResponsePageDTO;
+import ac.kmgames.model.dto.UserDTO;
 import ac.kmgames.model.entity.User;
+import ac.kmgames.model.mapper.UserMapper;
 import ac.kmgames.model.repository.UserRepository;
+import ac.kmgames.model.utils.Criteria;
+import ac.kmgames.model.utils.PageDTO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,13 +18,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 final public class UserService{
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserService(@Autowired UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
+//    public UserService(@Autowired UserRepository userRepository){
+//        this.userRepository = userRepository;
+//    }
 
     public boolean existsByEmail(String email){
         return userRepository.existsByEmail(email);
@@ -59,5 +66,13 @@ final public class UserService{
 
     public Page<User> getFindByName(String keyword, Pageable pageable) {
         return userRepository.findByNameContains(keyword, pageable);
+    }
+
+    public ResponsePageDTO.ResponseUser getUserListAdmin(Criteria criteria) {
+        Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
+        List<UserDTO> pageList = userMapper.getAll(cs);
+        int total = userMapper.getCount(cs);
+        PageDTO pageDTO = new PageDTO(cs,total);
+        return new ResponsePageDTO.ResponseUser(pageList, pageDTO);
     }
 }

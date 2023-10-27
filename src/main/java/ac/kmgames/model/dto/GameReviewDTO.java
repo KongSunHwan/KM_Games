@@ -1,14 +1,14 @@
-package ac.kmgames.model.domain;
+package ac.kmgames.model.dto;
 
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
-class CashHistory {
+public class GameReviewDTO {
     private long id;
     private long user_id;
-    private int amount;
-    private String method;
+    private long game_id;
     private Timestamp date;
+
 }

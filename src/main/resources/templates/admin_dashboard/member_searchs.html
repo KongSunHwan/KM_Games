@@ -53,7 +53,79 @@
         crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/css/morioh.css">
+    <script>
+        $(function() {
+            var actionForm = $("#actionForm");
 
+            $(".page-item a").on("click", function (e) {
+                e.preventDefault();  //전송을 막음
+                console.log('click');
+                actionForm.find("input[name='pageNum']")
+                    .val($(this).attr("href"));
+                actionForm.submit();
+            });
+            // id.move는 상세정보에 pageNum과 amount를 가져가서 목록으로 돌아올 때 쓸 페이징 정보를 함께 넘김
+            $(".move").on("click", function(e) {
+
+                e.preventDefault();
+                actionForm
+                    .append("<input type='hidden' name='notice_num' value='"
+                        + $(this).attr("href") + "'>");
+                actionForm.attr("action", "/notice_detail");
+                actionForm.submit();
+
+            });
+
+            var searchForm = $("#searchForm");
+
+            $("#searchForm button").on("click",function(e) {
+                // 화면에서 키워드가 없다면 검색을 하지 않도록 제어
+                if (!searchForm.find("option:selected").val()) {
+                    alert("검색종류를 선택하세요");
+                    return false;
+                }
+
+                if (!searchForm.find("input[name='keyword']").val()) {
+                    alert("키워드를 입력하세요");
+                    return false;
+                }
+
+                // 페이지 번호를 1로 처리
+                searchForm.find("input[name='pageNum']").val("1");
+
+                // 폼 태그의 전송을 막음
+                e.preventDefault();
+
+                searchForm.submit();
+
+            });
+
+            $("#searchForm").on("keydown", function(e) {
+                // 화면에서 키워드가 없다면 검색을 하지 않도록 제어
+                if ((e.type === "keydown" && e.keyCode === 13)) {
+                    if (!searchForm.find("option:selected").val()) {
+                        alert("검색종류를 선택하세요");
+                        return false;
+                    }
+
+                    if (!searchForm.find("input[name='keyword']").val()) {
+                        alert("키워드를 입력하세요");
+                        return false;
+                    }
+
+                    // 페이지 번호를 1로 처리
+                    searchForm.find("input[name='pageNum']").val("1");
+
+                    // 폼 태그의 전송을 막음
+                    e.preventDefault();
+
+                    searchForm.submit();
+                }
+            });
+
+
+        });
+    </script>
 </head>
 
 <body class="menubar-enabled navbar-top-fixed">
@@ -64,6 +136,13 @@
         <header th:replace="~{include/admin_header}"></header>
         <!-- header 끝 -->
 
+        <form method="get"  id="actionForm" action="/member_searchs">
+            <input type="hidden" name="pageNum" th:value="${pageList.pageDTO.cri.getPageNum()}">
+            <input type="hidden" name="amount" th:value="${pageList.pageDTO.cri.getAmount()}">
+            <input type="hidden" name="type" th:value="${pageList.pageDTO.cri.getType()}">
+            <input type="hidden" name="keyword" th:value="${pageList.pageDTO.cri.getKeyword()}">
+        </form>
+
         <div class="row">
             <div class="col-lg-13 col-md-12">
                 <div class="card mb-15">
@@ -73,17 +152,26 @@
                         <h6 style="font-size: 15px; color:#808080; text-align:center">총 관리자 권한이 있는 대상만 회원 권한부여/조회 할 수 있습니다.
                         </h6>
                         <br>
-                        <form class="form-inline" action="/member_searchs">
+                        <form class="search_area" action="/member_searchs">
+                            <input type="hidden" name="pageNum" th:value="${pageList.pageDTO.cri.getPageNum()}">
+                            <input type="hidden" name="amount" th:value="${pageList.pageDTO.cri.getAmount()}">
                             <div class="input-group">
-                                <input class="form-control" type="text" name="keyword"
+                                <div class="search_area">
+                                    <select name="type" class="border border-secondary">
+                                        <option value="E">이메일</option>
+                                        <option value="N">이름</option>
+                                        <option value="M">닉네임</option>
+                                    </select>
+                                <input class="form-control" type="text" name="keyword" th:value="${pageList.pageDTO.cri.getKeyword()}"
                                     placeholder="회원의 이메일 또는 닉네임으로 검색하여 추가할 수 있습니다." aria-label="Search">
                                 <button class="btn btn-outline-primary" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
+                            </div>
                         </form>
-                        <table class="table">
 
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th class="text-center">권한</th>
@@ -95,21 +183,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr th:each="pageList : ${pageList.userPageList}">
                                     <td class="text-center">
                                         일반 회원
                                     </td>
-                                    <td class="text-center">
-                                        이메일
+                                    <td class="text-center" th:text="${pageList.email}">
+
                                     </td>
 
-                                    <td class="text-center">
+                                    <td class="text-center" th:text="${pageList.name}">
                                         이름
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" th:text="${pageList.nickname}">
                                         닉네임
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center" th:text="${pageList.register_date}">
                                         <span class="badge bg-primary">날짜</span>
                                     </td>
 
@@ -128,16 +216,39 @@
                                     </td>
                                 </tr>
                             </tbody>
+
                         </table>
                     </div>
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination mt-2" style="justify-content : center;">
-                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                        <li class="page-item"><a class="page-link disabled" href="#">#</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">#</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                    </nav>
+                </div>
+<!--                    <nav aria-label="Page navigation example">-->
+<!--                        <ul class="pagination mt-2" style="justify-content : center;">-->
+<!--                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link disabled" href="#">#</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">#</a></li>-->
+<!--                                <li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+<!--                        </ul>-->
+<!--                    </nav>-->
+                    <!-- Paging[s] -->
+                    <div class="col-sm-12 col-md-7" style="text-align:center; margin: 0 auto;">
+
+                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                            <ul class="pagination justify-content-center" style="align:center;">
+                                <li th:if="${pageList.pageDTO.isPrev()}" class="paginate_button page-item previous">
+                                    <a class="page-link" th:href="${pageList.pageDTO.startPage -1}">이전</a>
+                                </li>
+                                <!--                            <li th:each="num: ${#numbers.sequence(searchVO.startDate,searchVO.endDate)}" class="paginate_button page-item">-->
+                                <!--                                <a href="javascript:void(0);" th:text="${num}" onclick="fn_go_page(num); return false;" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link" title="${num}">${num}</a>-->
+                                <!--                            </li>-->
+                                <li th:each="num: ${#numbers.sequence(pageList.pageDTO.startPage,pageList.pageDTO.endPage)}" class="paginate_button page-item">
+                                    <a class="page-link" th:href="${num}" th:value="${num}" th:text="${num}"></a>
+                                </li>
+                                <li th:if="${pageList.pageDTO.isNext()}" class="paginate_button page-item next" >
+                                    <a class="page-link" th:href="${pageList.pageDTO.endPage + 1}">다음</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

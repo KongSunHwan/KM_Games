@@ -1,17 +1,19 @@
-package ac.kmgames.model.domain;
+package ac.kmgames.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
-class User {
+@AllArgsConstructor
+public class UserDTO {
     private long id;
     private String email;
     private String password;
     private String name;
-    private String nicname;
+    private String nickname;
     private long cash;
-    private Timestamp date;
+    private Timestamp register_date;
     private boolean ban;
 }

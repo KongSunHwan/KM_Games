@@ -1,9 +1,9 @@
-package ac.kmgames.model.domain;
+package ac.kmgames.model.dto;
 
 import lombok.Data;
 
 @Data
-class GamePost {
+public class GamePostDTO {
     private long id;
     private long game_id;
 }
