@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -14,13 +14,15 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-  <link href="resources/css/contract_in.css" rel="stylesheet">
-  <link rel="stylesheet" href="resources/css/footer.css" />
-  <link rel="shortcut icon" type="image/x-icon" href="resources/img/KM_GAMES_logo_icon.png" />
+  <link href="/css/contract_in.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/footer.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
 </head>
 
 <body>
-<jsp:include page="../include/header.jsp"></jsp:include>
+<!-- header 시작 -->
+<header th:replace="~{include/header}"></header>
+<!-- header 끝 -->
 
   <main id="main">
 
@@ -40,7 +42,7 @@
             <div class="well-left">
               <div class="single-well">
                 <a href="#">
-                  <img src="resources/img/game/game_img2.jpg" alt="">
+                  <img src="/img/game/game_img2.jpg" alt="">
                 </a>
               </div>
             </div>
@@ -85,7 +87,7 @@
             <div class="well-left">
               <div class="single-well">
                 <a href="#">
-                  <img src="resources/img/game/game_img2.jpg" alt="">
+                  <img src="/img/game/game_img2.jpg" alt="">
                 </a>
               </div>
             </div>
@@ -130,7 +132,7 @@
             <div class="well-left">
               <div class="single-well">
                 <a href="#">
-                  <img src="resources/img/game/game_img2.jpg" alt="">
+                  <img src="/img/game/game_img2.jpg" alt="">
                 </a>
               </div>
             </div>
@@ -188,7 +190,7 @@
     </div><!-- End About Section -->
 
     <!--footer 시작-->
-    <jsp:include page="../include/footer.jsp"></jsp:include>
+    <header th:replace="~{include/footer}"></header>
     <!--footer 종료-->
 
 

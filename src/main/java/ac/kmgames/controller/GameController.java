@@ -37,7 +37,7 @@ public class GameController{
         request.setAttribute("review_list", gameReviewService.getAllByGameId(id));
         request.setAttribute("review_count", gameReviewService.getCountByGameId(id));
         request.setAttribute("average_rate", gameReviewService.getAverageRateByGameId(id));
-        return "game_detail/game_detail";
+        return "game/game_detail";
     }
 
     @PostMapping("/game_review")

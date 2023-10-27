@@ -28,12 +28,16 @@ public class MainController{
         @RequestParam(value = "page", defaultValue = "1") int page){
         if(session.getAttribute("user") instanceof User user){
             page = Math.max(page - 1, 0);
-            request.setAttribute("current_page", page + 1);
+            var startPage = (page / 5) * 5 + 1;
+            var pageCount = (int) Math.ceil(gameService.getCount() / 16.0);
+            request.setAttribute("page", page + 1);
+            request.setAttribute("start_page", startPage);
+            request.setAttribute("page_count", pageCount);
+            request.setAttribute("end_page", Math.min(startPage + 4, pageCount));
             request.setAttribute("game_list", gameService.getAll(page));
-            request.setAttribute("game_page", (long) Math.ceil(gameService.getCount() / 16.0));
-            return "main/index";
+            return "index";
         }else{
-            return "main/index_login";
+            return "index_login";
         }
     }
 

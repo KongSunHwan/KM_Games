@@ -1,6 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
-<html lang="ko">
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <meta charset="utf-8">
@@ -73,7 +74,9 @@
 </head>
 
 <body>
-<jsp:include page="../include/header.jsp"></jsp:include>
+<!-- header 시작 -->
+<header th:replace="~{include/header}"></header>
+<!-- header 끝 -->
     <main>
         <div class="container py-4">
             <div class="p-3 mb-4 bg-light rounded-3">
@@ -95,7 +98,7 @@
                 </div>
             </div>
             <div class="row align-items-md-stretch">
-                <%--col 시작--%>
+                <!--col시작-->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="well-left">
@@ -138,13 +141,13 @@
                         </div>
                     </div>
                 </div>
-                    <%--col 끝--%>
+                <!--col끝-->
 
             </div>
         </div>
     </main>
 <!--footer 시작-->
-<jsp:include page="../include/footer.jsp"></jsp:include>
+<header th:replace="~{include/footer}"></header>
 <!--footer 종료-->
 
 

@@ -1,21 +1,21 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <!-- 부트스트랩 css파일 참조 -->
-    <link rel="stylesheet" href="resources/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
 
     <!-- jquery 파일 참조 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- 부트스트랩 js파일 참조 -->
-    <script src="resources/js/bootstrap.js"></script>
+    <script src="/js/bootstrap.js"></script>
 
     <!-- 개인 커스텀 디자인 -->
-    <link rel="stylesheet" href="resources/css/Order.css">
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/KM_GAMES_logo_icon.png" />
+    <link rel="stylesheet" href="/css/Order.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
     <title>상품 주문페이지</title>
     <script>
         $(document).ready(function () {
@@ -95,7 +95,7 @@
                                     <input type="checkbox" name="checkbox" />
                                 </td>
                                 <td style="border-left: none; border-right: none;"><img style="width: 100%;"
-                                        src="resources/img/game/game_img2.jpg"></td>
+                                        src="/img/game/game_img2.jpg"></td>
                                 <td style="text-align: left; padding-left: 10px; border-left: none; font-weight: bold;">
                                     휴먼 폴 플랫</td>
 
@@ -116,7 +116,7 @@
 
                     <div
                         style="border: solid 1px #e0e0eb; border-right:none; border-left:none; padding: 11px 0; background-color:rgb(255, 203, 203);">
-                        <img src="resources/img/주의.png" style="margin-left: 5px; position: relative; top: -2px; width: 20px;">
+                        <img src="/img/주의.png" style="margin-left: 5px; position: relative; top: -2px; width: 20px;">
                         <span style="font-size: 10pt; color: red;">상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</span>
                     </div>
                 </div>
@@ -196,10 +196,10 @@
                         </div>
 
                         <div align="left">
-                            <img src="resources/img/주의.png" style="margin-left: 5px; position : relative; top: 6px; width: 20px;">
+                            <img src="/img/주의.png" style="margin-left: 5px; position : relative; top: 6px; width: 20px;">
                             <span style="font-size: 10pt; color: gray;">최소 결제 금액은 결제금액에서 수수료를 제외한
                                 금액입니다.</span><br />
-                            <img src="resources/img/주의.png" style="margin-left: 5px; position : relative; top: 6px; width: 20px;">
+                            <img src="/img/주의.png" style="margin-left: 5px; position : relative; top: 6px; width: 20px;">
                             <span style="font-size: 10pt; color: gray;">소액 결제의 경우 PG사 정책에 따라 결제 금액 제한이 있을 수
                                 있습니다.</span>
                         </div>
