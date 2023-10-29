@@ -369,14 +369,15 @@
                                 <div class="form-inline mb-2">
                                     <label class="fw-bolder">
                                         <i class="fa fa-user-circle-o fa-2x"></i>
-                                        <span style="color:gray;" th:text="|&nbsp; ${review.user.nickname}|"></span>
-                                        <div class="fs-6">&#x2B50&#x2B50&#x2B50&#x2B50&#x2B50</div>
+                                            <span class="text-primary fw-bolder" style="color:gray;" th:text="|&nbsp; ${review.user.nickname}|"></span>
+                                            <span class="fw-bolder" style="color:gray; padding-top: 10px; flex: 1;" th:text="${review.date}"></span>
+                                            <div class="fs-6">&#x2B50&#x2B50&#x2B50&#x2B50&#x2B50</div>
                                     </label>
                                 </div>
                                 <div class="fw-bolder" th:text="${review.comment}"></div>
-                                <div class="fw-bolder" style="color:gray; padding-top: 10px;" th:text="${review.date}"></div>
                             </li>
                         </th:block>
+                    </ul>
                 </div>
             </div>
             <!-- 총평리뷰 끝 -->
