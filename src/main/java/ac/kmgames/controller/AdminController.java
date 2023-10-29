@@ -84,8 +84,7 @@ public class AdminController {
     @GetMapping("member_order")
     public String member_order(
         HttpServletRequest request,
-        @RequestParam(value = "page", defaultValue = "1") int page
-    ){
+        @RequestParam(value = "page", defaultValue = "1") int page){
         page = Math.max(page - 1, 0);
         var payment = paymentService.getAll(page);
         request.setAttribute("payment_list", payment.getContent());
@@ -137,4 +136,10 @@ public class AdminController {
 
         return "admin_dashboard/member_detail";
     }
+
+    @GetMapping("member_detail")
+    public String tes1tss() {
+        return "admin_dashboard/member_detail";
+    }
+
 }

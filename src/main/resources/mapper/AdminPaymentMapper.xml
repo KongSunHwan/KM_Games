@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ac.kmgames.model.mapper.PaymentMapper">
+    <sql id="criteria">
+        <trim prefix=" AND (" suffix=")" prefixOverrides="OR" >
+            <foreach item="cs.type" collection ="cs.typeArr">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="cs.type == 'N'.toString()">
+                            g.name like concat ('%',#{cs.keyword},'%')
+                        </when>
+                        <when test="cs.type == 'G'.toString()">
+                            g.genre like concat ('%',#{cs.keyword},'%')
+                        </when>
+                        <when test="cs.type == 'D'.toString()">
+                            g.developer like concat ('%',#{cs.keyword},'%')
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+    <select id="getAllById" resultType="PaymentHistoryDTO">
+        select p.id as 'id', g.name as 'name', g.genre as 'genre', g.developer as 'developer', g.price as 'price', p.date as 'date'
+        from payment_history p, game g
+        <where>
+            p.user_id = #{idx} and p.game_id = g.id
+            <include refid="criteria"></include>
+        </where>
+        limit #{cs.skip} , #{cs.amount}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(*) from payment_history p, game g
+        <where>
+            p.user_id = #{idx} and p.game_id = g.id
+            <include refid="criteria"></include>
+        </where>
+    </select>
+</mapper>

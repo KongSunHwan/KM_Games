@@ -24,10 +24,6 @@ final public class UserService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-//    public UserService(@Autowired UserRepository userRepository){
-//        this.userRepository = userRepository;
-//    }
-
     public boolean existsByEmail(String email){
         return userRepository.existsByEmail(email);
     }
@@ -68,11 +64,17 @@ final public class UserService{
         return userRepository.findByNameContains(keyword, pageable);
     }
 
+    //admin user list + pagination
     public ResponsePageDTO.ResponseUser getUserListAdmin(Criteria criteria) {
         Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
         List<UserDTO> pageList = userMapper.getAll(cs);
         int total = userMapper.getCount(cs);
         PageDTO pageDTO = new PageDTO(cs,total);
         return new ResponsePageDTO.ResponseUser(pageList, pageDTO);
+    }
+
+    //admin user detail by id
+    public UserDTO getUserDetail(int id) {
+        return userMapper.getUserDetail(id);
     }
 }

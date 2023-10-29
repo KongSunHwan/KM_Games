@@ -37,4 +37,11 @@
             <include refid="criteria"></include>
         </where>
     </select>
+
+    <!-- user detail by id   -->
+    <select id="getUserDetail" resultType="UserDTO">
+        select *
+        from user
+        where id = #{id}
+    </select>
 </mapper>

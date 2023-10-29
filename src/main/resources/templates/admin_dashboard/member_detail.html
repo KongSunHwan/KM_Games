@@ -56,7 +56,49 @@
     <link rel="stylesheet" href="/css/morioh.css">
     <link rel="stylesheet" href="/css/style.css" />
 
+<script>
+    var UserName;
+    $(document).ready(function () {
+        //유저정보를 출력
+        $.ajax({
+            url: 'http://localhost/api/admin/user/2',
+            type: 'GET',
+            success: function(result) {
+                console.log(result.id);
+                console.log(result.email);
+                console.log(result.name);
+                console.log(result.nickname);
+                var userForm = $("#userForm")
+                userForm.find("input[id='emailText'").val(result.email);
+                userForm.find("input[id='nameText'").val(result.name);
+                userForm.find("input[id='nickNameText'").val(result.nickname);
+                UserName = result.name;
+                console.log("성공된 이름 : " + UserName);
+                saveUserObject(result);
+            }
+        })
+        //유저의 구매목록을 출력
+        $.ajax({
+            url: 'http://localhost/api/admin/user/payment/2',
+            type: 'GET',
+            data : {
+                "pageNum" : 1,
+                "amount" : 5,
+                "type" : "",
+                "keyword" : ""
+            },
+            success: function(result) {
 
+            }
+        })
+    });
+
+    //가져온 user객체를 전역변수에 저장하는 메서드
+    function saveUserObject(result) {
+        UserName = result.name;
+        console.log("내맘대로 이름 : " + UserName + " 멋지게 뛰어라!")
+    }
+</script>
 
 </head>
 
@@ -86,20 +128,20 @@
                                                     <div class="card-body">
                                                         <h5 class="card-title">회원 정보</h5>
                                                         <br>
-                                                        <form>
+                                                        <form id="userForm">
 
                                                             <div class="mb-3">
                                                                 <label for="emailText" class="form-label">Email</label>
-                                                                <input type="text" id="emailText" class="form-control" value="#" disabled>
+                                                                <input id="emailText" type="text" class="form-control" value="#" disabled>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="name_text" class="form-label">Name</label>
-                                                                <input id="name_text" type="text" class="form-control" name="name" value="#" aria-describedby="emailHelp">
+                                                                <label for="nameText" class="form-label">Name</label>
+                                                                <input id="nameText" type="text" class="form-control" name="name" value="#" aria-describedby="emailHelp">
                                                             </div>
 
                                                             <div class="mb-3">
-                                                                <label for="nickName_text" class="form-label">NickName</label>
-                                                                <input type="text" id="nickName_text" class="form-control" value="#">
+                                                                <label for="nickNameText" class="form-label">NickName</label>
+                                                                <input id="nickNameText" type="text" class="form-control" value="#">
                                                             </div>
 
                                                             <button type="submit" class="btn btn-primary">수정</button> &nbsp;<button type="submit" class="btn btn-primary">비밀번호 초기화</button>&nbsp;

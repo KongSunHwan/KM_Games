@@ -8,7 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
+    //admin user list
     List<UserDTO> getAll(Criteria criteria);
-
+    //admin user list count
     int getCount(Criteria criteria);
+
+    //admin user detail
+    UserDTO getUserDetail(int id);
 }

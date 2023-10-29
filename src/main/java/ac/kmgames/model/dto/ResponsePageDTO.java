@@ -15,4 +15,11 @@ public class ResponsePageDTO {
         private PageDTO pageDTO;
     }
 
+    @Data
+    @AllArgsConstructor
+    public static class ResponsePayment {
+        private List<PaymentHistoryDTO> paymentPageList;
+        private PageDTO pageDTO;
+    }
+
 }
