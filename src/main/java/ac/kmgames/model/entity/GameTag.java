@@ -1,18 +1,22 @@
 package ac.kmgames.model.entity;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Embeddable
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 @Getter
 @Setter
 public class GameTag {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "game_tags_id")
     private Long id;
     private String gaem_tags;
+    @OneToMany(mappedBy = "gameTag")
+    private List<GamePost> gamePosts = new ArrayList<>();
 
     public GameTag(Long id, String gaem_tags) {
         this.id = id;

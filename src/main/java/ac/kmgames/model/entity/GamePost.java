@@ -26,11 +26,9 @@ public class GamePost{
     private String platform_type; // 게임 플랫폼 타입
     private int game_price; // 게임 가격
 
-    @ElementCollection
-    @CollectionTable(name = "GAMETAG",
-            joinColumns = @JoinColumn(name = "GAME_ID")
-    )
-    private List<GameTag> gametag = new ArrayList<>(); // 게임 포함 태그
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "game_tags_id")
+    private GameTag gameTag;// 게임 포함 태그
 
     private String detail_title; // 상세 제목
     private String detail_content; // 상세 내용

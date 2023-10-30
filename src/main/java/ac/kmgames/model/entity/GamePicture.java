@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class GamePicture {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "game_picture_id")
     private Long id;
     private String original_name; // 오리지널 파일명
