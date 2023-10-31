@@ -7,7 +7,6 @@ public class Criteria {
     private int pageNum;
     private int amount;
     private int skip;
-    private int cateId;
     private String type;
     private String keyword;
 

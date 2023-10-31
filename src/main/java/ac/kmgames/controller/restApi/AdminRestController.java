@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.cert.Certificate;
+
 @Slf4j
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
@@ -27,9 +29,9 @@ public class AdminRestController {
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
     //구매내역
-    @GetMapping("user/payment/{id}")
+    @PostMapping("user/payment/{id}")
     public ResponseEntity userPaymentInfo(@PathVariable("id") int id,
-                                @RequestBody Criteria criteria) {
+                                           @RequestBody Criteria criteria) {
         ResponsePageDTO.ResponsePayment result = paymentService.getPaymentHListAdmin(id, criteria);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }

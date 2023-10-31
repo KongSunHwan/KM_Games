@@ -7,6 +7,7 @@ import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.model.utils.Criteria;
 import ac.kmgames.service.*;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,7 +139,8 @@ public class AdminController {
     }
 
     @GetMapping("member_detail")
-    public String tes1tss() {
+    public String tes1tss(@RequestParam(value = "id", defaultValue = "1") long id, Model model) {
+        model.addAttribute("id", id);
         return "admin_dashboard/member_detail";
     }
 

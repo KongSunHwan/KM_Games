@@ -56,39 +56,36 @@
     <link rel="stylesheet" href="/css/morioh.css">
     <link rel="stylesheet" href="/css/style.css" />
 
-<script>
+<script th:inline="javascript">
+    var UserId = [[${id}]];
     var UserName;
+    var criteria = {
+        pageNum : 1,
+        amount : 5
+    };
     $(document).ready(function () {
         //유저정보를 출력
         $.ajax({
-            url: 'http://localhost/api/admin/user/2',
+            url: `http://localhost/api/admin/user/${UserId}`,
             type: 'GET',
             success: function(result) {
-                console.log(result.id);
-                console.log(result.email);
-                console.log(result.name);
-                console.log(result.nickname);
                 var userForm = $("#userForm")
                 userForm.find("input[id='emailText'").val(result.email);
                 userForm.find("input[id='nameText'").val(result.name);
                 userForm.find("input[id='nickNameText'").val(result.nickname);
                 UserName = result.name;
-                console.log("성공된 이름 : " + UserName);
                 saveUserObject(result);
             }
         })
         //유저의 구매목록을 출력
         $.ajax({
-            url: 'http://localhost/api/admin/user/payment/2',
-            type: 'GET',
-            data : {
-                "pageNum" : 1,
-                "amount" : 5,
-                "type" : "",
-                "keyword" : ""
-            },
+            url: `http://localhost/api/admin/user/payment/${UserId}`,
+            type: 'POST',
+            data : JSON.stringify(criteria),
+            contentType : "application/json",
             success: function(result) {
-
+                console.log("호출성공");
+                paymentList(result);
             }
         })
     });
@@ -96,7 +93,40 @@
     //가져온 user객체를 전역변수에 저장하는 메서드
     function saveUserObject(result) {
         UserName = result.name;
-        console.log("내맘대로 이름 : " + UserName + " 멋지게 뛰어라!")
+    }
+
+    // paymentH를 출력하는 함수
+    function paymentList(result) {
+        $.each(result.paymentPageList, function (index, result) {
+            var row = "<tr>" +
+                "<th scope=\"row\">" + result.id + "</th>" +
+                "<td>" + result.name + "</td>" +
+                "<td>" + result.genre + "</td>" +
+                "<td>" + result.developer + "</td>" +
+                "<td>" + result.price + "</td>" +
+                "<td>" + result.date + "</td>" +
+                "</tr>";
+            $("#paymentList").append(row);
+        });
+        //paymentH pagination
+        var pagePHprev = $("#paymentP");
+        if(result.pageDTO.prev != false)
+        pagePHprev.append("<li class='page-item'>" + "<a class='page-link'>" + "이전" + "</a>"
+            +"</li>"
+        );
+
+        var pagePHnum = $("#paymentP");
+        for(var i = result.pageDTO.startPage; i<= result.pageDTO.endPage; i++){
+             pagePHnum = "<li class='page-item'>" + "<a class='page-link'>" + i + "</a>"
+                + "</li>";
+            $("#paymentP").append(pagePHnum);
+        }
+
+        var pagePHnext = $("#paymentP");
+        if(result.pageDTO.next != false)
+            pagePHnext.append("<li class='page-item'>" + "<a class='page-link'>" + "다음" + "</a>"
+                +"</li>"
+            );
     }
 </script>
 
@@ -169,7 +199,7 @@
                                                                 <th scope="col">날짜</th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody id="paymentList">
                                                             <tr>
                                                                 <th scope="row">결제 번호</th>
                                                                 <td>게임</td>
@@ -183,11 +213,10 @@
 
 
                                                         <nav aria-label="Page navigation example">
-                                                            <ul class="pagination mt-2" style="justify-content : center;">
-                                                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                                                            <li class="page-item"><a class="page-link disabled" href="#">이전</a></li>
-                                                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                                    <li class="page-item"><a class="page-link" href="#">다음</a></li>
+                                                            <ul id="paymentP" class="pagination mt-2" style="justify-content : center;">
+<!--                                                                    <li class="page-item"><a class="page-link disabled" href="#">이전</a></li>-->
+<!--                                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                                                                    <li class="page-item"><a class="page-link" href="#">다음</a></li>-->
                                                             </ul>
                                                         </nav>
                                                     </div>
