@@ -21,5 +21,10 @@ public class ResponsePageDTO {
         private List<PaymentHistoryDTO> paymentPageList;
         private PageDTO pageDTO;
     }
-
+    @Data
+    @AllArgsConstructor
+    public static class ResponseGame {
+        private List<GameDTO> gamePageList;
+        private PageDTO pageDTO;
+    }
 }

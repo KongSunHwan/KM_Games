@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -64,4 +65,7 @@ final public class PaymentService{
         return new ResponsePageDTO.ResponsePayment(pageList, pageDTO);
     }
 
+    public List<HashMap> get_game_payment_l5(long id) {
+        return paymentMapper.get_game_payment_l5(id);
+    }
 }

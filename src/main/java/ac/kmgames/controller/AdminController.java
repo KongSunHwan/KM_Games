@@ -1,5 +1,7 @@
 package ac.kmgames.controller;
 
+import ac.kmgames.model.dto.GameDTO;
+import ac.kmgames.model.dto.GameReviewDTO;
 import ac.kmgames.model.dto.ResponsePageDTO;
 import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.entity.GameReview;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -36,33 +39,49 @@ public class AdminController {
         this.gameService = gameService;
     }
 
+//    @GetMapping("game_management")
+//    public String game_management(HttpServletRequest request,@RequestParam(value = "keyword", required = false) String keyword,
+//                                  @RequestParam(value = "page", defaultValue = "1") int page,
+//                                  @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+//        page = Math.max(page -1, 0);
+//        if(keyword == null){
+//            request.setAttribute("current_page", page + 1);
+//            request.setAttribute("pageList", gameService.getAll(page));
+//            request.setAttribute("game_page", (long) Math.ceil(gameService.getCount() / 16.0));
+//        }else{
+//            //검색조건 + pageing, list로 변환해야 jsp에서 쓸 수 있음.
+//            Page<Game> pages = gameService.getFindByName(keyword, pageable);
+//            List<Game> content = pages.getContent();
+//            request.setAttribute("pageList", content);
+//            request.setAttribute("current_page", pages.getNumber() + 1);
+//            request.setAttribute("game_page", (long) Math.ceil(pages.getTotalElements() / 16.0));
+//        }
+//        return "admin_dashboard/game_management";
+//    }
+
     @GetMapping("game_management")
-    public String game_management(HttpServletRequest request,@RequestParam(value = "keyword", required = false) String keyword,
-                                  @RequestParam(value = "page", defaultValue = "1") int page,
-                                  @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-
-        page = Math.max(page -1, 0);
-
-        if(keyword == null){
-            request.setAttribute("current_page", page + 1);
-            request.setAttribute("game_list", gameService.getAll(page));
-            request.setAttribute("game_page", (long) Math.ceil(gameService.getCount() / 16.0));
+    public String game_management(Criteria criteria, Model model,@RequestParam(value = "keyword", required = false) String keyword) {
+        if(keyword == null) {
+            ResponsePageDTO.ResponseGame list = gameService.getGameListAdmin(criteria);
+            model.addAttribute("pageList", list);
         }else{
-            //검색조건 + pageing, list로 변환해야 jsp에서 쓸 수 있음.
-            Page<Game> pages = gameService.getFindByName(keyword, pageable);
-            List<Game> content = pages.getContent();
-            request.setAttribute("game_list", content);
-            request.setAttribute("current_page", pages.getNumber() + 1);
-            request.setAttribute("game_page", (long) Math.ceil(pages.getTotalElements() / 16.0));
+            criteria.setKeyword(keyword);
+            ResponsePageDTO.ResponseGame list = gameService.getGameSearch(criteria);
+            model.addAttribute("pageList", list);
         }
-
         return "admin_dashboard/game_management";
     }
 
+
     @GetMapping(value = "game_detail_manage")
-    public String gameManagement(HttpSession session, HttpServletRequest request,
-        @RequestParam(value = "id", defaultValue = "1") long id){
-        request.setAttribute("game", gameService.getGameById(id).get());
+    public String gameManagement(@RequestParam(value = "id", defaultValue = "1") long id,Model model){
+        List<GameDTO> game_info = gameService.get_game_info(id);
+        List<HashMap> payment_game = paymentService.get_game_payment_l5(id);
+        List<HashMap> game_review = gameReviewService.get_game_reivew_l5(id);
+
+        model.addAttribute("game_info", game_info);
+        model.addAttribute("payment_game", payment_game);
+        model.addAttribute("game_review", game_review);
         return "admin_dashboard/game_detail_manage";
     }
 
@@ -124,7 +143,7 @@ public class AdminController {
     //회원상세정보
     @GetMapping(value = "member_detail.do")
     public String member_detail(@RequestParam int id, HttpServletRequest request,
-                                @RequestParam(value = "page", defaultValue = "1") int page) {
+                                 @RequestParam(value = "page", defaultValue = "1")int page) {
         User select_user = userService.findAllById(id);
         List<PaymentHistory> user_payment = paymentService.findAllByUser(page,select_user);
         List<GameReview> user_review = gameReviewService.findAllByUser(select_user);

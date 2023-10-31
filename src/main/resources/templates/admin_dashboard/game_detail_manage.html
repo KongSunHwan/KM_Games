@@ -79,46 +79,66 @@
                             <div class="card">
                                 <div class="card-body">
 
-                                    <div class="card mb-3" style="max-width: 100%;">
+                                    <div class="card mb-3" style="max-width: 100%;" th:each="game_info : ${game_info}">
                                         <div class="row g-0">
                                             <div class="col-md-4">
-                                                <img src="/img/game/" style="width: 350px; height:350px;">
+                                                <img th:src="|/img/game/${game_info.thumbUrl}|"style="width: 350px; height:350px;">
                                             </div>
                                             <div class="col-md-8">
-                                                <div class="card-body">
-                                                    <h5 class="card-title" style="text-align: center"> 게임 정보
-                                                    </h5>
-                                                    <div class="mb-3">
-                                                        <label for="emailText" class="form-label">게임이름</label>
-                                                        <input type="text" id="emailText" class="form-control" value="게임이름">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="name_text" class="form-label">가격</label>
-                                                        <input id="name_text" type="text" class="form-control" name="name"
-                                                               value="게임" aria-describedby="emailHelp">
-                                                    </div>
+                                                    <div class="card-body">
+                                                        <table class="table table-bordered .table-hover dt-responsive" >
+                                                            <thead>
+                                                            <tr style="text-align: center">
+                                                                <th class="email" colspan="3" >게임 정보 </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody style="text-align: center" >
+                                                            <tr height="30px">
+                                                                <td  style="width:50%">게임이름</td>
+                                                                <td th:text="${game_info.name}"></td>
+                                                            </tr>
 
-                                                    <div class="mb-3">
-                                                        <label for="nickName_text" class="form-label">NickName</label>
-                                                        <input type="text" id="nickName_text" class="form-control" value="게임">
-                                                    </div>
-                                                    <div style="float: right">
-                                                        <button type="submit" class="btn btn-primary">수정</button> &nbsp;
+                                                            <tr height="30px">
+                                                                <td  style="width:50%">가격</td>
+                                                                <td th:text="${game_info.price}"></td>
+                                                            </tr>
+
+                                                            <tr height="30px">
+                                                                <td  style="width:50%">장르</td>
+                                                                <td th:text="${game_info.genre}"></td>
+                                                            </tr>
+                                                            <tr height="30px">
+                                                                <td  style="width:50%">게임회사 / 개발자</td>
+                                                                <td th:text="${game_info.developer}"></td>
+                                                            </tr>   <tr height="30px">
+                                                                <td  style="width:50%">연령</td>
+                                                                <td th:text="${game_info.age}"></td>
+                                                            </tr>
+                                                            <tr height="30px">
+                                                                <td  style="width:50%">설명</td>
+                                                                <td th:text="${game_info.description}"></td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div style="float: right">
                                                         <button type="button" class="btn btn-danger">삭제</button>
+                                                        </div>
+                                                        <br>
                                                     </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        <br>
 
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
+                                    <div>
                                     <h5 class="card-title">구매 내역</h5>
+                                    <div>&nbsp;
                                     <table class="table text-center">
                                         <thead>
                                         <tr>
@@ -129,72 +149,22 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">a</th>
-                                            <td>a</td>
-                                            <td>1원</td>
-                                            <td>12341234</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">a</th>
-                                            <td>a</td>
-                                            <td>1원</td>
-                                            <td>12341234</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">a</th>
-                                            <td>a</td>
-                                            <td>1원</td>
-                                            <td>12341234</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">a</th>
-                                            <td>a</td>
-                                            <td>1원</td>
-                                            <td>12341234</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">a</th>
-                                            <td>a</td>
-                                            <td>1원</td>
-                                            <td>12341234</td>
+                                        <tr th:each="payment_game : ${payment_game}">
+                                            <th scope="row" th:text="${payment_game.id}">a</th>
+                                            <td th:text="${payment_game.name}">a</td>
+                                            <td th:text="${payment_game.price}">1원</td>
+                                            <td th:text="${payment_game.date}">12341234</td>
                                         </tr>
                                         </tbody>
                                     </table>
-
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination" style="justify-content: center;">
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-
-
-                                    <nav aria-label="Page navigation example">
-                                        <ul class="pagination mt-2" style="justify-content : center;">
-                                            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                            <li class="page-item"><a class="page-link disabled" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="2">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                        </ul>
-                                    </nav>
+                                        <div style="float: right">
+                                            <button type="submit" class="btn btn-primary">전체보기</button>
+                                        </div>
                                 </div>
                             </div>
                         </div>
 
                         <br>
-
 
                         <div class="col">
                             <div class="card">
@@ -205,94 +175,33 @@
                                         <div class="card-header bg-light">
                                             <i class="fa fa-comment fa"></i> 리뷰 목록
                                         </div>
+
                                         <div class="card-body">
-                                            <ul class="list-group list-group-flush">
+                                            <ul class="list-group list-group-flush" th:each="game_review : ${game_review}">
 
                                                 <li class="list-group-item">
                                                     <div class="form-inline mb-2">
                                                         <i class="fa fa-user-circle-o fa-2x"></i>
-                                                        <span style="color:gray;">&nbsp;asdf@afsds</span>
-                                                        <div class="fs-6">&#x2B50&#x2B50&#x2B50</div>
+                                                        <span style="color:gray;" th:text="${game_review.email}">&nbsp;asdf@afsds</span>
+                                                        <div class="fs-6">
+                                                            <span th:each="starNumber : ${#numbers.sequence(1, game_review.rate)}">&#x2B50</span>
+                                                        </div>
                                                         </label>
                                                     </div>
-                                                    <div class="fw-bolder">asdfasdfdsfasfd</div>
-                                                    <div class="fw-bolder" style="color:gray; padding-top: 10px;">20231111</div>
+                                                    <div class="fw-bolder" th:text="${game_review.comment}">asdfasdfdsfasfd</div>
+                                                    <div class="fw-bolder" style="color:gray; float: right; padding-top: 10px;" th:text="${game_review.date}">20231111</div>
                                                 </li>
 
                                             </ul>
+                                            <br>
+                                            <div style="float: right">
+                                                <button type="submit" class="btn btn-primary">전체보기</button>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div class="card mb-2">
-                                        <div class="card-header bg-light">
-                                            <i class="fa fa-comment fa"></i> 리뷰 목록
-                                        </div>
-                                        <div class="card-body">
-                                            <ul class="list-group list-group-flush">
-
-                                                <li class="list-group-item">
-                                                    <div class="form-inline mb-2">
-                                                        <i class="fa fa-user-circle-o fa-2x"></i>
-                                                        <span style="color:gray;">&nbsp;asdf@afsds</span>
-                                                        <div class="fs-6">&#x2B50&#x2B50&#x2B50</div>
-                                                        </label>
-                                                    </div>
-                                                    <div class="fw-bolder">asdfasdfdsfasfd</div>
-                                                    <div class="fw-bolder" style="color:gray; padding-top: 10px;">20231111</div>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="card mb-2">
-                                        <div class="card-header bg-light">
-                                            <i class="fa fa-comment fa"></i> 리뷰 목록
-                                        </div>
-                                        <div class="card-body">
-                                            <ul class="list-group list-group-flush">
-
-                                                <li class="list-group-item">
-                                                    <div class="form-inline mb-2">
-                                                        <i class="fa fa-user-circle-o fa-2x"></i>
-                                                        <span style="color:gray;">&nbsp;asdf@afsds</span>
-                                                        <div class="fs-6">&#x2B50&#x2B50&#x2B50</div>
-                                                        </label>
-                                                    </div>
-                                                    <div class="fw-bolder">asdfasdfdsfasfd</div>
-                                                    <div class="fw-bolder" style="color:gray; padding-top: 10px;">20231111</div>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- 총평리뷰 끝 -->
-
                                 </div>
-
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination" style="justify-content: center;">
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
                             </div>
-
-
                         </div>
-
-
                     </div>
                 </div>
             </div>

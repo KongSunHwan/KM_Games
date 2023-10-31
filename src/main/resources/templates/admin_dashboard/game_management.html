@@ -73,28 +73,37 @@
 
                                             <br>
 
-                                                    <div class="row" style="margin-top:10px;">
-                                                        <div class="card-back mb-2 col-lg-3" style="cursor:pointer;">
+                                            <div class="row" style="margin-top:10px;">
 
-                                                            <div class="card-img">
-                                                                <img src="/img/game" style="width: 230px; height:150px;">
-                                                            </div>
-
-                                                            <div class="card-title">
-                                                                <div class="fw-bold fs-5">게임 이름</div>
-                                                            </div>
-
-                                                        </div>
+                                                <div class="card-back mb-2 col-lg-3" style="cursor:pointer;" th:each="pageList : ${pageList.gamePageList}"  th:onclick="|location.href = '/game_detail_manage?id=${pageList.id}'|">
+                                                    <div class="card-img">
+                                                        <img th:src="|/img/game/${pageList.thumbUrl}|" style="width: 100%; height:250px;">
                                                     </div>
+                                                    </a>
+                                                    <div class="card-title">
+                                                        <div class="fw-bold fs-5"th:text="${pageList.name}" style="text-align: center" >게임 이름</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <br>
 
 
                                         </div>
-                                        <ul class="pagination mt-2" style="justify-content : center;">
-                                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                                        <li class="page-item"><a class="page-link disabled" href="#">1</a></li>
-                                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                        </ul>
+                                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                            <ul class="pagination justify-content-center" style="align:center;">
+                                                <li th:if="${pageList.pageDTO.isPrev()}" class="paginate_button page-item previous">
+                                                    <a class="page-link" th:href="${pageList.pageDTO.startPage -1}">이전</a>
+                                                </li>
+                                                <li th:each="num: ${#numbers.sequence(pageList.pageDTO.startPage,pageList.pageDTO.endPage)}" class="paginate_button page-item">
+                                                    <a class="page-link" th:href="${num}" th:value="${num}" th:text="${num}"></a>
+                                                </li>
+                                                <li th:if="${pageList.pageDTO.isNext()}" class="paginate_button page-item next" >
+                                                    <a class="page-link" th:href="${pageList.pageDTO.endPage + 1}">다음</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

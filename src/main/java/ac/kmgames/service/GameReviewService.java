@@ -1,20 +1,24 @@
 package ac.kmgames.service;
 
+import ac.kmgames.model.dto.GameReviewDTO;
 import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.User;
+import ac.kmgames.model.mapper.GameMapper;
+import ac.kmgames.model.mapper.GameReviewMapper;
 import ac.kmgames.model.repository.GameReviewRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 final public class GameReviewService{
     private final GameReviewRepository repository;
+    private final GameReviewMapper gameReviewMapper;
 
-    public GameReviewService(@Autowired GameReviewRepository repository){
-        this.repository = repository;
-    }
 
     public long getCountByGameId(long id){
         return repository.countByGameId(id);
@@ -54,5 +58,9 @@ final public class GameReviewService{
 
     public List<GameReview> findAllByUser(User selectUser) {
         return repository.findAllByUser(selectUser);
+    }
+
+    public List<HashMap> get_game_reivew_l5(long id) {
+        return gameReviewMapper.get_game_reivew_l5(id);
     }
 }

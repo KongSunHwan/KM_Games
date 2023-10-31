@@ -1,15 +1,19 @@
 package ac.kmgames.model.dto;
 
+import ac.kmgames.model.utils.PageVO;
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
-public class GameDTO {
+public class GameDTO extends PageVO {
     private long id;
-    private long user_id;
-    private int amount;
-    private String method;
-    private Timestamp date;
+    private String name;
+    private String developer;
+    private String genre;
+    private String description;
+    private int age;
+    private int price;
+    private String thumbUrl;
 
 }
