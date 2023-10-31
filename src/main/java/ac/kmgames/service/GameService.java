@@ -1,9 +1,16 @@
 package ac.kmgames.service;
 
+import ac.kmgames.model.dto.GameDTO;
+import ac.kmgames.model.dto.ResponsePageDTO;
+import ac.kmgames.model.dto.UserDTO;
 import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
+import ac.kmgames.model.mapper.GameMapper;
 import ac.kmgames.model.repository.GameRepository;
+import ac.kmgames.model.utils.Criteria;
+import ac.kmgames.model.utils.PageDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,12 +21,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 final public class GameService{
-    private final GameRepository repository;
 
-    public GameService(@Autowired GameRepository repository){
-        this.repository = repository;
-    }
+    private final GameRepository repository;
+    private final GameMapper gameMapper;
 
     public List<Game> getAll(int page){
         return repository.findAll(PageRequest.of(page, 16)).getContent();
@@ -35,5 +41,27 @@ final public class GameService{
 
     public Page<Game> getFindByName(String keyword, Pageable pageable) {
         return repository.findByNameContains(keyword,pageable);
+    }
+
+    public ResponsePageDTO.ResponseGame getGameListAdmin(Criteria criteria) {
+        Criteria cs = new Criteria(criteria.getPageNum(), 16, criteria.getType(), criteria.getKeyword());
+        List<GameDTO> pageList = gameMapper.getGameListAdmin(cs);
+        int total = gameMapper.getCount(cs);
+        PageDTO pageDTO = new PageDTO(cs,total);
+        return  new ResponsePageDTO.ResponseGame(pageList, pageDTO);
+    }
+
+    public ResponsePageDTO.ResponseGame getGameSearch(Criteria criteria) {
+        Criteria cs = new Criteria(criteria.getPageNum(), 16, criteria.getType(), criteria.getKeyword());
+        List<GameDTO> pageList = gameMapper.getGameSearch(cs);
+        int total = gameMapper.getGameSearch_cnt(cs);
+        PageDTO pageDTO = new PageDTO(cs,total);
+        System.out.println(pageList);
+        return  new ResponsePageDTO.ResponseGame(pageList, pageDTO);
+
+    }
+
+    public List<GameDTO> get_game_info(long id) {
+        return gameMapper.get_game_info(id);
     }
 }
