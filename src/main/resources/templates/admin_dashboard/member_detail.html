@@ -82,12 +82,14 @@
             url: `http://localhost/api/admin/user/payment/${UserId}`,
             type: 'POST',
             data : JSON.stringify(criteria),
+            // data : criteria,
             contentType : "application/json",
             success: function(result) {
                 console.log("호출성공");
                 paymentList(result);
             }
         })
+
     });
 
     //가져온 user객체를 전역변수에 저장하는 메서드
@@ -117,7 +119,7 @@
 
         var pagePHnum = $("#paymentP");
         for(var i = result.pageDTO.startPage; i<= result.pageDTO.endPage; i++){
-             pagePHnum = "<li class='page-item'>" + "<a class='page-link'>" + i + "</a>"
+             pagePHnum = "<li class='page-item'>" + "<a id='actionPH' class='page-link'>" + i + "</a>"
                 + "</li>";
             $("#paymentP").append(pagePHnum);
         }
@@ -128,6 +130,30 @@
                 +"</li>"
             );
     }
+
+
+
+    $(document).on('click', "#actionPH", function(e){
+       e.preventDefault();
+       var num = $(this).text();
+       var datas = {
+           "pageNum" : num,
+           "amount" : 5
+       }
+        $.ajax({
+            url: `http://localhost/api/admin/user/payment/${UserId}`,
+            type: 'POST',
+            data : JSON.stringify(datas),
+            contentType : "application/json",
+            success: function(result) {
+                $("#paymentList").empty();
+                $("#paymentP").empty();
+                paymentList(result);
+            }
+        })
+
+    });
+
 </script>
 
 </head>
@@ -200,14 +226,14 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody id="paymentList">
-                                                            <tr>
-                                                                <th scope="row">결제 번호</th>
-                                                                <td>게임</td>
-                                                                <td>장르</td>
-                                                                <td>개발자</td>
-                                                                <td>가격</td>
-                                                                <td>날짜</td>
-                                                            </tr>
+<!--                                                            <tr>-->
+<!--                                                                <th scope="row">결제 번호</th>-->
+<!--                                                                <td>게임</td>-->
+<!--                                                                <td>장르</td>-->
+<!--                                                                <td>개발자</td>-->
+<!--                                                                <td>가격</td>-->
+<!--                                                                <td>날짜</td>-->
+<!--                                                            </tr>-->
                                                             </tbody>
                                                         </table>
 

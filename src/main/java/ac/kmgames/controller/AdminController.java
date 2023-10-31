@@ -157,9 +157,8 @@ public class AdminController {
         return "admin_dashboard/member_detail";
     }
 
-    @GetMapping("member_detail")
-    public String tes1tss(@RequestParam(value = "id", defaultValue = "1") long id, Model model) {
-        model.addAttribute("id", id);
+    @GetMapping("member_detail/{id}")
+    public String member_detailGo(@PathVariable("id") Long id) {
         return "admin_dashboard/member_detail";
     }
 

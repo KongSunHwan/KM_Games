@@ -185,7 +185,8 @@
                             <tbody>
                                 <tr th:each="pageList : ${pageList.userPageList}">
                                     <td class="text-center">
-                                        일반 회원
+                                        <a th:href="@{/member_detail/{param1}(param1=${pageList.id})}">일반회원</a>
+
                                     </td>
                                     <td class="text-center" th:text="${pageList.email}">
 
