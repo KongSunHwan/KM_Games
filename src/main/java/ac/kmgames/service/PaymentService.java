@@ -1,5 +1,6 @@
 package ac.kmgames.service;
 
+import ac.kmgames.model.dto.GameDTO;
 import ac.kmgames.model.dto.PaymentHistoryDTO;
 import ac.kmgames.model.dto.ResponsePageDTO;
 import ac.kmgames.model.entity.PaymentHistory;
@@ -56,7 +57,9 @@ final public class PaymentService{
     //admin user-paymentHistory 페이징
     public ResponsePageDTO.ResponsePayment getPaymentHListAdmin(int id, Criteria criteria) {
         Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
-        List<PaymentHistoryDTO> pageList = paymentMapper.getAllById(id, cs);
+//        List<PaymentHistoryDTO> pageList = paymentMapper.getAllById(id, cs);
+        List<HashMap> pageList = paymentMapper.getAllById(id, cs);
+
         log.info("pageList={}", pageList);
         int total = paymentMapper.getCount(id, cs);
         System.out.println("전체갯수 : " + total);
@@ -67,5 +70,19 @@ final public class PaymentService{
 
     public List<HashMap> get_game_payment_l5(long id) {
         return paymentMapper.get_game_payment_l5(id);
+    }
+
+    public ResponsePageDTO.ResponsePayment get_payment_group_game(Criteria criteria,long id) {
+        Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
+        List<HashMap> paymentPageList = paymentMapper.get_payment_group_game(cs,id);
+        int total = paymentMapper.get_payment_group_game_cnt(cs,id);
+        System.out.println(total);
+        PageDTO pageDTO = new PageDTO(cs,total);
+        System.out.println(paymentPageList);
+        return new ResponsePageDTO.ResponsePayment(paymentPageList, pageDTO);
+    }
+
+    public int get_payment_group_game_cnt(Criteria cs,long id) {
+        return paymentMapper.get_payment_group_game_cnt(cs,id);
     }
 }

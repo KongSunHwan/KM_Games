@@ -15,9 +15,9 @@ public interface GameMapper {
 
     int getCount(Criteria cs);
 
-    List<GameDTO> getGameSearch(Criteria cs);
-
-    int getGameSearch_cnt(Criteria cs);
-
     List<GameDTO> get_game_info(long id);
+
+    List<GameDTO> getGameSearchList(Criteria cs);
+
+    int getGameSearchCount(Criteria cs);
 }

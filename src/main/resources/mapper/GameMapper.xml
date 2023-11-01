@@ -7,14 +7,8 @@
             <foreach item="type" collection ="typeArr">
                 <trim prefix="OR">
                     <choose>
-                        <when test="type == 'E'.toString()">
-                            email like concat ('%',#{keyword},'%')
-                        </when>
-                        <when test="type == 'N'.toString()">
+                        <when test="keyword != null">
                             name like concat ('%',#{keyword},'%')
-                        </when>
-                        <when test="type == 'M'.toString()">
-                            nickname like concat ('%',#{keyword},'%')
                         </when>
                     </choose>
                 </trim>
@@ -31,6 +25,13 @@
         limit #{skip} , #{amount}
     </select>
 
+    <select id="getGameSearchList" resultType="GameDTO">
+        select *
+        from game
+        where name like concat ('%',#{keyword},'%')
+        order by id
+        limit #{skip} , #{amount}
+    </select>
     <select id="getCount" resultType="int">
         select count(*) from game
         <where>
@@ -38,18 +39,13 @@
         </where>
     </select>
 
-    <select id="getGameSearch" resultType="GameDTO">
-        select *
+    <select id="getGameSearchCount" resultType="int">
+        select count(*)
         from game
         where name like concat ('%',#{keyword},'%')
-        order by id
-        limit #{skip} , #{amount}
     </select>
 
-    <select id="getGameSearch_cnt" resultType="int">
-        select count(*) from game
-        where name like concat ('%',#{keyword},'%')
-    </select>
+
 
     <select id="get_game_info" resultType="GameDTO">
         select * from game

@@ -21,7 +21,7 @@
             </foreach>
         </trim>
     </sql>
-    <select id="getAllById" resultType="PaymentHistoryDTO">
+    <select id="getAllById" resultType="java.util.HashMap">
         select p.id as 'id', g.name as 'name', g.genre as 'genre', g.developer as 'developer', g.price as 'price', p.date as 'date'
         from payment_history p, game g
         <where>
@@ -47,5 +47,24 @@
           AND a.game_id = #{id}
         order by a.date desc
         limit 5
+    </select>
+
+    <select id="get_payment_group_game" resultType="java.util.HashMap">
+        select a.id, b.name, c.price, a.date
+        from payment_history a,user b,game c
+        <where>
+        a.user_id = b.id and a.game_id = c.id and a.game_id = #{game_id}
+        <include refid="criteria"></include>
+        </where>
+        order by a.date desc
+        limit #{cs.skip} , #{cs.amount}
+    </select>
+
+    <select id="get_payment_group_game_cnt" resultType="int">
+        select count(*)
+        from payment_history a,user b,game c
+        where a.user_id = b.id and
+            a.game_id = c.id
+          AND a.game_id = #{game_id}
     </select>
 </mapper>

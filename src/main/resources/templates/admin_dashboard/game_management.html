@@ -39,8 +39,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
 
     <link rel="stylesheet" href="/css/morioh.css">
-
-
 </head>
 
 <body class="menubar-enabled navbar-top-fixed">
@@ -61,10 +59,14 @@
                                 <div class="row no-gutters">
                                     <div class="col-12">
                                         <div class="card-body">
-                                            <form class="form-inline" action="/game_management">
+                                            <form class="form-inline" method="get" id="searchForm" action="/game_management">
+
+                                                <input type="hidden" name="pageNum" th:value="${pageList.pageDTO.cri.getPageNum()}">
+<!--                                                <input type="hidden" name="amount" th:value="${pageList.pageDTO.cri.setAmount(16)}">-->
+
                                                 <div class="input-group">
-                                                    <input class="form-control" type="text" name="keyword"
-                                                           placeholder="게임 이름으로 검색이 가능합니다." aria-label="Search">
+                                                    <input class="form-control" type="text" name="keyword" th:value="${pageList.pageDTO.cri.getKeyword()}"
+                                                           placeholder="게임이름으로 검색이 가능합니다" aria-label="Search">
                                                     <button class="btn btn-outline-primary" type="submit">
                                                         <i class="fas fa-search"></i>
                                                     </button>
@@ -95,6 +97,7 @@
                                                 <li th:if="${pageList.pageDTO.isPrev()}" class="paginate_button page-item previous">
                                                     <a class="page-link" th:href="${pageList.pageDTO.startPage -1}">이전</a>
                                                 </li>
+
                                                 <li th:each="num: ${#numbers.sequence(pageList.pageDTO.startPage,pageList.pageDTO.endPage)}" class="paginate_button page-item">
                                                     <a class="page-link" th:href="${num}" th:value="${num}" th:text="${num}"></a>
                                                 </li>

@@ -4,6 +4,7 @@ import ac.kmgames.model.utils.PageDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -18,7 +19,8 @@ public class ResponsePageDTO {
     @Data
     @AllArgsConstructor
     public static class ResponsePayment {
-        private List<PaymentHistoryDTO> paymentPageList;
+//        private List<PaymentHistoryDTO> paymentPageList;
+        private List<HashMap> paymentPageList;
         private PageDTO pageDTO;
     }
     @Data

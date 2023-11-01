@@ -44,21 +44,23 @@ final public class GameService{
     }
 
     public ResponsePageDTO.ResponseGame getGameListAdmin(Criteria criteria) {
-        Criteria cs = new Criteria(criteria.getPageNum(), 16, criteria.getType(), criteria.getKeyword());
-        List<GameDTO> pageList = gameMapper.getGameListAdmin(cs);
-        int total = gameMapper.getCount(cs);
-        PageDTO pageDTO = new PageDTO(cs,total);
-        return  new ResponsePageDTO.ResponseGame(pageList, pageDTO);
-    }
 
-    public ResponsePageDTO.ResponseGame getGameSearch(Criteria criteria) {
-        Criteria cs = new Criteria(criteria.getPageNum(), 16, criteria.getType(), criteria.getKeyword());
-        List<GameDTO> pageList = gameMapper.getGameSearch(cs);
-        int total = gameMapper.getGameSearch_cnt(cs);
-        PageDTO pageDTO = new PageDTO(cs,total);
-        System.out.println(pageList);
-        return  new ResponsePageDTO.ResponseGame(pageList, pageDTO);
+        if(criteria.getKeyword() != null){
+            Criteria cs = new Criteria(criteria.getPageNum(), 16, criteria.getType(), criteria.getKeyword());
+            List<GameDTO> pageList = gameMapper.getGameSearchList(cs);
+            int total = gameMapper.getGameSearchCount(cs);
+            PageDTO pageDTO = new PageDTO(cs,total);
+            System.out.println("검색 SERVICE");
+            return  new ResponsePageDTO.ResponseGame(pageList, pageDTO);
 
+        } else {
+            Criteria cs = new Criteria(criteria.getPageNum(), 16, criteria.getType(), criteria.getKeyword());
+            List<GameDTO> pageList = gameMapper.getGameListAdmin(cs);
+            int total = gameMapper.getCount(cs);
+            PageDTO pageDTO = new PageDTO(cs,total);
+            System.out.println("일반 SERVICE");
+            return  new ResponsePageDTO.ResponseGame(pageList, pageDTO);
+        }
     }
 
     public List<GameDTO> get_game_info(long id) {

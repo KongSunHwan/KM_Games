@@ -143,7 +143,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div>
-                                    <h5 class="card-title">구매 내역</h5>
+                                    <h5 class="card-title">구매 내역</h5> &nbsp;
+                                        이용자 수 : <span th:text="${game_user_cnt}"></span>
                                     <div>&nbsp;
                                     <table class="table text-center">
                                         <thead>
@@ -155,7 +156,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="payment_game : ${payment_game}">
+                                        <tr th:each="payment_game : ${payment_game.paymentPageList}">
                                             <th scope="row" th:text="${payment_game.id}">a</th>
                                             <td th:text="${payment_game.name}">a</td>
                                             <td th:text="${payment_game.price}">1원</td>
@@ -163,50 +164,29 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                        <div style="float: right">
-                                            <button type="submit" class="btn btn-primary" th:onclick="|location.href = '/game_detail_payment?id=${id}'|">전체보기</button>
-                                        </div>
                                 </div>
                             </div>
-                        </div>
+                                    <div class="col-sm-12 col-md-7" style="text-align:center; margin: 0 auto;">
 
-                        <br>
-
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">리뷰 내역</h5>
-
-                                    <div class="card mb-2">
-                                        <div class="card-header bg-light">
-                                            <i class="fa fa-comment fa"></i> 리뷰 목록
-                                        </div>
-
-                                        <div class="card-body">
-                                            <ul class="list-group list-group-flush" th:each="game_review : ${game_review}">
-
-                                                <li class="list-group-item">
-                                                    <div class="form-inline mb-2">
-                                                        <i class="fa fa-user-circle-o fa-2x"></i>
-                                                        <span style="color:gray;" th:text="${game_review.email}">&nbsp;asdf@afsds</span>
-                                                        <div class="fs-6">
-                                                            <span th:each="starNumber : ${#numbers.sequence(1, game_review.rate)}">&#x2B50</span>
-                                                        </div>
-                                                        </label>
-                                                    </div>
-                                                    <div class="fw-bolder" th:text="${game_review.comment}">asdfasdfdsfasfd</div>
-                                                    <div class="fw-bolder" style="color:gray; float: right; padding-top: 10px;" th:text="${game_review.date}">20231111</div>
+                                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                            <ul class="pagination justify-content-center" style="align:center;">
+                                                <li th:if="${payment_game.pageDTO.isPrev()}" class="paginate_button page-item previous">
+                                                    <a class="page-link" th:href="${payment_game.pageDTO.startPage -1}">이전</a>
+                                                </li>
+                                                <!--                            <li th:each="num: ${#numbers.sequence(searchVO.startDate,searchVO.endDate)}" class="paginate_button page-item">-->
+                                                <!--                                <a href="javascript:void(0);" th:text="${num}" onclick="fn_go_page(num); return false;" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link" title="${num}">${num}</a>-->
+                                                <!--                            </li>-->
+                                                <li th:each="num: ${#numbers.sequence(payment_game.pageDTO.startPage,payment_game.pageDTO.endPage)}" class="paginate_button page-item">
+                                                    <a class="page-link" th:href="${num}" th:value="${num}" th:text="${num}"></a>
+                                                </li>
+                                                <li th:if="${payment_game.pageDTO.isNext()}" class="paginate_button page-item next" >
+                                                    <a class="page-link" th:href="${payment_game.pageDTO.endPage + 1}">다음</a>
                                                 </li>
 
                                             </ul>
-                                            <br>
-                                            <div style="float: right">
-                                                <button type="submit" class="btn btn-primary">전체보기</button>
-                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
