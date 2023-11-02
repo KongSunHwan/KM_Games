@@ -50,7 +50,6 @@ final public class GameService{
             List<GameDTO> pageList = gameMapper.getGameSearchList(cs);
             int total = gameMapper.getGameSearchCount(cs);
             PageDTO pageDTO = new PageDTO(cs,total);
-            System.out.println("검색 SERVICE");
             return  new ResponsePageDTO.ResponseGame(pageList, pageDTO);
 
         } else {
@@ -58,7 +57,6 @@ final public class GameService{
             List<GameDTO> pageList = gameMapper.getGameListAdmin(cs);
             int total = gameMapper.getCount(cs);
             PageDTO pageDTO = new PageDTO(cs,total);
-            System.out.println("일반 SERVICE");
             return  new ResponsePageDTO.ResponseGame(pageList, pageDTO);
         }
     }
