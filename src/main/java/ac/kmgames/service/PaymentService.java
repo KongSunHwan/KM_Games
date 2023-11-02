@@ -1,7 +1,5 @@
 package ac.kmgames.service;
 
-import ac.kmgames.model.dto.GameDTO;
-import ac.kmgames.model.dto.PaymentHistoryDTO;
 import ac.kmgames.model.dto.ResponsePageDTO;
 import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
@@ -19,8 +17,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 
-@Service
 @Slf4j
+@Service
 final public class PaymentService{
     private final PaymentRepository repository;
     private final PaymentMapper paymentMapper;

@@ -1,8 +1,6 @@
 package ac.kmgames.model.mapper;
 
 import ac.kmgames.model.dto.GameDTO;
-import ac.kmgames.model.dto.UserDTO;
-import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.utils.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 

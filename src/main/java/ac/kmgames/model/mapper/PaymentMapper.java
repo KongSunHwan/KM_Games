@@ -1,11 +1,8 @@
 package ac.kmgames.model.mapper;
 
-import ac.kmgames.model.dto.PaymentHistoryDTO;
-import ac.kmgames.model.dto.ResponsePageDTO;
 import ac.kmgames.model.utils.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.codehaus.groovy.util.ListHashMap;
 
 import java.util.HashMap;
 import java.util.List;

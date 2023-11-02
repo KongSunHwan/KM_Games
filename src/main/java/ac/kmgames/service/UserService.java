@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 final public class UserService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
