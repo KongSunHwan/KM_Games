@@ -1,13 +1,10 @@
 package ac.kmgames.service;
 
-import ac.kmgames.model.dto.GameReviewDTO;
 import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.User;
-import ac.kmgames.model.mapper.GameMapper;
 import ac.kmgames.model.mapper.GameReviewMapper;
 import ac.kmgames.model.repository.GameReviewRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

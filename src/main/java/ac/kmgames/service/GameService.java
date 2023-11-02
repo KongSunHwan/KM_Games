@@ -2,16 +2,12 @@ package ac.kmgames.service;
 
 import ac.kmgames.model.dto.GameDTO;
 import ac.kmgames.model.dto.ResponsePageDTO;
-import ac.kmgames.model.dto.UserDTO;
 import ac.kmgames.model.entity.Game;
-import ac.kmgames.model.entity.PaymentHistory;
-import ac.kmgames.model.entity.User;
 import ac.kmgames.model.mapper.GameMapper;
 import ac.kmgames.model.repository.GameRepository;
 import ac.kmgames.model.utils.Criteria;
 import ac.kmgames.model.utils.PageDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
