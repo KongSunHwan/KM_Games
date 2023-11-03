@@ -1,9 +1,13 @@
 package ac.kmgames.service;
 
+import ac.kmgames.model.dto.GameDTO;
+import ac.kmgames.model.dto.ResponsePageDTO;
 import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.model.mapper.GameReviewMapper;
 import ac.kmgames.model.repository.GameReviewRepository;
+import ac.kmgames.model.utils.Criteria;
+import ac.kmgames.model.utils.PageDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +63,13 @@ final public class GameReviewService{
 
     public List<HashMap> get_game_reivew_l5(long id) {
         return gameReviewMapper.get_game_reivew_l5(id);
+    }
+
+    public ResponsePageDTO.ResponseReview get_review_group_game(Criteria criteria, long id) {
+        Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
+        List<HashMap> game_review = gameReviewMapper.getGameSearchList(cs,id);
+        int total = gameReviewMapper.getGameSearchCount(cs,id);
+        PageDTO pageDTO = new PageDTO(cs,total);
+        return  new ResponsePageDTO.ResponseReview(game_review, pageDTO);
     }
 }

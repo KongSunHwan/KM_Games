@@ -55,7 +55,6 @@
 
     <link rel="stylesheet" href="/css/morioh.css">
     <link rel="stylesheet" href="/css/style.css"/>
-
     <script>
         function get_query(){
             var url = document.location.href;
@@ -68,18 +67,13 @@
         }
         var result = get_query();
         var amount = 10;
-        var keyword = result.keyword;
-
-        if(keyword==undefined){
-            keyword ="";
-        }
 
         $(function() {
             $(".page-item a").on("click", function (e) {
                 e.preventDefault();  //전송을 막음
                 console.log('click');
                 var pageNum = $(this).text();
-                var href = '/game_detail_payment?pageNum=' + pageNum + '&amount=' + amount ;
+                var href = '/game_detail_review?pageNum=' + pageNum + '&amount=' + amount ;
                 $(this).attr("href", href); // 속성을 변경하여 href 값을 설정
                 window.location.href = href;
             });
@@ -171,49 +165,57 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <div>
-                                    <h5 class="card-title">구매 내역</h5> &nbsp;
-                                        이용자 수 : <span th:text="${game_user_cnt}"></span>
-                                    <div>&nbsp;
-                                    <table class="table text-center">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">결제 번호</th>
-                                            <th scope="col">회원</th>
-                                            <th scope="col">가격</th>
-                                            <th scope="col">날짜</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="payment_game : ${payment_game.paymentPageList}">
-                                            <th scope="row" th:text="${payment_game.id}">a</th>
-                                            <td th:text="${payment_game.name}">a</td>
-                                            <td th:text="${payment_game.price}">1원</td>
-                                            <td th:text="${payment_game.date}">12341234</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                                <div class="col-sm-12 col-md-7" style="text-align:center; margin: 0 auto;">
+                                    <h5 class="card-title">리뷰 내역</h5>
 
-                                    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
-                                        <ul class="pagination justify-content-center" style="align:center;">
-                                            <li th:if="${payment_game.pageDTO.isPrev()}" class="paginate_button page-item">
-                                                <a class="page-link" th:href="${payment_game.pageDTO.startPage -1}">이전</a>
-                                            </li>
+                                    <div class="card mb-2">
+                                        <div class="card-header bg-light">
+                                            <i class="fa fa-comment fa"></i> 리뷰목록  [(${game_review_cnt})]개
+                                        </div>
 
-                                            <li th:each="num: ${#numbers.sequence(payment_game.pageDTO.startPage,payment_game.pageDTO.endPage)}" class="paginate_button page-item">
-                                                <a class="page-link" th:href="${num}" th:value="${num}" th:text="${num}"></a>
-                                            </li>
-                                            <li th:if="${payment_game.pageDTO.isNext()}" class="paginate_button page-item" >
-                                                <a class="page-link" th:href="${payment_game.pageDTO.endPage + 1}">다음</a>
-                                            </li>
+                                        <div class="card-body">
+                                            <ul class="list-group list-group-flush" th:each="game_review : ${game_review.reviewPageList}">
 
-                                        </ul>
+                                                <li class="list-group-item">
+                                                    <div class="form-inline mb-2">
+                                                        <i class="fa fa-user-circle-o fa-2x"></i>
+                                                        <span style="color:gray;" th:text="${game_review.email}">&nbsp;asdf@afsds</span>
+                                                        <div class="fs-6">
+                                                            <span th:each="starNumber : ${#numbers.sequence(1, game_review.rate)}">&#x2B50</span>
+                                                        </div>
+                                                        </label>
+                                                    </div>
+                                                    <div class="fw-bolder" th:text="${game_review.comment}">asdfasdfdsfasfd</div>
+                                                    <div class="fw-bolder" style="color:gray; float: right; padding-top: 10px;" th:text="${game_review.date}">20231111</div>
+                                                </li>
+
+                                            </ul>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-7" style="text-align:center; margin: 0 auto;">
+
+                                        <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+                                            <ul class="pagination justify-content-center" style="align:center;">
+                                                <li th:if="${game_review.pageDTO.isPrev()}" class="paginate_button page-item">
+                                                    <a class="page-link" th:href="${game_review.pageDTO.startPage -1}">이전</a>
+                                                </li>
+
+                                                <li th:each="num: ${#numbers.sequence(game_review.pageDTO.startPage,game_review.pageDTO.endPage)}" class="paginate_button page-item">
+                                                    <a class="page-link" th:href="${num}" th:value="${num}" th:text="${num}"></a>
+                                                </li>
+                                                <li th:if="${game_review.pageDTO.isNext()}" class="paginate_button page-item" >
+                                                    <a class="page-link" th:href="${game_review.pageDTO.endPage + 1}">다음</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
+
+                                </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>

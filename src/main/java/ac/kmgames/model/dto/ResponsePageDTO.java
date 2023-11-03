@@ -29,4 +29,10 @@ public class ResponsePageDTO {
         private List<GameDTO> gamePageList;
         private PageDTO pageDTO;
     }
+    @Data
+    @AllArgsConstructor
+    public static class ResponseReview {
+        private List<HashMap> reviewPageList;
+        private PageDTO pageDTO;
+    }
 }

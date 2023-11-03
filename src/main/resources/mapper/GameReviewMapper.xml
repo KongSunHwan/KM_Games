@@ -10,4 +10,19 @@
         order by date desc
         limit 3
     </select>
+
+    <select id="getGameSearchList" resultType="java.util.HashMap">
+        select b.email, a.rate, a.comment,a.date
+        from game_review a, user b
+        where a.user_id = b.id and a.game_id = #{game_id}
+        order by date desc
+        limit #{cs.skip} , #{cs.amount}
+    </select>
+
+    <select id="getGameSearchCount" resultType="int">
+        select count(*)
+        from game_review a, user b
+        where a.user_id = b.id and a.game_id = #{game_id}
+        order by date desc
+    </select>
 </mapper>

@@ -221,15 +221,7 @@
                         </table>
                     </div>
                 </div>
-<!--                    <nav aria-label="Page navigation example">-->
-<!--                        <ul class="pagination mt-2" style="justify-content : center;">-->
-<!--                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>-->
-<!--                                        <li class="page-item"><a class="page-link disabled" href="#">#</a></li>-->
-<!--                                        <li class="page-item"><a class="page-link" href="#">#</a></li>-->
-<!--                                <li class="page-item"><a class="page-link" href="#">Next</a></li>-->
-<!--                        </ul>-->
-<!--                    </nav>-->
-                    <!-- Paging[s] -->
+
                     <div class="col-sm-12 col-md-7" style="text-align:center; margin: 0 auto;">
 
                         <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
@@ -237,9 +229,7 @@
                                 <li th:if="${pageList.pageDTO.isPrev()}" class="paginate_button page-item previous">
                                     <a class="page-link" th:href="${pageList.pageDTO.startPage -1}">이전</a>
                                 </li>
-                                <!--                            <li th:each="num: ${#numbers.sequence(searchVO.startDate,searchVO.endDate)}" class="paginate_button page-item">-->
-                                <!--                                <a href="javascript:void(0);" th:text="${num}" onclick="fn_go_page(num); return false;" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link" title="${num}">${num}</a>-->
-                                <!--                            </li>-->
+
                                 <li th:each="num: ${#numbers.sequence(pageList.pageDTO.startPage,pageList.pageDTO.endPage)}" class="paginate_button page-item">
                                     <a class="page-link" th:href="${num}" th:value="${num}" th:text="${num}"></a>
                                 </li>

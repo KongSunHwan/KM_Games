@@ -83,4 +83,8 @@ final public class PaymentService{
     public int get_payment_group_game_cnt(Criteria cs,long id) {
         return paymentMapper.get_payment_group_game_cnt(cs,id);
     }
+
+    public int get_review_group_game_cnt(Criteria cs, long id) {
+        return paymentMapper.get_payment_group_game_cnt(cs,id);
+    }
 }
