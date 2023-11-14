@@ -1,27 +1,37 @@
 package ac.kmgames.controller;
 
+import ac.kmgames.model.dto.GamePostDTO;
+import ac.kmgames.model.entity.GamePost;
+import ac.kmgames.model.entity.QGamePost;
 import ac.kmgames.model.entity.User;
+import ac.kmgames.model.repository.GamePostRepository;
+import ac.kmgames.service.GamePostService;
 import ac.kmgames.service.GameService;
 import ac.kmgames.service.UserService;
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.Expressions;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequiredArgsConstructor
 public class MainController{
     private final UserService userService;
     private final GameService gameService;
-
-    @Autowired
-    public MainController(UserService userService, GameService gameService){
-        this.userService = userService;
-        this.gameService = gameService;
-    }
+    private final GamePostService gamePostService;
 
     @GetMapping("/")
     public String index(HttpSession session, HttpServletRequest request,
@@ -41,13 +51,37 @@ public class MainController{
         }
     }
 
-    @ResponseBody
-    @GetMapping("*")
-    public String preparedFeature(){
-        return
-            "<script>" +
-                "alert('현재 준비중인 기능입니다');" +
-                "history.back();" +
-            "</script>";
+    @GetMapping("/main")
+    public String main(@PageableDefault(size = 16) Pageable pageable, Model model) {
+        Page<GamePost> page = gamePostService.findAll(pageable);
+        model.addAttribute("gamePosts", page.getContent());
+        model.addAttribute("page", page);
+        return "main/main";
     }
+
+    @GetMapping("/search")
+    public String searchGamePosts(
+            @RequestParam(name = "keyword") String keyword,
+            @RequestParam(name = "keywordType") String keywordType,
+            @PageableDefault(size = 16) Pageable pageable,
+            Model model
+    ) {
+        Page<GamePost> gamePosts = gamePostService.findByKeyword(keyword, keywordType, pageable);
+        model.addAttribute("gamePosts", gamePosts.getContent());
+        model.addAttribute("page", gamePosts);
+        model.addAttribute("keywordType", keywordType);
+        model.addAttribute("keyword", keyword);
+
+        return "search/search_results";
+    }
+
+//    @ResponseBody
+//    @GetMapping("*")
+//    public String preparedFeature(){
+//        return
+//            "<script>" +
+//                "alert('현재 준비중인 기능입니다');" +
+//                "history.back();" +
+//            "</script>";
+//    }
 }

@@ -1,5 +1,6 @@
 package ac.kmgames.model.entity;
 
+import com.querydsl.core.types.dsl.StringExpression;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class GamePost extends BaseTimeEntity{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "game_post_id")
@@ -40,7 +42,6 @@ public class GamePost extends BaseTimeEntity{
     )
     @Column(name = "tagName")
     private Set<String> gameTags = new HashSet<>();
-
 
     private String detailContent; // 상세 내용
 

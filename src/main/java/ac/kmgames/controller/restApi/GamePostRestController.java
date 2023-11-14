@@ -1,14 +1,19 @@
 package ac.kmgames.controller.restApi;
 
+import ac.kmgames.model.dto.GamePostDTO;
 import ac.kmgames.model.entity.*;
 import ac.kmgames.model.utils.FileUtilities;
 import ac.kmgames.service.GamePostService;
 import com.google.gson.JsonObject;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.mybatis.logging.Logger;
 import org.mybatis.logging.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -197,6 +202,30 @@ public class GamePostRestController {
         } catch (Exception e) {
             throw new RuntimeException("시스템에 문제가 발생하였습니다.");
         }
+    }
+
+    // GamePost 엔티티를 Response DTO로 변환하는 메서드
+    public GamePostDTO.Response convertToResponse(GamePost gamePost) {
+        return new GamePostDTO.Response(
+                gamePost
+        );
+    }
+
+    // GamePost 엔티티 목록을 ListResponse DTO 목록으로 변환하는 메서드
+    public List<GamePostDTO.ListResponse> convertToListResponse(List<GamePost> gamePostList) {
+        return gamePostList.stream()
+                .map(gamePost -> new GamePostDTO.ListResponse(
+                        gamePost
+                ))
+                .collect(Collectors.toList());
+    }
+
+    //메인페이지 + (페이징)
+    @GetMapping("/api/main")
+    public Page<GamePost> apiMain(@PageableDefault(size = 5) Pageable pageable) {
+        Page<GamePost> page = gamePostService.findAll(pageable);
+        Page<GamePostDTO.Response> mappedPage = page.map(gamePost -> convertToResponse(gamePost));
+        return page;
     }
 
 }

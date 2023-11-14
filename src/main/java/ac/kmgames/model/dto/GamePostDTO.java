@@ -12,6 +12,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 public class GamePostDTO {
+
     @Getter
     @NoArgsConstructor
     public static class Response {
