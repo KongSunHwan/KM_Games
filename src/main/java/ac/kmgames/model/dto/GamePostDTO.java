@@ -28,6 +28,12 @@ public class GamePostDTO {
         private PriceState priceState;
         private Set<String> gameTags;
         private String detailContent;
+        private String gameOs;
+        private String gameProcess;
+        private String gameMemory;
+        private String gameGraphic;
+        private String gameDirectX;
+        private String gameStorage;
         private List<GamePhoto> gamePhotos;
         private LocalDateTime createdDateTime;
 
@@ -44,6 +50,12 @@ public class GamePostDTO {
             this.priceState = gamePost.getPriceState();
             this.gameTags = gamePost.getGameTags();
             this.detailContent = gamePost.getDetailContent();
+            this.gameOs = gamePost.getGameOs();
+            this.gameProcess = gamePost.getGameProcess();
+            this.gameMemory = gamePost.getGameMemory();
+            this.gameGraphic = gamePost.getGameGraphic();
+            this.gameDirectX = gamePost.getGameDirectX();
+            this.gameStorage = gamePost.getGameStorage();
             this.gamePhotos = gamePost.getGamePhotos();
             this.createdDateTime = gamePost.getCreatedDateTime();
         }
@@ -62,6 +74,12 @@ public class GamePostDTO {
         private PriceState priceState;
         private Set<String> gameTags;
         private String detailContent;
+        private String gameOs;
+        private String gameProcess;
+        private String gameMemory;
+        private String gameGraphic;
+        private String gameDirectX;
+        private String gameStorage;
         private List<GamePhoto> gamePhotos;
         private LocalDateTime createdDateTime;
 
@@ -77,6 +95,12 @@ public class GamePostDTO {
             this.priceState = gamePost.getPriceState();
             this.gameTags = gamePost.getGameTags();
             this.detailContent = gamePost.getDetailContent();
+            this.gameOs = gamePost.getGameOs();
+            this.gameProcess = gamePost.getGameProcess();
+            this.gameMemory = gamePost.getGameMemory();
+            this.gameGraphic = gamePost.getGameGraphic();
+            this.gameDirectX = gamePost.getGameDirectX();
+            this.gameStorage = gamePost.getGameStorage();
             this.gamePhotos = gamePost.getGamePhotos();
             this.createdDateTime = gamePost.getCreatedDateTime();
         }

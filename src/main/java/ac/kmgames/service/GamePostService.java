@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -85,5 +86,9 @@ public class GamePostService {
         }
         // 키워드 타입이 유효하지 않은 경우 빈 페이지 반환
         return Page.empty();
+    }
+
+    public Optional<GamePost> findById(long id) {
+        return gamePostRepository.findById(id);
     }
 }

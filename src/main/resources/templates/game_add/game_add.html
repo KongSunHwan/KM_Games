@@ -107,7 +107,7 @@
         </div>
         <br><br>
 
-        <!-- 기본정보 -->
+        <!-- 게임 정보 -->
         <div class="row">
             <table class="table table-bordered .table-hover dt-responsive"
                    summary="This table shows how to create responsive tables using Datatables' extended functionality">
@@ -198,6 +198,77 @@
             </table>
         </div>
         <br><br>
+
+        <!-- 시스템 요구 정보 -->
+        <div class="row">
+            <table class="table table-bordered .table-hover dt-responsive"
+                   summary="This table shows how to create responsive tables using Datatables' extended functionality">
+                <thead>
+                <tr style="text-align: center">
+                    <th class="email" colspan="4">시스템 요구 정보 (최소사양)</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+                    <td class="align-middle text-center" rowspan="1" style="width:15%;">
+                        운영체제
+                    </td>
+                    <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="Windows® 7/Vista/XP" size="50"
+                                                                        th:field="*{gameOs}"
+                                                                        type="text">
+                    </td>
+
+                    <td class="align-middle text-center" rowspan="1" style="width:15%;">
+                        프로세스
+                    </td>
+                    <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="Intel® Core™ 2 Duo E6600 또는 AMD Phenom™ X3 8750" size="50"
+                                                                        th:field="*{gameProcess}"
+                                                                        type="text">
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td class="align-middle text-center" rowspan="1" style="width:15%;">
+                        메모리
+                    </td>
+                    <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="2 GB RAM" size="50"
+                                                                        th:field="*{gameMemory}"
+                                                                        type="text">
+                    </td>
+
+                    <td class="align-middle text-center" rowspan="1" style="width:15%;">
+                        그래픽
+                    </td>
+                    <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="비디오 카드는 256MB 이상에 DirectX 9와 호환 가능해야 하며 Pixel Shader 3.0을 지원해야 합니다." size="50"
+                                                                        th:field="*{gameGraphic}"
+                                                                        type="text">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="align-middle text-center" rowspan="1" style="width:15%;">
+                        DirectX
+                    </td>
+                    <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="버전 9.0c" size="50"
+                                                                        th:field="*{gameDirectX}"
+                                                                        type="text">
+                    </td>
+                    <td class="align-middle text-center" rowspan="1" style="width:15%;">
+                        저장공간
+                    </td>
+                    <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="15 GB 사용 가능 공간" size="50"
+                                                                        th:field="*{gameStorage}"
+                                                                        type="text">
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <br><br>
+
         <!-- 추가정보 -->
         <div class="row">
             <table class="table table-bordered .table-hover dt-responsive"

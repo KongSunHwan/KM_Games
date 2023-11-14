@@ -44,6 +44,12 @@ public class GamePost extends BaseTimeEntity{
     private Set<String> gameTags = new HashSet<>();
 
     private String detailContent; // 상세 내용
+    private String gameOs; // 운영체제
+    private String gameProcess; // 프로세스
+    private String gameMemory; // 메모리
+    private String gameGraphic; // 그래픽
+    private String gameDirectX; // DirectX
+    private String gameStorage; // 저장공간
 
     @OneToMany(mappedBy="gamePost", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<GamePhoto> gamePhotos = new ArrayList<>(); // 게임 사진

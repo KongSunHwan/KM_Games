@@ -163,12 +163,12 @@ public class GameController{
 //    }
 
     @GetMapping("/game_detail")
-    public String detailPage(HttpSession session, HttpServletRequest request,
+    public String detailPage(HttpSession session, Model model,
                              @RequestParam(value = "id", defaultValue = "1") long id){
-        request.setAttribute("game", gameService.getGameById(id).get());
-        request.setAttribute("review_list", gameReviewService.getAllByGameId(id));
-        request.setAttribute("review_count", gameReviewService.getCountByGameId(id));
-        request.setAttribute("average_rate", gameReviewService.getAverageRateByGameId(id));
+        model.addAttribute("gamePosts", gamePostService.findById(id).get());
+        model.addAttribute("review_list", gameReviewService.getAllByGameId(id));
+        model.addAttribute("review_count", gameReviewService.getCountByGameId(id));
+        model.addAttribute("average_rate", gameReviewService.getAverageRateByGameId(id));
         return "game/game_detail";
     }
 

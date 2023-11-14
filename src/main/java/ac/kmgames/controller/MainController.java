@@ -75,13 +75,13 @@ public class MainController{
         return "search/search_results";
     }
 
-//    @ResponseBody
-//    @GetMapping("*")
-//    public String preparedFeature(){
-//        return
-//            "<script>" +
-//                "alert('현재 준비중인 기능입니다');" +
-//                "history.back();" +
-//            "</script>";
-//    }
+    @ResponseBody
+    @GetMapping("*")
+    public String preparedFeature(){
+        return
+            "<script>" +
+                "alert('현재 준비중인 기능입니다');" +
+                "history.back();" +
+            "</script>";
+    }
 }

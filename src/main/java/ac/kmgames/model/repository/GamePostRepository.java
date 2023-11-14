@@ -2,6 +2,7 @@ package ac.kmgames.model.repository;
 
 
 import ac.kmgames.model.dto.GameSearch;
+import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.entity.GamePhoto;
 import ac.kmgames.model.entity.GamePost;
 import ac.kmgames.model.entity.GameReview;
@@ -15,12 +16,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface GamePostRepository extends JpaRepository<GamePost, Long> {
 
-
+    // 게임 등록
     GamePost save(GamePost gamePost);
 
+    // 리스트 아이디 내림차순 조회
     List<GamePost> findAllByOrderByIdDesc();
 
     // 메인페이지 페이징 + 리스트
@@ -31,5 +34,8 @@ public interface GamePostRepository extends JpaRepository<GamePost, Long> {
 
     // 게임 태그에 대한 검색
     Page<GamePost> findByGameTagsContaining(String gameTags, Pageable pageable);
+
+    // 등록된 게임 아이디 find
+    Optional<GamePost> findById(long id);
 
 }

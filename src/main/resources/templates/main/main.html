@@ -142,12 +142,15 @@
                 </select>
             </div>
 
+            <div th:if="${gamePosts.empty}">
+                <p style="text-align: center; font-size: 18px; font-weight: bold;">현재 게임이 없습니다.</p>
+            </div>
             <div class="row" style="margin-top: 10px">
                 <th:block th:each="gamePost : ${gamePosts}">
                     <!-- gamePost가 null인 경우를 처리 -->
                     <th:block th:if="${gamePost != null}">
                         <div class="card-back mb-2 col-lg-3" style="cursor:pointer;"
-                             th:onclick="|location.href = '/game_detail?id=${gamePost.id}'|">
+                             th:onclick="|location.href = '/game_detail?id=' + ${gamePost.id}|">
                             <div class="card-img">
                                 <!-- gamePost의 첫 번째 이미지를 가져올 때 index(0) 사용 -->
                                 <img onerror="this.onerror=null; this.src='/img/game/wip.png';"
@@ -169,6 +172,7 @@
                 </th:block>
             </div>
 
+            <th:block th:if="${page.totalElements > 0}">
             <ul class="pagination mt-2" style="justify-content: center;">
                 <li class="page-item" th:if="${page.hasPrevious()}">
                     <a class="page-link" th:href="@{|?page=0|}">처음</a>
@@ -188,7 +192,7 @@
                     <a class="page-link" th:href="@{|?page=${page.totalPages - 1}|}">마지막</a>
                 </li>
             </ul>
-
+            </th:block>
         </div>
     </div>
 </div>

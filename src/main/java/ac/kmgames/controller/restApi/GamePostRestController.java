@@ -100,6 +100,12 @@ public class GamePostRestController {
             gamePost.setGameTags(gameTagsSet);
 
             gamePost.setDetailContent(multiRequest.getParameter("detailContent"));
+            gamePost.setGameOs(multiRequest.getParameter("gameOs"));
+            gamePost.setGameProcess(multiRequest.getParameter("gameProcess"));
+            gamePost.setGameMemory(multiRequest.getParameter("gameMemory"));
+            gamePost.setGameGraphic(multiRequest.getParameter("gameGraphic"));
+            gamePost.setGameDirectX(multiRequest.getParameter("gameDirectX"));
+            gamePost.setGameStorage(multiRequest.getParameter("gameStorage"));
         }
         // 수정
         else {
@@ -137,6 +143,12 @@ public class GamePostRestController {
             gamePost.setGameTags(gameTagsSet);
 
             gamePost.setDetailContent(multiRequest.getParameter("detailContent"));
+            gamePost.setGameOs(multiRequest.getParameter("gameOs"));
+            gamePost.setGameProcess(multiRequest.getParameter("gameProcess"));
+            gamePost.setGameMemory(multiRequest.getParameter("gameMemory"));
+            gamePost.setGameGraphic(multiRequest.getParameter("gameGraphic"));
+            gamePost.setGameDirectX(multiRequest.getParameter("gameDirectX"));
+            gamePost.setGameStorage(multiRequest.getParameter("gameStorage"));
 
 
             if (!"".equals(multiRequest.getParameter("deleteFiles"))) {
@@ -161,7 +173,13 @@ public class GamePostRestController {
                 "게임 가격: " + gamePost.getGamePrice() + "\n" +
                 "가격 상태: " + gamePost.getPriceState() + "\n" +
                 "게임 태그: " + gamePost.getGameTags() + "\n" +
-                "상세 내용: " + gamePost.getDetailContent() + "\n";
+                "상세 내용: " + gamePost.getDetailContent() + "\n" +
+                "운영 체제: " + gamePost.getGameOs() + "\n" +
+                "프로 세스: " + gamePost.getGameProcess() + "\n" +
+                "메모리 : " + gamePost.getGameMemory() + "\n" +
+                "그래픽 : " + gamePost.getGameGraphic() + "\n" +
+                "DirectX: " + gamePost.getGameDirectX() + "\n" +
+                "저장 공간: " + gamePost.getGameStorage() + "\n";
 
         System.out.println(gamePostString);
 
