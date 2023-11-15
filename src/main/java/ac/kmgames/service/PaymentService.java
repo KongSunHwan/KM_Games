@@ -74,9 +74,7 @@ final public class PaymentService{
         Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
         List<HashMap> paymentPageList = paymentMapper.get_payment_group_game(cs,id);
         int total = paymentMapper.get_payment_group_game_cnt(cs,id);
-        System.out.println(total);
         PageDTO pageDTO = new PageDTO(cs,total);
-        System.out.println(paymentPageList);
         return new ResponsePageDTO.ResponsePayment(paymentPageList, pageDTO);
     }
 
@@ -86,5 +84,13 @@ final public class PaymentService{
 
     public int get_review_group_game_cnt(Criteria cs, long id) {
         return paymentMapper.get_payment_group_game_cnt(cs,id);
+    }
+
+    public ResponsePageDTO.ResponsePayment getPaymentList(Criteria criteria) {
+        Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
+        List<HashMap> paymentPageList = paymentMapper.getPaymentList(cs);
+        int total = paymentMapper.getPaymentListCnt(cs);
+        PageDTO pageDTO = new PageDTO(cs,total);
+        return new ResponsePageDTO.ResponsePayment(paymentPageList, pageDTO);
     }
 }

@@ -1,6 +1,6 @@
 package ac.kmgames.model.entity;
 
-import com.querydsl.core.types.dsl.StringExpression;
+//import com.querydsl.core.types.dsl.StringExpression;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 

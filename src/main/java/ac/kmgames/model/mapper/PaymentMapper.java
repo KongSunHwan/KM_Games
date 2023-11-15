@@ -20,4 +20,7 @@ public interface PaymentMapper {
 
     int get_payment_group_game_cnt(@Param("cs") Criteria cs,@Param("game_id") long game_id);
 
+    List<HashMap> getPaymentList(@Param("cs") Criteria cs);
+
+    int getPaymentListCnt(@Param("cs")  Criteria cs);
 }

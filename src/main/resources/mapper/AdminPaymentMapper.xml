@@ -8,10 +8,10 @@
                 <trim prefix="OR">
                     <choose>
                         <when test="cs.type == 'N'.toString()">
-                            g.name like concat ('%',#{cs.keyword},'%')
+                            u.email like concat ('%',#{cs.keyword},'%')
                         </when>
                         <when test="cs.type == 'G'.toString()">
-                            g.genre like concat ('%',#{cs.keyword},'%')
+                            g.name like concat ('%',#{cs.keyword},'%')
                         </when>
                         <when test="cs.type == 'D'.toString()">
                             g.developer like concat ('%',#{cs.keyword},'%')
@@ -41,9 +41,9 @@
 
     <select id="get_game_payment_l5" resultType="java.util.HashMap">
         select a.id, b.name, c.price, a.date
-        from payment_history a,user b,game c
-        where a.user_id = b.id and
-            a.game_id = c.id
+        from payment_history p,user u,game g
+        where p.user_id = u.id and
+            p.game_id = g.id
           AND a.game_id = #{id}
         order by a.date desc
         limit 5
@@ -66,5 +66,25 @@
         where a.user_id = b.id and
             a.game_id = c.id
           AND a.game_id = #{game_id}
+    </select>
+
+    <select id="getPaymentList" resultType="java.util.HashMap">
+        select p.id, u.email, g.name, g.price, p.date, g.developer
+        from payment_history p, game g, user u
+        <where>
+            p.game_id = g.id and p.user_id = u.id
+            <include refid="criteria"></include>
+        </where>
+        order by p.date desc
+        limit #{cs.skip} , #{cs.amount}
+    </select>
+
+    <select id="getPaymentListCnt" resultType="int">
+        select count(*)
+        from payment_history p, game g, user u
+        <where>
+            p.game_id = g.id and p.user_id = u.id
+            <include refid="criteria"></include>
+        </where>
     </select>
 </mapper>

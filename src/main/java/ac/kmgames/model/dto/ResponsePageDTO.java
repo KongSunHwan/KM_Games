@@ -35,4 +35,5 @@ public class ResponsePageDTO {
         private List<HashMap> reviewPageList;
         private PageDTO pageDTO;
     }
+
 }

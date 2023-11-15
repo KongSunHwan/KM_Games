@@ -89,15 +89,23 @@ public class AdminController {
         return "admin_dashboard/member_manag_information";
     }
 
+//    @GetMapping("member_order")
+//    public String member_order(
+//        HttpServletRequest request,
+//        @RequestParam(value = "page", defaultValue = "1") int page){
+//        page = Math.max(page - 1, 0);
+//        var payment = paymentService.getAll(page);
+//        request.setAttribute("payment_list", payment.getContent());
+//        request.setAttribute("current_page", page + 1);
+//        request.setAttribute("payment_page", (long) Math.ceil(paymentService.getCount() / 5.0));
+//        return "admin_dashboard/member_order";
+//    }
+
     @GetMapping("member_order")
-    public String member_order(
-        HttpServletRequest request,
-        @RequestParam(value = "page", defaultValue = "1") int page){
-        page = Math.max(page - 1, 0);
-        var payment = paymentService.getAll(page);
-        request.setAttribute("payment_list", payment.getContent());
-        request.setAttribute("current_page", page + 1);
-        request.setAttribute("payment_page", (long) Math.ceil(paymentService.getCount() / 5.0));
+    public String member_order(Criteria criteria, Model model){
+        ResponsePageDTO.ResponsePayment list = paymentService.getPaymentList(criteria);
+        model.addAttribute("pageList", list);
+        System.out.println(list);
         return "admin_dashboard/member_order";
     }
 

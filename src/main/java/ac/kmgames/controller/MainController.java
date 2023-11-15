@@ -2,14 +2,14 @@ package ac.kmgames.controller;
 
 import ac.kmgames.model.dto.GamePostDTO;
 import ac.kmgames.model.entity.GamePost;
-import ac.kmgames.model.entity.QGamePost;
+//import ac.kmgames.model.entity.QGamePost;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.GamePostRepository;
 import ac.kmgames.service.GamePostService;
 import ac.kmgames.service.GameService;
 import ac.kmgames.service.UserService;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.Expressions;
+//import com.querydsl.core.types.dsl.BooleanExpression;
+//import com.querydsl.core.types.dsl.Expressions;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

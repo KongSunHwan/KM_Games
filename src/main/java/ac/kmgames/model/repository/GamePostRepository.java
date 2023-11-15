@@ -6,7 +6,7 @@ import ac.kmgames.model.entity.Game;
 import ac.kmgames.model.entity.GamePhoto;
 import ac.kmgames.model.entity.GamePost;
 import ac.kmgames.model.entity.GameReview;
-import com.querydsl.core.types.dsl.BooleanExpression;
+//import com.querydsl.core.types.dsl.BooleanExpression;
 import org.apache.ibatis.javassist.compiler.ast.Keyword;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
