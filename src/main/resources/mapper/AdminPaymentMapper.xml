@@ -41,12 +41,12 @@
 
     <select id="get_game_payment_l5" resultType="java.util.HashMap">
         select a.id, b.name, c.price, a.date
-        from payment_history p,user u,game g
-        where p.user_id = u.id and
-            p.game_id = g.id
+        from payment_history a,user b,game c
+        where a.user_id = b.id and
+            a.game_id = c.id
           AND a.game_id = #{id}
         order by a.date desc
-        limit 5
+            limit 5
     </select>
 
     <select id="get_payment_group_game" resultType="java.util.HashMap">
