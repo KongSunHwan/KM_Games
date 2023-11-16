@@ -162,7 +162,7 @@
                             </div>
                             <div class="card-text2">
                                 <b style="font-size: 17px;">
-                                    <span th:if="${gamePost.gamePrice > 0}" th:text="|${gamePost.gamePrice}원|"></span>
+                                    <span th:if="${gamePost.gamePrice > 0}" th:text="${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}"></span>원
                                     <span th:unless="${gamePost.gamePrice > 0}">무료</span>
                                 </b>
                             </div>
