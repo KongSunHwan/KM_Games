@@ -25,7 +25,7 @@
       </div>
 
     </div>
-    <div class="member">
+    <div class="user">
       <div class="member1">모든 HOT한 게임으로</div>
       <br>
       <div class="member2">무엇을 좋아할지 몰라서 여러가지를 준비 했습니다.</div>

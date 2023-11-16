@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-final public class UserService{
+public class UserService{
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -55,7 +56,7 @@ final public class UserService{
         return users.getId();
     }
 
-    public User findAllById(int id) {
+    public User findAllById(Long id) {
         return userRepository.findAllById(id);
     }
 
@@ -76,5 +77,10 @@ final public class UserService{
     //admin user detail by id
     public UserDTO getUserDetail(int id) {
         return userMapper.getUserDetail(id);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<User> getUserById(Long userId) {
+        return userRepository.findById(userId);
     }
 }

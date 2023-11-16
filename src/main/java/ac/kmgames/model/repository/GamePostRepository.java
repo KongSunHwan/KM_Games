@@ -38,4 +38,7 @@ public interface GamePostRepository extends JpaRepository<GamePost, Long> {
     // 등록된 게임 아이디 find
     Optional<GamePost> findById(long id);
 
+    // 게임 전체 리스트
+    List<GamePost> findAll();
+
 }

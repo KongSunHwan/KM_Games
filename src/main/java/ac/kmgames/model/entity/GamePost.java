@@ -54,4 +54,15 @@ public class GamePost extends BaseTimeEntity{
     @OneToMany(mappedBy="gamePost", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<GamePhoto> gamePhotos = new ArrayList<>(); // 게임 사진
 
+    @OneToMany(mappedBy = "gamePost", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private List<GameReview> reviews = new ArrayList<>(); // 게임 리뷰 목록
+
+    @Transient
+    private int rating; // 별점
+
+    @Transient
+    private double averageRating; // 평균 별점
+
+    @Transient
+    private int totalReviews; // 전체 리뷰
 }

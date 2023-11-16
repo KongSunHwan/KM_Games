@@ -2,7 +2,9 @@ package ac.kmgames.model.entity;
 
 public enum PriceState {
     FREE("무료"),
-    TRIAL("체험판");
+    TRIAL("체험판"),
+
+    CHARGED("유료");
 
     private final String description;
 

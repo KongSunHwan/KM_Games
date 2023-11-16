@@ -286,7 +286,7 @@
                         <div class="d-flex">
                             <div class="col-sm-3">
                                 <input class="form-control" placeholder="가격을 입력해주세요." required
-                                       th:field="*{gamePrice}" type="text" value="">
+                                       th:field="*{gamePrice}" type="text" value="" id="gamePriceInput">
                             </div>
 
                             <div style="font-size: 20px;">원</div>
@@ -298,19 +298,26 @@
                     <td colspan="3">
                         <div class="d-flex">
                             &nbsp;&nbsp;&nbsp;
+<!--                            <div class="input-group has-validation">-->
+<!--                                <div th:each="type : ${PriceStates}">-->
+<!--                                    <input autocomplete="off" checked class="btn-check"-->
+<!--                                           th:field="*{priceState}"-->
+<!--                                           th:value="${type.name()}" type="radio" onclick="handlePriceInput(this)">-->
+<!--                                    <label class="btn btn-outline-primary" th:for="${#ids.prev('priceState')}"-->
+<!--                                           th:text="${type.description}">무료</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <div class="input-group has-validation">
                                 <div th:each="type : ${PriceStates}">
-                                    <input autocomplete="off" checked class="btn-check"
+                                    <input autocomplete="off" class="btn-check"
                                            th:field="*{priceState}"
-                                           th:value="${type.name()}" type="radio">
+                                           th:value="${type.name()}" type="radio" onclick="handlePriceInput(this)">
                                     <label class="btn btn-outline-primary" th:for="${#ids.prev('priceState')}"
                                            th:text="${type.description}">무료</label>
                                     &nbsp;
-                                    <!--                                        <input type="radio" class="btn-check" name="options" id="option11"-->
-                                    <!--                                            autocomplete="off">-->
-                                    <!--                                        <label class="btn btn-outline-primary" for="option11">체험판</label>-->
                                 </div>
                             </div>
+
                         </div>
                     </td>
                 </tr>
@@ -606,7 +613,7 @@
                     }
 
                     // location.href = "/gallery/edit/" + result.galleryId;
-                    location.href = "/";
+                    location.href = "/main";
                 } else {
                     alert(result.errorMsg);
                 }
@@ -615,6 +622,14 @@
     }
 
     /*]]>*/
+
+    function handlePriceInput(radio) {
+        var priceInput = document.getElementById('gamePriceInput');
+        priceInput.disabled = (radio.value === 'FREE' || radio.value === 'TRIAL');
+        if (priceInput.disabled) {
+            priceInput.value = ""; // 무료 또는 체험판을 선택하면 가격을 지웁니다.
+        }
+    }
 </script>
 
 

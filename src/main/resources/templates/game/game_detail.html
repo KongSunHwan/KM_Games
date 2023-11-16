@@ -2,436 +2,493 @@
 <html lagn="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
     <title>게임 상세</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png"/>
-    <script src="https://kit.fontawesome.com/0bca6ce86d.js" crossorigin="anonymous">
+    <link href="/img/KM_GAMES_logo_icon.png" rel="shortcut icon" type="image/x-icon"/>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/0bca6ce86d.js">
     </script>
-    <link rel="stylesheet" href="/css/footer.css"/>
-    <link rel="stylesheet" href="/css/evaluation.css"/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="/css/footer.css" rel="stylesheet"/>
+    <link href="/css/evaluation.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 <header th:replace="~{include/header}"></header>
 
 <th:block th:each="gamePost : ${gamePosts}">
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <div class="col-md-8 p-lg-4 mx-auto">
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-            <div class="carousel-indicators">
-                <th:block th:each="gamePhoto, iterStat : ${gamePost.gamePhotos}">
-                    <button type="button" data-bs-target="#carouselExampleIndicators"
-                            th:data-bs-slide-to="${iterStat.index}" th:classappend="${iterStat.index == 0} ? 'active'"></button>
-                </th:block>
-            </div>
-            <div class="carousel-inner">
-                <div th:each="gamePhoto, iterStat : ${gamePost.gamePhotos}" class="carousel-item"
-                     th:classappend="${iterStat.index == 0} ? 'active'">
-                    <img th:src="@{/gallery/download/{id}(id=${gamePhoto.id})}" class="d-block w-100" width="500" height="600">
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-8 p-lg-4 mx-auto">
+            <div class="carousel slide" data-bs-ride="true" id="carouselExampleIndicators">
+                <div class="carousel-indicators">
+                    <th:block th:each="gamePhoto, iterStat : ${gamePost.gamePhotos}">
+                        <button data-bs-target="#carouselExampleIndicators" th:classappend="${iterStat.index == 0} ? 'active'"
+                                th:data-bs-slide-to="${iterStat.index}"
+                                type="button"></button>
+                    </th:block>
                 </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item" th:classappend="${iterStat.index == 0} ? 'active'"
+                         th:each="gamePhoto, iterStat : ${gamePost.gamePhotos}">
+                        <img class="d-block w-100" height="600" th:src="@{/gallery/download/{id}(id=${gamePhoto.id})}"
+                             width="500">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators"
+                        type="button">
+                    <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators"
+                        type="button">
+                    <span aria-hidden="true" class="carousel-control-next-icon"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
+        <div class="product-device shadow-sm d-none d-md-block"></div>
+        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
     </div>
-    <div class="product-device shadow-sm d-none d-md-block"></div>
-    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-</div>
-<div>
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-7">
-            <div class="rounded-3" style="height: 80px; background-color:rgb(71, 133, 240);">
-                <div class="text-center fw-bolder" style="color: white; padding-top: 10px;">게임을 소개하자면?<br>
-                    ⭐ 다이나믹한 게임 입니다. ⭐
+    <div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-7">
+                <div class="rounded-3" style="height: 80px; background-color:rgb(71, 133, 240);">
+                    <div class="text-center fw-bolder" style="color: white; padding-top: 10px;">게임을 소개하자면?<br>
+                        ⭐ 다이나믹한 게임 입니다. ⭐
+                    </div>
                 </div>
-            </div>
-            <br>
-            <ul style="list-style-type: none;">
-                <!-- 최근 이벤트 및 공지 시작 -->
-                <h2><b>최근 이벤트 및 공지</b></h2>
-                <hr>
-                <br><br>
-                <li>
-                    <div class="d-flex">
-                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                <br>
+                <ul style="list-style-type: none;">
+                    <!-- 최근 이벤트 및 공지 시작 -->
+                    <h2><b>최근 이벤트 및 공지</b></h2>
+                    <hr>
+                    <br><br>
+                    <li>
+                        <div class="d-flex">
+                            <div class="row row-cols-1 row-cols-md-3 g-4">
 
-                            <div class="col">
-                                <div class="card h-100">
-                                    <img th:src="@{/gallery/download/{id}(id=${gamePost.id})}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
-                                        <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
+                                <div class="col">
+                                    <div class="card h-100">
+                                        <img alt="..." class="card-img-top"
+                                             th:src="@{/gallery/download/{id}(id=${gamePost.id})}" height="200">
+                                        <div class="card-body">
+                                            <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
+                                            <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col">
-                                <div class="card h-100">
-                                    <img th:src="@{/gallery/download/{id}(id=${gamePost.id})}" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
-                                        <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
+                                <div class="col">
+                                    <div class="card h-100">
+                                        <img alt="..." th:src="@{/gallery/download/{id}(id=${gamePost.id})}" height="200">
+                                        <div class="card-body">
+                                            <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
+                                            <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col">
-                                <div class="card h-100">
-                                    <img th:src="@{/gallery/download/{id}(id=${gamePost.id})}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
-                                        <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
+                                <div class="col">
+                                    <div class="card h-100">
+                                        <img alt="..." class="card-img-top"
+                                             th:src="@{/gallery/download/{id}(id=${gamePost.id})}" height="200">
+                                        <div class="card-body">
+                                            <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
+                                            <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
-                    </div>
-                </li>
-                <!-- 최근 이벤트 및 공지 끝 -->
-
-                <br><br><br>
-
-                <!-- 게임정보 시작 -->
-                <h2><b>게임에 대해</b></h2>
-                <hr>
-                <br><br>
-                <li>
-
-                    <div class="card text-bg-dark">
-                        <img th:src="@{/gallery/download/{id}(id=${gamePost.id})}" class="card-img" alt="...">
-<!--                        <div class="card-img-overlay">-->
-<!--                            <h5 class="card-title text-center">현실감 있는 FPS</h5>-->
-<!--                            <p class="card-text text-center">출시 당시 개척한 팀 기반 액션 게임플레이의 수준을 한층 더 끌어올렸습니다..</p>-->
-<!--                            <p class="card-text text-center"><small>새 맵, 캐릭터, 무기 및 게임 모드를 도입했고, 기존의 클래식 CS-->
-<!--                                콘텐츠(de_dust2-->
-<!--                                등)의 개선된 버전을-->
-<!--                                제공합니다.</small></p>-->
-<!--                        </div>-->
-                    </div>
+                    </li>
+                    <!-- 최근 이벤트 및 공지 끝 -->
 
                     <br><br><br>
 
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">게임 제목</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.gameTitle})]</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">이용 등급</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.ageLimit})]</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">게임 장르</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.genreCode})]</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">개발자</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 70px;"><b>[(${gamePost.company})]</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">배급사</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 70px;"><b>KM_GAMES</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">원작 국적</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.nationalityCode})]</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">플랫폼 종류</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 35px;"><b>[(${gamePost.platformCode})]</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">게임 버전</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.gameVersion})]</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">출시일</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 70px;"><b th:text="${#strings.substring(gamePost.createdDateTime, 0, 10)}">[(${gamePost.createdDateTime})]</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-                    <br><br>
-                    <!-- 상세정보 시작 -->
-                <li>
-
-                    <div class="card text-dark bg-light mb-3" style="max-width: 60rem;">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bolder">게임에 대해 상세 설명</h5>
-                            <p class="card-text">
-                                 <textarea class="form-control" id="h_content" name="h_content" th:text = "${gamePost.detailContent}"
-                                           style="width: 100%; height: 300px;" disabled></textarea>
-                            </p>
-                        </div>
-                    </div>
-
-                </li>
-                <!-- 상세정보 끝 -->
-
-                </li>
-                <!-- 게임정보 끝 -->
-
-                <br><br><br><br><br><br><br><br>
-                <!-- 시스템 요구사항 시작 -->
-                <li>
-                    <h2><b>시스템 요구사항 (최소사양)</b></h2>
+                    <!-- 게임정보 시작 -->
+                    <h2><b>게임에 대해</b></h2>
                     <hr>
-                    <br>
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">운영체제</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 50px;"><b th:text = "${gamePost.gameOs}">Windows® 7/Vista/XP</b></div>
-                        </div>
-                        <hr>
-                    </h5>
+                    <br><br>
+                    <li>
 
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">프로세스</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 50px;"><b th:text = "${gamePost.gameProcess}">Intel® Core™ 2 Duo E6600 또는 AMD
-                                Phenom™ X3 8750</b></div>
+                        <div class="card text-bg-dark">
+                            <img alt="..." class="card-img" th:src="@{/gallery/download/{id}(id=${gamePost.id})}">
+                            <!--                        <div class="card-img-overlay">-->
+                            <!--                            <h5 class="card-title text-center">현실감 있는 FPS</h5>-->
+                            <!--                            <p class="card-text text-center">출시 당시 개척한 팀 기반 액션 게임플레이의 수준을 한층 더 끌어올렸습니다..</p>-->
+                            <!--                            <p class="card-text text-center"><small>새 맵, 캐릭터, 무기 및 게임 모드를 도입했고, 기존의 클래식 CS-->
+                            <!--                                콘텐츠(de_dust2-->
+                            <!--                                등)의 개선된 버전을-->
+                            <!--                                제공합니다.</small></p>-->
+                            <!--                        </div>-->
                         </div>
-                        <hr>
-                    </h5>
 
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">메모리</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 67px;"><b th:text = "${gamePost.gameMemory}">2 GB RAM</b></div>
-                        </div>
-                        <hr>
-                    </h5>
+                        <br><br><br>
 
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">그래픽</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 67px;"><b th:text = "${gamePost.gameGraphic}">비디오 카드는 256MB 이상에 DirectX 9와 호환
-                                가능해야 하며 Pixel Shader 3.0을 지원해야 합니다.</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">DirectX</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 63px;"><b th:text = "${gamePost.gameDirectX}">버전 9.0c</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                    <h5>
-                        <div class="d-flex">
-                            <div class="fs-6 justify-content-start">저장공간</div>
-                            <div class="justify-content-center fs-6" style="margin-left: 50px;"><b th:text = "${gamePost.gameStorage}">15 GB 사용 가능 공간</b></div>
-                        </div>
-                        <hr>
-                    </h5>
-
-                </li>
-                <!-- 시스템 요구사항 끝 -->
-                <br><br><br>
-            </ul>
-            <!-- 총평리뷰 시작 -->
-            <hr>
-            <div>
-                <h2><b>총 평점</b></h2>
-            </div>
-
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <div style="margin-top: 60px;">
-                            <div class="fs-1 fw-bolder" style="text-align: center;">
-                                <span th:text="${average_rate}"></span>
-                                <div class="fs-5">&#x2B50&#x2B50&#x2B50&#x2B50&#x2B50</div>
-                                <div class="fs-6" th:text="|${review_count}개의 평가|"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body" style="margin-top: 5px;">
-                            <div class="card-text">5점
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 95%;">
-                                    </div>
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">게임 제목</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.gameTitle})]</b>
                                 </div>
                             </div>
-                            <div class="card-text">4점
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 5%;">
-                                    </div>
-                                </div>
-                            </div>
+                            <hr>
+                        </h5>
 
-                            <div class="card-text">3점
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 0%;">
-                                    </div>
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">이용 등급</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.ageLimit})]</b>
                                 </div>
                             </div>
-                            <div class="card-text">2점
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 0%;">
-                                    </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">게임 장르</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.genreCode})]</b>
                                 </div>
                             </div>
-                            <div class="card-text">1점
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: 0%;">
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">개발자</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 70px;"><b>[(${gamePost.company})]</b>
+                                </div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">배급사</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 70px;"><b>KM_GAMES</b>
+                                </div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">원작 국적</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.nationalityCode})]</b>
+                                </div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">플랫폼 종류</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 35px;"><b>[(${gamePost.platformCode})]</b>
+                                </div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">게임 버전</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 50px;"><b>[(${gamePost.gameVersion})]</b>
+                                </div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">출시일</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 70px;"><b
+                                        th:text="${#strings.substring(gamePost.createdDateTime, 0, 10)}">[(${gamePost.createdDateTime})]</b>
+                                </div>
+                            </div>
+                            <hr>
+                        </h5>
+                        <br><br>
+                        <!-- 상세정보 시작 -->
+                    <li>
+
+                        <div class="card text-dark bg-light mb-3" style="max-width: 60rem;">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bolder">게임에 대해 상세 설명</h5>
+                                <p class="card-text">
+                                 <textarea class="form-control" disabled id="h_content"
+                                           name="h_content"
+                                           style="width: 100%; height: 300px;" th:text="${gamePost.detailContent}"></textarea>
+                                </p>
+                            </div>
+                        </div>
+
+                    </li>
+                    <!-- 상세정보 끝 -->
+
+                    </li>
+                    <!-- 게임정보 끝 -->
+
+                    <br><br><br><br><br><br><br><br>
+                    <!-- 시스템 요구사항 시작 -->
+                    <li>
+                        <h2><b>시스템 요구사항 (최소사양)</b></h2>
+                        <hr>
+                        <br>
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">운영체제</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 50px;"><b
+                                        th:text="${gamePost.gameOs}">Windows® 7/Vista/XP</b></div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">프로세스</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 50px;"><b
+                                        th:text="${gamePost.gameProcess}">Intel® Core™ 2 Duo E6600 또는 AMD
+                                    Phenom™ X3 8750</b></div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">메모리</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 67px;"><b
+                                        th:text="${gamePost.gameMemory}">2 GB RAM</b></div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">그래픽</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 67px;"><b
+                                        th:text="${gamePost.gameGraphic}">비디오 카드는 256MB 이상에 DirectX 9와 호환
+                                    가능해야 하며 Pixel Shader 3.0을 지원해야 합니다.</b></div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">DirectX</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 63px;"><b
+                                        th:text="${gamePost.gameDirectX}">버전 9.0c</b></div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                        <h5>
+                            <div class="d-flex">
+                                <div class="fs-6 justify-content-start">저장공간</div>
+                                <div class="justify-content-center fs-6" style="margin-left: 50px;"><b
+                                        th:text="${gamePost.gameStorage}">15 GB 사용 가능 공간</b></div>
+                            </div>
+                            <hr>
+                        </h5>
+
+                    </li>
+                    <!-- 시스템 요구사항 끝 -->
+                    <br><br><br>
+                </ul>
+                <!-- 총평리뷰 시작 -->
+                <hr>
+                <div>
+                    <h2><b>총 평점</b></h2>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <div style="margin-top: 60px;">
+                                <div class="fs-1 fw-bolder" style="text-align: center;">
+                                    <span th:text="${reviewStatistics.averageRate}"></span>
+                                    <div class="fs-5" id="starRating"></div>
+                                    <div class="fs-6" th:text="|${reviewStatistics.reviewCount}개의 평가|"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body" style="margin-top: 5px;">
+                                <div class="card-text">5점
+                                    <div class="progress">
+                                        <div class="progress-bar"
+                                             th:style="'width: ' + ${reviewStatistics.fiveStarPercentage} + '%'"></div>
                                     </div>
                                 </div>
+
+                                <div class="card-text">4점
+                                    <div class="progress">
+                                        <div class="progress-bar"
+                                             th:style="'width: ' + ${reviewStatistics.fourStarPercentage} + '%'"></div>
+                                    </div>
+                                </div>
+
+                                <div class="card-text">3점
+                                    <div class="progress">
+                                        <div class="progress-bar"
+                                             th:style="'width: ' + ${reviewStatistics.threeStarPercentage} + '%'"></div>
+                                    </div>
+                                </div>
+
+                                <div class="card-text">2점
+                                    <div class="progress">
+                                        <div class="progress-bar"
+                                             th:style="'width: ' + ${reviewStatistics.twoStarPercentage} + '%'"></div>
+                                    </div>
+                                </div>
+
+                                <div class="card-text">1점
+                                    <div class="progress">
+                                        <div class="progress-bar"
+                                             th:style="'width: ' + ${reviewStatistics.oneStarPercentage} + '%'"></div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <form id="myform" method="post" action="/game_review">
-<!--                <input type="hidden" name="game_id" th:value="${game.id}" hidden>-->
-<!--                <input type="hidden" name="user_id" th:value="${session.user.id}" hidden>-->
+
+                <form id="myform" method="post" th:action="@{/write}">
+                    <div class="card mb-2">
+                        <div class="card-header bg-light">
+                            <i class="fa fa-comment fa"></i>&nbsp;리뷰 남기기
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <input name="gameId" th:value="${gamePost.id}" type="hidden"/>
+                                    <input name="userId" th:value="${user}" type="hidden"/>
+                                    <fieldset>
+                                        <legend>별점을 선택해주세요</legend>
+                                        <input id="rate1" name="rating" type="radio" value="5"><label
+                                            for="rate1">⭐</label>
+                                        <input id="rate2" name="rating" type="radio" value="4"><label
+                                            for="rate2">⭐</label>
+                                        <input id="rate3" name="rating" type="radio" value="3"><label
+                                            for="rate3">⭐</label>
+                                        <input id="rate4" name="rating" type="radio" value="2"><label
+                                            for="rate4">⭐</label>
+                                        <input id="rate5" name="rating" type="radio" value="1"><label
+                                            for="rate5">⭐</label>
+                                    </fieldset>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="comment"
+                                              rows="3"></textarea>
+                                    <button class="btn btn-dark mt-3" type="submit">등록</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+
+                <hr>
+
                 <div class="card mb-2">
                     <div class="card-header bg-light">
-                        <i class="fa fa-comment fa"></i>&nbsp;리뷰 남기기
+                        <i class="fa fa-comment fa"></i> 리뷰 목록
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <fieldset>
-                                    <legend>별점을 선택해주세요</legend>
-                                    <input type="radio" name="rating" value="5" id="rate1"><label for="rate1">⭐</label>
-                                    <input type="radio" name="rating" value="4" id="rate2"><label for="rate2">⭐</label>
-                                    <input type="radio" name="rating" value="3" id="rate3"><label for="rate3">⭐</label>
-                                    <input type="radio" name="rating" value="2" id="rate4"><label for="rate4">⭐</label>
-                                    <input type="radio" name="rating" value="1" id="rate5"><label for="rate5">⭐</label>
-                                </fieldset>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                          name="comment"></textarea>
-                                <button type="submit" class="btn btn-dark mt-3">등록</button>
+                            <th:block th:if="${reviews != null and reviews.isEmpty()}">
+                                <li class="list-group-item">
+                                    <div class="fw-bolder text-center">현재 작성된 리뷰가 없습니다</div>
+                                </li>
+                            </th:block>
+
+                            <th:block th:each="review : ${reviews}">
+                                <li class="list-group-item">
+                                    <div class="form-inline mb-2">
+                                        <label class="fw-bolder">
+                                            <i class="fa fa-user-circle-o fa-2x"></i>
+                                            <span class="text-primary fw-bolder" style="color:gray;"
+                                                  th:text="|&nbsp; ${review.user.nickname}|"></span>
+                                            <span class="fw-bolder" style="color:gray; padding-top: 10px; flex: 1;"
+                                                  th:text="${#strings.substring(review.createdDateTime, 0, 10)}"></span>
+                                            <div class="fs-6"><span
+                                                    th:each="i : ${#numbers.sequence(1, review.rating)}">&#x2B50</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="fw-bolder" th:text="${review.comment}"></div>
+                                </li>
+                            </th:block>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 총평리뷰 끝 -->
+
+            </div>
+            <div class="col">
+                <div class="rounded-3"
+                     style="width: 400px; padding: 10px 10px; position: -webkit-sticky; position: sticky; top: 50px; text-align: center; margin-top: 50px; border: 1px solid rgb(194, 193, 193); box-shadow:2px 3px 5px 0px;">
+                    <div>
+                        <h4>[(${gamePost.gameTitle})]</h4>
+                    </div>
+                    <button class="btn btn-primary" onclick="location.href='/order_detail'" style="width: 200px; margin-top: 10px;"
+                            type="button">게임 구매
+                    </button>
+                    <div style="margin-top: 10px;">
+                        <button class="btn btn-outline-secondary" style="width: 200px;" type="button">장바구니 추가</button>
+                    </div>
+                    <hr>
+                    <div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="bi bi-chat-heart"></i> 최근평가 : <b>매우 긍정적</b><span
+                                    class="text-secondary" th:text="|&nbsp;(${reviewStatistics.reviewCount})|"> (92,100)</span></li>
+                            <li class="list-group-item"><i class="bi bi-chat-square-heart"></i> 모든평가 : <b>매우
+                                긍정적</b><span
+                                    class="text-secondary" th:text="|&nbsp;(${reviewStatistics.reviewCount})|"> (92,100)</span></li>
+                            <li class="list-group-item"><i class="bi bi-controller"></i> 게임장르 : <b>[(${gamePost.genreCode})]</b>
+                            </li>
+                            <li class="list-group-item"><i class="bi bi-chat-text-fill"></i> 개발자 : <b>[(${gamePost.company})]</b>
+                            </li>
+                            <li class="list-group-item"><i class="bi bi-cash-coin">
+                            </i> 가격 :
+                                <b th:text="${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}">[(${gamePost.gamePrice})]</b>
+                                원
                             </li>
                         </ul>
                     </div>
                 </div>
-            </form>
-
-            <hr>
-
-            <div class="card mb-2">
-                <div class="card-header bg-light">
-                    <i class="fa fa-comment fa"></i> 리뷰 목록
-                </div>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <th:block th:if="${review_list.isEmpty()}">
-                            <li class="list-group-item">
-                                <div class="fw-bolder text-center">현재 작성된 리뷰가 없습니다</div>
-                            </li>
-                        </th:block>
-                        <th:block th:each="review : ${review_list}">
-                            <li class="list-group-item">
-                                <div class="form-inline mb-2">
-                                    <label class="fw-bolder">
-                                        <i class="fa fa-user-circle-o fa-2x"></i>
-                                            <span class="text-primary fw-bolder" style="color:gray;" th:text="|&nbsp; ${review.user.nickname}|"></span>
-                                            <span class="fw-bolder" style="color:gray; padding-top: 10px; flex: 1;" th:text="${review.date}"></span>
-                                            <div class="fs-6">&#x2B50&#x2B50&#x2B50&#x2B50&#x2B50</div>
-                                    </label>
-                                </div>
-                                <div class="fw-bolder" th:text="${review.comment}"></div>
-                            </li>
-                        </th:block>
-                    </ul>
-                </div>
-            </div>
-            <!-- 총평리뷰 끝 -->
-
-        </div>
-        <div class="col">
-            <div class="rounded-3"
-                 style="width: 400px; padding: 10px 10px; position: -webkit-sticky; position: sticky; top: 50px; text-align: center; margin-top: 50px; border: 1px solid rgb(194, 193, 193); box-shadow:2px 3px 5px 0px;">
-                <div>
-                    <h4>[(${gamePost.gameTitle})]</h4>
-                </div>
-                <button type="button" style="width: 200px; margin-top: 10px;" class="btn btn-primary"
-                        onclick="location.href='/order_detail'">게임 구매
-                </button>
-                <div style="margin-top: 10px;">
-                    <button type="button" style="width: 200px;" class="btn btn-outline-secondary">장바구니 추가</button>
-                </div>
-                <hr>
-                <div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i class="bi bi-chat-heart"></i> 최근평가 : <b>매우 긍정적</b><span
-                                class="text-secondary"> (92,100)</span></li>
-                        <li class="list-group-item"><i class="bi bi-chat-square-heart"></i> 모든평가 : <b>매우 긍정적</b><span
-                                class="text-secondary"> (92,100)</span></li>
-                        <li class="list-group-item"><i class="bi bi-controller"></i> 게임장르 : <b>[(${gamePost.genreCode})]</b></li>
-                        <li class="list-group-item"><i class="bi bi-chat-text-fill"></i> 개발자 : <b>[(${gamePost.company})]</b></li>
-                        <li class="list-group-item"><i class="bi bi-cash-coin">
-                        </i> 가격 :
-                            <b th:text="${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}">[(${gamePost.gamePrice})]</b> 원
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>
-</div>
-    </th:block>
-    <!--첫번째 줄-->
+</th:block>
+<!--첫번째 줄-->
 
 <!--footer 시작-->
 <header th:replace="~{include/footer}"></header>
 <!--footer 종료-->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-    crossorigin="anonymous"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener('DOMContentLoaded', function () {
+        var averageRate = /*[[${reviewStatistics.averageRate}]]*/;
+
+        // 평점에 따라 별의 개수를 계산하여 HTML에 추가
+        var starRatingElement = document.getElementById('starRating');
+        var starCount = Math.round(averageRate);
+        starRatingElement.innerHTML = '⭐'.repeat(starCount);
+    });
+    /*]]>*/
+</script>
+
 </body>
 
 </html>

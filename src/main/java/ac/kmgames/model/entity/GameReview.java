@@ -1,36 +1,44 @@
 package ac.kmgames.model.entity;
 
-import java.sql.Timestamp;
+import java.util.Optional;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @Entity
-@NoArgsConstructor
-public class GameReview{
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+public class GameReview extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "game_review_id")
+    private Long id;
 
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "game_id", referencedColumnName = "id")
-    private Game game;
+    @JoinColumn(name = "game_post_id")
+    private GamePost gamePost; // 해당 리뷰가 속한 게임 정보
 
-    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "user_id")
+    private User user; // 리뷰를 작성한 사용자 정보
 
-    @Column
-    private int rate;
-    
-    @Column
-    private String comment;
+    @Column(nullable = false)
+    private int rating; // 별점
 
-    @Column(insertable = false)
-    private Timestamp date;
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String comment; // 리뷰 내용
+
+    @Transient
+    private double averageRating; // 평균 별점
+
+    @Transient
+    private int totalReviews; // 전체 리뷰
+
+    public GameReview(GamePost gamePost, User user, int rating, String comment) {
+        this.gamePost = gamePost;
+        this.user = user;
+        this.rating = rating;
+        this.comment = comment;
+    }
 }

@@ -3,9 +3,12 @@ package ac.kmgames.controller;
 import ac.kmgames.model.dto.GamePostDTO;
 import ac.kmgames.model.entity.GamePost;
 //import ac.kmgames.model.entity.QGamePost;
+import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.GamePostRepository;
+import ac.kmgames.model.utils.ReviewStatistics;
 import ac.kmgames.service.GamePostService;
+import ac.kmgames.service.GameReviewService;
 import ac.kmgames.service.GameService;
 import ac.kmgames.service.UserService;
 //import com.querydsl.core.types.dsl.BooleanExpression;
@@ -26,12 +29,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class MainController{
     private final UserService userService;
     private final GameService gameService;
     private final GamePostService gamePostService;
+    private final GameReviewService gameReviewService;
 
     @GetMapping("/")
     public String index(HttpSession session, HttpServletRequest request,
@@ -54,10 +60,12 @@ public class MainController{
     @GetMapping("/main")
     public String main(@PageableDefault(size = 16) Pageable pageable, Model model) {
         Page<GamePost> page = gamePostService.findAll(pageable);
+
         model.addAttribute("gamePosts", page.getContent());
         model.addAttribute("page", page);
         return "main/main";
     }
+
 
     @GetMapping("/search")
     public String searchGamePosts(

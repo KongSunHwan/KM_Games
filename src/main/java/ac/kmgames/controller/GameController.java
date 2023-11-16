@@ -5,41 +5,37 @@ import ac.kmgames.model.dto.GamePostDTO;
 import ac.kmgames.model.dto.NationalityCodes;
 import ac.kmgames.model.dto.PlatformTypeCodes;
 import ac.kmgames.model.entity.*;
+import ac.kmgames.model.utils.ReviewStatistics;
 import ac.kmgames.service.GamePostService;
 import ac.kmgames.service.GameReviewService;
 import ac.kmgames.service.GameService;
+import ac.kmgames.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
+@RequiredArgsConstructor
 public class GameController{
     private final GameService gameService;
     private final GameReviewService gameReviewService;
+    private final UserService userService;
     private final GamePostService gamePostService;
-
-    @Autowired
-    public GameController(GameService gameService, GameReviewService gameReviewService, GamePostService gamePostService){
-        this.gameService = gameService;
-        this.gameReviewService = gameReviewService;
-        this.gamePostService = gamePostService;
-    }
 
     @ModelAttribute("PriceStates")
     public PriceState[] PriceStates() {
-        return PriceState.values(); // 해당 ENUM의 모든 정보를 배열로 반환한다. [FORFREE, TRIAL]
+        return PriceState.values(); // 해당 ENUM의 모든 정보를 배열로 반환한다. [FORFREE, TRIAL, CHARGED]
     }
 
     @ModelAttribute("AgeLimits")
@@ -104,84 +100,134 @@ public class GameController{
         return "game_add/game_add";
     }
 
-//    @ResponseBody
-//    @PostMapping("/game_add")
-//    public String game_create(GamePostDTO gamePostDTO, BindingResult result) {
-////        if(result.hasErrors()) {
-////            return "game_add/game_add";
-////        }
-//
-//        GamePost gamePost = new GamePost();
-//        gamePost.setAgeLimit(gamePostDTO.getAgeLimit());
-//        gamePost.setGameTitle(gamePostDTO.getGameTitle());
-//        gamePost.setNationalityCode(gamePostDTO.getNationalityCode());
-//        gamePost.setCompany(gamePostDTO.getCompany());
-//        gamePost.setGenreCode(gamePostDTO.getGenreCode());
-//        gamePost.setGameVersion(gamePostDTO.getGameVersion());
-//        gamePost.setPlatformCode(gamePostDTO.getPlatformCode());
-//        gamePost.setGamePrice(gamePostDTO.getGamePrice());
-//        gamePost.setPriceState(gamePostDTO.getPriceState());
-//        gamePost.setGameTag(gamePostDTO.getGameTag());
-//        gamePost.setDetailContent(gamePostDTO.getDetailContent());
-//
-//        if(gamePostService.save(gamePost)){
-//            return
-//                    "<script>" +
-//                            "alert('게임등록이 완료되었습니다');" +
-//                            "location.href = '/';" +
-//                            "</script>";
-//        }else{
-//            return "<script>history.back()</script>";
-//        }
-//    }
-
-//    @PostMapping("/game_add")
-//    public ResponseEntity<String> addGame(@RequestBody GamePostDTO.Response gamePostDTO, BindingResult result) {
-////        if(result.hasErrors()) {
-////            return "game_add/game_add";
-////        }
-//
-//        GamePost gamePost = new GamePost();
-//        gamePost.setAgeLimit(gamePostDTO.getAgeLimit());
-//        gamePost.setGameTitle(gamePostDTO.getGameTitle());
-//        gamePost.setNationalityCode(gamePostDTO.getNationalityCode());
-//        gamePost.setCompany(gamePostDTO.getCompany());
-//        gamePost.setGenreCode(gamePostDTO.getGenreCode());
-//        gamePost.setGameVersion(gamePostDTO.getGameVersion());
-//        gamePost.setPlatformCode(gamePostDTO.getPlatformCode());
-//        gamePost.setGamePrice(gamePostDTO.getGamePrice());
-//        gamePost.setPriceState(gamePostDTO.getPriceState());
-//        gamePost.setGameTag(gamePostDTO.getGameTag());
-//        gamePost.setDetailContent(gamePostDTO.getDetailContent());
-//
-//        // GamePostService를 사용하여 게임 정보를 저장
-//        if (gamePostService.save(gamePost)) {
-//            return new ResponseEntity<>("게임 정보가 성공적으로 저장되었습니다.", HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>("게임 정보 저장에 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
-    @GetMapping("/game_detail")
+    @GetMapping("/game_detail/{id}")
     public String detailPage(HttpSession session, Model model,
-                             @RequestParam(value = "id", defaultValue = "1") long id){
+                             @PathVariable long id){
+        // 세션에서 유저 정보 가져오기
+        User user = (User) session.getAttribute("user");
+
         model.addAttribute("gamePosts", gamePostService.findById(id).get());
-        model.addAttribute("review_list", gameReviewService.getAllByGameId(id));
-        model.addAttribute("review_count", gameReviewService.getCountByGameId(id));
-        model.addAttribute("average_rate", gameReviewService.getAverageRateByGameId(id));
+        model.addAttribute("reviews", gameReviewService.getReviewsByGameId(id));
+
+        // 세션에 유저 정보가 있으면 모델에 추가
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
+
+        if (user == null) {
+            return "redirect:/";
+        }
+
+        // 주석: 게임 ID에 해당하는 리뷰 통계 정보 계산 및 모델에 추가
+        for (GamePost gamePost : gamePostService.findGamePostAll()) {
+            ReviewStatistics gameReviewStatistics = calculateReviewStatistics(gamePost.getId());
+            model.addAttribute("reviewStatistics[" + gamePost.getId() + "]", gameReviewStatistics);
+        }
+
+        // 별점 통계 정보 계산
+        ReviewStatistics reviewStatistics = calculateReviewStatistics(id);
+        model.addAttribute("reviewStatistics", reviewStatistics);
+
         return "game/game_detail";
+    }
+
+    private ReviewStatistics calculateReviewStatistics(long gameId) {
+        // 게임 ID에 해당하는 리뷰 정보 가져오기
+        List<GameReview> reviews = gameReviewService.getReviewsByGameId(gameId);
+
+        // ReviewStatistics 객체 생성
+        ReviewStatistics reviewStatistics = new ReviewStatistics();
+
+        // 리뷰 정보를 기반으로 통계 계산
+        for (GameReview review : reviews) {
+            int rating = review.getRating();
+            switch (rating) {
+                case 5:
+                    reviewStatistics.setFiveStarCount(reviewStatistics.getFiveStarCount() + 1);
+                    break;
+                case 4:
+                    reviewStatistics.setFourStarCount(reviewStatistics.getFourStarCount() + 1);
+                    break;
+                case 3:
+                    reviewStatistics.setThreeStarCount(reviewStatistics.getThreeStarCount() + 1);
+                    break;
+                case 2:
+                    reviewStatistics.setTwoStarCount(reviewStatistics.getTwoStarCount() + 1);
+                    break;
+                case 1:
+                    reviewStatistics.setOneStarCount(reviewStatistics.getOneStarCount() + 1);
+                    break;
+                default:
+                    break;
+            }
+
+            // 리뷰 개수를 계산
+            reviewStatistics.calculateReviewCount();
+        }
+
+        // 리뷰 평균 평점을 계산
+        reviewStatistics.calculateAverageRate();
+
+        return reviewStatistics;
     }
 
     @PostMapping("/game_review")
     public String writeGameReview(HttpSession session, HttpServletRequest request, GameReview input){
         User user = new User();
         user.setId(Long.parseLong(request.getParameter("user_id")));
-        Game game = new Game();
-        game.setId(Long.parseLong(request.getParameter("game_id")));
+
+        GamePost gamePost = new GamePost();
+        gamePost.setId(Long.parseLong(request.getParameter("game_id")));
+
         input.setUser(user);
-        input.setGame(game);
+        input.setGamePost(gamePost);
         gameReviewService.save(input);
         return "redirect:/game_detail";
     }
+
+    @PostMapping("/write")
+    public String writeReview(
+            @RequestParam String gameId,
+            @RequestParam String userId,
+            @RequestParam int rating,
+            @RequestParam String comment
+    ) {
+        Long gameIdLong = Long.parseLong(gameId);
+
+        // 게임 포스트와 사용자 정보를 찾아옴
+        Optional<GamePost> gamePostOptional = gamePostService.findById(gameIdLong);
+        Optional<User> userOptional = userService.getUserById(getUserIdFromUserString(userId));
+
+        if (gamePostOptional.isPresent() && userOptional.isPresent()) {
+            GamePost gamePost = gamePostOptional.get();
+            User user = userOptional.get();
+
+            // 리뷰 추가
+            gameReviewService.writeReview(gamePost, user, rating, comment);
+
+            // 리뷰 통계 업데이트
+            gameReviewService.updateReviewStatistics(gamePost);
+
+            // 리다이렉트할 때 게임의 ID를 함께 전달
+            return "redirect:/game_detail/" + gameIdLong;
+        } else {
+            return "redirect:/error-page"; // 적절한 에러 페이지로 리다이렉트 또는 처리
+        }
+    }
+
+
+    private Long getUserIdFromUserString(String userString) {
+        int startIndex = userString.indexOf("id=");
+        int endIndex = userString.indexOf(",");
+
+        // 콤마가 없는 경우를 처리
+        if (endIndex == -1) {
+            endIndex = userString.length();
+        }
+
+        String userIdSubstring = userString.substring(startIndex + 3, endIndex);
+        return Long.parseLong(userIdSubstring);
+    }
+
 
 }

@@ -138,7 +138,7 @@ public class AdminController {
 
     //회원상세정보
     @GetMapping(value = "member_detail.do")
-    public String member_detail(@RequestParam int id, HttpServletRequest request,
+    public String member_detail(@RequestParam Long id, HttpServletRequest request,
                                  @RequestParam(value = "page", defaultValue = "1")int page) {
         User select_user = userService.findAllById(id);
         List<PaymentHistory> user_payment = paymentService.findAllByUser(page,select_user);

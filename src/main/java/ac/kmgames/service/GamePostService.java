@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 public class GamePostService {
     private final GamePostRepository gamePostRepository;
     private final GamePhotoRepository gamePhotoRepository;
+    private final GameReviewService gameReviewService;
 
     public boolean save(GamePost gamePost){
         try{
@@ -75,7 +76,19 @@ public class GamePostService {
     }
 
     public Page<GamePost> findAll(Pageable pageable){
-        return gamePostRepository.findAll(pageable);
+
+        Page<GamePost> page = gamePostRepository.findAll(pageable);
+
+        // 각 게임의 리뷰 통계 업데이트
+        for (GamePost gamePost : page.getContent()) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return page;
+    }
+
+    public List<GamePost> findGamePostAll() {
+        return gamePostRepository.findAll();
     }
 
     public Page<GamePost> findByKeyword(String keyword, String keywordType, Pageable pageable) {

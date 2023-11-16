@@ -20,7 +20,7 @@ import java.util.List;
 
 public class FileUtilities {
     // Paths.get()으로 운영체제에 따라서 다른 파일구분자 처리
-    public final static String rootPath = Paths.get("C:", "Users", "rhdtj", "Desktop", "testFile").toString();
+    public final static String rootPath = Paths.get("C:", "testFile").toString();
 
     /**
      * MultipartFile 형태의 파일을 Photo Entity 형태로 파싱

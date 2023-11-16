@@ -21,9 +21,11 @@ public interface UserRepository extends PagingAndSortingRepository<User, Integer
 
     Optional<User> findByNickname(String names);
 
-    User findAllById(int id);
+    User findAllById(Long id);
 
     List<User> getUsersByName(String id);
 
     Page<User> findByNameContains(String name, Pageable pageable);
+
+    Optional<User> findById(Long userId);
 }
