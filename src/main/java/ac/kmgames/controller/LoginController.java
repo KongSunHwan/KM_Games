@@ -56,7 +56,7 @@ public class LoginController{
         }
 
         session.setAttribute("user", user);
-        return "<script>location.href = '/';</script>";
+        return "<script>location.href = '/main';</script>";
     }
 
     @ResponseBody
