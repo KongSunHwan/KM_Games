@@ -440,19 +440,21 @@
                     <hr>
                     <div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><i class="bi bi-chat-heart"></i> 최근평가 : <b>매우 긍정적</b><span
+                            <li class="list-group-item"><i class="bi bi-chat-heart"></i> 최근평가 : <b th:text="${reviewStatistics.getRatingText()}">매우 긍정적</b><span
                                     class="text-secondary" th:text="|&nbsp;(${reviewStatistics.reviewCount})|"> (92,100)</span></li>
-                            <li class="list-group-item"><i class="bi bi-chat-square-heart"></i> 모든평가 : <b>매우
+                            <li class="list-group-item"><i class="bi bi-chat-square-heart"></i> 모든평가 : <b th:text="${reviewStatistics.getRatingText()}">매우
                                 긍정적</b><span
                                     class="text-secondary" th:text="|&nbsp;(${reviewStatistics.reviewCount})|"> (92,100)</span></li>
                             <li class="list-group-item"><i class="bi bi-controller"></i> 게임장르 : <b>[(${gamePost.genreCode})]</b>
                             </li>
                             <li class="list-group-item"><i class="bi bi-chat-text-fill"></i> 개발자 : <b>[(${gamePost.company})]</b>
                             </li>
-                            <li class="list-group-item"><i class="bi bi-cash-coin">
-                            </i> 가격 :
-                                <b th:text="${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}">[(${gamePost.gamePrice})]</b>
-                                원
+                            <li class="list-group-item">
+                                <i class="bi bi-cash-coin"></i> 가격 :
+                                <b th:if="${gamePost.gamePrice > 0}" th:text="|${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|">[(${gamePost.gamePrice})]</b>
+                                <span th:unless="${gamePost.gamePrice > 0}">
+                                    <b th:text="${gamePost.priceState.description}"></b>
+                                </span>
                             </li>
                         </ul>
                     </div>

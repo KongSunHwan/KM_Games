@@ -163,8 +163,10 @@
                             </div>
                             <div class="card-text2">
                                 <b style="font-size: 17px;">
-                                    <span th:if="${gamePost.gamePrice > 0}" th:text="${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}"></span>원
-                                    <span th:unless="${gamePost.gamePrice > 0}">무료</span>
+                                    <span th:if="${gamePost.gamePrice > 0}" th:text="|${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|"></span>
+                                    <span th:unless="${gamePost.gamePrice > 0}">
+                                    <span th:text="${gamePost.priceState.description}"></span>
+                                    </span>
                                 </b>
                             </div>
                             <div class="card-text2" th:if="${gamePost.rating > 0 and gamePost.totalReviews > 0}">

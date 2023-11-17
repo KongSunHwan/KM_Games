@@ -30,7 +30,7 @@ public class GamePost extends BaseTimeEntity{
     private String genreCode; // 게임 장르
     private String gameVersion; // 게임 버전
     private String platformCode; // 게임 플랫폼 타입
-    private int gamePrice; // 게임 가격
+    private Integer gamePrice; // 게임 가격
 
     @Enumerated(EnumType.STRING)
     private PriceState priceState; // 가격 상태를 나타내는 필드 [FREE, TRIAL]

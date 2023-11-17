@@ -41,6 +41,10 @@
             display: flex;
             justify-content: center;
         }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
     </style>
 </head>
 
@@ -124,13 +128,17 @@
                     </td>
                     <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="게임 제목을 입력해주세요." size="50"
                                                                         th:field="*{gameTitle}"
-                                                                        type="text">
+                                                                        type="text"
+                                                                        th:errorclass="field-error" required>
+                        <div class="field-error" th:if="${#fields.hasErrors('gameTitle')}" th:errors="*{gameTitle}">
+                            게임명 오류
+                        </div>
                     </td>
                     <td class="align-middle text-center" rowspan="1" style="width:15%;">
                         원작 국적
                     </td>
                     <td class="align-middle" style="width: 35%;">
-                        <select class="form-select" th:field="*{nationalityCode}">
+                        <select class="form-select" th:field="*{nationalityCode}" th:errorclass="field-error" required>
                             <option value="">==국적 선택==</option>
                             <option th:each="NationalityCode : ${NationalityCodes}"
                                     th:text="${NationalityCode.nationalityTypeName}"
@@ -139,6 +147,9 @@
                             <!--                                <option value="일본">일본</option>-->
                             <!--                                <option value="미국">미국</option>-->
                         </select>
+                        <div class="field-error" th:if="${#fields.hasErrors('nationalityCode')}" th:errors="*{nationalityCode}">
+                            국적 오류
+                        </div>
                     </td>
                 </tr>
 
@@ -148,13 +159,16 @@
                     </td>
                     <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="개발사를 입력해주세요." size="50"
                                                                         th:field="*{company}"
-                                                                        type="text">
+                                                                        type="text" th:errorclass="field-error" required>
+                        <div class="field-error" th:if="${#fields.hasErrors('company')}" th:errors="*{company}">
+                            개발사 오류
+                        </div>
                     </td>
                     <td class="align-middle text-center" rowspan="1" style="width:15%;">
                         게임 장르
                     </td>
                     <td class="align-middle" style="width: 35%;">
-                        <select class="form-select" th:field="*{genreCode}">
+                        <select class="form-select" th:field="*{genreCode}" th:errorclass="field-error" required>
                             <option value="">==게임 장르 선택==</option>
                             <option th:each="GameGenreCode : ${GameGenreCodes}"
                                     th:text="${GameGenreCode.genreTypeName}"
@@ -168,6 +182,9 @@
                             <!--                                <option value="호러">호러</option>-->
                             <!--                                <option value="음악">음악</option>-->
                         </select>
+                        <div class="field-error" th:if="${#fields.hasErrors('genreCode')}" th:errors="*{genreCode}">
+                            게임 장르 오류
+                        </div>
                     </td>
                 </tr>
 
@@ -177,13 +194,16 @@
                     </td>
                     <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="게임 버전을 입력해주세요." size="50"
                                                                         th:field="*{gameVersion}"
-                                                                        type="text">
+                                                                        type="text" th:errorclass="field-error" required>
+                        <div class="field-error" th:if="${#fields.hasErrors('gameVersion')}" th:errors="*{gameVersion}">
+                            게임 버전 오류
+                        </div>
                     </td>
                     <td class="align-middle text-center" rowspan="1" style="width:15%;">
                         플랫폼 종류
                     </td>
                     <td class="align-middle" style="width: 35%;">
-                        <select class="form-select" th:field="*{platformCode}">
+                        <select class="form-select" th:field="*{platformCode}" th:errorclass="field-error" required>
                             <option value="">==플랫폼 종류 선택==</option>
                             <option th:each="PlatformTypeCode : ${PlatformTypeCodes}"
                                     th:text="${PlatformTypeCode.platformTypeName}"
@@ -191,6 +211,9 @@
                             </option>
                             <!--                                <option value="모바일">모바일용</option>-->
                         </select>
+                        <div class="field-error" th:if="${#fields.hasErrors('platformCode')}" th:errors="*{platformCode}">
+                            플랫폼 종류 오류
+                        </div>
                     </td>
                 </tr>
 
@@ -216,7 +239,10 @@
                     </td>
                     <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="Windows® 7/Vista/XP" size="50"
                                                                         th:field="*{gameOs}"
-                                                                        type="text">
+                                                                        type="text" th:errorclass="field-error" required>
+                        <div class="field-error" th:if="${#fields.hasErrors('gameOs')}" th:errors="*{gameOs}">
+                            운영체제 오류
+                        </div>
                     </td>
 
                     <td class="align-middle text-center" rowspan="1" style="width:15%;">
@@ -224,7 +250,10 @@
                     </td>
                     <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="Intel® Core™ 2 Duo E6600 또는 AMD Phenom™ X3 8750" size="50"
                                                                         th:field="*{gameProcess}"
-                                                                        type="text">
+                                                                        type="text" th:errorclass="field-error" required>
+                        <div class="field-error" th:if="${#fields.hasErrors('gameProcess')}" th:errors="*{gameProcess}">
+                            프로세스 오류
+                        </div>
                     </td>
 
                 </tr>
@@ -235,7 +264,10 @@
                     </td>
                     <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="2 GB RAM" size="50"
                                                                         th:field="*{gameMemory}"
-                                                                        type="text">
+                                                                        type="text" th:errorclass="field-error" required>
+                        <div class="field-error" th:if="${#fields.hasErrors('gameMemory')}" th:errors="*{gameMemory}">
+                            메모리 오류
+                        </div>
                     </td>
 
                     <td class="align-middle text-center" rowspan="1" style="width:15%;">
@@ -243,7 +275,10 @@
                     </td>
                     <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="비디오 카드는 256MB 이상에 DirectX 9와 호환 가능해야 하며 Pixel Shader 3.0을 지원해야 합니다." size="50"
                                                                         th:field="*{gameGraphic}"
-                                                                        type="text">
+                                                                        type="text" th:errorclass="field-error" required>
+                        <div class="field-error" th:if="${#fields.hasErrors('gameGraphic')}" th:errors="*{gameGraphic}">
+                            그래픽 오류
+                        </div>
                     </td>
                 </tr>
 
@@ -253,14 +288,20 @@
                     </td>
                     <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="버전 9.0c" size="50"
                                                                         th:field="*{gameDirectX}"
-                                                                        type="text">
+                                                                        type="text" th:errorclass="field-error" required>
+                        <div class="field-error" th:if="${#fields.hasErrors('gameDirectX')}" th:errors="*{gameDirectX}">
+                            DirectX 오류
+                        </div>
                     </td>
                     <td class="align-middle text-center" rowspan="1" style="width:15%;">
                         저장공간
                     </td>
                     <td class="align-middle" style="width: 35%;"><input class="form-control" placeholder="15 GB 사용 가능 공간" size="50"
                                                                         th:field="*{gameStorage}"
-                                                                        type="text">
+                                                                        type="text" th:errorclass="field-error" required>
+                        <div class="field-error" th:if="${#fields.hasErrors('gameStorage')}" th:errors="*{gameStorage}">
+                            저장공간 오류
+                        </div>
                     </td>
                 </tr>
 
@@ -285,11 +326,14 @@
                     <td colspan="3">
                         <div class="d-flex">
                             <div class="col-sm-3">
-                                <input class="form-control" placeholder="가격을 입력해주세요." required
-                                       th:field="*{gamePrice}" type="text" value="" id="gamePriceInput">
+                                <input class="form-control" placeholder="가격을 입력해주세요."
+                                       th:field="*{gamePrice}" type="text" value="" id="gamePriceInput" th:errorclass="field-error">
                             </div>
 
                             <div style="font-size: 20px;">원</div>
+                        </div>
+                        <div class="field-error" th:if="${#fields.hasErrors('gamePrice')}" th:errors="*{gamePrice}">
+                            게임가격 오류
                         </div>
                     </td>
 
@@ -311,7 +355,7 @@
                                 <div th:each="type : ${PriceStates}">
                                     <input autocomplete="off" class="btn-check"
                                            th:field="*{priceState}"
-                                           th:value="${type.name()}" type="radio" onclick="handlePriceInput(this)">
+                                           th:value="${type.name()}" type="radio" onclick="handlePriceInput(this)" required>
                                     <label class="btn btn-outline-primary" th:for="${#ids.prev('priceState')}"
                                            th:text="${type.description}">무료</label>
                                     &nbsp;
@@ -329,7 +373,7 @@
                             <div>
                                 <th:block th:each="gametag : ${gameTags}">
                                     <input autocomplete="off" th:field="*{gameTags}" th:value="${gametag.key}"
-                                           type="checkbox">
+                                           type="checkbox" required>
                                     <label th:for="${#ids.prev('gameTags')}"
                                            th:text="${gametag.value}">인디</label>
                                 </th:block>
@@ -369,8 +413,10 @@
                     -게임등록규정에 위반되는금칙어는 입력할 수 없습니다. &#13;&#10;
                      &#13;&#10;
                      위 주의사항 위반시 임의로 게임 삭제 혹은 서비스 이용이 제한될 수 있습니다." style="width: 100%; height: 300px;" th:field="*{detailContent}"
-                                      value=""></textarea>
-
+                                      value="" th:errorclass="field-error" required></textarea>
+                        <div class="field-error" th:if="${#fields.hasErrors('detailContent')}" th:errors="*{detailContent}">
+                            상세설명 오류
+                        </div>
                     </td>
                 </tr>
                 </tbody>
@@ -418,7 +464,7 @@
                                 </div>
                                 <div class="custom-file" id="inputFile">
                                     <input class="custom-file-input" id="files" multiple="multiple" name="files"
-                                           type="file" accept=".png, .jpg" data-max-files="15" data-min-files="3" onchange="checkFileCount(this)">
+                                           type="file" accept=".png, .jpg" data-max-files="15" data-min-files="3" onchange="checkFileCount(this)" required>
                                     <label class="custom-file-label" for="files">파일을 선택해 주세요.</label>
                                 </div>
                             <div id="fileList" style="margin:40px;">

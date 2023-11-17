@@ -32,7 +32,7 @@ public class LoginController{
 
     @GetMapping("/register")
     public String register(){
-        return "Join_Member/register";
+        return "join_member/register";
     }
 
     @ResponseBody

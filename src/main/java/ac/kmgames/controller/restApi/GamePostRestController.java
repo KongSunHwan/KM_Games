@@ -4,10 +4,13 @@ import ac.kmgames.model.dto.GamePostDTO;
 import ac.kmgames.model.entity.*;
 import ac.kmgames.model.utils.FileUtilities;
 import ac.kmgames.service.GamePostService;
+import ac.kmgames.validation.form.GamePostSaveForm;
 import com.google.gson.JsonObject;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.mybatis.logging.Logger;
 import org.mybatis.logging.LoggerFactory;
@@ -15,6 +18,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -27,6 +33,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
+@Slf4j
 public class GamePostRestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(GamePostRestController.class);
 
@@ -55,7 +62,16 @@ public class GamePostRestController {
      */
     @PostMapping("/gallery")
     @ResponseStatus(HttpStatus.CREATED)
-    public String saveGallery(MultipartHttpServletRequest multiRequest) throws Exception {
+    public String saveGallery(MultipartHttpServletRequest multiRequest ,
+                              @Validated @ModelAttribute("form") GamePostSaveForm form,
+                              BindingResult bindingResult)
+            throws Exception {
+
+        //검증에 실패
+        if (bindingResult.hasErrors()) {
+            log.info("Validation errors={}", bindingResult);
+            return "<script>location.href = '/game_add';</script>";
+        }
 
 //        LOGGER.debug(multiRequest.getParameter("id"));
         LOGGER.debug(() -> multiRequest.getParameter("id"));
@@ -70,6 +86,7 @@ public class GamePostRestController {
 //            return jsonObject.toString();
 //        }
 
+
         GamePost gamePost = new GamePost();
         List<Long> deleteFileList = new ArrayList<>();
 
@@ -82,7 +99,11 @@ public class GamePostRestController {
             gamePost.setGenreCode(multiRequest.getParameter("genreCode"));
             gamePost.setGameVersion(multiRequest.getParameter("gameVersion"));
             gamePost.setPlatformCode(multiRequest.getParameter("platformCode"));
+            if (multiRequest.getParameter("gamePrice") != null) {
             gamePost.setGamePrice(Integer.parseInt(multiRequest.getParameter("gamePrice")));
+            } else {
+                gamePost.setGamePrice(null);
+            }
             gamePost.setPriceState(PriceState.valueOf(multiRequest.getParameter("priceState")));
 
             // HTTP 요청에서 선택한 게임 태그 값을 배열로 받아옴
