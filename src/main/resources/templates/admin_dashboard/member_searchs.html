@@ -143,8 +143,8 @@
             <input type="hidden" name="keyword" th:value="${pageList.pageDTO.cri.getKeyword()}">
         </form>
 
-        <div class="row">
-            <div class="col-lg-13 col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 col-md-12 mx-auto">
                 <div class="card mb-15">
                     <div class="table-responsive">
                         <br>
@@ -152,7 +152,8 @@
                             <h6 style="font-size: 15px; color:#808080; text-align:center">총 관리자 권한이 있는 대상만 회원 권한부여/조회 할 수 있습니다.
                             </h6>
                             <br>
-                        <div class="row">
+                        <div class="d-flex justify-content-center">
+                        <div class="col-6">
                             <form id="searchForm" class="search_area" action="/member_searchs">
                                 <input type="hidden" name="pageNum" th:value="${pageList.pageDTO.cri.getPageNum()}">
                                 <input type="hidden" name="amount" th:value="${pageList.pageDTO.cri.getAmount()}">
@@ -170,7 +171,45 @@
                                 </div>
                             </form>
                         </div>
-                        <a th:href="@{/member_searchs}">목록 초기화</a>
+                        </div>
+                        <div>&nbsp;</div>
+                        <button class="btn btn-primary" style="float: right; margin-right: 420px; margin-top: -20px;" th:href="@{/member_searchs}">목록 초기화</button>
+                        <div>&nbsp;</div>
+                        <div class="input-group has-validation justify-content-center">
+                            <div>
+                                <input type="checkbox" class="btn-check" id="btn-check-outlined" name="d_last_week" autocomplete="off" value="">
+                                <label class="btn btn-outline-primary" for="btn-check-outlined">최근 1주일</label>
+
+                                <input type="checkbox" class="btn-check" id="btn-check-2-outlined" name="d_last_month"
+                                       autocomplete="off" value="">
+                                <label class="btn btn-outline-primary" for="btn-check-2-outlined">최근 1개월</label>
+
+                                <input type="checkbox" class="btn-check" id="btn-check-3-outlined" name="d_last_three_months"
+                                       autocomplete="off" value="">
+                                <label class="btn btn-outline-primary" for="btn-check-3-outlined">최근 3개월</label>
+
+                                <input type="checkbox" class="btn-check" id="btn-check-4-outlined" name="d_last_six_months"
+                                       autocomplete="off" value="">
+                                <label class="btn btn-outline-primary" for="btn-check-4-outlined">최근 6개월</label>
+
+                                <input type="checkbox" class="btn-check" id="btn-check-5-outlined" name="d_last_year"
+                                       autocomplete="off" value="">
+                                <label class="btn btn-outline-primary" for="btn-check-5-outlined">최근 1년</label>
+
+                                <input type="checkbox" class="btn-check" id="btn-check-6-outlined" name="d_custom"
+                                       autocomplete="off" value="">
+                                <label class="btn btn-outline-primary" for="btn-check-6-outlined">사용자 지정 날짜</label>
+                                <div>&nbsp;</div>
+                                <div class="card border border-secondary">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-center">
+                                            선택일 선택 : &nbsp;<input type="date">&nbsp;~&nbsp;종료일 선택 : &nbsp;<input type="date">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>&nbsp;</div>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -262,6 +301,29 @@
 
             gtag('config', 'UA-50750921-19');
         </script>
+
+    <script>
+        $(document).ready(function () {
+            // 사용자 지정 체크 버튼 요소
+            var customCheckbox = $('#btn-check-6-outlined');
+            // 날짜 카드 요소
+            var customDateCard = $('.card.border.border-secondary');
+
+            // 초기에는 날짜 카드를 숨김
+            customDateCard.hide();
+
+            // 체크 버튼의 변화를 감지하는 이벤트 리스너 등록
+            customCheckbox.change(function () {
+                // 체크되었을 때 날짜 카드를 보이도록 함
+                if (customCheckbox.is(':checked')) {
+                    customDateCard.show();
+                } else {
+                    // 체크 해제되었을 때 날짜 카드를 숨김
+                    customDateCard.hide();
+                }
+            });
+        });
+    </script>
 
 
 
