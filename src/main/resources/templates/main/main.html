@@ -156,7 +156,7 @@
                                 <!-- gamePost의 첫 번째 이미지를 가져올 때 index(0) 사용 -->
                                 <img onerror="this.onerror=null; this.src='/img/game/wip.png';"
                                      style="width: 230px; height: 150px;"
-                                     th:src="@{/gallery/download/{id}(id=${gamePost.id})}">
+                                     th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}">
                             </div>
                             <div class="card-title">
                                 <div class="fw-bold fs-5" th:text="${gamePost.gameTitle}"></div>

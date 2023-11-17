@@ -72,7 +72,7 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <img alt="..." class="card-img-top"
-                                             th:src="@{/gallery/download/{id}(id=${gamePost.id})}" height="200">
+                                             th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" height="200">
                                         <div class="card-body">
                                             <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
                                             <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
@@ -82,7 +82,7 @@
 
                                 <div class="col">
                                     <div class="card h-100">
-                                        <img alt="..." th:src="@{/gallery/download/{id}(id=${gamePost.id})}" height="200">
+                                        <img alt="..." th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" height="200">
                                         <div class="card-body">
                                             <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
                                             <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
@@ -93,7 +93,7 @@
                                 <div class="col">
                                     <div class="card h-100">
                                         <img alt="..." class="card-img-top"
-                                             th:src="@{/gallery/download/{id}(id=${gamePost.id})}" height="200">
+                                             th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" height="200">
                                         <div class="card-body">
                                             <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
                                             <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
@@ -115,7 +115,7 @@
                     <li>
 
                         <div class="card text-bg-dark">
-                            <img alt="..." class="card-img" th:src="@{/gallery/download/{id}(id=${gamePost.id})}">
+                            <img alt="..." class="card-img" th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}">
                             <!--                        <div class="card-img-overlay">-->
                             <!--                            <h5 class="card-title text-center">현실감 있는 FPS</h5>-->
                             <!--                            <p class="card-text text-center">출시 당시 개척한 팀 기반 액션 게임플레이의 수준을 한층 더 끌어올렸습니다..</p>-->
