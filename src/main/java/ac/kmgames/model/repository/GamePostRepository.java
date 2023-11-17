@@ -27,13 +27,13 @@ public interface GamePostRepository extends JpaRepository<GamePost, Long> {
     List<GamePost> findAllByOrderByIdDesc();
 
     // 메인페이지 페이징 + 리스트
-    Page<GamePost> findAll(Pageable pageable);
+    Page<GamePost> findAllByOrderByIdDesc(Pageable pageable);
 
     // 게임 제목에 대한 검색
-    Page<GamePost> findByGameTitleContaining(String gameTitle, Pageable pageable);
+    Page<GamePost> findByGameTitleContainingOrderByIdDesc(String gameTitle, Pageable pageable);
 
     // 게임 태그에 대한 검색
-    Page<GamePost> findByGameTagsContaining(String gameTags, Pageable pageable);
+    Page<GamePost> findByGameTagsContainingOrderByIdDesc(String gameTags, Pageable pageable);
 
     // 등록된 게임 아이디 find
     Optional<GamePost> findById(long id);

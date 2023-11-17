@@ -262,7 +262,7 @@ public class GamePostRestController {
     //메인페이지 + (페이징)
     @GetMapping("/api/main")
     public Page<GamePost> apiMain(@PageableDefault(size = 5) Pageable pageable) {
-        Page<GamePost> page = gamePostService.findAll(pageable);
+        Page<GamePost> page = gamePostService.findAllByOrderByIdDesc(pageable);
         Page<GamePostDTO.Response> mappedPage = page.map(gamePost -> convertToResponse(gamePost));
         return page;
     }

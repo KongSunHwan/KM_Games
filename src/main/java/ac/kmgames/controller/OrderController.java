@@ -1,12 +1,14 @@
 package ac.kmgames.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class OrderController {
-    @GetMapping("/order_detail")
-    public String order_detail() {
+    @GetMapping("/order_detail/{id}")
+    public String order_detail(@PathVariable long id, Model model) {
         return "order_detail/order_detail";
     }
 

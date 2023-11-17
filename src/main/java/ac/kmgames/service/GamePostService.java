@@ -75,9 +75,9 @@ public class GamePostService {
         return saveGamePost.getId();
     }
 
-    public Page<GamePost> findAll(Pageable pageable){
+    public Page<GamePost> findAllByOrderByIdDesc(Pageable pageable){
 
-        Page<GamePost> page = gamePostRepository.findAll(pageable);
+        Page<GamePost> page = gamePostRepository.findAllByOrderByIdDesc(pageable);
 
         // 각 게임의 리뷰 통계 업데이트
         for (GamePost gamePost : page.getContent()) {
@@ -93,9 +93,9 @@ public class GamePostService {
 
     public Page<GamePost> findByKeyword(String keyword, String keywordType, Pageable pageable) {
         if ("gameTitle".equals(keywordType)) {
-            return gamePostRepository.findByGameTitleContaining(keyword, pageable);
+            return gamePostRepository.findByGameTitleContainingOrderByIdDesc(keyword, pageable);
         } else if ("gameTags".equals(keywordType)) {
-            return gamePostRepository.findByGameTagsContaining(keyword, pageable);
+            return gamePostRepository.findByGameTagsContainingOrderByIdDesc(keyword, pageable);
         }
         // 키워드 타입이 유효하지 않은 경우 빈 페이지 반환
         return Page.empty();

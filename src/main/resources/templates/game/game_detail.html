@@ -431,7 +431,7 @@
                     <div>
                         <h4>[(${gamePost.gameTitle})]</h4>
                     </div>
-                    <button class="btn btn-primary" onclick="location.href='/order_detail'" style="width: 200px; margin-top: 10px;"
+                    <button class="btn btn-primary" th:onclick="|location.href = '/order_detail/' + ${gamePost.id}|" style="width: 200px; margin-top: 10px;"
                             type="button">게임 구매
                     </button>
                     <div style="margin-top: 10px;">

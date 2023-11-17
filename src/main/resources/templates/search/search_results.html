@@ -131,21 +131,26 @@
                 <th:block th:each="gamePost : ${gamePosts}">
                     <!-- gamePost가 null인 경우를 처리 -->
                     <th:block th:if="${gamePost != null}">
-                        <div class="card-back mb-2 col-lg-3" style="cursor:pointer;" th:onclick="|location.href = '/game_detail?id=${gamePost.id}'|">
+                        <div class="card-back mb-2 col-lg-3" style="cursor:pointer;" th:onclick="|location.href = '/game_detail/' + ${gamePost.id}|">
                             <div class="card-img">
                                 <!-- gamePost의 첫 번째 이미지를 가져올 때 index(0) 사용 -->
-                                <img th:src="@{/gallery/download/{id}(id=${gamePost.id})}" style="width: 230px; height: 150px;" onerror="this.onerror=null; this.src='/img/game/wip.png';">
+                                <img th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" style="width: 230px; height: 150px;" onerror="this.onerror=null; this.src='/img/game/wip.png';">
                             </div>
                             <div class="card-title">
                                 <div class="fw-bold fs-5" th:text="${gamePost.gameTitle}"></div>
                             </div>
                             <div class="card-text2">
                                 <b style="font-size: 17px;">
-                                    <span th:if="${gamePost.gamePrice > 0}" th:text="|${gamePost.gamePrice}원|"></span>
-                                    <span th:unless="${gamePost.gamePrice > 0}">무료</span>
+                                    <span th:if="${gamePost.gamePrice > 0}" th:text="|${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|"></span>
+                                    <span th:unless="${gamePost.gamePrice > 0}">
+                                    <span th:text="${gamePost.priceState.description}"></span>
+                                    </span>
                                 </b>
                             </div>
-                            <div class="card-text2">&#x2B50&#x2B50&#x2B50&#x2B50&#x2B50 (48)</div>
+                            <div class="card-text2" th:if="${gamePost.rating > 0 and gamePost.totalReviews > 0}">
+                                <span th:each="i : ${#numbers.sequence(1, gamePost.rating)}">&#x2B50</span>
+                                <b><span th:text="|(${gamePost.totalReviews})|">(48)</span></b>
+                            </div>
                         </div>
                     </th:block>
                 </th:block>

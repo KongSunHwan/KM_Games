@@ -59,7 +59,7 @@ public class MainController{
 
     @GetMapping("/main")
     public String main(@PageableDefault(size = 16) Pageable pageable, Model model) {
-        Page<GamePost> page = gamePostService.findAll(pageable);
+        Page<GamePost> page = gamePostService.findAllByOrderByIdDesc(pageable);
 
         model.addAttribute("gamePosts", page.getContent());
         model.addAttribute("page", page);
