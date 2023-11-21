@@ -105,6 +105,7 @@ public class GameController{
                              @PathVariable long id){
         // 세션에서 유저 정보 가져오기
         User user = (User) session.getAttribute("user");
+        Long UserId = user.getId();
 
         model.addAttribute("gamePosts", gamePostService.findById(id).get());
         model.addAttribute("reviews", gameReviewService.getReviewsByGameId(id));
@@ -127,6 +128,9 @@ public class GameController{
         // 별점 통계 정보 계산
         ReviewStatistics reviewStatistics = calculateReviewStatistics(id);
         model.addAttribute("reviewStatistics", reviewStatistics);
+
+        // 유저 ID 보내기
+        model.addAttribute("UserId", UserId);
 
         return "game/game_detail";
     }

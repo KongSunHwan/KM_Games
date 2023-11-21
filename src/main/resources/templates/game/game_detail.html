@@ -62,48 +62,48 @@
                 <br>
                 <ul style="list-style-type: none;">
                     <!-- 최근 이벤트 및 공지 시작 -->
-                    <h2><b>최근 이벤트 및 공지</b></h2>
-                    <hr>
-                    <br><br>
-                    <li>
-                        <div class="d-flex">
-                            <div class="row row-cols-1 row-cols-md-3 g-4">
+<!--                    <h2><b>최근 이벤트 및 공지</b></h2>-->
+<!--                    <hr>-->
+<!--                    <br><br>-->
+<!--                    <li>-->
+<!--                        <div class="d-flex">-->
+<!--                            <div class="row row-cols-1 row-cols-md-3 g-4">-->
 
-                                <div class="col">
-                                    <div class="card h-100">
-                                        <img alt="..." class="card-img-top"
-                                             th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" height="200">
-                                        <div class="card-body">
-                                            <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
-                                            <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <div class="col">-->
+<!--                                    <div class="card h-100">-->
+<!--                                        <img alt="..." class="card-img-top"-->
+<!--                                             th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" height="200">-->
+<!--                                        <div class="card-body">-->
+<!--                                            <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>-->
+<!--                                            <p class="card-text text-secondary">2023년 9월 5일 (화)</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                                <div class="col">
-                                    <div class="card h-100">
-                                        <img alt="..." th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" height="200">
-                                        <div class="card-body">
-                                            <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
-                                            <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <div class="col">-->
+<!--                                    <div class="card h-100">-->
+<!--                                        <img alt="..." th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" height="200">-->
+<!--                                        <div class="card-body">-->
+<!--                                            <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>-->
+<!--                                            <p class="card-text text-secondary">2023년 9월 5일 (화)</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                                <div class="col">
-                                    <div class="card h-100">
-                                        <img alt="..." class="card-img-top"
-                                             th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" height="200">
-                                        <div class="card-body">
-                                            <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>
-                                            <p class="card-text text-secondary">2023년 9월 5일 (화)</p>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <div class="col">-->
+<!--                                    <div class="card h-100">-->
+<!--                                        <img alt="..." class="card-img-top"-->
+<!--                                             th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" height="200">-->
+<!--                                        <div class="card-body">-->
+<!--                                            <h5 class="card-title">GM과 함께하는 데스매치 이벤트</h5>-->
+<!--                                            <p class="card-text text-secondary">2023년 9월 5일 (화)</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 
-                            </div>
-                        </div>
-                    </li>
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
                     <!-- 최근 이벤트 및 공지 끝 -->
 
                     <br><br><br>
@@ -431,7 +431,7 @@
                     <div>
                         <h4>[(${gamePost.gameTitle})]</h4>
                     </div>
-                    <button class="btn btn-primary" th:onclick="|location.href = '/order_detail/' + ${gamePost.id}|" style="width: 200px; margin-top: 10px;"
+                    <button class="btn btn-primary" th:onclick="|location.href = '/order_detail/' + ${gamePost.id} + '/' + ${UserId}|" style="width: 200px; margin-top: 10px;"
                             type="button">게임 구매
                     </button>
                     <div style="margin-top: 10px;">

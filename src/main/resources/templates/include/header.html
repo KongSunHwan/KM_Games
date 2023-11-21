@@ -29,7 +29,7 @@
                             <a class="dropdown-item" href="/cash_history"><i class="bi bi-cash-coin"></i> 충전 내역</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/payment_history"><i class="bi bi-cart-check"></i> 결제 내역</a>
+                            <a class="dropdown-item" th:href="@{/order_history/{id}(id=${session.user.getId()})}"><i class="bi bi-cart-check"></i> 주문 내역</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i> 로그아웃</a>

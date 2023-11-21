@@ -61,7 +61,10 @@ public class ReviewStatistics {
     }
     // 별점 평균에 따른 평가 계산
     public String getRatingText() {
-        if (this.averageRate < 1.0) {
+        if (this.averageRate == 0.0) {
+            return "평가 없음";
+        }
+        else if (this.averageRate < 1.0) {
             return "매우 나쁨";
         } else if (this.averageRate < 2.0) {
             return "나쁨";

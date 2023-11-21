@@ -102,7 +102,7 @@ public class GamePostRestController {
             if (multiRequest.getParameter("gamePrice") != null) {
             gamePost.setGamePrice(Integer.parseInt(multiRequest.getParameter("gamePrice")));
             } else {
-                gamePost.setGamePrice(null);
+                gamePost.setGamePrice(0);
             }
             gamePost.setPriceState(PriceState.valueOf(multiRequest.getParameter("priceState")));
 

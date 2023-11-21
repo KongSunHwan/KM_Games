@@ -13,9 +13,9 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="resources/css/footer.css" />
-    <link href="resources/css/contract_in.css" rel="stylesheet">
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/KM_GAMES_logo_icon.png" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <link href="/css/contract_in.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
 
     <style>
         .bd-placeholder-img {
@@ -85,10 +85,12 @@
                     <div>&nbsp;</div>
 
                     <div class="d-flex">
-                        <div class="p-2 w-75 fs-3 fw-bold">주문 완료</div>
+                        <th:block th:each="gameOrders : ${gameOrder}">
+                        <div class="p-2 w-75 fs-3 fw-bold" th:text="${gameOrders.orderStatus}">주문 완료</div>
                         <div class="p-2 flex-shrink-1 fs-5 fw-bold">주문번호 :
-                            <span class="text-muted">1234-123</span>
+                            <span class="text-muted" th:text="${gameOrders.id}">1234-123</span>
                         </div>
+                        </th:block>
                     </div>
                     <div>&nbsp;</div>
                     <div>
@@ -99,12 +101,12 @@
             </div>
             <div class="row align-items-md-stretch">
                 <!--col시작-->
-                <div class="row">
+                <div class="row" th:each="gameOrder : ${gameOrder}">
                     <div class="col-md-6">
                         <div class="well-left">
                             <div class="single-well">
                                 <a href="#">
-                                    <img src="resources/img/game/game_img2.jpg">
+                                    <img th:src="@{/gallery/download/{id}(id=${gameOrder.gamePost.gamePhotos[0].id})}">
                                 </a>
                             </div>
                         </div>
@@ -117,24 +119,28 @@
                                     <h4 class="sec-head">주문 정보</h4>
                                 </a>
                                 <p>
-                                    <b class="text-success">주문 완료</b>
+                                    <b class="text-success" th:text="${gameOrder.orderStatus}">주문 완료</b>
                                 </p>
                                 <hr>
                                 <ul>
                                     <li>
-                                        <i class="bi bi-check"></i> <b>게임 제목 :</b> 휴먼 폴 플랫
+                                        <i class="bi bi-check"></i> <b>게임 제목 :</b> <span th:text="${gameOrder.gamePost.gameTitle}">휴먼 폴 플랫</span>
                                     </li>
                                     <li>
-                                        <i class="bi bi-check"></i> <b>게임 장르 :</b> 아케이드
+                                        <i class="bi bi-check"></i> <b>게임 장르 :</b> <span th:text="${gameOrder.gamePost.genreCode}">아케이드</span>
                                     </li>
                                     <li>
-                                        <i class="bi bi-check"></i> <b>가격 :</b> 10,000 원
+                                        <i class="bi bi-check"></i> <b>가격 :</b>
+                                        <span th:if="${gameOrder.gamePost.gamePrice > 0}" th:text="|${#numbers.formatDecimal(gameOrder.gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|"></span>
+                                        <span th:unless="${gameOrder.gamePost.gamePrice > 0}">
+                                        <span th:text="${gameOrder.gamePost.priceState.description}"></span>
+                                        </span>
                                     </li>
                                     <li>
-                                        <i class="bi bi-check"></i> <b>등급 분류 :</b> 만 12세 이상
+                                        <i class="bi bi-check"></i> <b>등급 분류 :</b> <span th:text="${gameOrder.gamePost.ageLimit}">만 12세 이상</span>
                                     </li>
                                     <li>
-                                        <i class="bi bi-check"></i> <b>개발사 :</b> KM_GAMES
+                                        <i class="bi bi-check"></i> <b>개발사 :</b> <span th:text="${gameOrder.gamePost.company}">KM_GAMES</span>
                                     </li>
                                 </ul>
                             </div>
