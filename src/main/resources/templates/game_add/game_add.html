@@ -58,6 +58,9 @@
         <div class="py-5 text-center">
             <h2>게임 등록</h2>
         </div>
+
+        <input type="hidden" th:field="*{user}" th:value="${session.user.id}"/>
+
         <!-- 안내 테이블 -->
         <div class="row">
             <table class="table table-bordered .table-hover dt-responsive"

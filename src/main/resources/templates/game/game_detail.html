@@ -431,11 +431,11 @@
                     <div>
                         <h4>[(${gamePost.gameTitle})]</h4>
                     </div>
-                    <button class="btn btn-primary" th:onclick="|location.href = '/order_detail/' + ${gamePost.id} + '/' + ${UserId}|" style="width: 200px; margin-top: 10px;"
-                            type="button">게임 구매
+<!--                    <button class="btn btn-primary" th:onclick="|location.href = '/order_detail/' + ${gamePost.id} + '/' + ${UserId}|" style="width: 200px; margin-top: 10px;"-->
+<!--                            type="button">게임 구매-->
                     </button>
                     <div style="margin-top: 10px;">
-                        <button class="btn btn-outline-secondary" style="width: 200px;" type="button">장바구니 추가</button>
+                        <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
                     </div>
                     <hr>
                     <div>
@@ -489,6 +489,48 @@
         starRatingElement.innerHTML = '⭐'.repeat(starCount);
     });
     /*]]>*/
+</script>
+
+<script th:inline="javascript">
+    // 쇼핑 카트에 상품 추가
+    function addToCart() {
+        // 사용자 아이디와 게임 아이디는 실제 값으로 대체해야 합니다.
+        var userId = /*[[${UserId}]]*/
+        var gameId = /*[[${gameId}]]*/
+
+        $.ajax({
+            type: 'POST',
+            url: '/add-to-cart',
+            data: {userId: userId, gameId: gameId},
+            success: function (response) {
+                alert(response);
+
+                // 제품이 추가되면 버튼의 클래스를 btn-secondary로 변경
+                $('#addToCartBtn').removeClass('btn-outline-secondary').addClass('btn-secondary');
+            },
+            error: function (error) {
+                alert('오류: ' + error.responseText);
+            }
+        });
+    }
+
+    // 쇼핑 카트에서 상품 제거
+    function removeFromCart(userId, gameId) {
+        $.ajax({
+            type: 'POST',
+            url: '/remove-from-cart',
+            data: {userId: userId, gameId: gameId},
+            success: function (response) {
+                alert(response);
+
+                // 제품이 제거되면 버튼의 클래스를 btn-secondary에서 btn-outline-secondary로 변경
+                $('#addToCartBtn').removeClass('btn-secondary').addClass('btn-outline-secondary');
+            },
+            error: function (error) {
+                alert('오류: ' + error.responseText);
+            }
+        });
+    }
 </script>
 
 </body>

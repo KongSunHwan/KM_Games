@@ -20,278 +20,334 @@
 </head>
 
 <body>
-<form id="form" th:object="${gameOrders}" method="post" th:action="@{'/placeOrder?gameId=' + ${gamePost.id} + '&userId=' + ${userId} + '&totalAmount=' + ${gamePost.gamePrice} + '&paymentTypeStr=' + ${gameOrders.paymentType} + '&orderStatusStr=' + ${gameOrders.orderStatus}}">
     <div id="backbody">
         <div id="frame">
-                <div id="frame2">
-                    <span style="font-size: 16pt; font-weight: bold;">상품 주문하기</span>
-                    <span class="home"> 홈 > 상품 주문하기</span>
+            <div id="frame2">
+                <span style="font-size: 16pt; font-weight: bold;">상품 주문하기</span>
+                <span class="home"> 장바구니 > 상품 주문하기</span>
 
-                    <span> </span>
-                </div>
-                <br/>
+                <span> </span>
+            </div>
+            <br/>
 
-                <!-- 상품정보 테이블 -->
-                <div>
-                    <table class="calculation1">
-                        <thead>
-                        <tr>
-                            <th colspan="10" id="productHeader" style="text-align: left; padding-left : 10px;">일반상품</th>
-                        </tr>
-                        <tr>
-                            <!--                                <th><input type="checkbox" id="checkAll" /></th>-->
-                            <th><span>이미지</span></th>
-                            <th style="width: 400px;"><span>상품정보</span></th>
-                            <th style="width: 100px;">게임 종류</th>
-                            <th style="width: 100px;">등급 분류</th>
-                            <th style="width: 100px;">판매가</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr style="height: 90px; background-color: #fff;">
-                            <!--                                <td style="text-align: left; text-align: center; border-right: none;">-->
-                            <!--                                    <input type="checkbox" name="checkbox" />-->
-                            <!--                                </td>-->
-                            <td style="border-left: none; border-right: none;">
-                                <img style="width: 80%;"
-                                     th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}">
-                            </td>
-                            <td style="text-align: center; padding-left: 10px; border-left: none; font-weight: bold;">
-                                [(${gamePost.gameTitle})]
-                            </td>
-                            <td>[(${gamePost.genreCode})]</td>
-                            <td>[(${gamePost.ageLimit})]</td>
-                            <td>
-                                     <span th:if="${gamePost.gamePrice > 0}"
-                                           th:text="|${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|">
-                                        0
-                                    </span>
-                                <span th:text="${gamePost.priceState.description}"
-                                      th:unless="${gamePost.gamePrice > 0}">
-                                        0
-                                    </span>
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-
-                    <!--                    <div-->
-                    <!--                        style="border: solid 1px #e0e0eb; border-right:none; border-left:none; padding: 11px 0; background-color:rgb(255, 203, 203);">-->
-                    <!--                        <img src="/img/주의.png" style="margin-left: 5px; position: relative; top: -2px; width: 20px;">-->
-                    <!--                        <span style="font-size: 10pt; color: red;">상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</span>-->
-                    <!--                    </div>-->
-                </div>
-
-                <div style="margin: 10px 0; padding-bottom: 50px; border-bottom: solid 1px gray;">
-                    <!--                    <span style="margin: 0 10px;" class="btnfloat">선택상품</span>-->
-                    <!--                    <button type="button" class="btn default btnfloat" style="background-color: gray; color: #fff; margin-top: -5px;">x-->
-                    <!--                        삭제하기</button>-->
-
-                    <button class="btn default btnfloat2" onclick="javascript:history.back()" type="button">이전페이지
-                        >
-                    </button>
-                </div>
-                <br/><br/>
-
-                <!-- 주문자 정보 -->
-                <span style="font-size: 12pt; display: inline-block; padding-bottom: 10px; ">&nbsp;주문자 정보</span>
-                <table class="delivery">
+            <!-- 상품정보 테이블 -->
+            <div>
+                <table class="calculation1">
                     <thead>
-
                     <tr>
-                        <td class="deliverytd">닉네임&nbsp;</td>
-                        <td>
-                            <input disabled th:value="${name}" type="text"/>
-                            <input type="hidden" th:value="${userId}"/>
-                        </td>
+                        <th colspan="10" id="productHeader" style="text-align: left; padding-left : 10px;">일반상품</th>
                     </tr>
-
-                    <!--                        <tr>-->
-                    <!--                            <td class="deliverytd">휴대전화&nbsp;<span style="color: red;">*</span></td>-->
-                    <!--                            <td><input type="text" size="5" />-<input type="text" size="5" />-<input type="text"-->
-                    <!--                                    size="5" /></td>-->
-                    <!--                        </tr>-->
-
-                    <!--                        <tr>-->
-                    <!--                            <td class="deliverytd">이메일&nbsp;<span style="color : red;">*</span></td>-->
-                    <!--                            <td><input type="text" />@<input id="domainName" type="text" />&nbsp;-->
-                    <!--                                <select id="emailChoice" style="height: 20px;">-->
-                    <!--                                    <option>-이메일 선택-</option>-->
-                    <!--                                    <option>daum.net</option>-->
-                    <!--                                    <option>naver.com</option>-->
-                    <!--                                    <option>nate.com</option>-->
-                    <!--                                    <option>hotmail.com</option>-->
-                    <!--                                    <option>yahoo.com</option>-->
-                    <!--                                    <option>empas.com</option>-->
-                    <!--                                    <option>korea.com</option>-->
-                    <!--                                    <option>gmail.com</option>-->
-                    <!--                                </select>-->
-                    <!--                                <span style="font-size: 10pt; color:gray;">-->
-                    <!--                                    <p>이메일을 통해 주문처리과정을 보내드립니다.<br />-->
-                    <!--                                        이메일 주소란에는 반드시 수신가능한 이메일주소를 입력해 주세요.</p>-->
-                    <!--                                </span>-->
-                    <!--                            </td>-->
-                    <!--                        </tr>-->
+                    <tr>
+                        <th></th>
+                        <th><span>이미지</span></th>
+                        <th style="width: 400px;"><span>상품정보</span></th>
+                        <th style="width: 100px;">게임 종류</th>
+                        <th style="width: 100px;">등급 분류</th>
+                        <th style="width: 100px;">판매가</th>
+                    </tr>
                     </thead>
-                </table>
-                <br/><br/>
-                <!-- 결제예정금액 테이블 -->
-                <table class="calculation2">
-                    <tr>
-                        <th>상품금액</th>
-                        <th style="width: 750px; padding: 22px 0;"><span>결제예정금액</span></th>
-                    </tr>
 
-                    <tr style="background-color: #fff;">
-                        <td style="padding: 23px 0;">
-                             <span class="price" th:if="${gamePost.gamePrice > 0}"
-                                   th:text="|${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|">
-                                        0
-                                    </span>
-                            <span class="price" th:text="${gamePost.priceState.description}"
-                                  th:unless="${gamePost.gamePrice > 0}">
-                                        0
-                                    </span>
-                        </td>
-                        <td>
-                             <span class="price" th:if="${gamePost.gamePrice > 0}"
-                                   th:text="|${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|">
-                                        0
-                                    </span>
-                            <span class="price" th:text="${gamePost.priceState.description}"
-                                  th:unless="${gamePost.gamePrice > 0}">
-                                        0
-                                    </span>
-                        </td>
-                    </tr>
+                    <tbody>
+                    <th:block th:each="cart : ${shoppingCart}">
+                        <th:block th:each="gamePost : ${cart.gamePosts}">
+                            <tr style="height: 90px; background-color: #fff;">
+                                <td style="text-align: left; text-align: center; border-right: none;">
+                                    <input onchange="updateCart(this)"
+                                           th:attr="data-gameid=${gamePost.id}" th:checked="${cart.isChecked}"
+                                           type="checkbox"/>
+                                </td>
+                                <td style="border-left: none; border-right: none;">
+                                    <img style="width: 80%;"
+                                         th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}">
+                                </td>
+                                <td style="text-align: center; padding-left: 10px; border-left: none; font-weight: bold;">
+                                    <span th:text="${gamePost.gameTitle}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${gamePost.genreCode}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${gamePost.ageLimit}"></span>
+                                </td>
+                                <td>
+                                    <span th:text="${gamePost.gamePrice}"></span>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </th:block>
+                    </tbody>
                 </table>
-                <br/><br/>
 
-                <!-- 결제하기 -->
-                <div class="payArea">
-                    <div class="payment">
-                        <div style="padding: 18px 10px; font-size: 10pt; border-bottom: solid 1px #e0e0eb;">
+                <!--                    <div-->
+                <!--                        style="border: solid 1px #e0e0eb; border-right:none; border-left:none; padding: 11px 0; background-color:rgb(255, 203, 203);">-->
+                <!--                        <img src="/img/주의.png" style="margin-left: 5px; position: relative; top: -2px; width: 20px;">-->
+                <!--                        <span style="font-size: 10pt; color: red;">상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</span>-->
+                <!--                    </div>-->
+            </div>
+
+            <div style="margin: 10px 0; padding-bottom: 50px; border-bottom: solid 1px gray;">
+                <!--                    <span style="margin: 0 10px;" class="btnfloat">선택상품</span>-->
+                <!--                    <button type="button" class="btn default btnfloat" style="background-color: gray; color: #fff; margin-top: -5px;">x-->
+                <!--                        삭제하기</button>-->
+
+                <button class="btn default btnfloat2" onclick="javascript:history.back()" type="button">이전페이지
+                    >
+                </button>
+            </div>
+            <br/><br/>
+
+            <!-- 주문자 정보 -->
+            <span style="font-size: 12pt; display: inline-block; padding-bottom: 10px; ">&nbsp;주문자 정보</span>
+            <table class="delivery">
+                <thead>
+
+                <tr>
+                    <td class="deliverytd">닉네임&nbsp;</td>
+                    <td>
+                        <input disabled th:value="${session.user.nickname}" type="text"/>
+                        <input th:value="${userId}" type="hidden"/>
+                    </td>
+                </tr>
+
+                <!--                        <tr>-->
+                <!--                            <td class="deliverytd">휴대전화&nbsp;<span style="color: red;">*</span></td>-->
+                <!--                            <td><input type="text" size="5" />-<input type="text" size="5" />-<input type="text"-->
+                <!--                                    size="5" /></td>-->
+                <!--                        </tr>-->
+
+                <!--                        <tr>-->
+                <!--                            <td class="deliverytd">이메일&nbsp;<span style="color : red;">*</span></td>-->
+                <!--                            <td><input type="text" />@<input id="domainName" type="text" />&nbsp;-->
+                <!--                                <select id="emailChoice" style="height: 20px;">-->
+                <!--                                    <option>-이메일 선택-</option>-->
+                <!--                                    <option>daum.net</option>-->
+                <!--                                    <option>naver.com</option>-->
+                <!--                                    <option>nate.com</option>-->
+                <!--                                    <option>hotmail.com</option>-->
+                <!--                                    <option>yahoo.com</option>-->
+                <!--                                    <option>empas.com</option>-->
+                <!--                                    <option>korea.com</option>-->
+                <!--                                    <option>gmail.com</option>-->
+                <!--                                </select>-->
+                <!--                                <span style="font-size: 10pt; color:gray;">-->
+                <!--                                    <p>이메일을 통해 주문처리과정을 보내드립니다.<br />-->
+                <!--                                        이메일 주소란에는 반드시 수신가능한 이메일주소를 입력해 주세요.</p>-->
+                <!--                                </span>-->
+                <!--                            </td>-->
+                <!--                        </tr>-->
+                </thead>
+            </table>
+            <br/><br/>
+            <!-- 결제예정금액 테이블 -->
+<!--            <table class="calculation2">-->
+<!--                <tr>-->
+<!--                    <th>상품금액</th>-->
+<!--                    <th style="width: 750px; padding: 22px 0;"><span>결제예정금액</span></th>-->
+<!--                </tr>-->
+
+<!--                <tr style="background-color: #fff;">-->
+<!--                    <th:block th:each="cart : ${shoppingCart}">-->
+<!--                        <th:block th:each="gamePost : ${cart.gamePosts}">-->
+<!--                            <td style="padding: 23px 0;">-->
+<!--                              <span class="price" th:text="${gamePost.gamePrice}">0</span>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <span class="text-primary" id="totalPrice">0</span>-->
+<!--                            </td>-->
+<!--                        </th:block>-->
+<!--                    </th:block>-->
+<!--                </tr>-->
+<!--            </table>-->
+            <br/><br/>
+
+            <!-- 결제하기 -->
+            <div class="payArea">
+                <div class="payment">
+                    <div style="padding: 18px 10px; font-size: 10pt; border-bottom: solid 1px #e0e0eb;">
+                        <th:block th:each="cart : ${shoppingCart}">
+                            <th:block th:each="gameOrder : ${cart.gameOrder}">
                                     <span th:each="type : ${PaymentType}">
-                                    <input th:field="*{paymentType}" th:value="${type.name()}" type="radio"/>&nbsp;
+                                    <input th:field="${gameOrder.paymentType}" th:value="${type.name()}" type="radio"/>&nbsp;
                                     <label th:for="${#ids.prev('paymentType')}"
                                            th:text="${type.description}">카드결제</label>&nbsp;&nbsp;
                                     </span>
-                        </div>
+                            </th:block>
+                        </th:block>
+                    </div>
 
-                        <div align="left">
-                            <img src="/img/주의.png"
-                                 style="margin-left: 5px; position : relative; top: -3px; width: 20px;">
-                            <span style="font-size: 10pt; color: gray;">최소 결제 금액은 결제금액에서 수수료를 제외한
+                    <div align="left">
+                        <img src="/img/주의.png"
+                             style="margin-left: 5px; position : relative; top: -3px; width: 20px;">
+                        <span style="font-size: 10pt; color: gray;">최소 결제 금액은 결제금액에서 수수료를 제외한
                                         금액입니다.</span><br/>
-                            <img src="/img/주의.png"
-                                 style="margin-left: 5px; position : relative; top: -3px; width: 20px;">
-                            <span style="font-size: 10pt; color: gray;">게임 가격이 체험판이나 무료인 경우
+                        <img src="/img/주의.png"
+                             style="margin-left: 5px; position : relative; top: -3px; width: 20px;">
+                        <span style="font-size: 10pt; color: gray;">게임 가격이 체험판이나 무료인 경우
                         선택하지 않고 주문하여 주세요.</span>
-                        </div>
-                    </div>
-
-                    <div class="total">
-                        <span style="display: inline-block; padding: 20px 10px;">최종결제 금액</span><br/>
-                        <span style="font-size: 25pt; font-weight: bold; padding: 0px  10px;"
-                              th:if="${gamePost.gamePrice > 0}"
-                              th:text="|${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|">0원</span>
-                        <span style="font-size: 25pt; font-weight: bold; padding: 0px  10px;"
-                              th:text="${gamePost.priceState.description}"
-                              th:unless="${gamePost.gamePrice > 0}">0원</span>
-                        <br/><br/>
-                        <button class="btn default"
-                                style="width: 90%; height: 60px; margin-right: 10px; font-size: 20px;"
-                                type="submit">결제하기
-                        </button>
                     </div>
                 </div>
-                <br/><br/>
 
-
-                <!-- 이용안내 -->
-                <div
-                        style="border: solid 1px #e0e0eb; padding: 10px 0; font-size: 12pt; background-color: #f5f5f0; padding-left: 10px;">
-                    무이자할부 이용안내
+                <div class="total">
+                    <span style="display: inline-block; padding: 20px 10px;">최종결제 금액</span><br/>
+                    <span style="font-size: 25pt; font-weight: bold; padding: 0px  10px;" id="totalPrice">0</span>
+                    <br/><br/>
+                    <button class="btn default"
+                            style="width: 90%; height: 60px; margin-right: 10px; font-size: 20px;"
+                            type="button" onclick="checkoutCart()">결제하기
+                    </button>
                 </div>
+            </div>
+            <br/><br/>
 
-                <div style="border: solid 1px #e0e0eb; font-size: 12pt; padding-left: 10px;">
-                    <span>-</span> <span style="font-size: 10pt; color:gray;">무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을
+
+            <!-- 이용안내 -->
+            <div
+                    style="border: solid 1px #e0e0eb; padding: 10px 0; font-size: 12pt; background-color: #f5f5f0; padding-left: 10px;">
+                무이자할부 이용안내
+            </div>
+
+            <div style="border: solid 1px #e0e0eb; font-size: 12pt; padding-left: 10px;">
+                <span>-</span> <span style="font-size: 10pt; color:gray;">무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을
                         동시에 구매할 수 없습니다.</span><br>
-                    <span>-</span> <span style="font-size: 10pt; color:gray;">무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만
+                <span>-</span> <span style="font-size: 10pt; color:gray;">무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만
                         선택하여 주문하여 주세요.</span>
-                </div>
+            </div>
 
-                <div
-                        style="border: solid 1px #e0e0eb; padding: 10px 0; font-size: 12pt; background-color: #f5f5f0; padding-left: 10px">
-                    이용안내
-                </div>
-                <div style="border: solid 1px #e0e0eb; height: 500px; font-size: 12pt; padding-left: 10px;">
-                    <br/>세금계산서 발행 안내
-                    <ol style="padding-left: 30px; padding-top : 8px">
-                        <li class="lifont"> 부가가치세법 제 54조에 의거하여 세금계산서는 주문완료일로부터 다음날 10일까지만 요청하실 수 있습니다.</li>
-                        <li class="lifont"> 세금계산서는 사업자만 신청할 수 있습니다.</li>
-                        <li class="lifont"> 주문이 완료된 주문에 한하여 세금계산서 발행신청이 가능합니다.</li>
-                        <li class="lifont"> [세금계산서 신청]버튼을 눌러 세금계산서 신청양식을 작성한 후 팩스로 사업자등록증사본을 보내셔야 세금계산서 발행이
-                            가능합니다.
-                        </li>
-                        <li class="lifont"> [세금계산서 인쇄]버튼을 누르면 발행된 세금게산서를 인쇄할 수 있습니다.</li>
-                    </ol>
-                    <br/>
-                    부가가치세법 변경에 따른 신용카드매출전표 및 세금계산서 변경안내
-                    <ol style="padding-left: 30px; padding-top: 8px;">
-                        <li class="lifont"> 변경된 부가가치세법에 의거, 2004.7.1 이후 신용카드로 결제하신 주문에 대해서는 세금계산서 발행이 불가하며</li>
-                        <li class="lifont"> 신용카드매출전표로 부가가치세 신고를 하셔야 합니다.(부가가치세법 시행령 57조)</li>
-                        <li class="lifont"> 상기 부가가치세법 변경내용에 따라 신용카드 이외의 결제건에 대해서만 세금계산서 발행이 가능함을 양지하여 주시기 바랍니다.
-                        </li>
-                    </ol>
-                    <br/>
-                    현금영수증 이용안내
-                    <ol style="padding-left: 30px; padding-top: 8px;">
-                        <li class="lifont"> 현금영수증은 1원 이상의 현금성거래(무통장입금, 실시간계좌이체, 에스크로, 예치금)에 대해 발행이 됩니다.</li>
-                        <li class="lifont"> 현금영수증 발행 금액에는 수수료는 포함되고, 적립금사용액은 포함되지 않습니다.</li>
-                        <li class="lifont"> 발행신청 기간제한 현금영수증은 입금확인일로 부터 48시간안에 발행을 해야 합니다.</li>
-                        <li class="lifont"> 현금영수증 발행 취소의 경우는 시간 제한이 없습니다. (국세청의 정책에 따라 변경 될 수 있습니다.)</li>
-                        <li class="lifont"> 현금영수증이나 세금계산서 중 하나만 발행 가능 합니다.</li>
-                    </ol>
-                    <br/>
-                </div>
+            <div
+                    style="border: solid 1px #e0e0eb; padding: 10px 0; font-size: 12pt; background-color: #f5f5f0; padding-left: 10px">
+                이용안내
+            </div>
+            <div style="border: solid 1px #e0e0eb; height: 500px; font-size: 12pt; padding-left: 10px;">
+                <br/>세금계산서 발행 안내
+                <ol style="padding-left: 30px; padding-top : 8px">
+                    <li class="lifont"> 부가가치세법 제 54조에 의거하여 세금계산서는 주문완료일로부터 다음날 10일까지만 요청하실 수 있습니다.</li>
+                    <li class="lifont"> 세금계산서는 사업자만 신청할 수 있습니다.</li>
+                    <li class="lifont"> 주문이 완료된 주문에 한하여 세금계산서 발행신청이 가능합니다.</li>
+                    <li class="lifont"> [세금계산서 신청]버튼을 눌러 세금계산서 신청양식을 작성한 후 팩스로 사업자등록증사본을 보내셔야 세금계산서 발행이
+                        가능합니다.
+                    </li>
+                    <li class="lifont"> [세금계산서 인쇄]버튼을 누르면 발행된 세금게산서를 인쇄할 수 있습니다.</li>
+                </ol>
+                <br/>
+                부가가치세법 변경에 따른 신용카드매출전표 및 세금계산서 변경안내
+                <ol style="padding-left: 30px; padding-top: 8px;">
+                    <li class="lifont"> 변경된 부가가치세법에 의거, 2004.7.1 이후 신용카드로 결제하신 주문에 대해서는 세금계산서 발행이 불가하며</li>
+                    <li class="lifont"> 신용카드매출전표로 부가가치세 신고를 하셔야 합니다.(부가가치세법 시행령 57조)</li>
+                    <li class="lifont"> 상기 부가가치세법 변경내용에 따라 신용카드 이외의 결제건에 대해서만 세금계산서 발행이 가능함을 양지하여 주시기 바랍니다.
+                    </li>
+                </ol>
+                <br/>
+                현금영수증 이용안내
+                <ol style="padding-left: 30px; padding-top: 8px;">
+                    <li class="lifont"> 현금영수증은 1원 이상의 현금성거래(무통장입금, 실시간계좌이체, 에스크로, 예치금)에 대해 발행이 됩니다.</li>
+                    <li class="lifont"> 현금영수증 발행 금액에는 수수료는 포함되고, 적립금사용액은 포함되지 않습니다.</li>
+                    <li class="lifont"> 발행신청 기간제한 현금영수증은 입금확인일로 부터 48시간안에 발행을 해야 합니다.</li>
+                    <li class="lifont"> 현금영수증 발행 취소의 경우는 시간 제한이 없습니다. (국세청의 정책에 따라 변경 될 수 있습니다.)</li>
+                    <li class="lifont"> 현금영수증이나 세금계산서 중 하나만 발행 가능 합니다.</li>
+                </ol>
+                <br/>
+            </div>
         </div>
     </div>
-</form>
 
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        // 전체 선택/해제-->
-<!--        $("#checkAll").click(function () {-->
-<!--            var isChecked = $(this).prop("checked");-->
-<!--            $("input[name='checkbox']").prop("checked", isChecked);-->
-<!--            updateProductHeader(); // 선택된 상품의 수에 따라 헤더 업데이트-->
-<!--        });-->
+    <script th:inline="javascript">
 
-<!--        // 개별 체크박스 선택 시 전체 선택/해제 체크박스 상태 변경-->
-<!--        $("input[name='checkbox']").change(function () {-->
-<!--            var allChecked = true;-->
+        // 체크된 게임 아이템의 수를 업데이트하는 함수
+        function updateCheckedGameCount() {
+            var checkboxes = document.querySelectorAll('input[name="gameCheckbox"]:checked');
+            var gameCountSpan = document.getElementById('gameCount');
 
-<!--            $("input[name='checkbox']").each(function () {-->
-<!--                if (!$(this).prop("checked")) {-->
-<!--                    allChecked = false;-->
-<!--                    return false; // 반복문 탈출-->
-<!--                }-->
-<!--            });-->
+            gameCountSpan.textContent = checkboxes.length;
 
-<!--            $("#checkAll").prop("checked", allChecked);-->
-<!--            updateProductHeader(); // 선택된 상품의 수에 따라 헤더 업데이트-->
-<!--        });-->
+            var cartDetails = document.getElementById('cartDetails');
+            cartDetails.textContent = checkboxes.length;
+        }
 
-<!--        // 선택된 상품의 수에 따라 헤더 업데이트-->
-<!--        function updateProductHeader() {-->
-<!--            var selectedProducts = $("input[name='checkbox']:checked").length;-->
-<!--            $("#productHeader").text("일반상품 (" + selectedProducts + ")");-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->
+        // 체크박스 상태 변경 시 호출되는 함수
+        function updateCart(checkbox) {
+            var gameId = checkbox.getAttribute("data-gameid");
+            var isChecked = checkbox.checked;
+            var userId = [[${userId}]];
+
+
+            fetch('/order_basket/update?gameId=' + gameId + '&isChecked=' + isChecked + '&userId=' + userId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({}),
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        // 주문 버튼 클릭 시 호출되는 함수
+        function checkoutCart() {
+            fetch('/order_basket/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 주문 결과 처리
+                    console.log(data);
+
+                    // 주문이 성공적으로 처리되면 사용자를 주문 영수증 페이지로 리디렉션
+                    if (data.success) {
+                        window.location.href = '/order_receipt';
+                    }
+                })
+                .catch(error => console.error('에러:', error));
+
+            window.location.href = '/order_receipt';
+        }
+
+        // 총 가격을 업데이트하는 함수
+        function updateTotalPrice() {
+            var total = 0;
+
+            // 체크된 각 상품에 대해 가격을 더함
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(checkbox) {
+                // 체크된 상품의 행을 찾음
+                var row = checkbox.closest('tr');
+
+                // 디버깅 메시지 추가
+                console.log('Row:', row);
+
+                // 행에서 가격 정보를 가져와서 더함
+                var priceElement = row.querySelector('td:nth-child(6) span');
+                console.log('Price Element:', priceElement);
+
+                var price = parseInt(priceElement.textContent.replace('원', ''), 10);
+                console.log('Price:', price);
+
+                total += price;
+            });
+
+            // 총 가격을 동적으로 업데이트
+            document.getElementById('totalPrice').textContent = total.toLocaleString() + '원';
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // 페이지 로드 시 초기 총 가격 계산
+            updateTotalPrice();
+            // updateCheckedGameCount();
+
+            // 각 체크박스에 대한 이벤트 리스너 추가
+            document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    // 체크박스 상태가 변경되면 총 가격 업데이트
+                    updateTotalPrice();
+                    // updateCheckedGameCount();
+                });
+            });
+        });
+    </script>
+
+
 
 </body>
 

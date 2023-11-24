@@ -57,6 +57,13 @@ public class GamePost extends BaseTimeEntity{
     @OneToMany(mappedBy = "gamePost", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<GameReview> reviews = new ArrayList<>(); // 게임 리뷰 목록
 
+    @Column(name = "is_checked")
+    private Boolean isChecked;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id") // 사용자 정보를 저장하는 컬럼명 설정
+    private User user; // 사용자 정보
+
     @Transient
     private int rating; // 별점
 
@@ -65,4 +72,9 @@ public class GamePost extends BaseTimeEntity{
 
     @Transient
     private int totalReviews; // 전체 리뷰
+
+    // isChecked 메서드
+    public boolean isCheck() {
+        return Boolean.TRUE.equals(isChecked);
+    }
 }

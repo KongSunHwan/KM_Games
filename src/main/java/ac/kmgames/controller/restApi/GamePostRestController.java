@@ -8,6 +8,7 @@ import ac.kmgames.validation.form.GamePostSaveForm;
 import com.google.gson.JsonObject;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +65,7 @@ public class GamePostRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public String saveGallery(MultipartHttpServletRequest multiRequest ,
                               @Validated @ModelAttribute("form") GamePostSaveForm form,
-                              BindingResult bindingResult)
+                              BindingResult bindingResult, HttpSession session)
             throws Exception {
 
         //검증에 실패
@@ -127,6 +128,10 @@ public class GamePostRestController {
             gamePost.setGameGraphic(multiRequest.getParameter("gameGraphic"));
             gamePost.setGameDirectX(multiRequest.getParameter("gameDirectX"));
             gamePost.setGameStorage(multiRequest.getParameter("gameStorage"));
+
+            // 세션에서 유저 정보 가져오기
+            User user = (User) session.getAttribute("user");
+            gamePost.setUser(user);
         }
         // 수정
         else {
@@ -170,6 +175,10 @@ public class GamePostRestController {
             gamePost.setGameGraphic(multiRequest.getParameter("gameGraphic"));
             gamePost.setGameDirectX(multiRequest.getParameter("gameDirectX"));
             gamePost.setGameStorage(multiRequest.getParameter("gameStorage"));
+
+            // 세션에서 유저 정보 가져오기
+            User user = (User) session.getAttribute("user");
+            gamePost.setUser(user);
 
 
             if (!"".equals(multiRequest.getParameter("deleteFiles"))) {

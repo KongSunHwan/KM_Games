@@ -131,6 +131,7 @@ public class GameController{
 
         // 유저 ID 보내기
         model.addAttribute("UserId", UserId);
+        model.addAttribute("gameId", id);
 
         return "game/game_detail";
     }

@@ -35,6 +35,7 @@ public class GamePostDTO {
         private String gameDirectX;
         private String gameStorage;
         private List<GamePhoto> gamePhotos;
+        private User user;
         private LocalDateTime createdDateTime;
 
         public Response(GamePost gamePost) {
@@ -57,6 +58,7 @@ public class GamePostDTO {
             this.gameDirectX = gamePost.getGameDirectX();
             this.gameStorage = gamePost.getGameStorage();
             this.gamePhotos = gamePost.getGamePhotos();
+            this.user = gamePost.getUser();
             this.createdDateTime = gamePost.getCreatedDateTime();
         }
     }
@@ -81,6 +83,7 @@ public class GamePostDTO {
         private String gameDirectX;
         private String gameStorage;
         private List<GamePhoto> gamePhotos;
+        private User user;
         private LocalDateTime createdDateTime;
 
         public ListResponse(GamePost gamePost) {
@@ -102,6 +105,7 @@ public class GamePostDTO {
             this.gameDirectX = gamePost.getGameDirectX();
             this.gameStorage = gamePost.getGameStorage();
             this.gamePhotos = gamePost.getGamePhotos();
+            this.user = gamePost.getUser();
             this.createdDateTime = gamePost.getCreatedDateTime();
         }
     }

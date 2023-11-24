@@ -2,10 +2,13 @@ package ac.kmgames.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NaturalId;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -14,7 +17,7 @@ import java.util.List;
 @ToString
 public class User{
     public static User NULL(){
-        return new User(-1, "", "", "", "", 0, null, false, null, null, null);
+        return new User(-1, "", "", "", "", 0, null, false, null, null, null, null);
     }
 
     @Id
@@ -54,6 +57,9 @@ public class User{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<PaymentHistory> paymentHistories;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<ShoppingCart> shoppingCarts;
+
     public boolean isValid(){
         return id > 0 && email.length() > 4 && registerDate != null;
     }
@@ -76,5 +82,13 @@ public class User{
         }
         cash -= amount;
         return true;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        // 쇼핑 카트를 반환하는 로직을 추가합니다.
+        if (shoppingCarts != null && !shoppingCarts.isEmpty()) {
+            return shoppingCarts.iterator().next();
+        }
+        return null;
     }
 }

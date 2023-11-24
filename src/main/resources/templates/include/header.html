@@ -8,7 +8,7 @@
                 <!--<li><a href="/shop" class="nav-link px-4 link-dark">캐시 상점</a></li>-->
                 <li><a href="/qna" class="nav-link px-4 link-dark">Q&A</a></li>
                 <li><a href="/support" class="nav-link px-4 link-dark">고객지원</a></li>
-                <li><a href="/order_basket" class="nav-link px-4 link-dark">장바구니</a></li>
+                <li><a th:href="@{/order_basket/{id}(id=${session.user.getId()})}" class="nav-link px-4 link-dark">장바구니</a></li>
             </ul>
 
             <th:block th:if="${session.user == null}">
