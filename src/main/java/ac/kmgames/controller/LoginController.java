@@ -1,23 +1,21 @@
 package ac.kmgames.controller;
 
 import ac.kmgames.model.entity.User;
+import ac.kmgames.service.ShoppingCartService;
 import ac.kmgames.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequiredArgsConstructor
 public class LoginController{
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public LoginController(UserService userService, PasswordEncoder pwEncoder){
-        this.userService = userService;
-        this.passwordEncoder = pwEncoder;
-    }
 
     @GetMapping("/login")
     public String login(){
@@ -39,6 +37,7 @@ public class LoginController{
     @PostMapping("/request_login")
     public String requestLogin(HttpSession session, User input){
         var user = userService.getUserByEmail(input.getEmail());
+
         if(!passwordEncoder.matches(input.getPassword(), user.getPassword())){
             return
                 "<script>" +

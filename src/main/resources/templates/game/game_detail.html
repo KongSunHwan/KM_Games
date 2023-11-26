@@ -435,47 +435,24 @@
 <!--                            type="button">게임 구매-->
                     </button>
                             <div style="margin-top: 10px;">
-                                <th:block th:if="${cartItemAll.empty}">
-                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
-                                </th:block>
-                                <th:block th:unless="${not cartItemAll.empty}">
-                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
-                                </th:block>
-                                <th:block th:each="cartItemAll : ${cartItemAll}">
-                                    <th:block th:each="shoppingCart : ${shoppingCart}">
-                                    <button th:if="${cartItemAll.checked == false and cartItemAll.shoppingCart.id == shoppingCart.id and cartItemAll.gamePost.id == gamePost.id}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
-                                    <button th:if="${cartItemAll.checked == true and cartItemAll.shoppingCart.id == shoppingCart.id and cartItemAll.gamePost.id == gamePost.id}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>
-                                    </th:block>
-                                </th:block>
-
-                                <!-- 장바구니가 비어 있을 때 -->
-<!--                                <th:block th:if="${cartItemAll.empty}">-->
+<!--                                <th:block th:if="${cartItemAll.empty or shoppingCart == null}">-->
 <!--                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>-->
 <!--                                </th:block>-->
 
-<!--                                &lt;!&ndash; 장바구니가 비어 있지 않을 때 &ndash;&gt;-->
-<!--                                <th:block th:if="${not cartItemAll.empty}">-->
-<!--                                    &lt;!&ndash; 각 장바구니 아이템에 대한 버튼 표시 &ndash;&gt;-->
-<!--                                    <th:block th:each="cartItem : ${cartItemAll}">-->
-<!--                                        <th:block th:each="shoppingCart : ${shoppingCart}">-->
-<!--                                            &lt;!&ndash; "장바구니 추가" 버튼 &ndash;&gt;-->
-<!--                                            <button th:if="${cartItem.checked == false and cartItem.shoppingCart.id == shoppingCart.id and (cartItem.gamePost == null or cartItem.gamePost.id == gamePost.id) and cartItem.shoppingCart.id == null}"-->
-<!--                                                    id="addToCartBtn"-->
-<!--                                                    class="btn btn-outline-secondary"-->
-<!--                                                    style="width: 200px;"-->
-<!--                                                    type="button"-->
-<!--                                                    onclick="addToCart()">장바구니 추가</button>-->
+<!--                                <th:block th:unless="${not cartItemAll.empty}">-->
+<!--                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>-->
+<!--                                </th:block>-->
 
-<!--                                            &lt;!&ndash; "장바구니 제거" 버튼 &ndash;&gt;-->
-<!--                                            <button th:if="${cartItem.checked == true and cartItem.shoppingCart.id == shoppingCart.id and cartItem.gamePost.id == gamePost.id}"-->
-<!--                                                    id="removeToCartBtn"-->
-<!--                                                    class="btn btn-outline-secondary"-->
-<!--                                                    style="width: 200px;"-->
-<!--                                                    type="button"-->
-<!--                                                    onclick="removeFromCart()">장바구니 제거</button>-->
-<!--                                        </th:block>-->
+<!--                                <th:block th:each="cartItemAll : ${cartItemAll}">-->
+<!--                                    <th:block th:each="shoppingCart : ${shoppingCart}">-->
+<!--                                    <button th:if="${cartItemAll.checked == false and cartItemAll.shoppingCart.id == shoppingCart.id and cartItemAll.gamePost.id == gamePost.id}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>-->
+<!--                                    <button th:if="${cartItemAll.checked == true and cartItemAll.shoppingCart.id == shoppingCart.id and cartItemAll.gamePost.id == gamePost.id}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>-->
 <!--                                    </th:block>-->
 <!--                                </th:block>-->
+
+                                <button th:if="${cart == 0}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
+                                <button th:if="${cart == 1}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>
+
                             </div>
 
 
@@ -540,8 +517,8 @@
         var userId = /*[[${UserId}]]*/
         var gameId = /*[[${gameId}]]*/
 
-        var addToCartBtn = document.getElementById('addToCartBtn');
-        addToCartBtn.style.display = 'none';
+        // 현재 장바구니 상태 가져오기
+        var cartStatus = /*[[${cart}]]*/
 
         $.ajax({
             type: 'POST',
@@ -566,6 +543,9 @@
         // 사용자 아이디와 게임 아이디는 실제 값으로 대체해야 합니다.
         var userId = /*[[${UserId}]]*/
         var gameId = /*[[${gameId}]]*/
+
+        // 현재 장바구니 상태 가져오기
+        var cartStatus = /*[[${cart}]]*/
 
         $.ajax({
             type: 'POST',

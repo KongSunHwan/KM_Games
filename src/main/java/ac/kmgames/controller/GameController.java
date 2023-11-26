@@ -110,6 +110,10 @@ public class GameController{
         List<CartItem> cartItemAll = cartItemService.findAll();
         List<ShoppingCart> shoppingCart = shoppingCartService.getShoppingCartByUser(UserId);
 
+        long cart = cartItemService.countByGamePostAndUser(gamePostService.findById(id), user);
+
+        model.addAttribute("cart", cart);
+
         model.addAttribute("gamePosts", gamePostService.findById(id).get());
         model.addAttribute("reviews", gameReviewService.getReviewsByGameId(id));
         model.addAttribute("cartItemAll", cartItemAll);
