@@ -68,6 +68,17 @@
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
         }
+        a {
+            opacity: 0; /* 초기에는 투명하게 설정 */
+            animation: fadeIn 1s forwards; /* 1초 동안 fadeIn 애니메이션 적용 */
+            animation-delay: 0.5s; /* 0.5초의 딜레이 적용 */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1; /* 애니메이션 종료 시점에 투명도를 1로 설정하여 나타나도록 함 */
+            }
+        }
     </style>
 
 
@@ -174,9 +185,11 @@
                                 </div>
 
                         <div class="p-2 flex-shrink-1">
-                            <button type="button" class="btn btn-primary btn-lg" onclick="redirectToOrderDetail()">총 주문하기
+                            <a th:href="@{/order_receipt}">
+                            <button type="button" class="btn btn-primary btn-lg" onclick="checkoutCart()">총 주문하기
                                 <span id="gameCount" class="badge text-bg-light">0</span>
                             </button>
+                            </a>
                         </div>
                     </div>
 
@@ -217,16 +230,6 @@
         crossorigin="anonymous"></script>
 
 <script th:inline="javascript">
-    function redirectToOrderDetail() {
-        var userId = [[${userId}]];
-
-        // userId를 사용하여 URL 생성
-        var url = '/order_detail/' + userId;
-
-        // 리다이렉트
-        window.location.href = url;
-    }
-
     // 체크된 게임 아이템의 수를 업데이트하는 함수
     function updateCheckedGameCount() {
         var checkboxes = document.querySelectorAll('input[name="gameCheckbox"]:checked');
@@ -242,7 +245,7 @@
     function updateCart(checkbox) {
         var gameId = checkbox.getAttribute("data-gameid");
         var isChecked = checkbox.checked;
-        var userId = [[${userId}]];
+        var userId = [[${userId}]]
 
 
         fetch('/order_basket/update?gameId=' + gameId + '&isChecked=' + isChecked + '&userId=' + userId, {
@@ -258,20 +261,30 @@
     }
 
     // 주문 버튼 클릭 시 호출되는 함수
-    // function checkoutCart() {
-    //     fetch('/order_basket/checkout', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             // 주문 결과에 대한 처리
-    //             console.log(data);
-    //         })
-    //         .catch(error => console.error('Error:', error));
-    // }
+    function checkoutCart() {
+        fetch('/order_basket/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                // 주문 결과에 대한 처리
+                console.log(data);
+
+                // 주문이 성공적으로 처리되면 현재 창의 URL을 변경하여 주문 영수증 페이지로 이동
+                if (data.success) {
+                    redirectToOrderReceipt();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function redirectToOrderReceipt() {
+        // 주문 영수증 페이지로 리디렉션
+        window.location.href = '/order_receipt';
+    }
 
     // 총 가격을 업데이트하는 함수
     function updateTotalPrice() {

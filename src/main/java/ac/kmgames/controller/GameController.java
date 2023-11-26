@@ -5,11 +5,9 @@ import ac.kmgames.model.dto.GamePostDTO;
 import ac.kmgames.model.dto.NationalityCodes;
 import ac.kmgames.model.dto.PlatformTypeCodes;
 import ac.kmgames.model.entity.*;
+import ac.kmgames.model.repository.CartItemRepository;
 import ac.kmgames.model.utils.ReviewStatistics;
-import ac.kmgames.service.GamePostService;
-import ac.kmgames.service.GameReviewService;
-import ac.kmgames.service.GameService;
-import ac.kmgames.service.UserService;
+import ac.kmgames.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -32,6 +30,8 @@ public class GameController{
     private final GameReviewService gameReviewService;
     private final UserService userService;
     private final GamePostService gamePostService;
+    private final CartItemService cartItemService;
+    private final ShoppingCartService shoppingCartService;
 
     @ModelAttribute("PriceStates")
     public PriceState[] PriceStates() {
@@ -107,8 +107,13 @@ public class GameController{
         User user = (User) session.getAttribute("user");
         Long UserId = user.getId();
 
+        List<CartItem> cartItemAll = cartItemService.findAll();
+        List<ShoppingCart> shoppingCart = shoppingCartService.getShoppingCartByUser(UserId);
+
         model.addAttribute("gamePosts", gamePostService.findById(id).get());
         model.addAttribute("reviews", gameReviewService.getReviewsByGameId(id));
+        model.addAttribute("cartItemAll", cartItemAll);
+        model.addAttribute("shoppingCart", shoppingCart);
 
         // 세션에 유저 정보가 있으면 모델에 추가
         if (user != null) {

@@ -33,7 +33,28 @@ public class ShoppingCartService {
 //        return gameOrder;
 //    }
 
-    public void addToCart(Long userId, Long gameId) {
+//    public void addToCart(Long userId, Long gameId) {
+//        Optional<User> userOptional = userRepository.findById(userId);
+//        Optional<GamePost> gamePostOptional = gamePostRepository.findById(gameId);
+//
+//        if (userOptional.isPresent() && gamePostOptional.isPresent()) {
+//            User user = userOptional.get();
+//            GamePost gamePost = gamePostOptional.get();
+//
+//            ShoppingCart shoppingCart = user.getShoppingCart();
+//            if (shoppingCart == null) {
+//                shoppingCart = new ShoppingCart();
+//                shoppingCart.setUser(user);
+//            }
+//
+//            shoppingCart.addGameToCart(gamePost);
+//            shoppingCartRepository.save(shoppingCart);
+//        } else {
+//            throw new RuntimeException("사용자 또는 상품을 찾을 수 없습니다.");
+//        }
+//    }
+
+    public void addToCart(Long userId, Long gameId, boolean isChecked) {
         Optional<User> userOptional = userRepository.findById(userId);
         Optional<GamePost> gamePostOptional = gamePostRepository.findById(gameId);
 
@@ -48,28 +69,68 @@ public class ShoppingCartService {
             }
 
             shoppingCart.addGameToCart(gamePost);
+
+            // CartItem 추가 또는 업데이트
+            CartItem cartItem = findCartItem(shoppingCart, gamePost);
+            if (cartItem == null) {
+                cartItem = new CartItem();
+                cartItem.setShoppingCart(shoppingCart);
+                cartItem.setGamePost(gamePost);
+                shoppingCart.getCartItems().add(cartItem);
+            }
+
+            cartItem.setChecked(isChecked);
+
             shoppingCartRepository.save(shoppingCart);
         } else {
             throw new RuntimeException("사용자 또는 상품을 찾을 수 없습니다.");
         }
     }
 
-    public void removeFromCart(Long userId, Long gameId) {
+    public void removeFromCart(Long userId, Long gameId, boolean isChecked) {
+        // 사용자 ID에 해당하는 사용자 정보 조회
         Optional<User> userOptional = userRepository.findById(userId);
+
+        // 게임 ID에 해당하는 게임 정보 조회
         Optional<GamePost> gamePostOptional = gamePostRepository.findById(gameId);
 
+        // 사용자 정보와 게임 정보가 모두 존재하는지 확인
         if (userOptional.isPresent() && gamePostOptional.isPresent()) {
             User user = userOptional.get();
             GamePost gamePost = gamePostOptional.get();
 
+            // 사용자의 쇼핑 카트 조회
             ShoppingCart shoppingCart = user.getShoppingCart();
+
+            // 쇼핑 카트가 존재하면 해당 게임을 제거하고 isChecked 값을 false로 설정한 후 저장
             if (shoppingCart != null) {
                 shoppingCart.removeGameFromCart(gamePost);
+
+                // CartItem 업데이트
+                CartItem cartItem = findCartItem(shoppingCart, gamePost);
+
+                if (cartItem != null) {
+                    cartItem.setChecked(isChecked);
+                    shoppingCartRepository.save(shoppingCart);
+                }
+
                 shoppingCartRepository.save(shoppingCart);
             }
         } else {
+            // 사용자 또는 상품을 찾을 수 없을 경우 예외 처리
             throw new RuntimeException("사용자 또는 상품을 찾을 수 없습니다.");
         }
+    }
+
+    public CartItem findCartItem(ShoppingCart shoppingCart, GamePost gamePost) {
+        List<CartItem> cartItems = shoppingCart.getCartItems();
+
+        for (CartItem cartItem : cartItems) {
+            if (cartItem.getGamePost().equals(gamePost)) {
+                return cartItem;
+            }
+        }
+        return null;
     }
 
     // 사용자 ID로 쇼핑 카트 목록 가져오기

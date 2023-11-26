@@ -45,17 +45,17 @@
 </div>
 
 <!-- 주문 버튼 -->
-<button th:href="@{|/order_detail/${userId}/|}">주문</button>
-
+<a th:href="@{/order_confirmation}">
+<button onclick="checkoutCart()">주문</button>
+</a>
 <script th:inline="javascript">
   // 체크박스 상태 변경 시 호출되는 함수
   function updateCart(checkbox) {
     var gameId = checkbox.getAttribute("data-gameid");
     var isChecked = checkbox.checked;
-    var userId = [[${userId}]];
 
 
-    fetch('/order_basket/update?gameId=' + gameId + '&isChecked=' + isChecked + '&userId=' + userId, {
+    fetch('/order_basket/update?gameId=' + gameId + '&isChecked=' + isChecked, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,20 +68,30 @@
   }
 
   // 주문 버튼 클릭 시 호출되는 함수
-  // function checkoutCart() {
-  //   fetch('/order_basket/checkout', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //           .then(response => response.json())
-  //           .then(data => {
-  //             // 주문 결과에 대한 처리
-  //             console.log(data);
-  //           })
-  //           .catch(error => console.error('Error:', error));
-  // }
+  function checkoutCart() {
+    fetch('/order_basket/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+            .then(response => response.json())
+            .then(data => {
+              // 주문 결과에 대한 처리
+              console.log(data);
+
+              // 주문이 성공적으로 처리되면 현재 창의 URL을 변경하여 주문 영수증 페이지로 이동
+              if (data.success) {
+                redirectToOrderReceipt();
+              }
+            })
+            .catch(error => console.error('Error:', error));
+  }
+
+  function redirectToOrderReceipt() {
+    // 주문 영수증 페이지로 리디렉션
+    window.location.href = '/order_confirmation';
+  }
 
   // 총 가격을 업데이트하는 함수
   function updateTotalPrice() {

@@ -434,9 +434,51 @@
 <!--                    <button class="btn btn-primary" th:onclick="|location.href = '/order_detail/' + ${gamePost.id} + '/' + ${UserId}|" style="width: 200px; margin-top: 10px;"-->
 <!--                            type="button">게임 구매-->
                     </button>
-                    <div style="margin-top: 10px;">
-                        <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
-                    </div>
+                            <div style="margin-top: 10px;">
+                                <th:block th:if="${cartItemAll.empty}">
+                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
+                                </th:block>
+                                <th:block th:unless="${not cartItemAll.empty}">
+                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
+                                </th:block>
+                                <th:block th:each="cartItemAll : ${cartItemAll}">
+                                    <th:block th:each="shoppingCart : ${shoppingCart}">
+                                    <button th:if="${cartItemAll.checked == false and cartItemAll.shoppingCart.id == shoppingCart.id and cartItemAll.gamePost.id == gamePost.id}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
+                                    <button th:if="${cartItemAll.checked == true and cartItemAll.shoppingCart.id == shoppingCart.id and cartItemAll.gamePost.id == gamePost.id}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>
+                                    </th:block>
+                                </th:block>
+
+                                <!-- 장바구니가 비어 있을 때 -->
+<!--                                <th:block th:if="${cartItemAll.empty}">-->
+<!--                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>-->
+<!--                                </th:block>-->
+
+<!--                                &lt;!&ndash; 장바구니가 비어 있지 않을 때 &ndash;&gt;-->
+<!--                                <th:block th:if="${not cartItemAll.empty}">-->
+<!--                                    &lt;!&ndash; 각 장바구니 아이템에 대한 버튼 표시 &ndash;&gt;-->
+<!--                                    <th:block th:each="cartItem : ${cartItemAll}">-->
+<!--                                        <th:block th:each="shoppingCart : ${shoppingCart}">-->
+<!--                                            &lt;!&ndash; "장바구니 추가" 버튼 &ndash;&gt;-->
+<!--                                            <button th:if="${cartItem.checked == false and cartItem.shoppingCart.id == shoppingCart.id and (cartItem.gamePost == null or cartItem.gamePost.id == gamePost.id) and cartItem.shoppingCart.id == null}"-->
+<!--                                                    id="addToCartBtn"-->
+<!--                                                    class="btn btn-outline-secondary"-->
+<!--                                                    style="width: 200px;"-->
+<!--                                                    type="button"-->
+<!--                                                    onclick="addToCart()">장바구니 추가</button>-->
+
+<!--                                            &lt;!&ndash; "장바구니 제거" 버튼 &ndash;&gt;-->
+<!--                                            <button th:if="${cartItem.checked == true and cartItem.shoppingCart.id == shoppingCart.id and cartItem.gamePost.id == gamePost.id}"-->
+<!--                                                    id="removeToCartBtn"-->
+<!--                                                    class="btn btn-outline-secondary"-->
+<!--                                                    style="width: 200px;"-->
+<!--                                                    type="button"-->
+<!--                                                    onclick="removeFromCart()">장바구니 제거</button>-->
+<!--                                        </th:block>-->
+<!--                                    </th:block>-->
+<!--                                </th:block>-->
+                            </div>
+
+
                     <hr>
                     <div>
                         <ul class="list-group list-group-flush">
@@ -498,6 +540,9 @@
         var userId = /*[[${UserId}]]*/
         var gameId = /*[[${gameId}]]*/
 
+        var addToCartBtn = document.getElementById('addToCartBtn');
+        addToCartBtn.style.display = 'none';
+
         $.ajax({
             type: 'POST',
             url: '/add-to-cart',
@@ -507,6 +552,8 @@
 
                 // 제품이 추가되면 버튼의 클래스를 btn-secondary로 변경
                 $('#addToCartBtn').removeClass('btn-outline-secondary').addClass('btn-secondary');
+
+                location.reload();
             },
             error: function (error) {
                 alert('오류: ' + error.responseText);
@@ -514,8 +561,12 @@
         });
     }
 
-    // 쇼핑 카트에서 상품 제거
+    // // 쇼핑 카트에서 상품 제거
     function removeFromCart(userId, gameId) {
+        // 사용자 아이디와 게임 아이디는 실제 값으로 대체해야 합니다.
+        var userId = /*[[${UserId}]]*/
+        var gameId = /*[[${gameId}]]*/
+
         $.ajax({
             type: 'POST',
             url: '/remove-from-cart',
@@ -524,13 +575,16 @@
                 alert(response);
 
                 // 제품이 제거되면 버튼의 클래스를 btn-secondary에서 btn-outline-secondary로 변경
-                $('#addToCartBtn').removeClass('btn-secondary').addClass('btn-outline-secondary');
+                $('#removeToCartBtn').removeClass('btn-secondary').addClass('btn-outline-secondary');
+
+                location.reload();
             },
             error: function (error) {
                 alert('오류: ' + error.responseText);
             }
         });
     }
+
 </script>
 
 </body>

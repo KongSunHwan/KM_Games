@@ -57,7 +57,7 @@ public class GamePost extends BaseTimeEntity{
     @OneToMany(mappedBy = "gamePost", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<GameReview> reviews = new ArrayList<>(); // 게임 리뷰 목록
 
-    @Column(name = "is_checked")
+    @Column(name = "is_checked", columnDefinition = "boolean default false")
     private Boolean isChecked;
 
     @ManyToOne

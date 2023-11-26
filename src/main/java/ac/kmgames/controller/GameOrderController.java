@@ -119,42 +119,49 @@ public class GameOrderController {
 //        return shoppingCart;
 //    }
 
-    @GetMapping("/order_confirmation")
+    @RequestMapping("/order_confirmation")
     public String showOrderConfirmation(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        long userId = user.getId();
+        GameOrder order = gameOrderService.getLastOrder(userId);
+        model.addAttribute("order", order);
 
-        if (user != null) {
-            long userId = user.getId();
-            GameOrder order = gameOrderService.getLastOrder(userId);
+//        if (user != null) {
+//            long userId = user.getId();
+//            GameOrder order = gameOrderService.getLastOrder(userId);
+//
+//            if (order != null) {
+//                model.addAttribute("order", order);
+//                return "order_confirmation/order_confirmation";
+//            }
+//        }
 
-            if (order != null) {
-                model.addAttribute("order", order);
-                return "order_confirmation/order_confirmation";
-            }
-        }
+        return "order_confirmation/order_confirmation";
 
         // 로그인되지 않은 경우 또는 주문이 없는 경우
-        return "redirect:/";
+//        return "redirect:/";
     }
 
     // 주문 영수증 페이지
-    @GetMapping("/order_receipt")
+    @RequestMapping("/order_receipt")
     public String order_receipt(HttpSession session, Model model) {
 
         User user = (User) session.getAttribute("user");
+        long userId = user.getId();
+        GameOrder order = gameOrderService.getLastOrder(userId);
+        model.addAttribute("order", order);
 
-        if (user != null) {
-            long userId = user.getId();
-            GameOrder order = gameOrderService.getLastOrder(userId);
+//        if (user != null) {
+//            long userId = user.getId();
+//            GameOrder order = gameOrderService.getLastOrder(userId);
+//
+//            if (order != null) {
+//                model.addAttribute("order", order);
+//                return "order_receipt/order_receipt";
+//            }
+//        }
 
-            if (order != null) {
-                model.addAttribute("order", order);
-                return "order_receipt/order_receipt";
-            }
-        }
-
-        // 로그인되지 않은 경우 또는 주문이 없는 경우
-        return "redirect:/";
+        return "order_receipt/order_receipt";
     }
 
     // 쇼핑 카트 페이지
@@ -195,7 +202,7 @@ public class GameOrderController {
         long userId = user.getId();
 
         shoppingCartService.addGameToCart(gameId, userId);
-        return "redirect:/order_basket";
+        return "redirect:/order_basket/{userId}";
     }
 
     @PostMapping("/order_basket/update")
@@ -206,7 +213,7 @@ public class GameOrderController {
         long userId = user.getId();
 
         shoppingCartService.setGameItemChecked(gameId, isChecked, userId);
-        return "redirect:/order_basket";
+        return "redirect:/order_basket/{userId}";
     }
 
     @PostMapping("/order_basket/remove")
@@ -217,7 +224,7 @@ public class GameOrderController {
         long userId = user.getId();
 
         shoppingCartService.removeGameFromCart(gameId, userId);
-        return "redirect:/order_basket";
+        return "redirect:/order_basket/{userId}";
     }
 
     @PostMapping("/order_basket/checkout")
@@ -230,10 +237,11 @@ public class GameOrderController {
         GameOrder order = shoppingCartService.orderSelectedItems(userId);
         if (order != null) {
             model.addAttribute("order", order);
+            model.addAttribute("userId", userId);
             return "redirect:/order_receipt";
         } else {
             // 아무 것도 선택되지 않은 경우 처리
-            return "redirect:/order_receipt";
+            return "redirect:/";
         }
     }
 }

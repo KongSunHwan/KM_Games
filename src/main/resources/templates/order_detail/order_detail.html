@@ -57,7 +57,7 @@
                                            type="checkbox"/>
                                 </td>
                                 <td style="border-left: none; border-right: none;">
-                                    <img style="width: 80%;"
+                                    <img style="width: 500px; height: 330px;"
                                          th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}">
                                 </td>
                                 <td style="text-align: center; padding-left: 10px; border-left: none; font-weight: bold;">
@@ -191,10 +191,12 @@
                     <span style="display: inline-block; padding: 20px 10px;">최종결제 금액</span><br/>
                     <span style="font-size: 25pt; font-weight: bold; padding: 0px  10px;" id="totalPrice">0</span>
                     <br/><br/>
+                    <a th:href="@{/order_receipt}">
                     <button class="btn default"
                             style="width: 90%; height: 60px; margin-right: 10px; font-size: 20px;"
                             type="button" onclick="checkoutCart()">결제하기
                     </button>
+                    </a>
                 </div>
             </div>
             <br/><br/>
@@ -267,7 +269,7 @@
         function updateCart(checkbox) {
             var gameId = checkbox.getAttribute("data-gameid");
             var isChecked = checkbox.checked;
-            var userId = [[${userId}]];
+            var userId = [[${userId}]]
 
 
             fetch('/order_basket/update?gameId=' + gameId + '&isChecked=' + isChecked + '&userId=' + userId, {
@@ -296,13 +298,20 @@
                     console.log(data);
 
                     // 주문이 성공적으로 처리되면 사용자를 주문 영수증 페이지로 리디렉션
-                    if (data.success) {
-                        window.location.href = '/order_receipt';
-                    }
+                    // if (data.success) {
+                    //     redirectToOrderReceipt();
+                    // }
                 })
                 .catch(error => console.error('에러:', error));
+        }
 
-            window.location.href = '/order_receipt';
+        // 리디렉션 함수 정의
+        function redirectToOrderReceipt() {
+
+            var url = '/order_receipt/'
+
+            // 리다이렉트
+            window.location.href = url;
         }
 
         // 총 가격을 업데이트하는 함수

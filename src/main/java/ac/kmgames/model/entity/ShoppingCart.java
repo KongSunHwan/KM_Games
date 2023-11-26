@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.naming.Name;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,8 @@ public class ShoppingCart extends BaseTimeEntity {
     @ManyToMany
     @JoinTable(name = "cart_games",
             joinColumns = @JoinColumn(name = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "game_post_id"))
+            inverseJoinColumns = @JoinColumn(name = "game_post_id")
+            )
     private List<GamePost> gamePosts = new ArrayList<>();  // 쇼핑 카트에 담긴 게임 목록
 
     private int totalItems;  // 쇼핑 카드에 담긴 총 아이템 수
@@ -37,8 +39,7 @@ public class ShoppingCart extends BaseTimeEntity {
     @OneToOne(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
     private GameOrder gameOrder;  // 주문 정보
 
-    @Transient
-    private boolean isChecked;
+    private boolean isChecked = false;
 
     @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
     private List<CartItem> cartItems = new ArrayList<>();
