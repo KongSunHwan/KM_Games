@@ -22,4 +22,5 @@ public class CartItem extends BaseTimeEntity {
     private GamePost gamePost;
 
     private boolean isChecked = false;
+
 }

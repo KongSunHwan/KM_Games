@@ -449,10 +449,8 @@
 <!--                                    <button th:if="${cartItemAll.checked == true and cartItemAll.shoppingCart.id == shoppingCart.id and cartItemAll.gamePost.id == gamePost.id}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>-->
 <!--                                    </th:block>-->
 <!--                                </th:block>-->
-
-                                <button th:if="${cart == 0}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
-                                <button th:if="${cart == 1}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>
-
+                                    <button th:if="${cart == 0}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
+                                    <button th:if="${cart == 1}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>
                             </div>
 
 
