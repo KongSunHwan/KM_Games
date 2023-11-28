@@ -32,6 +32,7 @@ public class GameController{
     private final GamePostService gamePostService;
     private final CartItemService cartItemService;
     private final ShoppingCartService shoppingCartService;
+    private final GameOrderService orderService;
 
     @ModelAttribute("PriceStates")
     public PriceState[] PriceStates() {
@@ -107,17 +108,24 @@ public class GameController{
         User user = (User) session.getAttribute("user");
         Long UserId = user.getId();
 
+        long cart = cartItemService.countByGamePostAndUser(gamePostService.findById(id), user);
+
         List<CartItem> cartItemAll = cartItemService.findAll();
         List<ShoppingCart> shoppingCart = shoppingCartService.getShoppingCartByUser(UserId);
 
-        long cart = cartItemService.countByGamePostAndUser(gamePostService.findById(id), user);
+        // orderState 값 가져오기
+        Integer orderState = cartItemService.findOrderStateByGamePostAndUser(gamePostService.findById(id).orElse(null), user);
 
+        // 게임 포스트 ID 및 사용자 ID를 사용하여 isChecked 값을 가져오기
+        Boolean isChecked = cartItemService.getIsCheckedValue(id, UserId);
+
+        // Model에 isChecked 값을 추가
+        model.addAttribute("isChecked", isChecked);
+        model.addAttribute("orderState", orderState);
         model.addAttribute("cart", cart);
-
         model.addAttribute("gamePosts", gamePostService.findById(id).get());
         model.addAttribute("reviews", gameReviewService.getReviewsByGameId(id));
-        model.addAttribute("cartItemAll", cartItemAll);
-        model.addAttribute("shoppingCart", shoppingCart);
+
 
         // 세션에 유저 정보가 있으면 모델에 추가
         if (user != null) {

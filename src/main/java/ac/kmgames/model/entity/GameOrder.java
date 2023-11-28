@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -26,6 +28,7 @@ public class GameOrder extends BaseTimeEntity {
     @JoinTable(name = "order_games",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "game_post_id"))
+    @Fetch(FetchMode.SUBSELECT)
     private List<GamePost> gamePosts; // 주문에 포함된 게임 목록
 
     @Column(name = "total_amount", nullable = true)

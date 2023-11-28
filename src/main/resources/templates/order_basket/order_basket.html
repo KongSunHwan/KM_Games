@@ -174,11 +174,9 @@
                                 </div>
 
                         <div class="p-2 flex-shrink-1">
-<!--                            <a th:href="@{/order_receipt}">-->
                             <button type="button" class="btn btn-primary btn-lg" onclick="checkoutCart()">총 주문하기
                                 <span id="gameCount" class="badge text-bg-light">0</span>
                             </button>
-<!--                            </a>-->
                         </div>
                     </div>
 
@@ -277,7 +275,7 @@
         // 주문 영수증 페이지로 리디렉션
         setTimeout(function() {
             window.location.href = '/order_receipt';
-        }, 1000);  // 1초 후에 리디렉션
+        }, 2000);  // 2초 후에 리디렉션
     }
 
     // 총 가격을 업데이트하는 함수

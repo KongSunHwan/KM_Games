@@ -80,21 +80,6 @@ public class GameOrderController {
 //        return "redirect:/order_receipt/" + userId + "/" + gameId; // 주문 완료 페이지로 리다이렉트
 //    }
 
-//    @GetMapping("/order_history/{userId}")
-//    public String order_history(@PathVariable Long userId,
-//                                @PageableDefault(size = 3) Pageable pageable,
-//                                Model model) {
-//
-//        // 주문 세부 정보를 가져오기 위해 서비스 호출
-//        Page<GameOrder> orderPage = gameOrderService.findByUserIdWithGameInfo(userId, pageable);
-//
-//        // Model에 페이징된 주문 세부 정보 추가
-//        model.addAttribute("orderPage", orderPage.getContent());
-//        model.addAttribute("page", orderPage);
-//
-//        return "order_history/order_history";
-//    }
-
 //    @PostMapping("/cart/orderSelectedItems")
 //    public String orderSelectedItems(HttpServletRequest request) {
 //        ShoppingCart shoppingCart = getOrCreateShoppingCart(request); // 쇼핑 카트를 가져오거나 생성합니다.
@@ -140,6 +125,22 @@ public class GameOrderController {
 
         // 로그인되지 않은 경우 또는 주문이 없는 경우
 //        return "redirect:/";
+    }
+
+    // 회원 주문 내역
+    @GetMapping("/order_history/{userId}")
+    public String order_history(@PathVariable Long userId,
+                                @PageableDefault(size = 3) Pageable pageable,
+                                Model model) {
+
+        // 서비스를 통해 주문 내역 가져오기
+        Page<GameOrder> orderPage = gameOrderService.findOrdersByUserIdWithGameInfo(userId, pageable);
+
+        // Model에 페이징된 주문 세부 정보 추가
+        model.addAttribute("orderPage", orderPage.getContent());
+        model.addAttribute("page", orderPage);
+
+        return "order_history/order_history";
     }
 
     // 주문 영수증 페이지

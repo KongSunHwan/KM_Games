@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Slf4j
@@ -54,7 +55,7 @@ public class ShoppingCartService {
 //        }
 //    }
 
-    public void addToCart(Long userId, Long gameId, boolean isChecked) {
+    public void addToCart(Long userId, Long gameId, boolean isChecked, int orderState) {
         Optional<User> userOptional = userRepository.findById(userId);
         Optional<GamePost> gamePostOptional = gamePostRepository.findById(gameId);
 
@@ -80,6 +81,7 @@ public class ShoppingCartService {
             }
 
             cartItem.setChecked(isChecked);
+            cartItem.setOrderState(orderState); // 주문 상태 설정
 
             shoppingCartRepository.save(shoppingCart);
         } else {
@@ -87,7 +89,7 @@ public class ShoppingCartService {
         }
     }
 
-    public void removeFromCart(Long userId, Long gameId, boolean isChecked) {
+    public void removeFromCart(Long userId, Long gameId, boolean isChecked, int orderState) {
         // 사용자 ID에 해당하는 사용자 정보 조회
         Optional<User> userOptional = userRepository.findById(userId);
 
@@ -111,6 +113,7 @@ public class ShoppingCartService {
 
                 if (cartItem != null) {
                     cartItem.setChecked(isChecked);
+                    cartItem.setOrderState(orderState); // 주문 상태 설정
                     shoppingCartRepository.save(shoppingCart);
                 }
 
@@ -180,30 +183,74 @@ public class ShoppingCartService {
         }
     }
 
-    // 선택된 아이템으로 주문 생성
     @Transactional
     public GameOrder orderSelectedItems(long userId) {
+        // 현재 사용자 정보 가져오기
         User user = getCurrentUser(userId);
+
+        // 사용자의 쇼핑 카트 가져오기
         ShoppingCart shoppingCart = user.getShoppingCart();
         List<GamePost> selectedItems = shoppingCart.getSelectedItems();
 
+        // 선택된 상품이 있는지 확인
         if (!selectedItems.isEmpty()) {
-            GameOrder order = new GameOrder();
-            order.setUser(user);
-            order.setShoppingCart(shoppingCart);
-            order.setGamePosts(selectedItems);
-            order.setTotalAmount(shoppingCart.calculateTotalPrice(selectedItems));
-            order.setPaymentType(PaymentType.UNCHECKED_PAYMENT);
-            order.setOrderStatus(OrderStatus.COMPLETED);
+            // 이미 주문이 있는지 확인
+            GameOrder existingOrder = orderRepository.findByUserAndOrderStatus(user, OrderStatus.COMPLETED);
 
-            shoppingCart.removeSelectedItems();
-            shoppingCartRepository.save(shoppingCart);
+            if (existingOrder != null) {
+                // 이미 주문이 있는 경우 해당 주문을 업데이트
+                existingOrder.setGamePosts(selectedItems);
 
-            orderRepository.save(order);
+                // 총 가격 업데이트
+                int totalAmount = shoppingCart.calculateTotalPrice(selectedItems);
+                existingOrder.setTotalAmount(totalAmount);
 
-            return order;
+                existingOrder.setPaymentType(PaymentType.UNCHECKED_PAYMENT);
+
+                // 선택된 상품의 isChecked 필드를 null로 초기화하고 구매 상태로 설정
+                for (CartItem cartItem : shoppingCart.getCartItems()) {
+                    if (selectedItems.contains(cartItem.getGamePost())) {
+                        cartItem.setChecked(false);
+                        cartItem.setOrderState(2); // 이미 구매됨으로 설정
+                    }
+                }
+
+                // 주문과 쇼핑 카트 업데이트
+                orderRepository.save(existingOrder);
+                shoppingCart.removeSelectedItems();
+                shoppingCartRepository.save(shoppingCart);
+
+                return existingOrder; // 업데이트된 주문 반환
+            } else {
+                // 주문이 없는 경우 새로운 주문 생성
+                GameOrder newOrder = new GameOrder();
+                newOrder.setUser(user);
+                newOrder.setShoppingCart(shoppingCart);
+                newOrder.setGamePosts(selectedItems);
+
+                // 총 가격 설정
+                int totalAmount = shoppingCart.calculateTotalPrice(selectedItems);
+                newOrder.setTotalAmount(totalAmount);
+
+                newOrder.setPaymentType(PaymentType.UNCHECKED_PAYMENT);
+                newOrder.setOrderStatus(OrderStatus.COMPLETED);
+
+                shoppingCart.removeSelectedItems();
+                shoppingCartRepository.save(shoppingCart);
+
+                orderRepository.save(newOrder);
+
+                for (CartItem cartItem : shoppingCart.getCartItems()) {
+                    if (selectedItems.contains(cartItem.getGamePost())) {
+                        cartItem.setChecked(false);
+                        cartItem.setOrderState(2); // 이미 구매됨으로 설정
+                    }
+                }
+
+                return newOrder; // 새로 생성된 주문 반환
+            }
         } else {
-            return null;
+            return null; // 선택된 상품이 없는 경우 null 반환
         }
     }
 

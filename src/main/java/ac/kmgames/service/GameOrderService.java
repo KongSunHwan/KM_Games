@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -79,6 +80,11 @@ public class GameOrderService {
         } else {
             return null;
         }
+    }
+
+    // 멤버의 주문 목록을 가져오는 메서드
+    public Page<GameOrder> findOrdersByUserIdWithGameInfo(Long userId, Pageable pageable) {
+        return gameOrderRepository.findByUserIdWithGameInfo(userId, pageable);
     }
 
 }

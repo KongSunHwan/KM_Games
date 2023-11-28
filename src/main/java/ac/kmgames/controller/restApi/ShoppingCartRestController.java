@@ -27,7 +27,7 @@ public class ShoppingCartRestController {
     @PostMapping("/add-to-cart")
     public ResponseEntity<String> addToCart(@RequestParam Long userId, @RequestParam Long gameId) {
         try {
-            shoppingCartService.addToCart(userId, gameId, true);
+            shoppingCartService.addToCart(userId, gameId, true, 0);
             return ResponseEntity.ok("상품이 카트에 추가되었습니다.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("카트에 상품을 추가하는 중에 오류가 발생했습니다.");
@@ -37,7 +37,7 @@ public class ShoppingCartRestController {
     @PostMapping("/remove-from-cart")
     public ResponseEntity<String> removeFromCart(@RequestParam Long userId, @RequestParam Long gameId) {
         try {
-            shoppingCartService.removeFromCart(userId, gameId, false);
+            shoppingCartService.removeFromCart(userId, gameId, false, 1);
             return ResponseEntity.ok("상품이 카트에서 제거되었습니다.");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("카트에서 상품을 제거하는 중에 오류가 발생했습니다.");

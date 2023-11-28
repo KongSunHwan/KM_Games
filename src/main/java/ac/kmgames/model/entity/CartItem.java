@@ -21,6 +21,7 @@ public class CartItem extends BaseTimeEntity {
     @JoinColumn(name = "game_post_id", nullable = false)
     private GamePost gamePost;
 
-    private boolean isChecked = false;
+    private boolean isChecked;
 
+    private int orderState;
 }

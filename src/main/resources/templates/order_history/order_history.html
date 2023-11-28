@@ -37,54 +37,56 @@
           </div>
         </div>
 
-        <th:block th:each="orderPage : ${orderPage}">
-        <div class="row"> <!-- Start col-->
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="well-left">
-              <div class="single-well">
-                <a href="#">
-                  <img th:src="@{/gallery/download/{id}(id=${orderPage.gamePost.gamePhotos[0].id})}" alt="">
-                </a>
-              </div>
-            </div>
-          </div>
+        <th:block th:each="order : ${orderPage}">
+          <th:block th:each="gamePost : ${order.gamePosts}">
+                <div class="row"> <!-- Start col-->
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="well-left">
+                      <div class="single-well">
+                        <a href="#">
+                          <img th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}" alt="" style="width: 550px; height: 330px;">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
 
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="well-middle">
-              <div class="single-well">
-                <a href="#">
-                  <h4 class="sec-head">주문 정보</h4>
-                </a>
-                <p>
-                  <b class="text-success" th:text="${orderPage.orderStatus}">입금 확인 중</b>
-                </p>
-                <hr>
-                <ul>
-                  <li>
-                    <i class="bi bi-check"></i> <b>게임 제목 :</b> <span th:text="${orderPage.gamePost.gameTitle}">휴먼 폴 플랫</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> <b>게임 장르 :</b> <span th:text="${orderPage.gamePost.genreCode}">아케이드</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> <b>가격 :</b>
-                    <span th:if="${orderPage.gamePost.gamePrice > 0}" th:text="|${#numbers.formatDecimal(orderPage.gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|"></span>
-                    <span th:unless="${orderPage.gamePost.gamePrice > 0}">
-                    <span th:text="${orderPage.gamePost.priceState.description}"></span>
-                    </span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> <b>등급 분류 :</b> <span th:text="${orderPage.gamePost.ageLimit}">만 12세 이상</span>
-                  </li>
-                  <li>
-                    <i class="bi bi-check"></i> <b>개발사 :</b> <span th:text="${orderPage.gamePost.company}">KM_GAMES</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div> <!-- End col-->
-          <div>&nbsp;</div>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="well-middle">
+                      <div class="single-well">
+                        <a href="#">
+                          <h4 class="sec-head">주문 정보</h4>
+                        </a>
+                        <p>
+                          <b class="text-success" th:text="${order.orderStatus}">입금 확인 중</b>
+                        </p>
+                        <hr>
+                        <ul>
+                          <li>
+                            <i class="bi bi-check"></i> <b>게임 제목 :</b> <span th:text="${gamePost.gameTitle}">휴먼 폴 플랫</span>
+                          </li>
+                          <li>
+                            <i class="bi bi-check"></i> <b>게임 장르 :</b> <span th:text="${gamePost.genreCode}">아케이드</span>
+                          </li>
+                          <li>
+                            <i class="bi bi-check"></i> <b>가격 :</b>
+                            <span th:if="${gamePost.gamePrice > 0}" th:text="|${#numbers.formatDecimal(gamePost.gamePrice, 0, 'COMMA', 0, 'POINT')}원|"></span>
+                            <span th:unless="${gamePost.gamePrice > 0}">
+                            <span th:text="${gamePost.priceState.description}"></span>
+                            </span>
+                          </li>
+                          <li>
+                            <i class="bi bi-check"></i> <b>등급 분류 :</b> <span th:text="${gamePost.ageLimit}">만 12세 이상</span>
+                          </li>
+                          <li>
+                            <i class="bi bi-check"></i> <b>개발사 :</b> <span th:text="${gamePost.company}">KM_GAMES</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!-- End col-->
+                <div>&nbsp;</div>
+            </th:block>
         </th:block>
 
         &nbsp;
@@ -116,26 +118,6 @@
       </div>
     </div><!-- End About Section -->
 
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
-    <div>&nbsp;</div>
     <div>&nbsp;</div>
     <div>&nbsp;</div>
     <div>&nbsp;</div>

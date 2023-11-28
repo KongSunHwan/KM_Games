@@ -435,22 +435,27 @@
 <!--                            type="button">게임 구매-->
                     </button>
                             <div style="margin-top: 10px;">
-<!--                                <th:block th:if="${cartItemAll.empty or shoppingCart == null}">-->
-<!--                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>-->
-<!--                                </th:block>-->
 
-<!--                                <th:block th:unless="${not cartItemAll.empty}">-->
-<!--                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>-->
-<!--                                </th:block>-->
+                                <th:block th:if="${orderState == 0 or cart == 0}">
+                                    <!-- cart가 0이거나 orderState가 0인 경우 -->
+                                    <button th:if="${cart == 0 and orderState == 2}" class="btn btn-outline-secondary" style="width: 200px;" type="button" disabled>이미 구매됨</button>
+                                    <button th:unless="${cart == 0 or orderState == 2}" th:if="${cart == 0}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
+                                    <button th:if="${cart == 1 and orderState != 0}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>
+                                </th:block>
 
-<!--                                <th:block th:each="cartItemAll : ${cartItemAll}">-->
-<!--                                    <th:block th:each="shoppingCart : ${shoppingCart}">-->
-<!--                                    <button th:if="${cartItemAll.checked == false and cartItemAll.shoppingCart.id == shoppingCart.id and cartItemAll.gamePost.id == gamePost.id}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>-->
-<!--                                    <button th:if="${cartItemAll.checked == true and cartItemAll.shoppingCart.id == shoppingCart.id and cartItemAll.gamePost.id == gamePost.id}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>-->
-<!--                                    </th:block>-->
-<!--                                </th:block>-->
-                                    <button th:if="${cart == 0}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
-                                    <button th:if="${cart == 1}" id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>
+                                <th:block th:if="${orderState == 0 and cart == 1}">
+                                    <button id="removeToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="removeFromCart()">장바구니 제거</button>
+                                </th:block>
+
+                                <th:block th:if="${orderState == 1 and cart == 0}">
+                                    <button id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
+                                </th:block>
+
+                                <button th:if="${(orderState == null or orderState == 0) and cart == 0}" id="addToCartBtn" class="btn btn-outline-secondary" style="width: 200px;" type="button" onclick="addToCart()">장바구니 추가</button>
+
+                                <p th:text="|orderState=${orderState}|" style="color: red;"></p>
+                                <p th:text="|cart=${cart}|" style="color: blue;"></p>
+
                             </div>
 
 
@@ -528,7 +533,8 @@
                 // 제품이 추가되면 버튼의 클래스를 btn-secondary로 변경
                 $('#addToCartBtn').removeClass('btn-outline-secondary').addClass('btn-secondary');
 
-                location.reload();
+                // 페이지를 새로고침하는 대신, 장바구니 상태에 따라 화면을 업데이트하도록 변경
+                updateCartStatus(true);
             },
             error: function (error) {
                 alert('오류: ' + error.responseText);
@@ -555,12 +561,34 @@
                 // 제품이 제거되면 버튼의 클래스를 btn-secondary에서 btn-outline-secondary로 변경
                 $('#removeToCartBtn').removeClass('btn-secondary').addClass('btn-outline-secondary');
 
-                location.reload();
+                // 페이지를 새로고침하는 대신, 장바구니 상태에 따라 화면을 업데이트하도록 변경
+                updateCartStatus(false);
             },
             error: function (error) {
                 alert('오류: ' + error.responseText);
             }
         });
+    }
+
+    // 장바구니 상태에 따라 화면 업데이트
+    function updateCartStatus(isAdded) {
+        // 현재 장바구니 수량을 나타내는 요소의 ID
+        var cartQuantityElementId = 'cartQuantity';
+
+        // 장바구니 수량을 나타내는 요소 가져오기
+        var cartQuantityElement = document.getElementById(cartQuantityElementId);
+
+        if (cartQuantityElement) {
+            // 현재 장바구니 수량 가져오기
+            var currentQuantity = parseInt(cartQuantityElement.innerText);
+
+            // 제품이 추가되었으면 수량을 1 증가, 제거되었으면 수량을 1 감소
+            currentQuantity = isAdded ? (currentQuantity + 1) : (currentQuantity - 1);
+
+            // 업데이트된 장바구니 수량을 화면에 반영
+            cartQuantityElement.innerText = currentQuantity;
+
+        }
     }
 
 </script>

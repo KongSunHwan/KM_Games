@@ -16,4 +16,11 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
     @Query("SELECT COUNT(ci) FROM CartItem ci JOIN ci.shoppingCart sc WHERE ci.gamePost = :gamePost AND sc.user = :user And ci.isChecked = true")
     long countByGamePostAndUser(@Param("gamePost") Optional<GamePost> gamePost, @Param("user") User user);
+
+    @Query("SELECT ci.isChecked FROM CartItem ci JOIN ci.shoppingCart sc WHERE ci.gamePost = :gamePost AND sc.user = :user")
+    Boolean findIsCheckedByGamePostAndUser(@Param("gamePost") Optional<GamePost> gamePost, @Param("user") User user);
+
+    @Query("SELECT ci.orderState FROM CartItem ci JOIN ci.shoppingCart sc WHERE ci.gamePost = :gamePost AND sc.user = :user")
+    Integer findOrderStateByGamePostAndUser(@Param("gamePost") Optional<GamePost> gamePost, @Param("user") Optional<User> user);
+
 }

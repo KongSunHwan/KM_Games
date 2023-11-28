@@ -137,14 +137,14 @@
                         style="width: 100px;">
                     <option selected>정렬</option>
                     <option value="1">인기순</option>
-                    <option value="2">최신순</option>
-                    <option value="3">가격순</option>
+                    <option value="2">가격순</option>
                 </select>
             </div>
 
             <div th:if="${gamePosts.empty}">
                 <p style="text-align: center; font-size: 18px; font-weight: bold;">현재 게임이 없습니다.</p>
             </div>
+
 
             <div class="row" style="margin-top: 10px">
                 <th:block th:each="gamePost : ${gamePosts}">
