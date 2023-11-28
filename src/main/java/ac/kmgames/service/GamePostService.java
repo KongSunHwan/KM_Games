@@ -5,6 +5,7 @@ import ac.kmgames.model.dto.GameSearch;
 import ac.kmgames.model.entity.GamePhoto;
 import ac.kmgames.model.entity.GamePost;
 //import ac.kmgames.model.entity.QGamePost;
+import ac.kmgames.model.entity.PriceState;
 import ac.kmgames.model.repository.GamePhotoRepository;
 import ac.kmgames.model.repository.GamePostRepository;
 import ac.kmgames.model.utils.FileUtilities;
@@ -103,5 +104,15 @@ public class GamePostService {
 
     public Optional<GamePost> findById(long id) {
         return gamePostRepository.findById(id);
+    }
+
+    // 가격 상태(priceState)에 따라 게시물 검색
+    public Page<GamePost> findByPriceState(PriceState priceState, Pageable pageable) {
+        return gamePostRepository.findByPriceState(priceState, pageable);
+    }
+
+    // 게임 장르(genreCode)에 따라 게시물 검색
+    public Page<GamePost> findByGenreCode(String genreCode, Pageable pageable) {
+        return gamePostRepository.findByGenreCode(genreCode, pageable);
     }
 }

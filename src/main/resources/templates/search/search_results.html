@@ -12,10 +12,19 @@
     <link rel="stylesheet" href="/css/footer.css" />
     <link rel="shortcut icon" type="image/x-icon" href="/img/KM_GAMES_logo_icon.png" />
     <title>게임 검색 결과</title>
+
+    <style>
+        .no-underline {
+            text-decoration: none; /* 하이퍼링크 밑줄 제거 */
+        }
+    </style>
 </head>
 <body>
 <header th:replace="~{include/header}"></header>
 <div class="container">
+    <h2 th:if="${priceState != null}" th:text="'가격 상태: ' + ${priceState.getDescription()}"></h2>
+    <h2 th:if="${genreCode != null}" th:text="'게임 장르: ' + ${genreCode}"></h2>
+
     <div class="row">
         <div class="col-lg-3" style=" max-width: 240px;">
             <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -30,43 +39,47 @@
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false"
                             aria-controls="panelsStayOpen-collapseOne">
-                            액션
+                            게임 장르
                         </button>
                     </h2>
 
                     <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
                         aria-labelledby="panelsStayOpen-headingOne">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">1인칭 슈팅</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">3인칭 슈팅</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">격투 및 무술</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">숏뎀업</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">아케이드 및 리듬</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">플랫폼 게임 및 러너</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">핵 앤 슬래시 게임</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">어드벤처</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">메트로배니아</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">비주얼 노벨</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">어드벤처 RPG</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">캐주얼</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">퍼즐</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">풍부한 스토리</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">히든 오브젝트</li>
+                            <li class="list-group-item list-group-item-action text-center" th:each="gameGenreCode : ${GameGenreCodes}">
+                                <a class="no-underline" th:href="@{'/searchByGenreCode?genreCode=' + ${gameGenreCode.genreCode}}"
+                                   onclick="location.href='/searchByGenreCode?genreCode=' + '${gameGenreCode.genreCode}'">
+                                    <span th:text="${gameGenreCode.genreTypeName}"></span>
+                                </a>
+                            </li>
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">3인칭 슈팅</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">격투 및 무술</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">숏뎀업</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">아케이드 및 리듬</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">플랫폼 게임 및 러너</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">핵 앤 슬래시 게임</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">어드벤처</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">메트로배니아</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">비주얼 노벨</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">어드벤처 RPG</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">캐주얼</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">퍼즐</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">풍부한 스토리</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">히든 오브젝트</li>-->
                         </ul>
                     </div>
                 </div>
@@ -76,17 +89,23 @@
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
                             aria-controls="panelsStayOpen-collapseTwo">
-                            특별 세선
+                            가격 종류
                         </button>
                     </h2>
 
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
                         aria-labelledby="panelsStayOpen-headingTwo">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">무료</li>
-                            <li class="list-group-item list-group-item-action" name="category"
-                                style="cursor:pointer">체험판</li>
+                            <li class="list-group-item list-group-item-action text-center" th:each="priceState : ${PriceStates}">
+                                <a class="no-underline" th:href="@{'/searchByPriceState?priceState=' + ${priceState}}"
+                                   onclick="location.href='/searchByPriceState?priceState=' + '${priceState}'">
+                                    <span th:text="${priceState.getDescription()}"></span>
+                                </a>
+                            </li>
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">무료</li>-->
+<!--                            <li class="list-group-item list-group-item-action" name="category"-->
+<!--                                style="cursor:pointer">체험판</li>-->
                         </ul>
                     </div>
                 </div>
@@ -118,8 +137,7 @@
                     aria-label=".form-select-sm example">
                     <option selected>정렬</option>
                     <option value="1">인기순</option>
-                    <option value="2">최신순</option>
-                    <option value="3">가격순</option>
+                    <option value="2">가격순</option>
                 </select>
             </div>
 

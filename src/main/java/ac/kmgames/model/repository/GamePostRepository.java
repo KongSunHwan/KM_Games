@@ -2,10 +2,7 @@ package ac.kmgames.model.repository;
 
 
 import ac.kmgames.model.dto.GameSearch;
-import ac.kmgames.model.entity.Game;
-import ac.kmgames.model.entity.GamePhoto;
-import ac.kmgames.model.entity.GamePost;
-import ac.kmgames.model.entity.GameReview;
+import ac.kmgames.model.entity.*;
 //import com.querydsl.core.types.dsl.BooleanExpression;
 import org.apache.ibatis.javassist.compiler.ast.Keyword;
 import org.springframework.data.domain.Page;
@@ -40,5 +37,11 @@ public interface GamePostRepository extends JpaRepository<GamePost, Long> {
 
     // 게임 전체 리스트
     List<GamePost> findAll();
+
+    // 가격 상태(priceState)를 이용한 검색
+    Page<GamePost> findByPriceState(@Param("priceState") PriceState priceState, Pageable pageable);
+
+    // 게임 장르(genreCode)를 이용한 검색
+    Page<GamePost> findByGenreCode(@Param("genreCode") String genreCode, Pageable pageable);
 
 }
