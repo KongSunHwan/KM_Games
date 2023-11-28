@@ -11,11 +11,11 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class UserDTO {
     private long id;
+    private boolean ban;
+    private long cash;
     private String email;
-    private String password;
     private String name;
     private String nickname;
-    private long cash;
-    private Timestamp register_date;
-    private boolean ban;
+    private String password;
+    private String register_date;
 }

@@ -4,17 +4,20 @@
 <mapper namespace="ac.kmgames.model.mapper.UserMapper">
     <sql id="criteria">
         <trim prefix=" AND (" suffix=")" prefixOverrides="OR" >
-            <foreach item="type" collection ="typeArr">
+            <foreach item="cri.type" collection ="cri.typeArr">
                 <trim prefix="OR">
                     <choose>
-                        <when test="type == 'E'.toString()">
-                            email like concat ('%',#{keyword},'%')
+                        <when test="cri.type == 'E'.toString()">
+                            email like concat ('%',#{cri.keyword},'%')
                         </when>
-                        <when test="type == 'N'.toString()">
-                            name like concat ('%',#{keyword},'%')
+                        <when test="cri.type == 'N'.toString()">
+                            name like concat ('%',#{cri.keyword},'%')
                         </when>
-                        <when test="type == 'M'.toString()">
-                            nickname like concat ('%',#{keyword},'%')
+                        <when test="cri.type == 'M'.toString()">
+                            nickname like concat ('%',#{cri.keyword},'%')
+                        </when>
+                        <when test="cri.type == 'NM'.toString()">
+                            nickname like concat ('%',#{cri.keyword},'%') or name like concat ('%',#{cri.keyword},'%')
                         </when>
                     </choose>
                 </trim>
@@ -28,7 +31,7 @@
             <include refid="criteria"></include>
         </where>
         order by id desc
-        limit #{skip} , #{amount}
+        limit #{cri.skip} , #{cri.amount}
     </select>
 
     <select id="getCount" resultType="int">
@@ -43,5 +46,24 @@
         select *
         from user
         where id = #{id}
+    </select>
+
+    <select id="getUserListforDate" resultType="UserDTO">
+        select *
+        from user
+        <where>
+            <include refid="criteria"></include>
+            and register_date between #{startDate} and #{endDate}
+        </where>
+        order by id desc
+        limit #{cri.skip} , #{cri.amount}
+    </select>
+
+    <select id="getUserListForDateCount" resultType="int">
+        select count(*) from user
+        <where>
+            <include refid="criteria"></include>
+            and register_date between #{startDate} and #{endDate}
+        </where>
     </select>
 </mapper>

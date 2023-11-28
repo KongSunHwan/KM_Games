@@ -74,6 +74,15 @@ public class UserService{
         return new ResponsePageDTO.ResponseUser(pageList, pageDTO);
     }
 
+    public ResponsePageDTO.ResponseUser getUserListAdmin(Criteria criteria, String startDate, String endDate) {
+        Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
+        String endDates = endDate + " 23:59:59";
+        List<UserDTO> pageList = userMapper.getUserListforDate(cs, startDate, endDates);
+        int total = userMapper.getUserListForDateCount(criteria, startDate, endDate);
+        PageDTO pageDTO = new PageDTO(cs,total);
+        return new ResponsePageDTO.ResponseUser(pageList, pageDTO);
+    }
+
     //admin user detail by id
     public UserDTO getUserDetail(int id) {
         return userMapper.getUserDetail(id);
