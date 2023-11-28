@@ -68,22 +68,39 @@
           AND a.game_id = #{game_id}
     </select>
 
+<!--    <select id="getPaymentList" resultType="java.util.HashMap">-->
+<!--        select p.id, u.email, g.name, g.price, p.date, g.developer-->
+<!--        from payment_history p, game g, user u-->
+<!--        <where>-->
+<!--            p.game_id = g.id and p.user_id = u.id-->
+<!--            <include refid="criteria"></include>-->
+<!--        </where>-->
+<!--        order by p.date desc-->
+<!--        limit #{cs.skip} , #{cs.amount}-->
+<!--    </select>-->
+
     <select id="getPaymentList" resultType="java.util.HashMap">
-        select p.id, u.email, g.name, g.price, p.date, g.developer
-        from payment_history p, game g, user u
-        <where>
-            p.game_id = g.id and p.user_id = u.id
+        SELECT r.order_id,o.created_date_time, u.email,g.game_title,g.game_price
+        from game_order o, order_games r, user u, game_post g
+        <where> o.order_id = r.order_id AND o.user_id = u.id AND r.game_post_id = g.game_post_id
             <include refid="criteria"></include>
         </where>
-        order by p.date desc
+        order by o.created_date_time desc
         limit #{cs.skip} , #{cs.amount}
     </select>
+<!--    <select id="getPaymentListCnt" resultType="int">-->
+<!--        select count(*)-->
+<!--        from payment_history p, game g, user u-->
+<!--        <where>-->
+<!--            p.game_id = g.id and p.user_id = u.id-->
+<!--            <include refid="criteria"></include>-->
+<!--        </where>-->
+<!--    </select>-->
 
     <select id="getPaymentListCnt" resultType="int">
-        select count(*)
-        from payment_history p, game g, user u
-        <where>
-            p.game_id = g.id and p.user_id = u.id
+        SELECT count(*)
+        from game_order o, order_games r, user u, game_post g
+        <where> o.order_id = r.order_id AND o.user_id = u.id AND r.game_post_id = g.game_post_id
             <include refid="criteria"></include>
         </where>
     </select>
