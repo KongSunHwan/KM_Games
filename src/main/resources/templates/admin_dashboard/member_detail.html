@@ -108,14 +108,26 @@
     // paymentH를 출력하는 함수
     function paymentList(result) {
         $.each(result.godetailPageList, function (index, detail) {
-            var row = "<tr>" +
-                "<th scope=\"row\">" + detail.orderId + "</th>" +
-                "<th scope=\"row\">" + detail.gameTitle + "</th>" +
-                "<th scope=\"row\">" + detail.gamePrice + "</th>" +
-                "<th scope=\"row\">" + detail.orderDate + "</th>" +
-                "<input type='hidden' id='gamePostId' value='" + detail.gamePostId + "'>" +
-                "</tr>";
-            $("#paymentList").append(row);
+            if(detail.orderDate == null){
+                var row = "<tr>" +
+                    "<th scope=\"row\">" + detail.orderId + "</th>" +
+                    "<th scope=\"row\">" + detail.gameTitle + "</th>" +
+                    "<th scope=\"row\">" + detail.gamePrice + "</th>" +
+                    "<th scope=\"row\">" + detail.orderDate + "</th>" +
+                    "<input type='hidden' id='gamePostId' value='" + detail.gamePostId + "'>" +
+                    "</tr>";
+                $("#paymentList").append(row);
+            }
+            else{
+                var row = "<tr>" +
+                    "<th scope=\"row\">" + detail.orderId + "</th>" +
+                    "<th scope=\"row\">" + detail.gameTitle + "</th>" +
+                    "<th scope=\"row\">" + detail.gamePrice + "</th>" +
+                    "<th scope=\"row\">" + detail.orderDate.substring(0,19) + "</th>" +
+                    "<input type='hidden' id='gamePostId' value='" + detail.gamePostId + "'>" +
+                    "</tr>";
+                $("#paymentList").append(row);
+            }
         });
 
 
