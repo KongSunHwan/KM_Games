@@ -18,4 +18,6 @@ public class UserDTO {
     private String nickname;
     private String password;
     private String register_date;
+    private String created_date_time;
+    private String modified_date_time;
 }

@@ -53,7 +53,7 @@
         from user
         <where>
             <include refid="criteria"></include>
-            and register_date between #{startDate} and #{endDate}
+            and created_date_time between #{startDate} and #{endDate}
         </where>
         order by id desc
         limit #{cri.skip} , #{cri.amount}
@@ -63,7 +63,7 @@
         select count(*) from user
         <where>
             <include refid="criteria"></include>
-            and register_date between #{startDate} and #{endDate}
+            and created_date_time between #{startDate} and #{endDate}
         </where>
     </select>
 </mapper>
