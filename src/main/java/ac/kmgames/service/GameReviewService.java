@@ -45,6 +45,10 @@ public class GameReviewService{
         return repository.findAllByOrderByIdDesc(pageable);
     }
 
+    public Page<GameReview> findAllByUserIdOrderByIdDesc(Long userId, Pageable pageable) {
+        return repository.findAllByUserIdOrderByIdDesc(userId, pageable);
+    }
+
 //    public float getAverageRateByGamePostId(long id){
 //        var list = getAllByGamePostId(id);
 //        if(list.isEmpty()){

@@ -185,7 +185,13 @@ public class AdminController {
     }
 
     @GetMapping("member_detail/{id}")
-    public String member_detailGo(@PathVariable("id") Long id, Model model) {
+    public String member_detailGo(@PathVariable("id") Long id, Model model, @PageableDefault(size = 3) Pageable pageable) {
+
+        Page<GameReview> gameReviews = gameReviewService.findAllByUserIdOrderByIdDesc(id, pageable);
+
+        model.addAttribute("gameReviews", gameReviews.getContent());
+        model.addAttribute("page", gameReviews);
+
         return "admin_dashboard/member_detail";
     }
 

@@ -35,4 +35,6 @@ public interface GameReviewRepository extends Repository<GameReview, Long>{
     List<GameReview> findAllByOrderByIdDesc();
 
     Page<GameReview> findAllByOrderByIdDesc(Pageable pageable);
+
+    Page<GameReview> findAllByUserIdOrderByIdDesc(Long userId, Pageable pageable);
 }
