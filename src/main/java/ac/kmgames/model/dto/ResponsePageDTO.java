@@ -36,4 +36,11 @@ public class ResponsePageDTO {
         private PageDTO pageDTO;
     }
 
+    @Data
+    @AllArgsConstructor
+    public static class ResponseGODetail {
+        private List<GODetailDTO> godetailPageList;
+        private PageDTO pageDTO;
+    }
+
 }

@@ -1,27 +1,33 @@
 package ac.kmgames.service;
 
-import ac.kmgames.Exception.DuplicateOrderException;
+import ac.kmgames.model.dto.GODetailDTO;
+import ac.kmgames.model.dto.ResponsePageDTO;
 import ac.kmgames.model.entity.*;
+import ac.kmgames.model.mapper.GameOrderMapper;
 import ac.kmgames.model.repository.GameOrderRepository;
 import ac.kmgames.model.repository.GamePostRepository;
 import ac.kmgames.model.repository.UserRepository;
+import ac.kmgames.model.utils.Criteria;
+import ac.kmgames.model.utils.PageDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class GameOrderService {
     private final GameOrderRepository gameOrderRepository;
     private final GamePostRepository gamePostRepository;
     private final UserRepository userRepository;
+    private final GameOrderMapper gameOrderMapper;
 
     public List<GameOrder> getAllGameOrders() {
         return gameOrderRepository.findAll();
@@ -87,4 +93,14 @@ public class GameOrderService {
         return gameOrderRepository.findByUserIdWithGameInfo(userId, pageable);
     }
 
+    public ResponsePageDTO.ResponseGODetail getGODetalResponse(int id, Criteria criteria) {
+        Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
+//        List<HashMap> pageList = gameOrderMapper.getGODetail(id, cs);
+        List<GODetailDTO> pageList = gameOrderMapper.getGODetail1(id, cs);
+        log.info("pageList={}", pageList);
+        int total = gameOrderMapper.getCountGODetail(id, cs);
+        System.out.println("전체갯수 = " + total);
+        PageDTO pageDTO = new PageDTO(cs,total);
+        return new ResponsePageDTO.ResponseGODetail(pageList, pageDTO);
+    }
 }

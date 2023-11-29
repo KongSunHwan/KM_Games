@@ -73,8 +73,14 @@
                 userForm.find("input[id='emailText'").val(result.email);
                 userForm.find("input[id='nameText'").val(result.name);
                 userForm.find("input[id='nickNameText'").val(result.nickname);
-                userForm.find("input[id='createdTimeText'").val(result.created_date_time.substring(0,19));
-                userForm.find("input[id='modifiedTimeText'").val(result.modified_date_time.substring(0,19));
+                if(result.created_date_time == null){
+                    userForm.find("input[id='createdTimeText'").val(result.created_date_time);
+                    userForm.find("input[id='modifiedTimeText'").val(result.modified_date_time);
+                }
+                else{
+                    userForm.find("input[id='createdTimeText'").val(result.created_date_time.substring(0,19));
+                    userForm.find("input[id='modifiedTimeText'").val(result.modified_date_time.substring(0,19));
+                }
                 UserName = result.name;
                 saveUserObject(result);
             }
@@ -101,18 +107,20 @@
 
     // paymentH를 출력하는 함수
     function paymentList(result) {
-        $.each(result.paymentPageList, function (index, result) {
+        $.each(result.godetailPageList, function (index, detail) {
             var row = "<tr>" +
-                "<th scope=\"row\">" + result.id + "</th>" +
-                "<td>" + result.name + "</td>" +
-                "<td>" + result.genre + "</td>" +
-                "<td>" + result.developer + "</td>" +
-                "<td>" + result.price + "</td>" +
-                "<td>" + result.date + "</td>" +
+                "<th scope=\"row\">" + detail.orderId + "</th>" +
+                "<th scope=\"row\">" + detail.gameTitle + "</th>" +
+                "<th scope=\"row\">" + detail.gamePrice + "</th>" +
+                "<th scope=\"row\">" + detail.orderDate + "</th>" +
+                "<th scope=\"row\">" + detail.gamePostId + "</th>" +
+                "<th scope=\"row\">" + "안녕하세요" + "</th>" +
                 "</tr>";
             $("#paymentList").append(row);
         });
-        //paymentH pagination
+
+
+    //paymentH pagination
         var pagePHprev = $("#paymentP");
         if(result.pageDTO.prev != false)
         pagePHprev.append("<li class='page-item'>" + "<a class='page-link'>" + "이전" + "</a>"
