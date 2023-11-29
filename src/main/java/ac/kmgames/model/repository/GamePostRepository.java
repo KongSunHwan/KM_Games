@@ -39,9 +39,9 @@ public interface GamePostRepository extends JpaRepository<GamePost, Long> {
     List<GamePost> findAll();
 
     // 가격 상태(priceState)를 이용한 검색
-    Page<GamePost> findByPriceState(@Param("priceState") PriceState priceState, Pageable pageable);
+    Page<GamePost> findByPriceStateOrderByIdDesc(@Param("priceState") PriceState priceState, Pageable pageable);
 
     // 게임 장르(genreCode)를 이용한 검색
-    Page<GamePost> findByGenreCode(@Param("genreCode") String genreCode, Pageable pageable);
+    Page<GamePost> findByGenreCodeOrderByIdDesc(@Param("genreCode") String genreCode, Pageable pageable);
 
 }

@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Data
 @Entity(name = "cash_history")
 @NoArgsConstructor
-public class CashHistory{
+public class CashHistory extends BaseTimeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

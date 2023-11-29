@@ -93,13 +93,22 @@ public class GamePostService {
     }
 
     public Page<GamePost> findByKeyword(String keyword, String keywordType, Pageable pageable) {
+
+        Page<GamePost> page;
+
         if ("gameTitle".equals(keywordType)) {
-            return gamePostRepository.findByGameTitleContainingOrderByIdDesc(keyword, pageable);
+            page = gamePostRepository.findByGameTitleContainingOrderByIdDesc(keyword, pageable);
         } else if ("gameTags".equals(keywordType)) {
-            return gamePostRepository.findByGameTagsContainingOrderByIdDesc(keyword, pageable);
+            page = gamePostRepository.findByGameTagsContainingOrderByIdDesc(keyword, pageable);
+        } else {
+            return Page.empty();
         }
-        // 키워드 타입이 유효하지 않은 경우 빈 페이지 반환
-        return Page.empty();
+
+        for (GamePost gamePost : page.getContent()) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return page;
     }
 
     public Optional<GamePost> findById(long id) {
@@ -108,11 +117,23 @@ public class GamePostService {
 
     // 가격 상태(priceState)에 따라 게시물 검색
     public Page<GamePost> findByPriceState(PriceState priceState, Pageable pageable) {
-        return gamePostRepository.findByPriceState(priceState, pageable);
+        Page<GamePost> page = gamePostRepository.findByPriceStateOrderByIdDesc(priceState, pageable);
+
+        for (GamePost gamePost : page.getContent()) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return page;
     }
 
     // 게임 장르(genreCode)에 따라 게시물 검색
     public Page<GamePost> findByGenreCode(String genreCode, Pageable pageable) {
-        return gamePostRepository.findByGenreCode(genreCode, pageable);
+        Page<GamePost> page = gamePostRepository.findByGenreCodeOrderByIdDesc(genreCode, pageable);
+
+        for (GamePost gamePost : page.getContent()) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return page;
     }
 }

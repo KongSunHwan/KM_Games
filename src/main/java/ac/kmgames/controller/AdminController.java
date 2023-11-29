@@ -2,13 +2,18 @@ package ac.kmgames.controller;
 
 import ac.kmgames.model.dto.GameDTO;
 import ac.kmgames.model.dto.ResponsePageDTO;
+import ac.kmgames.model.entity.GamePost;
 import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.model.utils.Criteria;
 import ac.kmgames.service.*;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,26 +22,38 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class AdminController {
     private final UserService userService;
     private final PaymentService paymentService;
     private final GameReviewService gameReviewService;
     private final GameService gameService;
-
-    @Autowired
-    public AdminController(UserService userService, PaymentService paymentService,GameReviewService gameReviewService,GameService gameService){
-        this.userService = userService;
-        this.paymentService = paymentService;
-        this.gameReviewService = gameReviewService;
-        this.gameService = gameService;
-    }
+    private final GamePostService gamePostService;
 
     @GetMapping("game_management")
-    public String game_management(Criteria criteria, Model model) {
-        ResponsePageDTO.ResponseGame list = gameService.getGameListAdmin(criteria);
-        model.addAttribute("pageList", list);
+    public String game_management(@PageableDefault(size = 16) Pageable pageable, Model model) {
+        Page<GamePost> page = gamePostService.findAllByOrderByIdDesc(pageable);
+
+        model.addAttribute("gamePosts", page.getContent());
+        model.addAttribute("page", page);
 
         return "admin_dashboard/game_management";
+    }
+
+    @GetMapping("game_management_search")
+    public String game_management_search(
+            @RequestParam(name = "keyword") String keyword,
+            @RequestParam(name = "keywordType") String keywordType,
+            @PageableDefault(size = 16) Pageable pageable,
+            Model model
+    ) {
+        Page<GamePost> gamePosts = gamePostService.findByKeyword(keyword, keywordType, pageable);
+        model.addAttribute("gamePosts", gamePosts.getContent());
+        model.addAttribute("page", gamePosts);
+        model.addAttribute("keywordType", keywordType);
+        model.addAttribute("keyword", keyword);
+
+        return "admin_dashboard/game_management_search";
     }
 
     @GetMapping(value = "game_detail_manage")
@@ -102,7 +119,7 @@ public class AdminController {
 //    }
 
     @GetMapping("member_order")
-    public String member_order(Criteria criteria, Model model){
+    public String member_order(Criteria criteria,Model model){
         System.out.println(criteria.getType() + "asdfasdfasdf");
         ResponsePageDTO.ResponsePayment list = paymentService.getPaymentList(criteria);
         model.addAttribute("pageList", list);
@@ -165,7 +182,7 @@ public class AdminController {
     }
 
     @GetMapping("member_detail/{id}")
-    public String member_detailGo(@PathVariable("id") Long id) {
+    public String member_detailGo(@PathVariable("id") Long id, Model model) {
         return "admin_dashboard/member_detail";
     }
 

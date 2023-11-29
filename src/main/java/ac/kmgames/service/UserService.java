@@ -42,6 +42,17 @@ public class UserService{
         }
     }
 
+    @Transactional
+    public void updateUser(User user) {
+        // 데이터베이스에서 사용자 정보를 가져와 업데이트
+        User existingUser = userRepository.findById(user.getId()).orElse(null);
+
+        if (existingUser != null) {
+            existingUser.setCash(user.getCash()); // 현금 업데이트 및 다른 필요한 정보도 업데이트 가능
+            userRepository.save(existingUser);
+        }
+    }
+
     public List<User> getAll(int page){
         return userRepository.findAll(PageRequest.of(page, 5)).getContent();
     }
