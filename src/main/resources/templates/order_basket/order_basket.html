@@ -112,6 +112,15 @@
                     <div>&nbsp;</div>
 
                     <!--col 시작-->
+
+                    <!-- 장바구니 아이템이 없는 경우 메시지 표시 -->
+                    <th:block th:if="${shoppingCart.isEmpty()}">
+                        <div class="alert alert-info" role="alert">
+                            장바구니에 게임 아이템이 없습니다.
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${not shoppingCart.isEmpty()}">
                     <th:block th:each="cart : ${shoppingCart}">
                         <th:block th:each="gamePost : ${cart.gamePosts}">
                     <div class="row">
@@ -162,6 +171,7 @@
                     </div>
                             <div>&nbsp;</div>
                         </th:block>
+                    </th:block>
                     </th:block>
                     <!--col 끝-->
 

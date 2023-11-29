@@ -148,19 +148,22 @@ public class GameOrderController {
     public String order_receipt(HttpSession session, Model model) {
 
         User user = (User) session.getAttribute("user");
-        long userId = user.getId();
-        GameOrder order = gameOrderService.getLastOrder(userId);
-        model.addAttribute("order", order);
 
-//        if (user != null) {
-//            long userId = user.getId();
-//            GameOrder order = gameOrderService.getLastOrder(userId);
-//
-//            if (order != null) {
-//                model.addAttribute("order", order);
-//                return "order_receipt/order_receipt";
-//            }
-//        }
+        if (user != null) {
+            long userId = user.getId();
+            GameOrder order = gameOrderService.getLastOrder(userId);
+
+            if (order != null) {
+                model.addAttribute("order", order);
+            } else {
+                // 주문이 없는 경우 메인 페이지로 이동
+                return "redirect:/main";
+            }
+        } else {
+            // 사용자 정보가 없는 경우 메인 페이지로 이동
+            return "redirect:/";
+        }
+
 
         return "order_receipt/order_receipt";
     }

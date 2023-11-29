@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User{
+public class User extends BaseTimeEntity{
     public static User NULL(){
         return new User(-1, "", "", "", "", 0, null, false, null, null, null, null);
     }
