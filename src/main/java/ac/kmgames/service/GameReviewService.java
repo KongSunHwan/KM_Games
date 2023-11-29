@@ -11,6 +11,8 @@ import ac.kmgames.model.repository.UserRepository;
 import ac.kmgames.model.utils.Criteria;
 import ac.kmgames.model.utils.PageDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +35,14 @@ public class GameReviewService{
 
     public List<GameReview> getAll(){
         return repository.findAll();
+    }
+
+    public List<GameReview> findAllByOrderByIdDesc() {
+        return repository.findAllByOrderByIdDesc();
+    }
+
+    public Page<GameReview> findAllByOrderByIdDesc(Pageable pageable) {
+        return repository.findAllByOrderByIdDesc(pageable);
     }
 
 //    public float getAverageRateByGamePostId(long id){

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 import ac.kmgames.model.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.Repository;
 
 public interface GameReviewRepository extends Repository<GameReview, Long>{
@@ -29,4 +31,8 @@ public interface GameReviewRepository extends Repository<GameReview, Long>{
     List<GameReview> findByGamePost(GamePost gamePost);
 
     Optional<GameReview> findById(Long reviewId);
+
+    List<GameReview> findAllByOrderByIdDesc();
+
+    Page<GameReview> findAllByOrderByIdDesc(Pageable pageable);
 }

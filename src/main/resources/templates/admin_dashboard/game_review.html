@@ -75,34 +75,42 @@
                                                 </thead>
 
                                                 <tbody>
-                                                    <tr>
-                                                        <th scope="row">리뷰 번호</th>
-                                                        <td>게임 제목</td>
-                                                        <td>회원 이메일</td>
-                                                        <td>회원 리뷰내용</td>
-                                                        <td>평점</td>
-                                                        <td>날짜</td>
+                                                    <tr th:each="gameReview : ${gameReviews}">
+                                                        <th scope="row" th:text="${gameReview.id}">리뷰 번호</th>
+                                                        <td th:text="${gameReview.gamePost.gameTitle}">게임 제목</td>
+                                                        <td th:text="${gameReview.user.email}">회원 이메일</td>
+                                                        <td th:text="${gameReview.comment}">회원 리뷰내용</td>
+                                                        <td>
+                                                            <span th:each="i : ${#numbers.sequence(1, gameReview.rating)}">&#x2B50</span>
+                                                        </td>
+                                                        <td th:text="${#strings.substring(gameReview.createdDateTime, 0, 10)}">날짜</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
+
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination" style="justify-content: center;">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                        <span aria-hidden="true">&laquo;</span>
-                                                    </a>
+                                                <li class="page-item" th:if="${page.hasPrevious()}">
+                                                    <a class="page-link" th:href="@{|?page=0|}">처음</a>
                                                 </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Next">
-                                                        <span aria-hidden="true">&raquo;</span>
-                                                    </a>
+                                                <li class="page-item" th:if="${page.hasPrevious()}">
+                                                    <a class="page-link" th:href="@{|?page=${page.number - 1}|}">이전</a>
+                                                </li>
+                                                <th:block th:each="index : ${#numbers.sequence(0, page.totalPages - 1)}">
+                                                    <li class="page-item" th:class="${index == page.number} ? 'active' : ''">
+                                                        <a class="page-link" th:href="@{|?page=${index}|}" th:text="${index + 1}"></a>
+                                                    </li>
+                                                </th:block>
+                                                <li class="page-item" th:if="${page.hasNext()}">
+                                                    <a class="page-link" th:href="@{|?page=${page.number + 1}|}">다음</a>
+                                                </li>
+                                                <li class="page-item" th:if="${page.hasNext()}">
+                                                    <a class="page-link" th:href="@{|?page=${page.totalPages - 1}|}">마지막</a>
                                                 </li>
                                             </ul>
                                         </nav>
+
                                     </div>
                                 </div>
                             </div>

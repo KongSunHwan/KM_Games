@@ -91,8 +91,11 @@ public class AdminController {
     }
 
     @GetMapping("game_review")
-    public String game_review(Model model) {
-        model.addAttribute("gameReviews", gameReviewService.getAll());
+    public String game_review(Model model, @PageableDefault(size = 16) Pageable pageable) {
+        Page<GameReview> page = gameReviewService.findAllByOrderByIdDesc(pageable);
+
+        model.addAttribute("gameReviews", page.getContent());
+        model.addAttribute("page", page);
         return "admin_dashboard/game_review";
     }
 
