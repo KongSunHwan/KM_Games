@@ -113,8 +113,7 @@
                 "<th scope=\"row\">" + detail.gameTitle + "</th>" +
                 "<th scope=\"row\">" + detail.gamePrice + "</th>" +
                 "<th scope=\"row\">" + detail.orderDate + "</th>" +
-                "<th scope=\"row\">" + detail.gamePostId + "</th>" +
-                "<th scope=\"row\">" + "안녕하세요" + "</th>" +
+                "<input type='hidden' id='gamePostId' value='" + detail.gamePostId + "'>" +
                 "</tr>";
             $("#paymentList").append(row);
         });
