@@ -130,10 +130,21 @@ public class AdminController {
     }
 
     @GetMapping("member_searchs")
-    public String member_searchs(Criteria criteria, Model model) {
-        ResponsePageDTO.ResponseUser list = userService.getUserListAdmin(criteria);
-        model.addAttribute("pageList", list);
-        return "admin_dashboard/member_searchs";
+    public String member_searchs(Criteria criteria, Model model, String startDate, String endDate) {
+        if(endDate == null) {
+            System.out.println("날짜 선택 x");
+            ResponsePageDTO.ResponseUser list = userService.getUserListAdmin(criteria);
+            model.addAttribute("pageList", list);
+            return "admin_dashboard/member_searchs";
+        }
+        else{
+            System.out.println("날짜 선택 on");
+            ResponsePageDTO.ResponseUser list = userService.getUserListAdmin(criteria, startDate, endDate);
+            model.addAttribute("pageList", list);
+            model.addAttribute("startDate", startDate);
+            model.addAttribute("endDate", endDate);
+            return "admin_dashboard/member_searchs";
+        }
     }
 
     //회원상세정보
@@ -158,4 +169,8 @@ public class AdminController {
         return "admin_dashboard/member_detail";
     }
 
+    @GetMapping("/testt")
+    public String testerMethod() {
+        return "admin_dashboard/testt";
+    }
 }
