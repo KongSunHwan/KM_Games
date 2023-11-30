@@ -37,6 +37,7 @@
           </div>
         </div>
 
+        <th:block th:if="${page.totalElements > 0}">
         <th:block th:each="order : ${orderPage}">
           <th:block th:each="gamePost : ${order.gamePosts}">
                 <div class="row"> <!-- Start col-->
@@ -88,7 +89,13 @@
                 <div>&nbsp;</div>
             </th:block>
         </th:block>
+        </th:block>
 
+        <th:block th:unless="${page.totalElements > 0}">
+          <div class="text-center">
+            <p><b>현재 주문 내역이 없습니다.</b></p>
+          </div>
+        </th:block>
         &nbsp;
         &nbsp;
         <th:block th:if="${page.totalElements > 0}">
