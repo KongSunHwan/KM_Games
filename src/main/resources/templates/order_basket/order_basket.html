@@ -184,9 +184,10 @@
                                 </div>
 
                         <div class="p-2 flex-shrink-1">
-                            <button type="button" class="btn btn-primary btn-lg" onclick="checkoutCart()">총 주문하기
-                                <span id="gameCount" class="badge text-bg-light">0</span>
-                            </button>
+<!--                            <button type="button" class="btn btn-primary btn-lg" onclick="checkoutCart()">총 주문하기-->
+<!--                                <span id="gameCount" class="badge text-bg-light">0</span>-->
+<!--                            </button>-->
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#purchaseCash">총 주문하기</button>
                         </div>
                     </div>
 
@@ -216,6 +217,8 @@
 <!--footer 시작-->
 <header th:replace="~{include/footer}"></header>
 <!--footer 종료-->
+
+<div th:replace="~{cash/cash_modal}"></div>
 
 <div class="spinner-border text-primary" role="status" id="loadingSpinner" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
     <span class="visually-hidden">로딩 중...</span>

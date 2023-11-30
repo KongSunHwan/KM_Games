@@ -334,6 +334,8 @@
                                                             </tr>
                                                             </tbody>
                                                         </table>
+
+                                                        <th:block th:if="${page.totalElements > 0}">
                                                         <nav aria-label="Page navigation example">
                                                             <ul class="pagination" style="justify-content: center;">
                                                                 <li class="page-item" th:if="${page.hasPrevious()}">
@@ -355,6 +357,7 @@
                                                                 </li>
                                                             </ul>
                                                         </nav>
+                                                        </th:block>
                                                 </div>
                                             </div>
 
