@@ -88,9 +88,30 @@ final public class PaymentService{
 
     public ResponsePageDTO.ResponsePayment getPaymentList(Criteria criteria) {
         Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());
-        List<HashMap> paymentPageList = paymentMapper.getPaymentList(cs);
-        int total = paymentMapper.getPaymentListCnt(cs);
-        PageDTO pageDTO = new PageDTO(cs,total);
+
+        List<HashMap> paymentPageList = null;
+        int total = 0;
+        PageDTO pageDTO = null;
+
+        if(criteria.getType()==null){
+            paymentPageList = paymentMapper.getPaymentList(cs);
+            total = paymentMapper.getPaymentListCnt(cs);
+            pageDTO = new PageDTO(cs,total);
+        }else if (criteria.getType().equals("game")){
+            paymentPageList = paymentMapper.getPaymentListByGame(cs);
+            total = paymentMapper.getPaymentListByGameCnt(cs);
+            pageDTO = new PageDTO(cs,total);
+            System.out.println("GAME" + paymentPageList);
+
+        }else if(criteria.getType().equals("email")){
+            paymentPageList = paymentMapper.getPaymentListByEmail(cs);
+            total = paymentMapper.getPaymentListByEmailCnt(cs);
+            pageDTO = new PageDTO(cs,total);
+            System.out.println("email" + paymentPageList);
+
+        }
+
         return new ResponsePageDTO.ResponsePayment(paymentPageList, pageDTO);
+
     }
 }

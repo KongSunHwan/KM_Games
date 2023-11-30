@@ -123,7 +123,6 @@ public class AdminController {
 
     @GetMapping("member_order")
     public String member_order(Criteria criteria,Model model){
-        System.out.println(criteria.getType() + "asdfasdfasdf");
         ResponsePageDTO.ResponsePayment list = paymentService.getPaymentList(criteria);
         model.addAttribute("pageList", list);
         return "admin_dashboard/member_order";

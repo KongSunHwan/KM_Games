@@ -23,4 +23,12 @@ public interface PaymentMapper {
     List<HashMap> getPaymentList(@Param("cs") Criteria cs);
 
     int getPaymentListCnt(@Param("cs")  Criteria cs);
+
+    List<HashMap> getPaymentListByEmail(@Param("cs")  Criteria cs);
+
+    int getPaymentListByEmailCnt(@Param("cs") Criteria cs);
+
+    List<HashMap> getPaymentListByGame(@Param("cs") Criteria cs);
+
+    int getPaymentListByGameCnt(@Param("cs") Criteria cs);
 }

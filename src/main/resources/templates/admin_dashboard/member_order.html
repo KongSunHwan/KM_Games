@@ -203,8 +203,8 @@
                             <input type="hidden" name="amount" th:value="${pageList.pageDTO.cri.getAmount()}">
                             <div class="input-group">
                                 <select name="type" class="border border-secondary">
-                                    <option value="E" th:selected="${pageList.pageDTO.cri.getType()} == 'N'">이메일</option>
-                                    <option value="N" th:selected="${pageList.pageDTO.cri.getType()} == 'G'">게임</option>
+                                    <option value="email" th:selected="${pageList.pageDTO.cri.getType()} == 'email'">이메일</option>
+                                    <option value="game" th:selected="${pageList.pageDTO.cri.getType()} == 'game'">게임</option>
 <!--                                    <option value="M" th:selected="${pageList.pageDTO.cri.getType()} == 'D'">개발자</option>-->
                                 </select>
                                 <input class="form-control" type="text" name="keyword" th:value="${pageList.pageDTO.cri.getKeyword()}"
