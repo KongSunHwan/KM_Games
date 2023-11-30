@@ -66,14 +66,14 @@
 
     <div class="container-fluid mt-15">
 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
 
             <div class="col">
                 <div class="card mb-15">
-                    <div class="card-body">
+                    <div class="card-body" id="traffic-card">
                         <span class="badge bg-success float-right">이번달</span>
-                        <h6 class="card-title text-muted">판매 증가</h6>
-                        <h3 class="mb-10">100,234 개</h3>
+                        <h6 class="card-title text-muted">게임 판매 수</h6>
+                        <h3 id="gameSales" class="mb-10">100,234 개</h3>
                         <p class="text-muted mb-0">이전달 : 50,233개
                             <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.1%</span>
                         </p>
@@ -85,21 +85,8 @@
                 <div class="card mb-15">
                     <div class="card-body">
                         <span class="badge bg-success float-right">이번달</span>
-                        <h6 class="card-title text-muted">게임 증가</h6>
-                        <h3 class="mb-10">1,027 개</h3>
-                        <p class="text-muted mb-0">이전달: 502개
-                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.5%</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card mb-15">
-                    <div class="card-body">
-                        <span class="badge bg-success float-right">이번달</span>
-                        <h6 class="card-title text-muted">게임 플레이</h6>
-                        <h3 class="mb-10">1,234 증가</h3>
+                        <h6 class="card-title text-muted">게임 등록 수</h6>
+                        <h3 id="registrationCount" class="mb-10">1,234 증가</h3>
                         <p class="text-muted mb-0">이전달: 608 증가
                             <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 47.5%</span>
                         </p>
@@ -112,7 +99,34 @@
                 <div class="card mb-15">
                     <div class="card-body">
                         <span class="badge bg-success float-right">이번달</span>
-                        <h6 class="card-title text-muted">매출</h6>
+                        <h6 class="card-title text-muted">게임 판매 매출</h6>
+                        <h3 class="mb-10">100,234 개</h3>
+                        <p class="text-muted mb-0">이전달 : 50,233개
+                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.1%</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="card mb-15">
+                    <div class="card-body">
+                        <span class="badge bg-success float-right">이번달</span>
+                        <h6 class="card-title text-muted">누적 게임 판매 수</h6>
+                        <h3 class="mb-10">1,027 개</h3>
+                        <p class="text-muted mb-0">이전달: 502개
+                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.5%</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card mb-15">
+                    <div class="card-body">
+                        <span class="badge bg-success float-right">이번달</span>
+                        <h6 class="card-title text-muted">누적 게임 등록 수</h6>
                         <h3 class="mb-10">189,909,000 원</h3>
                         <p class="text-muted mb-0">이전달: 100,802,000 원
                             <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 46.9%</span>
@@ -126,52 +140,11 @@
                 <div class="card mb-15">
                     <div class="card-body">
                         <span class="badge bg-success float-right">이번달</span>
-                        <h6 class="card-title text-muted">판매 증가</h6>
-                        <h3 class="mb-10">100,234 개</h3>
-                        <p class="text-muted mb-0">이전달 : 50,233개
-                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.1%</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card mb-15">
-                    <div class="card-body">
-                        <span class="badge bg-success float-right">이번달</span>
-                        <h6 class="card-title text-muted">게임 증가</h6>
+                        <h6 class="card-title text-muted">누적 판매 매출</h6>
                         <h3 class="mb-10">1,027 개</h3>
                         <p class="text-muted mb-0">이전달: 502개
                             <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.5%</span>
                         </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card mb-15">
-                    <div class="card-body">
-                        <span class="badge bg-success float-right">이번달</span>
-                        <h6 class="card-title text-muted">게임 플레이</h6>
-                        <h3 class="mb-10">1,234 증가</h3>
-                        <p class="text-muted mb-0">이전달: 608 증가
-                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 47.5%</span>
-                        </p>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card mb-15">
-                    <div class="card-body">
-                        <span class="badge bg-success float-right">이번달</span>
-                        <h6 class="card-title text-muted">매출</h6>
-                        <h3 class="mb-10">189,909,000 원</h3>
-                        <p class="text-muted mb-0">이전달: 100,802,000 원
-                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 46.9%</span>
-                        </p>
-
                     </div>
                 </div>
             </div>
@@ -555,7 +528,6 @@
 
     </div>
 </div>
-</body>
 
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -583,18 +555,18 @@
                 type: 'GET',
                 success: function (data) {
                     // 차트 생성 함수 호출
-                    createMonthlyTrafficChart(data);
+                    createMonthlyTrafficChart(data, 'hl-line-main');
                 },
                 error: function (error) {
-                    console.error('데이터를 불러오는 중 에러 발생:', error);
+                    console.error('데이터 로드 중 오류가 발생했습니다:', error);
                 }
             });
         }
 
         // 차트 생성 함수
-        function createMonthlyTrafficChart(data) {
-            // Highcharts 사용하여 차트 생성
-            Highcharts.chart('hl-line-main', {
+        function createMonthlyTrafficChart(data, chartId) {
+            // Highcharts를 사용하여 차트 생성
+            const chart = Highcharts.chart(chartId, {
                 title: {
                     text: '월간 트래픽 차트'
                 },
@@ -608,24 +580,37 @@
                 },
                 series: [{
                     name: '등록된 게임 수',
-                    data: data.map(entry => entry.games)
+                    data: data.map(entry => entry.games),
+                    events: {
+                        click: function (event) {
+                            var clickedMonth = event.point.category;
+                            var clickedData = data.find(entry => entry.month === clickedMonth)
+                            console.log("클릭한 데이터 : ", clickedData);
+
+                            // 예를 들어, 판매 게임 수를 가져와서 #gameSales에 업데이트
+                            var clickedGames = clickedData.games;
+                            $('#gameSales').text(clickedGames + '개');
+                        }
+                    }
                 }, {
-                    name: '점속자 수',
+                    name: '임차인 수',
                     data: data.map(entry => entry.members)
                 }, {
-                    name: '게임 플레이 횟수',
+                    name: '게임 플레이 수',
                     data: data.map(entry => entry.plays)
                 }, {
                     name: '매출',
                     data: data.map(entry => entry.sales)
                 }]
             });
+
         }
 
         // 페이지 로드 시 데이터 가져오기
         getMonthlyTrafficData();
     });
 </script>
+
 
 
 <script>

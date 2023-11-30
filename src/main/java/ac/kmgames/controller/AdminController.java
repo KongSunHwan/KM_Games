@@ -145,6 +145,9 @@ public class AdminController {
 
     @GetMapping("monthly_sales")
     public String monthly_sales() {
+
+
+
         return "admin_dashboard/monthly_sales";
     }
 

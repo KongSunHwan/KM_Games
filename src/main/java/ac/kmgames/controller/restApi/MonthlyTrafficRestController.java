@@ -17,19 +17,23 @@ public class MonthlyTrafficRestController {
     private MonthlyTrafficService monthlyTrafficService;
     @GetMapping("/api/monthly-traffic")
     public List<MonthlyTrafficDTO> getMonthlyTraffic() {
-        // 테스트를 위한 임의의 데이터 생성
         List<MonthlyTrafficDTO> testData = new ArrayList<>();
         Random random = new Random();
 
-        for (int i = 1; i <= 12; i++) {
-            MonthlyTrafficDTO entry = new MonthlyTrafficDTO();
-            entry.setMonth("2023-" + (i < 10 ? "0" + i : i));
-            entry.setGames(random.nextInt(500) + 500); // 500부터 1000까지의 임의의 값
-            entry.setMembers(random.nextInt(200) + 300); // 300부터 500까지의 임의의 값
-            entry.setPlays(random.nextInt(10000) + 5000); // 5000부터 15000까지의 임의의 값
-            entry.setSales(random.nextInt(50000) + 50000); // 50000부터 100000까지의 임의의 값
+        int currentYear = java.time.LocalDate.now().getYear();
+        int currentMonth = java.time.LocalDate.now().getMonthValue();
 
-            testData.add(entry);
+        for (int i = 1; i <= 12; i++) {
+            if (i < currentMonth) {
+                MonthlyTrafficDTO entry = new MonthlyTrafficDTO();
+                entry.setMonth(currentYear + "-" + (i < 10 ? "0" + i : i));
+                entry.setGames(random.nextInt(500) + 500);
+                entry.setMembers(random.nextInt(200) + 300);
+                entry.setPlays(random.nextInt(10000) + 5000);
+                entry.setSales(random.nextInt(50000) + 50000);
+
+                testData.add(entry);
+            }
         }
 
         return testData;
