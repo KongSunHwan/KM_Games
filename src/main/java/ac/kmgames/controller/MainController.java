@@ -44,20 +44,26 @@ public class MainController{
 
     @GetMapping("/")
     public String index(HttpSession session, HttpServletRequest request,
-        @RequestParam(value = "page", defaultValue = "1") int page){
-        if(session.getAttribute("user") instanceof User user){
-            page = Math.max(page - 1, 0);
-            var startPage = (page / 5) * 5 + 1;
-            var pageCount = (int) Math.ceil(gameService.getCount() / 16.0);
-            request.setAttribute("page", page + 1);
-            request.setAttribute("start_page", startPage);
-            request.setAttribute("page_count", pageCount);
-            request.setAttribute("end_page", Math.min(startPage + 4, pageCount));
-            request.setAttribute("game_list", gameService.getAll(page));
-            return "index";
-        }else{
-            return "index_login";
-        }
+        @RequestParam(value = "page", defaultValue = "1") int page
+        , Model model) {
+
+        List<GamePost> highRatedGames = gamePostService.findAllByOrderByAverageRatingDesc();
+
+        model.addAttribute("gamePosts", highRatedGames);
+//        if(session.getAttribute("user") instanceof User user){
+//            page = Math.max(page - 1, 0);
+//            var startPage = (page / 5) * 5 + 1;
+//            var pageCount = (int) Math.ceil(gameService.getCount() / 16.0);
+//            request.setAttribute("page", page + 1);
+//            request.setAttribute("start_page", startPage);
+//            request.setAttribute("page_count", pageCount);
+//            request.setAttribute("end_page", Math.min(startPage + 4, pageCount));
+//            request.setAttribute("game_list", gameService.getAll(page));
+//            return "main";
+//        }else{
+//            return "index_login";
+//        }
+        return "index_login";
     }
 
     @ModelAttribute("GameGenreCodes")
@@ -79,8 +85,24 @@ public class MainController{
     }
 
     @GetMapping("/main")
-    public String main(@PageableDefault(size = 16) Pageable pageable,Model model) {
+    public String main(@PageableDefault(size = 16) Pageable pageable,
+                       @RequestParam(defaultValue = "POPULARITY") String sortOption,
+                       Model model) {
         Page<GamePost> page = gamePostService.findAllByOrderByIdDesc(pageable);
+
+        Page<GamePost> gamePosts;
+
+        switch (sortOption) {
+            case "LOW_TO_HIGH":
+                gamePosts = gamePostService.getGamesSortedByLowestPrice(pageable);
+                break;
+            case "HIGH_TO_LOW":
+                gamePosts = gamePostService.getGamesSortedByHighestPrice(pageable);
+                break;
+            default:
+                gamePosts = gamePostService.getGamesSortedByPopularity(pageable);
+                break;
+        }
 
         model.addAttribute("gamePosts", page.getContent());
         model.addAttribute("page", page);

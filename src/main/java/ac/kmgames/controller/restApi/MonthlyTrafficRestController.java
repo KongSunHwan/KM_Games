@@ -28,8 +28,6 @@ public class MonthlyTrafficRestController {
                 MonthlyTrafficDTO entry = new MonthlyTrafficDTO();
                 entry.setMonth(currentYear + "-" + (i < 10 ? "0" + i : i));
                 entry.setGames(random.nextInt(500) + 500);
-                entry.setMembers(random.nextInt(200) + 300);
-                entry.setPlays(random.nextInt(10000) + 5000);
                 entry.setSales(random.nextInt(50000) + 50000);
 
                 testData.add(entry);

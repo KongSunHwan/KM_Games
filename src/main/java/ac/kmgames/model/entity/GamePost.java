@@ -67,7 +67,6 @@ public class GamePost extends BaseTimeEntity{
     @Transient
     private int rating; // 별점
 
-    @Transient
     private double averageRating; // 평균 별점
 
     @Transient

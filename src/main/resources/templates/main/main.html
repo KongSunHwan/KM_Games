@@ -144,11 +144,12 @@
                 <hr style="margin:5px 0px;">
                 <div style="font-weight:bold; font-size:20px;">전체 목록</div>
 
-                <select aria-label=".form-select-sm example" class="form-select form-select-sm mt-2"
-                        style="width: 100px;">
+                <select aria-label=".form-select-sm example" id="sortOption" class="form-select form-select-sm mt-2"
+                        style="width: 100px;" onchange="changeSort()">
                     <option selected>정렬</option>
-                    <option value="1">인기순</option>
-                    <option value="2">가격순</option>
+                    <option value="POPULARITY">인기순</option>
+                    <option value="LOW_TO_HIGH">가격 낮은순</option>
+                    <option value="HIGH_TO_LOW">가격 높은순</option>
                 </select>
             </div>
 
@@ -222,6 +223,13 @@
 <script crossorigin="anonymous"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    function changeSort() {
+        var selectedOption = document.getElementById("sortOption").value;
+        window.location.href = "main?sortOption=" + selectedOption;
+    }
+</script>
 
 </body>
 </html>
