@@ -179,22 +179,22 @@
             <th:block th:if="${page.totalElements > 0}">
             <ul class="pagination mt-2" style="justify-content: center;">
                 <li class="page-item" th:if="${page.hasPrevious()}">
-                    <a class="page-link" th:href="@{|?page=0&keywordType=${keywordType}&keyword=${keyword}|}">처음</a>
+                    <a class="page-link" th:href="@{|?page=0&sortOption=${sortOption}|}">처음</a>
                 </li>
                 <li class="page-item" th:if="${page.hasPrevious()}">
-                    <a class="page-link" th:href="@{|?page=${page.number - 1}&keywordType=${keywordType}&keyword=${keyword}|}">이전</a>
+                    <a class="page-link" th:href="@{|?page=${page.number - 1}&sortOption=${sortOption}|}">이전</a>
                 </li>
                 <th:block th:each="index : ${#numbers.sequence(0, page.totalPages - 1)}">
                     <li class="page-item" th:class="${index == page.number ? 'active' : ''}">
-                        <a class="page-link" th:href="@{|/search?page=${index}&keywordType=${keywordType}&keyword=${keyword}|}" th:text="${index + 1}"></a>
+                        <a class="page-link" th:href="@{|/searchBySortOption?page=${index}&sortOption=${sortOption}|}" th:text="${index + 1}"></a>
                     </li>
                 </th:block>
 
                 <li class="page-item" th:if="${page.hasNext()}">
-                    <a class="page-link" th:href="@{|?page=${page.number + 1}&keywordType=${keywordType}&keyword=${keyword}|}">다음</a>
+                    <a class="page-link" th:href="@{|?page=${page.number + 1}&sortOption=${sortOption}|}">다음</a>
                 </li>
                 <li class="page-item" th:if="${page.hasNext()}">
-                    <a class="page-link" th:href="@{|?page=${page.totalPages - 1}&keywordType=${keywordType}&keyword=${keyword}|}">마지막</a>
+                    <a class="page-link" th:href="@{|?page=${page.totalPages - 1}&sortOption=${sortOption}|}">마지막</a>
                 </li>
             </ul>
             </th:block>

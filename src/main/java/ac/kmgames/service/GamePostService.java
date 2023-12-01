@@ -148,14 +148,32 @@ public class GamePostService {
     }
 
     public Page<GamePost> getGamesSortedByLowestPrice(Pageable pageable) {
-        return gamePostRepository.findAllByOrderByGamePriceAsc(pageable);
+        Page<GamePost> postList = gamePostRepository.findAllByOrderByGamePriceAsc(pageable);
+
+        for (GamePost gamePost : postList) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return postList;
     }
 
     public Page<GamePost> getGamesSortedByHighestPrice(Pageable pageable) {
-        return gamePostRepository.findAllByOrderByGamePriceDesc(pageable);
+        Page<GamePost> postList = gamePostRepository.findAllByOrderByGamePriceDesc(pageable);
+
+        for (GamePost gamePost : postList) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return postList;
     }
 
     public Page<GamePost> getGamesSortedByPopularity(Pageable pageable) {
-        return gamePostRepository.findAllByOrderByAverageRatingDesc(pageable);
+        Page<GamePost> postList = gamePostRepository.findAllByOrderByAverageRatingDesc(pageable);
+
+        for (GamePost gamePost : postList) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return postList;
     }
 }

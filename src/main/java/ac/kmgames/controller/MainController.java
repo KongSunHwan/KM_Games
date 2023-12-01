@@ -86,23 +86,9 @@ public class MainController{
 
     @GetMapping("/main")
     public String main(@PageableDefault(size = 16) Pageable pageable,
-                       @RequestParam(defaultValue = "POPULARITY") String sortOption,
                        Model model) {
         Page<GamePost> page = gamePostService.findAllByOrderByIdDesc(pageable);
 
-        Page<GamePost> gamePosts;
-
-        switch (sortOption) {
-            case "LOW_TO_HIGH":
-                gamePosts = gamePostService.getGamesSortedByLowestPrice(pageable);
-                break;
-            case "HIGH_TO_LOW":
-                gamePosts = gamePostService.getGamesSortedByHighestPrice(pageable);
-                break;
-            default:
-                gamePosts = gamePostService.getGamesSortedByPopularity(pageable);
-                break;
-        }
 
         model.addAttribute("gamePosts", page.getContent());
         model.addAttribute("page", page);
@@ -130,34 +116,63 @@ public class MainController{
     @GetMapping("/searchByPriceState")
     public String searchByPriceState(
             @RequestParam(name = "priceState") PriceState priceState,
-            @RequestParam(value = "page", defaultValue = "1") int page,
+            @PageableDefault(size = 16) Pageable pageable,
             Model model
     ) {
-        Pageable pageable = PageRequest.of(page - 1, 16);
         Page<GamePost> gamePosts = gamePostService.findByPriceState(priceState, pageable);
 
         model.addAttribute("gamePosts", gamePosts.getContent());
         model.addAttribute("page", gamePosts);
         model.addAttribute("priceState", priceState);
 
-        return "search/search_results";
+        return "search/searchByPriceState";
     }
 
     // 게임 장르(genreCode)에 따라 게시물 검색
     @GetMapping("/searchByGenreCode")
     public String searchByGenreCode(
             @RequestParam(name = "genreCode") String genreCode,
-            @RequestParam(value = "page", defaultValue = "1") int page,
+            @PageableDefault(size = 16) Pageable pageable,
             Model model
     ) {
-        Pageable pageable = PageRequest.of(page - 1, 16);
         Page<GamePost> gamePosts = gamePostService.findByGenreCode(genreCode, pageable);
 
         model.addAttribute("gamePosts", gamePosts.getContent());
         model.addAttribute("page", gamePosts);
         model.addAttribute("genreCode", genreCode);
 
-        return "search/search_results";
+        return "search/searchByGenreCode";
+    }
+
+    @GetMapping("/searchBySortOption")
+    public String getGames(@RequestParam(name = "sortOption",
+                           defaultValue = "POPULARITY") String sortOption,
+                           Model model,
+                           @PageableDefault(size = 16) Pageable pageable) {
+        Page<GamePost> gamePosts;
+
+        // 정렬 방식에 따라 다른 메소드 호출
+        switch (sortOption) {
+            case "POPULARITY":
+                gamePosts = gamePostService.getGamesSortedByPopularity(pageable);
+                break;
+            case "LOW_TO_HIGH":
+                gamePosts = gamePostService.getGamesSortedByLowestPrice(pageable);
+                break;
+            case "HIGH_TO_LOW":
+                gamePosts = gamePostService.getGamesSortedByHighestPrice(pageable);
+                break;
+            default:
+                // 기본값은 "POPULARITY"
+                gamePosts = gamePostService.getGamesSortedByPopularity(pageable);
+        }
+
+        // 모델에 결과 추가
+        model.addAttribute("gamePosts", gamePosts.getContent());
+        model.addAttribute("page", gamePosts);
+        model.addAttribute("sortOption", sortOption);
+
+        return "search/searchBySortOption";
     }
 
 //    @ResponseBody
