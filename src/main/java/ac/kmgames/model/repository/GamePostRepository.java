@@ -44,4 +44,15 @@ public interface GamePostRepository extends JpaRepository<GamePost, Long> {
     // 게임 장르(genreCode)를 이용한 검색
     Page<GamePost> findByGenreCodeOrderByIdDesc(@Param("genreCode") String genreCode, Pageable pageable);
 
+    // 평점이 높은 순으로 게임 조회
+    List<GamePost> findAllByOrderByAverageRatingDesc();
+
+    // 가격에 낮은 순
+    Page<GamePost> findAllByOrderByGamePriceAsc(Pageable pageable);
+
+    // 가격에 높은 순
+    Page<GamePost> findAllByOrderByGamePriceDesc(Pageable pageable);
+
+    // 인기도에 따른 정렬 및 페이징
+    Page<GamePost> findAllByOrderByAverageRatingDesc(Pageable pageable);
 }

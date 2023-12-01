@@ -140,6 +140,46 @@ public class GamePostService {
         return page;
     }
 
+    public List<GamePost> findAllByOrderByAverageRatingDesc() {
+        List<GamePost> postList = gamePostRepository.findAllByOrderByAverageRatingDesc();
+
+        for (GamePost gamePost : postList) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return postList;
+    }
+
+    public Page<GamePost> getGamesSortedByLowestPrice(Pageable pageable) {
+        Page<GamePost> postList = gamePostRepository.findAllByOrderByGamePriceAsc(pageable);
+
+        for (GamePost gamePost : postList) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return postList;
+    }
+
+    public Page<GamePost> getGamesSortedByHighestPrice(Pageable pageable) {
+        Page<GamePost> postList = gamePostRepository.findAllByOrderByGamePriceDesc(pageable);
+
+        for (GamePost gamePost : postList) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return postList;
+    }
+
+    public Page<GamePost> getGamesSortedByPopularity(Pageable pageable) {
+        Page<GamePost> postList = gamePostRepository.findAllByOrderByAverageRatingDesc(pageable);
+
+        for (GamePost gamePost : postList) {
+            gameReviewService.updateReviewStatistics(gamePost);
+        }
+
+        return postList;
+    }
+
 
     public String getGameTitle(long id) {
         return gamePostMapper.getGameTitle(id);

@@ -6,7 +6,5 @@ import lombok.Data;
 public class MonthlyTrafficDTO {
     private String month;
     private int games;
-    private int members;
-    private int plays;
     private int sales;
 }
