@@ -114,4 +114,9 @@ final public class PaymentService{
         return new ResponsePageDTO.ResponsePayment(paymentPageList, pageDTO);
 
     }
+
+    public List<HashMap> getOrderByGame(long id) {
+        return paymentMapper.getOrderByGame(id);
+
+    }
 }

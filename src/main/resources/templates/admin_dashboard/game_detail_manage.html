@@ -80,16 +80,16 @@
 
                 <div class="row">
                     <div class="card-body">
-
+                        <th:block th:each="gamePost : ${gamePosts}">
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-
-                                    <div class="card mb-3" style="max-width: 100%;" th:each="game_info : ${game_info}">
+                                    <div class="card mb-3" style="max-width: 100%;" >
                                         <div class="row g-0">
                                             <div class="col-md-4">
-                                                <img th:src="|/img/game/${game_info.thumbUrl}|"style="width: 350px; height:350px;">
+                                                <img  style="width: 430px; height:430px;" th:src="@{/gallery/download/{id}(id=${gamePost.gamePhotos[0].id})}">
                                             </div>
+
                                             <div class="col-md-8">
                                                     <div class="card-body">
                                                         <table class="table table-bordered .table-hover dt-responsive" >
@@ -99,41 +99,56 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody style="text-align: center" >
-                                                            <tr height="30px">
-                                                                <td  style="width:50%">게임이름</td>
-                                                                <td th:text="${game_info.name}"></td>
-                                                            </tr>
+                                                                <tr height="30px">
+                                                                    <td  style="width:50%">게임이름</td>
+                                                                    <td th:text="${gamePost.gameTitle}">1</td>
+                                                                </tr>
 
-                                                            <tr height="30px">
-                                                                <td  style="width:50%">가격</td>
-                                                                <td th:text="${game_info.price}"></td>
-                                                            </tr>
+                                                                <tr height="30px">
+                                                                    <td  style="width:50%">이용등급</td>
+                                                                    <td>[(${gamePost.ageLimit})]</td>
+                                                                </tr>
 
-                                                            <tr height="30px">
-                                                                <td  style="width:50%">장르</td>
-                                                                <td th:text="${game_info.genre}"></td>
-                                                            </tr>
-                                                            <tr height="30px">
-                                                                <td  style="width:50%">게임회사 / 개발자</td>
-                                                                <td th:text="${game_info.developer}"></td>
-                                                            </tr>   <tr height="30px">
-                                                                <td  style="width:50%">연령</td>
-                                                                <td th:text="${game_info.age}"></td>
-                                                            </tr>
-                                                            <tr height="30px">
-                                                                <td  style="width:50%">설명</td>
-                                                                <td th:text="${game_info.description}"></td>
-                                                            </tr>
+                                                                <tr height="30px">
+                                                                    <td  style="width:50%">장르</td>
+                                                                    <td>[(${gamePost.genreCode})]</td>
+                                                                </tr>
+
+                                                                <tr height="30px">
+                                                                    <td  style="width:50%">게임회사 / 개발자</td>
+                                                                    <td>[(${gamePost.company})]</td>
+                                                                </tr>
+
+                                                                <tr height="30px">
+                                                                    <td  style="width:50%">국적</td>
+                                                                    <td>[(${gamePost.nationalityCode})]</td>
+                                                                </tr>
+
+                                                                <tr height="30px">
+                                                                    <td  style="width:50%">플랫폼 종류</td>
+                                                                    <td>[(${gamePost.gameTitle})]</td>
+                                                                </tr>
+
+                                                                <tr height="30px">
+                                                                    <td  style="width:50%">게임 버전</td>
+                                                                    <td>[(${gamePost.gameVersion})]</td>
+                                                                </tr>
+
+                                                                <tr height="30px">
+                                                                    <td  style="width:50%">출시일</td>
+                                                                    <td th:text="${#strings.substring(gamePost.createdDateTime, 0, 10)}">[(${gamePost.createdDateTime})]>111-111</td>
+                                                                </tr>
                                                             </tbody>
                                                         </table>
-                                                        <div style="float: right">
-                                                        <button type="button" class="btn btn-danger">삭제</button>
-                                                        </div>
+<!--                                                        <div style="float: right">-->
+<!--                                                        <button type="button" class="btn btn-danger">삭제</button>-->
+<!--                                                        </div>-->
                                                         <br>
                                                     </div>
                                             </div>
                                         </div>
                                     </div>
+                                </th:block>
                                 </div>
                             </div>
                         </div>
@@ -143,32 +158,45 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div>
-                                    <h5 class="card-title">구매 내역</h5>
+                                    <h5 class="card-title">회원 구매 내역</h5>
                                     <div>&nbsp;
                                     <table class="table text-center">
                                         <thead>
                                         <tr>
-                                            <th scope="col">결제 번호</th>
-                                            <th scope="col">회원</th>
+                                            <th scope="col">주문 번호</th>
+                                            <th scope="col">회원 이메일</th>
+                                            <th scope="col">게임</th>
                                             <th scope="col">가격</th>
                                             <th scope="col">날짜</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="payment_game : ${payment_game}">
-                                            <th scope="row" th:text="${payment_game.id}">a</th>
-                                            <td th:text="${payment_game.name}">a</td>
-                                            <td th:text="${payment_game.price}">1원</td>
-                                            <td th:text="${payment_game.date}">12341234</td>
+                                        <th:block th:if="${#lists.isEmpty(order_list)}">
+                                            <tr>
+                                                <td colspan="5">주문 내역이 없습니다</td>
+                                            </tr>
+                                        </th:block>
+                                        <tr th:each="order_list : ${order_list}">
+                                            <th scope="row" th:text="${order_list.order_id}">주문번호</th>
+                                            <td th:text="${order_list.email}">회원 이메일</td>
+                                            <td th:text="${order_list.game_title}">게임</td>
+                                            <!--                                                        <td th:text="${pageList.developer}">개발자</td>-->
+                                            <td th:text="${order_list.game_price}">결제금액</td>
+                                            <td th:text="${#dates.format(order_list.created_date_time, 'yyyy-MM-dd HH:mm')}">날짜</td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                        <div style="float: right">
-                                            <button type="submit" class="btn btn-primary" th:onclick="|location.href = '/game_detail_payment?id=${id}'|">전체보기</button>
-                                        </div>
-                                </div>
+                                            <div style="float: right">
+<!--                                               수정 필요! -->
+                                                <button type="submit" class="btn btn-primary" th:onclick="|location.href = '/member_order?pageNum=1&amount=10&type=game&keyword=dsadsa' |">전체보기</button>
+<!--                                             <button type="submit" class="btn btn-primary" th:onclick="|location.href = '/member_order?pageNum=1&amount=10&type=game&keyword=' + ${game_title} |">전체보기</button>-->
+                                            </div>
+
+
+                                    </div>
                             </div>
                         </div>
+                        </th:block>
 
                         <br>
 
@@ -176,32 +204,101 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">리뷰 내역</h5>
+                                    <br>
+                                    <div class="card mb-2">
+                                        <div>
+                                            <h2><b>총 평점</b></h2>
+                                        </div>
+
+                                        <div class="card mb-3" style="max-width: 540px;">
+                                            <div class="row g-0">
+                                                <div class="col-md-4">
+                                                    <div style="margin-top: 60px;">
+                                                        <div class="fs-1 fw-bolder" style="text-align: center;">
+                                                            <span th:text="${reviewStatistics.averageRate}"></span>
+                                                            <div class="fs-5" id="starRating"></div>
+                                                            <div class="fs-6" th:text="|${reviewStatistics.reviewCount}개의 평가|"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body" style="margin-top: 5px;">
+                                                        <div class="card-text">5점
+                                                            <div class="progress">
+                                                                <div class="progress-bar"
+                                                                     th:style="'width: ' + ${reviewStatistics.fiveStarPercentage} + '%'"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card-text">4점
+                                                            <div class="progress">
+                                                                <div class="progress-bar"
+                                                                     th:style="'width: ' + ${reviewStatistics.fourStarPercentage} + '%'"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card-text">3점
+                                                            <div class="progress">
+                                                                <div class="progress-bar"
+                                                                     th:style="'width: ' + ${reviewStatistics.threeStarPercentage} + '%'"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card-text">2점
+                                                            <div class="progress">
+                                                                <div class="progress-bar"
+                                                                     th:style="'width: ' + ${reviewStatistics.twoStarPercentage} + '%'"></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card-text">1점
+                                                            <div class="progress">
+                                                                <div class="progress-bar"
+                                                                     th:style="'width: ' + ${reviewStatistics.oneStarPercentage} + '%'"></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     <div class="card mb-2">
                                         <div class="card-header bg-light">
                                             <i class="fa fa-comment fa"></i> 리뷰 목록
                                         </div>
 
+
+
                                         <div class="card-body">
-                                            <ul class="list-group list-group-flush" th:each="game_review : ${game_review}">
+                                            <ul class="list-group list-group-flush">
+                                                <th:block th:if="${reviews != null and reviews.isEmpty()}">
+                                                    <li class="list-group-item">
+                                                        <div class="fw-bolder text-center">현재 작성된 리뷰가 없습니다</div>
+                                                    </li>
+                                                </th:block>
 
-                                                <li class="list-group-item">
-                                                    <div class="form-inline mb-2">
-                                                        <i class="fa fa-user-circle-o fa-2x"></i>
-                                                        <span style="color:gray;" th:text="${game_review.email}">&nbsp;asdf@afsds</span>
-                                                        <div class="fs-6">
-                                                            <span th:each="starNumber : ${#numbers.sequence(1, game_review.rate)}">&#x2B50</span>
+                                                <th:block th:each="review : ${reviews}">
+                                                    <li class="list-group-item">
+                                                        <div class="form-inline mb-2">
+                                                            <label class="fw-bolder">
+                                                                <i class="fa fa-user-circle-o fa-2x"></i>
+                                                                <span class="text-primary fw-bolder" style="color:gray;"
+                                                                      th:text="|&nbsp; ${review.user.nickname}|"></span>
+                                                                <span class="fw-bolder" style="color:gray; padding-top: 10px; flex: 1;"
+                                                                      th:text="${#strings.substring(review.createdDateTime, 0, 10)}"></span>
+                                                                <div class="fs-6"><span
+                                                                        th:each="i : ${#numbers.sequence(1, review.rating)}">&#x2B50</span>
+                                                                </div>
+                                                            </label>
                                                         </div>
-                                                        </label>
-                                                    </div>
-                                                    <div class="fw-bolder" th:text="${game_review.comment}">asdfasdfdsfasfd</div>
-                                                    <div class="fw-bolder" style="color:gray; float: right; padding-top: 10px;" th:text="${game_review.date}">20231111</div>
-                                                </li>
-
+                                                        <div class="fw-bolder" th:text="${review.comment}"></div>
+                                                    </li>
+                                                </th:block>
                                             </ul>
                                             <br>
                                             <div style="float: right">
-                                                <button type="submit" class="btn btn-primary" th:onclick="|location.href = '/game_detail_review?id=${id}'|">전체보기</button>
+                                                <button type="submit" class="btn btn-primary" th:onclick="|location.href = '/game_review'|">전체보기</button>
                                             </div>
                                         </div>
                                     </div>

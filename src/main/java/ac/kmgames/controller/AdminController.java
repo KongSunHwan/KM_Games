@@ -7,6 +7,7 @@ import ac.kmgames.model.entity.GameReview;
 import ac.kmgames.model.entity.PaymentHistory;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.model.utils.Criteria;
+import ac.kmgames.model.utils.ReviewStatistics;
 import ac.kmgames.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -57,17 +58,77 @@ public class AdminController {
     }
 
     @GetMapping(value = "game_detail_manage")
-    public String gameManagement(@RequestParam(value = "id", defaultValue = "1") long id,Model model) {
+    public String gameManagement(long id, Model model) {
+//        List<GameDTO> game_info = gameService.get_game_info(id);
+//        List<HashMap> payment_game = paymentService.get_game_payment_l5(id);
+//        List<HashMap> game_review = gameReviewService.get_game_reivew_l5(id);
 
-        List<GameDTO> game_info = gameService.get_game_info(id);
-        List<HashMap> payment_game = paymentService.get_game_payment_l5(id);
-        List<HashMap> game_review = gameReviewService.get_game_reivew_l5(id);
+//        model.addAttribute("id", id);
+//        model.addAttribute("game_info", game_info);
+//        model.addAttribute("payment_game", payment_game);
+//        model.addAttribute("game_review", game_review);
 
-        model.addAttribute("id", id);
-        model.addAttribute("game_info", game_info);
-        model.addAttribute("payment_game", payment_game);
-        model.addAttribute("game_review", game_review);
+        //게임 정보
+        String game_name =gamePostService.getGameTitle(id);
+        model.addAttribute("gamePosts", gamePostService.findById(id).get());
+        model.addAttribute("game_title", game_name);
+
+        //리뷰항목
+        model.addAttribute("reviews", gameReviewService.getReviewsByGameId(id));
+        for (GamePost gamePost : gamePostService.findGamePostAll()) {
+            ReviewStatistics gameReviewStatistics = calculateReviewStatistics(gamePost.getId());
+            model.addAttribute("reviewStatistics[" + gamePost.getId() + "]", gameReviewStatistics);
+        }
+        ReviewStatistics reviewStatistics = calculateReviewStatistics(id);
+        model.addAttribute("reviewStatistics", reviewStatistics);
+
+        //주문내역
+        List<HashMap >list = paymentService.getOrderByGame(id);
+        model.addAttribute("order_list", list);
+
+
+
         return "admin_dashboard/game_detail_manage";
+    }
+
+    private ReviewStatistics calculateReviewStatistics(long gameId) {
+        // 게임 ID에 해당하는 리뷰 정보 가져오기
+        List<GameReview> reviews = gameReviewService.getReviewsByGameId(gameId);
+
+        // ReviewStatistics 객체 생성
+        ReviewStatistics reviewStatistics = new ReviewStatistics();
+
+        // 리뷰 정보를 기반으로 통계 계산
+        for (GameReview review : reviews) {
+            int rating = review.getRating();
+            switch (rating) {
+                case 5:
+                    reviewStatistics.setFiveStarCount(reviewStatistics.getFiveStarCount() + 1);
+                    break;
+                case 4:
+                    reviewStatistics.setFourStarCount(reviewStatistics.getFourStarCount() + 1);
+                    break;
+                case 3:
+                    reviewStatistics.setThreeStarCount(reviewStatistics.getThreeStarCount() + 1);
+                    break;
+                case 2:
+                    reviewStatistics.setTwoStarCount(reviewStatistics.getTwoStarCount() + 1);
+                    break;
+                case 1:
+                    reviewStatistics.setOneStarCount(reviewStatistics.getOneStarCount() + 1);
+                    break;
+                default:
+                    break;
+            }
+
+            // 리뷰 개수를 계산
+            reviewStatistics.calculateReviewCount();
+        }
+
+        // 리뷰 평균 평점을 계산
+        reviewStatistics.calculateAverageRate();
+
+        return reviewStatistics;
     }
 
     @GetMapping(value = "game_detail_payment")

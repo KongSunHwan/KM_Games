@@ -31,4 +31,6 @@ public interface PaymentMapper {
     List<HashMap> getPaymentListByGame(@Param("cs") Criteria cs);
 
     int getPaymentListByGameCnt(@Param("cs") Criteria cs);
+
+    List<HashMap> getOrderByGame(long id);
 }

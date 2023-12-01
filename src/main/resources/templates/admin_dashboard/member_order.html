@@ -231,6 +231,11 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                <tr th:if="${#lists.isEmpty(pageList.paymentPageList)}" >
+                                                    <td colspan="6">주문 내역이 존재하지 않습니다.</td>
+                                                </tr>
+
+
                                                 <tr th:each="pageList : ${pageList.paymentPageList}">
                                                         <th scope="row" th:text="${pageList.order_id}">주문번호</th>
                                                         <td th:text="${pageList.email}">회원 이메일</td>
@@ -244,6 +249,7 @@
                                             </table>
                                         </div>
                                         <nav aria-label="Page navigation example">
+                                            <th:block th:if="${pageList.pageDTO.totalCount} > 0">
                                             <ul class="pagination justify-content-center" style="align:center;">
                                                 <li th:if="${pageList.pageDTO.isPrev()}" class="paginate_button page-item previous">
                                                     <a class="page-link" th:href="${pageList.pageDTO.startPage -1}">이전</a>
@@ -255,8 +261,8 @@
                                                 <li th:if="${pageList.pageDTO.isNext()}" class="paginate_button page-item next" >
                                                     <a class="page-link" th:href="${pageList.pageDTO.endPage + 1}">다음</a>
                                                 </li>
-
                                             </ul>
+                                            </th:block>
                                         </nav>
                                     </div>
                                 </div>

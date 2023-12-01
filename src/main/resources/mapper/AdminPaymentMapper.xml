@@ -141,4 +141,11 @@
         </where>
     </select>
 
+    <select id="getOrderByGame" resultType="HashMap">
+        SELECT r.order_id,o.created_date_time, u.email,g.game_title,g.game_price
+        FROM game_order o, order_games r, user u, game_post g
+        WHERE o.order_id = r.order_id AND o.user_id = u.id AND r.game_post_id = g.game_post_id AND g.game_post_id=#{id}
+        limit 5
+    </select>
+
 </mapper>

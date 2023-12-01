@@ -6,6 +6,7 @@ import ac.kmgames.model.entity.GamePhoto;
 import ac.kmgames.model.entity.GamePost;
 //import ac.kmgames.model.entity.QGamePost;
 import ac.kmgames.model.entity.PriceState;
+import ac.kmgames.model.mapper.GamePostMapper;
 import ac.kmgames.model.repository.GamePhotoRepository;
 import ac.kmgames.model.repository.GamePostRepository;
 import ac.kmgames.model.utils.FileUtilities;
@@ -30,6 +31,8 @@ public class GamePostService {
     private final GamePostRepository gamePostRepository;
     private final GamePhotoRepository gamePhotoRepository;
     private final GameReviewService gameReviewService;
+    private final GamePostMapper gamePostMapper;
+
 
     public boolean save(GamePost gamePost){
         try{
@@ -135,5 +138,10 @@ public class GamePostService {
         }
 
         return page;
+    }
+
+
+    public String getGameTitle(long id) {
+        return gamePostMapper.getGameTitle(id);
     }
 }
