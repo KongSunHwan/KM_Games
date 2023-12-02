@@ -37,24 +37,23 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">
-                            <b>보유 KM캐시</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="text-secondary"><b>10000</b>&nbsp;KM 캐시</span>
-                            <div class="row">
+                            <b>현재 보유중인 캐시</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <span class="text-secondary"><b th:text="${session.user.cash}"></b>&nbsp;캐시</span>
+                            <!-- <div class="row">
                                 <div class="col-8 col-sm-6">
                                     <b>충전후 KM캐시</b>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <span class="text-secondary"> 0</span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="text-secondary">충전안내 <i class=" bi bi-exclamation-circle"></i></div>
-                    </div>
+                    </div> -->
                     <hr>
                     <div class="row">
                         <div class="col-3">
-                            <span>충전금액 : </span>
-                            <label for="amount" class="form-label"><b>KM 캐시</b></label>
+                            <label for="amount" class="form-label"><b>충전 금액</b></label>
                             <div>&nbsp;</div>
                             <input class="form-control" list="price_list" id="amount">
                             <datalist id="price_list">
