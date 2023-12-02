@@ -14,26 +14,10 @@ import java.util.Random;
 @RestController
 public class MonthlyTrafficRestController {
 
-    private MonthlyTrafficService monthlyTrafficService;
+    final private MonthlyTrafficService monthlyTrafficService;
     @GetMapping("/api/monthly-traffic")
-    public List<MonthlyTrafficDTO> getMonthlyTraffic() {
-        List<MonthlyTrafficDTO> testData = new ArrayList<>();
-        Random random = new Random();
-
-        int currentYear = java.time.LocalDate.now().getYear();
-        int currentMonth = java.time.LocalDate.now().getMonthValue();
-
-        for (int i = 1; i <= 12; i++) {
-            if (i < currentMonth) {
-                MonthlyTrafficDTO entry = new MonthlyTrafficDTO();
-                entry.setMonth(currentYear + "-" + (i < 10 ? "0" + i : i));
-                entry.setGames(random.nextInt(500) + 500);
-                entry.setSales(random.nextInt(50000) + 50000);
-
-                testData.add(entry);
-            }
-        }
-
-        return testData;
+    public List<MonthlyTrafficDTO> getMonthlyTraffic(String endDate) {
+        System.out.println("endDate : " + endDate);
+        return monthlyTrafficService.getMonthlyTraffic(endDate);
     }
 }
