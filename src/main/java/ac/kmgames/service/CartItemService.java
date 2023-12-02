@@ -2,16 +2,19 @@ package ac.kmgames.service;
 
 import ac.kmgames.model.entity.CartItem;
 import ac.kmgames.model.entity.GamePost;
+import ac.kmgames.model.entity.ShoppingCart;
 import ac.kmgames.model.entity.User;
 import ac.kmgames.model.repository.CartItemRepository;
 import ac.kmgames.model.repository.GamePostRepository;
 import ac.kmgames.model.repository.UserRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import java.nio.channels.Pipe;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +55,26 @@ public class CartItemService {
         Optional<User> userOptional = Optional.ofNullable(user);
 
         return cartItemRepository.findOrderStateByGamePostAndUser(gamePostOptional, userOptional);
+    }
+
+    // 페이징된 게임 정보 가져오는 메서드
+    public Page<CartItem> getGamePostsByUserIdAndOrderState(Long userId, Pageable pageable) {
+        return cartItemRepository.findGamePostsByUserIdAndOrderState(userId, pageable);
+    }
+
+    public List<GamePost> getGamesByMemberAndCart(Long memberId, Long cartId) {
+        List<CartItem> cartItems = cartItemRepository.findByShoppingCartUser_IdAndShoppingCartId(memberId, cartId);
+
+        // 게임 정보를 담을 리스트
+        List<GamePost> games = new ArrayList<>();
+
+        // 카트 아이템에서 게임 정보 추출
+        for (CartItem cartItem : cartItems) {
+            GamePost gamePost = cartItem.getGamePost();
+            games.add(gamePost);
+        }
+
+        return games;
     }
 
 }

@@ -24,11 +24,10 @@ public class GameOrder extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user; // 주문에 속한 유저
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "order_games",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "game_post_id"))
-    @Fetch(FetchMode.SUBSELECT)
     private List<GamePost> gamePosts; // 주문에 포함된 게임 목록
 
     @Column(name = "total_amount", nullable = true)

@@ -1,10 +1,10 @@
 package ac.kmgames.model.repository;
 
-import ac.kmgames.model.entity.GameOrder;
-import ac.kmgames.model.entity.OrderStatus;
-import ac.kmgames.model.entity.User;
+import ac.kmgames.model.dto.GODetailDTO;
+import ac.kmgames.model.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,8 +20,13 @@ public interface GameOrderRepository extends JpaRepository<GameOrder, Long> {
 //    boolean existsByGamePostIdAndUserId(Long gamePostId, Long userId);
 
     // 특정 사용자의 주문 내역과 연관된 게임 정보를 페이지별로 가져오기
-    @Query("SELECT go FROM GameOrder go JOIN go.gamePosts gp WHERE go.user.id = :userId ORDER BY go.id DESC")
-    Page<GameOrder> findByUserIdWithGameInfo(@Param("userId") Long userId, Pageable pageable);
+//    @Query("SELECT go FROM GameOrder go JOIN go.gamePosts gp WHERE go.user.id = :userId ORDER BY go.id DESC")
+//    Page<GameOrder> findByUserIdWithGameInfo(@Param("userId") Long userId, Pageable pageable);
+
+    // 특정 사용자의 주문 내역에 관련된 모든 게임 정보를 페이지별로 검색
+    @EntityGraph(attributePaths = "gamePosts")
+    @Query("SELECT go FROM GameOrder go WHERE go.user.id = :userId")
+    Page<GameOrder> findByUserIdWithAllGames(@Param("userId") Long userId, Pageable pageable);
 
     GameOrder findByUserAndOrderStatus(User user, OrderStatus orderStatus);
 

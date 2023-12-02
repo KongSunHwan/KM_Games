@@ -264,6 +264,10 @@ public class ShoppingCartService {
         return shoppingCartRepository.findByUserId(UserId);
     }
 
+    public Long findIdByUserId(Long userId) {
+        return shoppingCartRepository.findIdByUserId(userId);
+    }
+
     // 쇼핑 카트 저장 메서드
     public void save(ShoppingCart shoppingCart) {
         shoppingCartRepository.save(shoppingCart);

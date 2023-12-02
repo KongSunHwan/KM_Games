@@ -90,8 +90,9 @@ public class GameOrderService {
 
     // 멤버의 주문 목록을 가져오는 메서드
     public Page<GameOrder> findOrdersByUserIdWithGameInfo(Long userId, Pageable pageable) {
-        return gameOrderRepository.findByUserIdWithGameInfo(userId, pageable);
+        return gameOrderRepository.findByUserIdWithAllGames(userId, pageable);
     }
+
 
     public ResponsePageDTO.ResponseGODetail getGODetalResponse(int id, Criteria criteria) {
         Criteria cs = new Criteria(criteria.getPageNum(), criteria.getAmount(), criteria.getType(), criteria.getKeyword());

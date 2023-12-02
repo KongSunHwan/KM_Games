@@ -1,25 +1,20 @@
 package ac.kmgames.controller;
 
-import ac.kmgames.model.dto.GameOrderDTO;
-import ac.kmgames.model.dto.GamePostDTO;
 import ac.kmgames.model.entity.*;
+import ac.kmgames.service.CartItemService;
 import ac.kmgames.service.GameOrderService;
 import ac.kmgames.service.GamePostService;
 import ac.kmgames.service.ShoppingCartService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +26,7 @@ public class GameOrderController {
     private final GameOrderService gameOrderService;
     private final GamePostService gamePostService;
     private final ShoppingCartService shoppingCartService;
+    private final CartItemService cartItemService;
 
     @ModelAttribute("PaymentType")
     public PaymentType[] PaymentType() {
@@ -139,11 +135,18 @@ public class GameOrderController {
             return "redirect:/";
         }
         // 서비스를 통해 주문 내역 가져오기
-        Page<GameOrder> orderPage = gameOrderService.findOrdersByUserIdWithGameInfo(userId, pageable);
+//        Page<GameOrder> orderPage = gameOrderService.findOrdersByUserIdWithGameInfo(userId, pageable);
+//        Page<CartItem> orderPage = cartItemService.getGamePostsByUserIdAndOrderState(userId, pageable);
+        Long idByCartId = shoppingCartService.findIdByUserId(userId);
 
         // Model에 페이징된 주문 세부 정보 추가
-        model.addAttribute("orderPage", orderPage.getContent());
-        model.addAttribute("page", orderPage);
+//        model.addAttribute("orderPage", orderPage.getContent());
+//        model.addAttribute("page", orderPage);
+
+        List<GamePost> games = cartItemService.getGamesByMemberAndCart(userId, idByCartId);
+
+        // 결과를 모델에 추가
+        model.addAttribute("games", games);
 
         return "order_history/order_history";
     }
