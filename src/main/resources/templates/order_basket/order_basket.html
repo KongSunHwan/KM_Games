@@ -184,12 +184,12 @@
                                 </div>
 
                         <div class="p-2 flex-shrink-1">
-                            <button type="button" class="btn btn-primary btn-lg" onclick="checkoutCart()">총 주문하기
+                            <button type="button" class="btn btn-primary btn-lg" onclick="checkoutCart()">구매하기
                                 <span id="gameCount" class="badge text-bg-light">0</span>
                             </button>
-<!--                            <button type="button" class="btn btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#purchaseCash">총 주문하기-->
-<!--                                <span id="gameCount" class="badge text-bg-light">0</span>-->
-<!--                            </button>-->
+                            <!-- <button type="button" class="btn btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#purchaseCash">구매하기
+                               <span id="gameCount" class="badge text-bg-light">0</span>
+                           </button> -->
                         </div>
                     </div>
 
@@ -219,8 +219,6 @@
 <!--footer 시작-->
 <header th:replace="~{include/footer}"></header>
 <!--footer 종료-->
-
-<div th:replace="~{cash/cash_modal}"></div>
 
 <div class="spinner-border text-primary" role="status" id="loadingSpinner" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;">
     <span class="visually-hidden">로딩 중...</span>
@@ -268,6 +266,15 @@
 
     // 주문 버튼 클릭 시 호출되는 함수
     function checkoutCart() {
+        var total = parseInt(document.getElementById('totalPrice').textContent);
+        if(total < 1){
+            return;
+        }
+
+        if([[${session.user.cash}]] < total){
+            alert('캐시가 부족합니다.');
+            return;
+        }
 
         fetch('/order_basket/checkout', {
             method: 'POST',
@@ -275,12 +282,12 @@
                 'Content-Type': 'application/json',
             },
         })
-            .then(response => response.json())
-            .then(data => {
-                // 주문 결과에 대한 처리
-                console.log(data);
-            })
-            .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => {
+            // 주문 결과에 대한 처리
+            console.log(data);
+        })
+        .catch(error => console.error('Error:', error));
         // 로딩 상태를 제거하는 CSS 클래스 제거
         document.body.style.cursor = 'wait';
         redirectToOrderReceipt();

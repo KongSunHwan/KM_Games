@@ -1,25 +1,22 @@
 package ac.kmgames.service;
 
 import ac.kmgames.model.dto.GamePostDTO;
-import ac.kmgames.model.dto.GameSearch;
 import ac.kmgames.model.entity.GamePhoto;
 import ac.kmgames.model.entity.GamePost;
-//import ac.kmgames.model.entity.QGamePost;
 import ac.kmgames.model.entity.PriceState;
 import ac.kmgames.model.mapper.GamePostMapper;
 import ac.kmgames.model.repository.GamePhotoRepository;
 import ac.kmgames.model.repository.GamePostRepository;
 import ac.kmgames.model.utils.FileUtilities;
-//import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -102,6 +99,25 @@ public class GamePostService {
         if ("gameTitle".equals(keywordType)) {
             page = gamePostRepository.findByGameTitleContainingOrderByIdDesc(keyword, pageable);
         } else if ("gameTags".equals(keywordType)) {
+            var tags = new HashMap<String, String>();
+            tags.put("인디", "Indy");
+            tags.put("액션", "Action");
+            tags.put("어드밴처", "Advantage");
+            tags.put("캐주얼", "casual");
+            tags.put("시뮬레이션", "Simulation");
+            tags.put("전략", "Strategy");
+            tags.put("싱글플레이", "SinglePlay");
+            tags.put("무료플레이", "FreePlay");
+            tags.put("분위기있는", "Mood");
+            tags.put("풍부한스토리", "Story");
+            tags.put("탐험", "Exploration");
+            for(var key : tags.keySet()){
+                System.out.println(key);
+                if(key.contains(keyword)){
+                    keyword = tags.get(key);
+                    break;
+                }
+            }
             page = gamePostRepository.findByGameTagsContainingOrderByIdDesc(keyword, pageable);
         } else {
             return Page.empty();

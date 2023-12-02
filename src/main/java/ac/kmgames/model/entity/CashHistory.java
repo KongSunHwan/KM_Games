@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 @Data
-@Entity(name = "cash_history")
+@Entity
 @NoArgsConstructor
-public class CashHistory extends BaseTimeEntity{
+public class CashHistory{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

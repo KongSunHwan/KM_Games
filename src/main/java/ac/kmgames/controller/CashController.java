@@ -6,7 +6,6 @@ import ac.kmgames.service.CashService;
 import ac.kmgames.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,15 +34,9 @@ public class CashController{
         cash.setUser(user);
         cash.setAmount(amount);
         cash.setMethod(method);
-
-//        var users = new User();
-//        users.setCash(amount);
-//
-//        // 사용자 정보를 데이터베이스에 업데이트
-//        userService.updateUser(user);
-
         if(cashService.save(cash)){
             user.addCash(amount);
+            userService.updateUser(user);
             return true;
         }
         return false;
