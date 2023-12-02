@@ -6,9 +6,12 @@
             </a>
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <!--<li><a href="/shop" class="nav-link px-4 link-dark">캐시 상점</a></li>-->
-                <li><a href="/qna" class="nav-link px-4 link-dark">Q&A</a></li>
-                <li><a href="/support" class="nav-link px-4 link-dark">고객지원</a></li>
+<!--                <li><a href="/qna" class="nav-link px-4 link-dark">Q&A</a></li>-->
+<!--                <li><a href="/support" class="nav-link px-4 link-dark">고객지원</a></li>-->
+                <li><a th:href="@{/game_add}" class="nav-link px-4 link-dark">게임등록</a></li>
                 <li><a th:href="@{/order_basket/{id}(id=${session.user.getId()})}" class="nav-link px-4 link-dark">장바구니</a></li>
+                <li><a th:href="@{/order_history/{id}(id=${session.user.getId()})}" class="nav-link px-4 link-dark">주문 내역</a></li>
+
             </ul>
 
             <th:block th:if="${session.user == null}">
@@ -24,17 +27,24 @@
                         <span class="fs-6" th:text="${session.user.getName()}"></span>
                     </a>
                     <ul class="dropdown-menu text-small">
+<!--                        <li>-->
+<!--                            <a class="dropdown-item" href="/my_info"><i class="bi bi-house-fill"></i> 마이페이지</a>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <a class="dropdown-item" href="/cash_history"><i class="bi bi-cash-coin"></i> 충전 내역</a>-->
+<!--                        </li>-->
                         <li>
-                            <a class="dropdown-item" href="/my_info"><i class="bi bi-house-fill"></i> 마이페이지</a>
+                            <a class="dropdown-item" th:href="@{/game_add}"><i class="bi bi-controller"></i>게임추가</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/cash_history"><i class="bi bi-cash-coin"></i> 충전 내역</a>
+                            <a class="dropdown-item" th:href="@{/order_basket/{id}(id=${session.user.getId()})}"><i class="bi bi-bag"></i>장바구니</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" th:href="@{/order_history/{id}(id=${session.user.getId()})}"><i class="bi bi-cart-check"></i> 주문내역</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" th:href="@{/order_history/{id}(id=${session.user.getId()})}"><i class="bi bi-cart-check"></i> 주문 내역</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i> 로그아웃</a>
+                            <a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-left"></i>로그아웃</a>
                         </li>
                     </ul>
                 </div>

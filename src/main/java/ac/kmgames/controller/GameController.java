@@ -95,7 +95,12 @@ public class GameController{
     }
 
     @GetMapping("/game_add")
-    public String game_add(Model model) {
+    public String game_add(HttpSession session,Model model) {
+
+        if (session.getAttribute("user")== null) {
+            return "redirect:/";
+        }
+
         model.addAttribute("gameForm", new GamePostDTO.Response());
         return "game_add/game_add";
     }
