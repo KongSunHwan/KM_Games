@@ -28,7 +28,10 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     @Query("SELECT ci.gamePost FROM CartItem ci WHERE ci.shoppingCart.user.id = :userId AND ci.orderState = 2")
     Page<CartItem> findGamePostsByUserIdAndOrderState(@Param("userId") Long userId, Pageable pageable);
 
+//    @Query("SELECT c FROM CartItem c WHERE c.shoppingCart.user.id = :userId AND c.shoppingCart.id = :cartId")
+//    List<CartItem> findByShoppingCartUser_IdAndShoppingCartId(Long userId, Long cartId);
+
     @Query("SELECT c FROM CartItem c WHERE c.shoppingCart.user.id = :userId AND c.shoppingCart.id = :cartId")
-    List<CartItem> findByShoppingCartUser_IdAndShoppingCartId(Long userId, Long cartId);
+    Page<CartItem> findByShoppingCartUser_IdAndShoppingCartId(Long userId, Long cartId, Pageable pageable);
 
 }

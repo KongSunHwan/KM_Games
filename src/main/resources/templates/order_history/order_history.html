@@ -37,9 +37,7 @@
           </div>
         </div>
 
-<!--        <th:block th:if="${page.totalElements > 0}">-->
-<!--        <th:block th:each="order : ${orderPage}">-->
-<!--          <th:block th:each="gamePost : ${order.gamePosts}">-->
+        <th:block th:if="${page.totalElements > 0}">
           <th:block th:each="gamePost : ${games}">
                 <div class="row"> <!-- Start col-->
                   <div class="col-md-6 col-sm-6 col-xs-12">
@@ -90,40 +88,38 @@
                 <div>&nbsp;</div>
           </th:block>
           </th:block>
-<!--            </th:block>-->
-<!--        </th:block>-->
-<!--        </th:block>-->
+            </th:block>
 
-<!--        <th:block th:unless="${page.totalElements > 0}">-->
-<!--          <div class="text-center">-->
-<!--            <p><b>현재 주문 내역이 없습니다.</b></p>-->
-<!--          </div>-->
-<!--        </th:block>-->
-<!--        &nbsp;-->
-<!--        &nbsp;-->
-<!--        <th:block th:if="${page.totalElements > 0}">-->
-<!--        <nav aria-label="Page navigation example">-->
-<!--            <ul class="pagination mt-2" style="justify-content: center;">-->
-<!--              <li class="page-item" th:if="${page.hasPrevious()}">-->
-<!--                <a class="page-link" th:href="@{|?page=0|}">처음</a>-->
-<!--              </li>-->
-<!--              <li class="page-item" th:if="${page.hasPrevious()}">-->
-<!--                <a class="page-link" th:href="@{|?page=${page.number - 1}|}">이전</a>-->
-<!--              </li>-->
-<!--              <th:block th:each="index : ${#numbers.sequence(0, page.totalPages - 1)}">-->
-<!--                <li class="page-item" th:class="${index == page.number} ? 'active' : ''">-->
-<!--                  <a class="page-link" th:href="@{|?page=${index}|}" th:text="${index + 1}">1</a>-->
-<!--                </li>-->
-<!--              </th:block>-->
-<!--              <li class="page-item" th:if="${page.hasNext()}">-->
-<!--                <a class="page-link" th:href="@{|?page=${page.number + 1}|}">다음</a>-->
-<!--              </li>-->
-<!--              <li class="page-item" th:if="${page.hasNext()}">-->
-<!--                <a class="page-link" th:href="@{|?page=${page.totalPages - 1}|}">마지막</a>-->
-<!--              </li>-->
-<!--            </ul>-->
-<!--        </nav>-->
-<!--        </th:block>-->
+        <th:block th:unless="${page.totalElements > 0}">
+          <div class="text-center">
+            <p><b>현재 주문 내역이 없습니다.</b></p>
+          </div>
+        </th:block>
+        &nbsp;
+        &nbsp;
+        <th:block th:if="${page.totalElements > 0}">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination mt-2" style="justify-content: center;">
+              <li class="page-item" th:if="${page.hasPrevious()}">
+                <a class="page-link" th:href="@{|?page=0|}">처음</a>
+              </li>
+              <li class="page-item" th:if="${page.hasPrevious()}">
+                <a class="page-link" th:href="@{|?page=${page.number - 1}|}">이전</a>
+              </li>
+              <th:block th:each="index : ${#numbers.sequence(0, page.totalPages - 1)}">
+                <li class="page-item" th:class="${index == page.number} ? 'active' : ''">
+                  <a class="page-link" th:href="@{|?page=${index}|}" th:text="${index + 1}">1</a>
+                </li>
+              </th:block>
+              <li class="page-item" th:if="${page.hasNext()}">
+                <a class="page-link" th:href="@{|?page=${page.number + 1}|}">다음</a>
+              </li>
+              <li class="page-item" th:if="${page.hasNext()}">
+                <a class="page-link" th:href="@{|?page=${page.totalPages - 1}|}">마지막</a>
+              </li>
+            </ul>
+        </nav>
+        </th:block>
 
       </div>
     </div><!-- End About Section -->

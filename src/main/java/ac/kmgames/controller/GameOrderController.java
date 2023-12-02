@@ -138,15 +138,18 @@ public class GameOrderController {
 //        Page<GameOrder> orderPage = gameOrderService.findOrdersByUserIdWithGameInfo(userId, pageable);
 //        Page<CartItem> orderPage = cartItemService.getGamePostsByUserIdAndOrderState(userId, pageable);
         Long idByCartId = shoppingCartService.findIdByUserId(userId);
+        // OrderService를 통해 주문 내역을 가져옴
+        Page<GamePost> games = cartItemService.getGamesByMemberAndCartWithPaging(userId, idByCartId, pageable);
 
         // Model에 페이징된 주문 세부 정보 추가
 //        model.addAttribute("orderPage", orderPage.getContent());
 //        model.addAttribute("page", orderPage);
 
-        List<GamePost> games = cartItemService.getGamesByMemberAndCart(userId, idByCartId);
+//        List<GamePost> games = cartItemService.getGamesByMemberAndCart(userId, idByCartId);
 
         // 결과를 모델에 추가
-        model.addAttribute("games", games);
+        model.addAttribute("games", games.getContent());
+        model.addAttribute("page", games);
 
         return "order_history/order_history";
     }

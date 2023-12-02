@@ -10,6 +10,8 @@ import ac.kmgames.model.repository.UserRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
@@ -62,19 +64,34 @@ public class CartItemService {
         return cartItemRepository.findGamePostsByUserIdAndOrderState(userId, pageable);
     }
 
-    public List<GamePost> getGamesByMemberAndCart(Long memberId, Long cartId) {
-        List<CartItem> cartItems = cartItemRepository.findByShoppingCartUser_IdAndShoppingCartId(memberId, cartId);
+//    public List<GamePost> getGamesByMemberAndCart(Long memberId, Long cartId) {
+//        List<CartItem> cartItems = cartItemRepository.findByShoppingCartUser_IdAndShoppingCartId(memberId, cartId);
+//
+//        // 게임 정보를 담을 리스트
+//        List<GamePost> games = new ArrayList<>();
+//
+//        // 카트 아이템에서 게임 정보 추출
+//        for (CartItem cartItem : cartItems) {
+//            GamePost gamePost = cartItem.getGamePost();
+//            games.add(gamePost);
+//        }
+//
+//        return games;
+//    }
 
-        // 게임 정보를 담을 리스트
+    public Page<GamePost> getGamesByMemberAndCartWithPaging(Long memberId, Long cartId, Pageable pageable) {
+        Page<CartItem> cartItemPage = cartItemRepository.findByShoppingCartUser_IdAndShoppingCartId(memberId, cartId, pageable);
+
+        // Page에서 CartItem 리스트를 가져와서 GamePost로 변환
         List<GamePost> games = new ArrayList<>();
-
-        // 카트 아이템에서 게임 정보 추출
+        List<CartItem> cartItems = cartItemPage.getContent();
         for (CartItem cartItem : cartItems) {
             GamePost gamePost = cartItem.getGamePost();
             games.add(gamePost);
         }
 
-        return games;
+        // 게임 정보와 페이징 정보를 포함하는 Page 반환
+        return new PageImpl<>(games, pageable, cartItemPage.getTotalElements());
     }
 
 }
