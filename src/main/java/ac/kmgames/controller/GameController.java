@@ -97,7 +97,6 @@ public class GameController{
     @GetMapping("/game_add")
     public String game_add(Model model) {
         model.addAttribute("gameForm", new GamePostDTO.Response());
-
         return "game_add/game_add";
     }
 
@@ -105,6 +104,11 @@ public class GameController{
     public String detailPage(HttpSession session, Model model,
                              @PathVariable long id){
         // 세션에서 유저 정보 가져오기
+
+        if (session.getAttribute("user")== null) {
+            return "redirect:/";
+        }
+
         User user = (User) session.getAttribute("user");
         Long UserId = user.getId();
 

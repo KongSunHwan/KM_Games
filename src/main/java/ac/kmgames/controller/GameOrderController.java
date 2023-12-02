@@ -131,8 +131,13 @@ public class GameOrderController {
     @GetMapping("/order_history/{userId}")
     public String order_history(@PathVariable Long userId,
                                 @PageableDefault(size = 3) Pageable pageable,
-                                Model model) {
+                                Model model,
+                                HttpSession session
+    ) {
 
+        if (session.getAttribute("user")== null) {
+            return "redirect:/";
+        }
         // 서비스를 통해 주문 내역 가져오기
         Page<GameOrder> orderPage = gameOrderService.findOrdersByUserIdWithGameInfo(userId, pageable);
 
@@ -172,6 +177,9 @@ public class GameOrderController {
     @GetMapping("/order_basket/{userId}")
     public String order_basket(@PathVariable("userId") Long id, HttpSession session, Model model) {
 
+        if (session.getAttribute("user")== null) {
+            return "redirect:/";
+        }
         // 세션에서 유저 정보 가져오기
         User user = (User) session.getAttribute("user");
         long userId = user.getId();

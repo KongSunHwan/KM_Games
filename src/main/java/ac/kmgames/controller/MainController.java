@@ -85,11 +85,14 @@ public class MainController{
     }
 
     @GetMapping("/main")
-    public String main(@PageableDefault(size = 16) Pageable pageable,
+    public String main(@PageableDefault(size = 16) Pageable pageable,HttpSession session,
                        Model model) {
+
+        if (session.getAttribute("user")== null) {
+            return "redirect:/";
+        }
+
         Page<GamePost> page = gamePostService.findAllByOrderByIdDesc(pageable);
-
-
         model.addAttribute("gamePosts", page.getContent());
         model.addAttribute("page", page);
         return "main/main";
@@ -101,8 +104,15 @@ public class MainController{
             @RequestParam(name = "keyword") String keyword,
             @RequestParam(name = "keywordType") String keywordType,
             @PageableDefault(size = 16) Pageable pageable,
-            Model model
+            Model model,
+            HttpSession session
+
     ) {
+
+        if (session.getAttribute("user")== null) {
+            return "redirect:/";
+        }
+
         Page<GamePost> gamePosts = gamePostService.findByKeyword(keyword, keywordType, pageable);
         model.addAttribute("gamePosts", gamePosts.getContent());
         model.addAttribute("page", gamePosts);
@@ -117,8 +127,13 @@ public class MainController{
     public String searchByPriceState(
             @RequestParam(name = "priceState") PriceState priceState,
             @PageableDefault(size = 16) Pageable pageable,
-            Model model
+            Model model,
+            HttpSession session
     ) {
+
+        if (session.getAttribute("user")== null) {
+            return "redirect:/";
+        }
         Page<GamePost> gamePosts = gamePostService.findByPriceState(priceState, pageable);
 
         model.addAttribute("gamePosts", gamePosts.getContent());
@@ -133,8 +148,15 @@ public class MainController{
     public String searchByGenreCode(
             @RequestParam(name = "genreCode") String genreCode,
             @PageableDefault(size = 16) Pageable pageable,
-            Model model
+            Model model,
+            HttpSession session
+
     ) {
+
+        if (session.getAttribute("user")== null) {
+            return "redirect:/";
+        }
+
         Page<GamePost> gamePosts = gamePostService.findByGenreCode(genreCode, pageable);
 
         model.addAttribute("gamePosts", gamePosts.getContent());
@@ -148,7 +170,14 @@ public class MainController{
     public String getGames(@RequestParam(name = "sortOption",
                            defaultValue = "POPULARITY") String sortOption,
                            Model model,
-                           @PageableDefault(size = 16) Pageable pageable) {
+                           @PageableDefault(size = 16) Pageable pageable,
+                           HttpSession session
+    ) {
+
+        if (session.getAttribute("user")== null) {
+            return "redirect:/";
+        }
+
         Page<GamePost> gamePosts;
 
         // 정렬 방식에 따라 다른 메소드 호출
