@@ -70,13 +70,22 @@
 
             <div class="col">
                 <div class="card mb-15">
-                    <div class="card-body" id="traffic-card">
+                    <div class="card-body">
                         <span id="clickedMonth1" class="badge bg-success float-right">이번달</span>
                         <h6 class="card-title text-muted">게임 판매 수</h6>
-                        <h3 id="gameSales" class="mb-10">100,234 개</h3>
-                        <p class="text-muted mb-0">이전달 : 50,233개
-                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.1%</span>
-                        </p>
+                        <h3 id="ms" class="mb-10">100,234 개</h3>
+
+                        <div class="d-flex justify-content-between">
+                            <div class="">
+                                <p id="pms" class="text-muted mb-0">이전달 : 50,233개</p>
+                            </div>
+                            <div class="">
+                                <i id="upicon1" class="fas fa-angle-up text-success"></i>&nbsp;
+                                <i id="downicon1" class="fas fa-angle-down text-danger"></i>&nbsp;
+                                <i id="barsicon1" class="fas fa-bars text-dark"></i>&nbsp;
+                                <span id="msip">50%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -86,10 +95,19 @@
                     <div class="card-body">
                         <span id="clickedMonth2" class="badge bg-success float-right">이번달</span>
                         <h6 class="card-title text-muted">게임 판매 매출</h6>
-                        <h3 id="TotalSales" class="mb-10">189,909,000 원</h3>
-                        <p class="text-muted mb-0">이전달: 100,802,000 원
-                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.1%</span>
-                        </p>
+                        <h3 id="msa" class="mb-10">100,234 개</h3>
+
+                        <div class="d-flex justify-content-between">
+                            <div class="">
+                                <p id="pmsa" class="text-muted mb-0">이전달 : 50,233개</p>
+                            </div>
+                            <div class="">
+                                <i id="upicon2" class="fas fa-angle-up text-success"></i>&nbsp;
+                                <i id="downicon2" class="fas fa-angle-down text-danger"></i>&nbsp;
+                                <i id="barsicon2" class="fas fa-bars text-dark"></i>&nbsp;
+                                <span id="msaip">50%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,10 +138,19 @@
                     <div class="card-body">
                         <span id="clickedMonth3" class="badge bg-success float-right">이번달</span>
                         <h6 class="card-title text-muted">누적 게임 판매 수</h6>
-                        <h3 class="mb-10">1,027 개</h3>
-                        <p class="text-muted mb-0">이전달: 502개
-                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.5%</span>
-                        </p>
+                        <h3 id="cms" class="mb-10">100,234 개</h3>
+
+                        <div class="d-flex justify-content-between">
+                            <div class="">
+                                <p id="pcms" class="text-muted mb-0">이전달 : 50,233개</p>
+                            </div>
+                            <div class="">
+                                <i id="upicon3" class="fas fa-angle-up text-success"></i>&nbsp;
+                                <i id="downicon3" class="fas fa-angle-down text-danger"></i>&nbsp;
+                                <i id="barsicon3" class="fas fa-bars text-dark"></i>&nbsp;
+                                <span id="cmsip">50%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -132,11 +159,20 @@
                 <div class="card mb-15">
                     <div class="card-body">
                         <span id="clickedMonth4" class="badge bg-success float-right">이번달</span>
-                        <h6 class="card-title text-muted">누적 판매 매출</h6>
-                        <h3 class="mb-10">189,909,000 원</h3>
-                        <p class="text-muted mb-0">이전달: 100,802,000 원
-                            <span class="float-right"> <i class="fas fa-angle-up text-success"></i> 50.5%</span>
-                        </p>
+                        <h6 class="card-title text-muted">누적 게임 판매 매출</h6>
+                        <h3 id="cmsa" class="mb-10">100,234 개</h3>
+
+                        <div class="d-flex justify-content-between">
+                            <div class="">
+                                <p id="pcmsa" class="text-muted mb-0">이전달 : 50,233개</p>
+                            </div>
+                            <div class="">
+                                <i id="upicon4" class="fas fa-angle-up text-success"></i>&nbsp;
+                                <i id="downicon4" class="fas fa-angle-down text-danger"></i>&nbsp;
+                                <i id="barsicon4" class="fas fa-bars text-dark"></i>&nbsp;
+                                <span id="cmsaip">50%</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -564,8 +600,17 @@
     $(document).ready(function () {
         // 서버에서 월간 트래픽 데이터를 가져오는 함수
         function getMonthlyTrafficData() {
+            // 현재 날짜와 시간을 가지고 있는 Date 객체 생성
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // 한 자리 수 월에 0을 추가
+            const day = currentDate.getDate().toString().padStart(2, '0'); // 한 자리 수 일에 0을 추가
+
+            const formattedDate = `${year}-${month}-${day}`;
+            console.log(formattedDate);
+
             $.ajax({
-                url: '/api/monthly-traffic',
+                url: '/api/monthly-traffic?endDate=' + formattedDate,
                 type: 'GET',
                 success: function (data) {
                     // 차트 생성 함수 호출
@@ -585,7 +630,7 @@
                     text: '월간 트래픽 차트'
                 },
                 xAxis: {
-                    categories: data.map(entry => entry.month)
+                    categories: data.map(data => data.month)
                 },
                 yAxis: {
                     title: {
@@ -594,55 +639,50 @@
                 },
                 series: [{
                     name: '게임 판매 수',
-                    data: data.map(entry => entry.games),
+                    data: data.map(data => data.ms),
+                    events: {
+                        click: function (event) {
+                            var clickedMonth = event.point.category;
+                            var clickedData = data.find(data => data.month === clickedMonth)
+                            console.log("클릭한 데이터 : ", clickedData);
+                            straight(clickedData);
+                        }
+                    }
+                }, {
+                    name: '누적 게임 판매 수',
+                    data: data.map(data => data.cms),
                     events: {
                         click: function (event) {
                             var clickedMonth = event.point.category;
                             var clickedData = data.find(entry => entry.month === clickedMonth)
                             console.log("클릭한 데이터 : ", clickedData);
-
-                            // 판매 게임 수를 가져와서 #gameSales에 업데이트
-                            var clickedGames = clickedData.games.toLocaleString();
-                            $('#gameSales').text(clickedGames + '개');
-
-                            // 매출량을 가져와서 #TotalSales 업데이트
-                            var clickedTotalSales = clickedData.sales.toLocaleString();
-                            $('#TotalSales').text(clickedTotalSales + '원');
-
-                            // 클릭한 월을 #clickedMonth에 업데이트
-                            $('#clickedMonth1').text(clickedMonth);
-                            $('#clickedMonth2').text(clickedMonth);
-                            $('#clickedMonth3').text(clickedMonth);
-                            $('#clickedMonth4').text(clickedMonth);
-                            $('#clickedMonth5').text(clickedMonth);
+                            straight(clickedData);
                         }
                     }
                 }, {
                     name: '게임 판매 매출',
-                    data: data.map(entry => entry.sales),
+                    data: data.map(data => data.msa),
+                    events: {
+                        click: function (event) {
+                            var clickedMonth = event.point.category;
+                            var clickedData = data.find(data => data.month === clickedMonth)
+                            console.log("클릭한 데이터 : ", clickedData);
+                            straight(clickedData);
+                        }
+                    }
+                }, {
+                    name: '누적 게임 판매 매출',
+                    data: data.map(data => data.cmsa),
                     events: {
                         click: function (event) {
                             var clickedMonth = event.point.category;
                             var clickedData = data.find(entry => entry.month === clickedMonth)
                             console.log("클릭한 데이터 : ", clickedData);
-
-                            // 판매 게임 수를 가져와서 #gameSales에 업데이트
-                            var clickedGames = clickedData.games.toLocaleString();
-                            $('#gameSales').text(clickedGames + '개');
-
-                            // 매출량을 가져와서 #TotalSales 업데이트
-                            var clickedTotalSales = clickedData.sales.toLocaleString();
-                            $('#TotalSales').text(clickedTotalSales + '원');
-
-                            // 클릭한 월을 #clickedMonth에 업데이트
-                            $('#clickedMonth1').text(clickedMonth);
-                            $('#clickedMonth2').text(clickedMonth);
-                            $('#clickedMonth3').text(clickedMonth);
-                            $('#clickedMonth4').text(clickedMonth);
-                            $('#clickedMonth5').text(clickedMonth);
+                            straight(clickedData);
                         }
                     }
-                }]
+                }
+                ]
             });
 
         }
@@ -650,6 +690,87 @@
         // 페이지 로드 시 데이터 가져오기
         getMonthlyTrafficData();
     });
+
+    function straight(e) {
+        //일 떄 증감소 바꿔
+        //- 일 때 -
+        $('#clickedMonth1').text(e.month);
+        $('#clickedMonth2').text(e.month);
+        $('#clickedMonth3').text(e.month);
+        $('#clickedMonth4').text(e.month);
+        $('#ms').text(e.ms.toLocaleString() + ' 개');
+        $('#pms').text(e.pms.toLocaleString() + ' 개');
+        if (e.msip === 0) {
+            $('#msip').text('0 %');
+            $('#barsicon1').css('display', 'inline');
+            $('#upicon1').css('display', 'none');
+            $('#downicon1').css('display', 'none');
+        } else if (e.msip > 0) {
+            $('#barsicon1').css('display', 'none');
+            $('#upicon1').css('display', 'inline');
+            $('#downicon1').css('display', 'none');
+            $('#msip').text(e.msip.toLocaleString() + ' %');
+        } else {
+            $('#barsicon1').css('display', 'none');
+            $('#upicon1').css('display', 'none');
+            $('#downicon1').css('display', 'inline');
+            $('#msip').text(e.msip.toLocaleString() + ' %');
+        }
+        $('#cms').text(e.cms.toLocaleString() + ' 개');
+        $('#pcms').text(e.pcms.toLocaleString() + ' 개');
+        if (e.cmsip === 0) {
+            $('#barsicon3').css('display', 'inline');
+            $('#upicon3').css('display', 'none');
+            $('#downicon3').css('display', 'none');
+            $('#cmsip').text(e.cmsip.toLocaleString() + ' %');
+        } else if (e.cmsip > 0) {
+            $('#barsicon3').css('display', 'none');
+            $('#upicon3').css('display', 'inline');
+            $('#downicon3').css('display', 'none');
+            $('#cmsip').text(e.cmsip.toLocaleString() + ' %');
+        } else {
+            $('#barsicon3').css('display', 'none');
+            $('#upicon3').css('display', 'none');
+            $('#downicon3').css('display', 'inline');
+            $('#cmsip').text(e.cmsip.toLocaleString() + ' %');
+        }
+        $('#msa').text(e.msa.toLocaleString() + ' 원');
+        $('#pmsa').text(e.pmsa.toLocaleString() + ' 원');
+        if (e.msaip === 0) {
+            $('#barsicon2').css('display', 'inline');
+            $('#upicon2').css('display', 'none');
+            $('#downicon2').css('display', 'none');
+            $('#msaip').text(e.msaip.toLocaleString() + ' %');
+        } else if (e.msaip > 0) {
+            $('#barsicon2').css('display', 'none');
+            $('#upicon2').css('display', 'inline');
+            $('#downicon2').css('display', 'none');
+            $('#msaip').text(e.msaip.toLocaleString() + ' %');
+        } else {
+            $('#barsicon2').css('display', 'none');
+            $('#upicon2').css('display', 'none');
+            $('#downicon2').css('display', 'inline');
+            $('#msaip').text(e.msaip.toLocaleString() + ' %');
+        }
+        $('#cmsa').text(e.cmsa.toLocaleString() + ' 원');
+        $('#pcmsa').text(e.pcmsa.toLocaleString() + ' 원');
+        if (e.cmsaip === 0) {
+            $('#barsicon4').css('display', 'inline');
+            $('#upicon4').css('display', 'none');
+            $('#downicon4').css('display', 'none');
+            $('#cmsaip').text(e.cmsaip.toLocaleString() + ' %');
+        } else if (e.cmsaip > 0) {
+            $('#barsicon4').css('display', 'none');
+            $('#upicon4').css('display', 'inline');
+            $('#downicon4').css('display', 'none');
+            $('#cmsaip').text(e.cmsaip.toLocaleString() + ' %');
+        } else {
+            $('#barsicon4').css('display', 'none');
+            $('#upicon4').css('display', 'none');
+            $('#downicon4').css('display', 'inline');
+            $('#cmsaip').text(e.cmsaip.toLocaleString() + ' %');
+        }
+    }
 </script>
 
 

@@ -19,7 +19,6 @@
         from game_order g, order_games o, game_post p
         where g.order_id = o.order_id and o.game_post_id = p.game_post_id and g.user_id = #{id}
         order by o.order_id desc
-            limit #{cs.skip} , #{cs.amount}
     </select>
     <select id="getGODetail1" resultType="ac.kmgames.model.dto.GODetailDTO">
         select o.order_id as orderId,

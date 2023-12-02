@@ -4,7 +4,31 @@
 <mapper namespace="ac.kmgames.model.mapper.MonthlyTrafficMapper">
 
     <select id="getMonthlyTraffic" resultType="MonthlyTrafficDTO">
-        SELECT month, games, members, plays, sales FROM your_monthly_traffic_table;
+        SELECT
+            DATE_FORMAT(g.created_date_time, '%Y-%m') AS month,
+    SUM(p.game_price) AS msa,
+	LAG(SUM(p.game_price)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) AS pmsa,
+    ROUND( (((SUM(p.game_price))-(LAG(SUM(p.game_price)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m'))))/(LAG(SUM(p.game_price)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')))) * 100  , 2) AS msaip,
+    SUM(SUM(p.game_price)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) AS cmsa,
+    SUM(SUM(p.game_price)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) - SUM(p.game_price) as pcmsa,
+    ROUND(((SUM(SUM(p.game_price)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m'))) - (SUM(SUM(p.game_price)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) - SUM(p.game_price)))/(SUM(SUM(p.game_price)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) - SUM(p.game_price)) * 100, 2) as cmsaip,
+    COUNT(*) AS ms,
+    LAG(COUNT(*)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) AS pms,
+    ROUND( (((COUNT(*))-(LAG(COUNT(*)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m'))))/(LAG(COUNT(*)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')))) * 100   ,2) as msip,
+    SUM(COUNT(*)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) AS cms,
+    SUM(COUNT(*)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) - COUNT(*) as pcms,
+    ROUND( (((SUM(COUNT(*)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')))-(SUM(COUNT(*)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) - COUNT(*))) / (SUM(COUNT(*)) OVER (ORDER BY DATE_FORMAT(g.created_date_time, '%Y-%m')) - COUNT(*))) * 100  ,2) as cmsip
+        FROM
+            game_order g
+            JOIN order_games o ON g.order_id = o.order_id
+            JOIN game_post p ON o.game_post_id = p.game_post_id
+            JOIN user u ON g.user_id = u.id
+        WHERE
+            g.created_date_time BETWEEN #{sd} AND #{ed}
+        GROUP BY
+            Month
+        ORDER BY
+            Month;
     </select>
 
 </mapper>
