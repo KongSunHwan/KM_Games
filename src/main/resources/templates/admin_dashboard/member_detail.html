@@ -107,25 +107,26 @@
         // paymentH를 출력하는 함수
         function paymentList(result) {
             $.each(result.godetailPageList, function (index, detail) {
-                if (detail.orderDate == null) {
-                    var row = "<tr>" +
-                        "<th scope=\"row\">" + detail.orderId + "</th>" +
-                        "<th scope=\"row\">" + detail.gameTitle + "</th>" +
-                        "<th scope=\"row\">" + detail.gamePrice + "</th>" +
-                        "<th scope=\"row\">" + detail.orderDate + "</th>" +
-                        "<input type='hidden' id='gamePostId' value='" + detail.gamePostId + "'>" +
-                        "</tr>";
-                    $("#paymentList").append(row);
-                } else {
-                    var row = "<tr>" +
-                        "<th scope=\"row\">" + detail.orderId + "</th>" +
-                        "<th scope=\"row\">" + detail.gameTitle + "</th>" +
-                        "<th scope=\"row\">" + detail.gamePrice + "</th>" +
-                        "<th scope=\"row\">" + detail.orderDate.substring(0, 19) + "</th>" +
-                        "<input type='hidden' id='gamePostId' value='" + detail.gamePostId + "'>" +
-                        "</tr>";
-                    $("#paymentList").append(row);
-                }
+                $("#paymentList").empty();
+                    if (detail.orderDate == null) {
+                        var row = "<tr>" +
+                            "<th scope=\"row\">" + detail.orderId + "</th>" +
+                            "<th scope=\"row\">" + detail.gameTitle + "</th>" +
+                            "<th scope=\"row\">" + detail.gamePrice + "</th>" +
+                            "<th scope=\"row\">" + detail.orderDate + "</th>" +
+                            "<input type='hidden' id='gamePostId' value='" + detail.gamePostId + "'>" +
+                            "</tr>";
+                        $("#paymentList").append(row);
+                    } else {
+                        var row = "<tr>" +
+                            "<th scope=\"row\">" + detail.orderId + "</th>" +
+                            "<th scope=\"row\">" + detail.gameTitle + "</th>" +
+                            "<th scope=\"row\">" + detail.gamePrice + "</th>" +
+                            "<th scope=\"row\">" + detail.orderDate.substring(0, 19) + "</th>" +
+                            "<input type='hidden' id='gamePostId' value='" + detail.gamePostId + "'>" +
+                            "</tr>";
+                        $("#paymentList").append(row);
+                    }
             });
 
 
@@ -266,14 +267,10 @@
                                                             </tr>
                                                             </thead>
                                                             <tbody id="paymentList">
-                                                            <!--                                                            <tr>-->
-                                                            <!--                                                                <th scope="row">결제 번호</th>-->
-                                                            <!--                                                                <td>게임</td>-->
-                                                            <!--                                                                <td>장르</td>-->
-                                                            <!--                                                                <td>개발자</td>-->
-                                                            <!--                                                                <td>가격</td>-->
-                                                            <!--                                                                <td>날짜</td>-->
-                                                            <!--                                                            </tr>-->
+                                                                <tr>
+                                                                    <th scope="row" colspan="4">구매내역이 존재하지 않습니다.</th>
+
+                                                                </tr>
                                                             </tbody>
                                                         </table>
 
