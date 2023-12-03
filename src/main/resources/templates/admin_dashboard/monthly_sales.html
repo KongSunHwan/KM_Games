@@ -80,8 +80,8 @@
                                 <p id="pms" class="text-muted mb-0">이전달 : 50,233개</p>
                             </div>
                             <div class="">
-                                <i id="upicon1" class="fas fa-angle-up text-success"></i>&nbsp;
-                                <i id="downicon1" class="fas fa-angle-down text-danger"></i>&nbsp;
+                                <i id="upicon1" class="fas fa-angle-up text-success"></i>
+                                <i id="downicon1" class="fas fa-angle-down text-danger"></i>
                                 <i id="barsicon1" class="fas fa-bars text-dark"></i>&nbsp;
                                 <span id="msip">50%</span>
                             </div>
@@ -184,17 +184,17 @@
                         <h6 class="card-title text-muted">월별 판매 1위 게임</h6>
                         <div class="d-flex">
                             <a class="avatar avatar-lg mr-20" href="javascript://">
-                                <img src="/img/game/game_img.png">
+                                <img id="ghid1">
                             </a>
                             <div class="flex-fill">
                                 <div class="float-right mt-10">
                                     <button class="btn btn-outline-primary btn-sm">조회</button>
                                 </div>
-                                <h6 class="my-3">서든어택</h6>
-                                <small class="text-muted">75,000원</small>
+                                <h6 id="gtitle1" class="my-3">서든어택</h6>
+                                <small id="gprice1" class="text-muted">75,000원</small>
                             </div>
                         </div>
-                        <b><p class="text-muted mb-0 float-right">이전달: 서든어택</p></b>
+                        <b><p id="pgtitle" class="text-muted mb-0 float-right">이전달: 서든어택</p></b>
                     </div>
                 </div>
             </div>
@@ -698,8 +698,9 @@
         $('#clickedMonth2').text(e.month);
         $('#clickedMonth3').text(e.month);
         $('#clickedMonth4').text(e.month);
+        $('#clickedMonth5').text(e.month);
         $('#ms').text(e.ms.toLocaleString() + ' 개');
-        $('#pms').text(e.pms.toLocaleString() + ' 개');
+        $('#pms').text('이전달 : ' + e.pms.toLocaleString() + ' 개');
         if (e.msip === 0) {
             $('#msip').text('0 %');
             $('#barsicon1').css('display', 'inline');
@@ -717,7 +718,7 @@
             $('#msip').text(e.msip.toLocaleString() + ' %');
         }
         $('#cms').text(e.cms.toLocaleString() + ' 개');
-        $('#pcms').text(e.pcms.toLocaleString() + ' 개');
+        $('#pcms').text('이전달 : ' + e.pcms.toLocaleString() + ' 개');
         if (e.cmsip === 0) {
             $('#barsicon3').css('display', 'inline');
             $('#upicon3').css('display', 'none');
@@ -735,7 +736,7 @@
             $('#cmsip').text(e.cmsip.toLocaleString() + ' %');
         }
         $('#msa').text(e.msa.toLocaleString() + ' 원');
-        $('#pmsa').text(e.pmsa.toLocaleString() + ' 원');
+        $('#pmsa').text('이전달 : ' + e.pmsa.toLocaleString() + ' 원');
         if (e.msaip === 0) {
             $('#barsicon2').css('display', 'inline');
             $('#upicon2').css('display', 'none');
@@ -753,7 +754,7 @@
             $('#msaip').text(e.msaip.toLocaleString() + ' %');
         }
         $('#cmsa').text(e.cmsa.toLocaleString() + ' 원');
-        $('#pcmsa').text(e.pcmsa.toLocaleString() + ' 원');
+        $('#pcmsa').text('이전달 : ' + e.pcmsa.toLocaleString() + ' 원');
         if (e.cmsaip === 0) {
             $('#barsicon4').css('display', 'inline');
             $('#upicon4').css('display', 'none');
@@ -770,6 +771,9 @@
             $('#downicon4').css('display', 'inline');
             $('#cmsaip').text(e.cmsaip.toLocaleString() + ' %');
         }
+        $('#gtitle1').text(e.gtitle);
+        $('#pgtitle').text('이전달 : ' + e.pgtitle);
+        $('#gprice1').text(e.gprice + '원');
     }
 </script>
 

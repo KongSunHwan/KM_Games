@@ -20,4 +20,10 @@ public class MonthlyTrafficRestController {
         System.out.println("endDate : " + endDate);
         return monthlyTrafficService.getMonthlyTraffic(endDate);
     }
+
+    @GetMapping("/api/monthlyRating")
+    public List<?> getRatingTraffic() {
+        return null;
+    }
+
 }
