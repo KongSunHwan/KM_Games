@@ -132,20 +132,20 @@
             //paymentH pagination
             var pagePHprev = $("#paymentP");
             if (result.pageDTO.prev != false)
-                pagePHprev.append("<li class='page-item'>" + "<a class='page-link'>" + "이전" + "</a>"
+                pagePHprev.append("<li class='page-item'>" + "<a class='page-link' style='cursor: pointer;'>" + "이전" + "</a>"
                     + "</li>"
                 );
 
             var pagePHnum = $("#paymentP");
             for (var i = result.pageDTO.startPage; i <= result.pageDTO.endPage; i++) {
-                pagePHnum = "<li class='page-item'>" + "<a id='actionPH' class='page-link'>" + i + "</a>"
+                pagePHnum = "<li class='page-item'>" + "<a id='actionPH' class='page-link' style='cursor: pointer;'>" + i + "</a>"
                     + "</li>";
                 $("#paymentP").append(pagePHnum);
             }
 
             var pagePHnext = $("#paymentP");
             if (result.pageDTO.next != false)
-                pagePHnext.append("<li class='page-item'>" + "<a class='page-link'>" + "다음" + "</a>"
+                pagePHnext.append("<li class='page-item'>" + "<a class='page-link' style='cursor: pointer;'>" + "다음" + "</a>"
                     + "</li>"
                 );
         }

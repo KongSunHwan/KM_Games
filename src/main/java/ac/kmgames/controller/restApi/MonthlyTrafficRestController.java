@@ -1,5 +1,6 @@
 package ac.kmgames.controller.restApi;
 
+import ac.kmgames.model.dto.GameDataDTO;
 import ac.kmgames.model.dto.MonthlyTrafficDTO;
 import ac.kmgames.service.MonthlyTrafficService;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,20 @@ public class MonthlyTrafficRestController {
         return monthlyTrafficService.getMonthlyTraffic(endDate);
     }
 
-    @GetMapping("/api/monthlyRating")
-    public List<?> getRatingTraffic() {
-        return null;
+    @GetMapping("/chart/data")
+    public List<GameDataDTO> getPieChartData() {
+        return generateTestData();
     }
+
+    public List<GameDataDTO> generateTestData() {
+        List<GameDataDTO> gameDataList = new ArrayList<>();
+        gameDataList.add(new GameDataDTO("게임1", 50.5));
+        gameDataList.add(new GameDataDTO("게임2", 25.5));
+        gameDataList.add(new GameDataDTO("게임3", 10));
+        gameDataList.add(new GameDataDTO("게임4", 5));
+        gameDataList.add(new GameDataDTO("게임5", 9));
+        return gameDataList;
+    }
+
 
 }

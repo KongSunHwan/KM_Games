@@ -53,6 +53,13 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="/css/morioh.css">
+
+    <style>
+        .hoverable:hover {
+            background-color: #e6e6e6;
+            cursor: pointer;
+        }
+    </style>
     <script>
         $(function () {
             var actionForm = $("#actionForm");
@@ -245,13 +252,14 @@
                             <th class="text-center">이름</th>
                             <th class="text-center">닉네임</th>
                             <th class="text-center">날짜</th>
-                            <th class="text-center">설정</th>
+<!--                            <th class="text-center">설정</th>-->
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="pageList : ${pageList.userPageList}">
+                        <tr th:each="pageList : ${pageList.userPageList}" th:class="'hoverable'" th:onclick="|location.href='@{/member_detail/{param1}(param1=${pageList.id})}'|">
+<!--                            <a th:href="@{/member_detail/{param1}(param1=${pageList.id})}">-->
                             <td class="text-center">
-                                <a th:href="@{/member_detail/{param1}(param1=${pageList.id})}">일반회원</a>
+                                일반회원
                             </td>
 
                             <td class="text-center" th:text="${pageList.email}">
@@ -269,25 +277,26 @@
                                 <span class="badge bg-primary"
                                       th:text="${#strings.substring(pageList.created_date_time, 0, 19)}">날짜</span>
                             </td>
+<!--                            </a>-->
 
-                            <td class="text-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn" data-bs-toggle="dropdown"
-                                            data-bs-display="static" aria-expanded="false">
-                                        <i class="mdi mdi-dots-horizontal"></i>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-lg-end">
-                                        <li><a href="#">
-                                            <button class="dropdown-item" type="button"
-                                                    th:text="${pageList.name} + ${' 상세내역'}">상세내역
-                                            </button>
-                                        </a></li>
-                                        <li>
-                                            <button class="dropdown-item" type="button">삭제</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </td>
+<!--                            <td class="text-center">-->
+<!--                                <div class="btn-group">-->
+<!--                                    <button type="button" class="btn" data-bs-toggle="dropdown"-->
+<!--                                            data-bs-display="static" aria-expanded="false">-->
+<!--                                        <i class="mdi mdi-dots-horizontal"></i>-->
+<!--                                    </button>-->
+<!--                                    <ul class="dropdown-menu dropdown-menu-lg-end">-->
+<!--                                        <li><a href="#">-->
+<!--                                            <button class="dropdown-item" type="button"-->
+<!--                                                    th:text="${pageList.name} + ${' 상세내역'}">상세내역-->
+<!--                                            </button>-->
+<!--                                        </a></li>-->
+<!--                                        <li>-->
+<!--                                            <button class="dropdown-item" type="button">삭제</button>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                            </td>-->
                         </tr>
                         </tbody>
 

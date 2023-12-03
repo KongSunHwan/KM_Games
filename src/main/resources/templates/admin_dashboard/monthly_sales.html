@@ -774,6 +774,8 @@
         $('#gtitle1').text(e.gtitle);
         $('#pgtitle').text('이전달 : ' + e.pgtitle);
         $('#gprice1').text(e.gprice + '원');
+        $('#ghid1').attr("src", "/gallery/download/" + e.gphid);
+
     }
 </script>
 
@@ -841,55 +843,55 @@
         });
 
 
-        Highcharts.chart('hl-pie-ref', {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-            },
-            title: {
-                text: ''
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: false
-                }
-            },
-            series: [{
-                name: '비율',
-                colorByPoint: true,
-                data: [{
-                    name: '게임1',
-                    y: 30.5,
-                    sliced: true,
-                    // selected: true
-                }, {
-                    name: '게임2',
-                    y: 25.5
-                }, {
-                    name: '게임3',
-                    y: 16
-                }, {
-                    name: '게임4',
-                    y: 8
-                }, {
-                    name: '게임5',
-                    y: 4
-                }, {
-                    name: '게임6',
-                    y: 7.05
-                }]
-            }]
-        });
+        // Highcharts.chart('hl-pie-ref', {
+        //     chart: {
+        //         plotBackgroundColor: null,
+        //         plotBorderWidth: null,
+        //         plotShadow: false,
+        //         type: 'pie'
+        //     },
+        //     title: {
+        //         text: ''
+        //     },
+        //     tooltip: {
+        //         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        //     },
+        //     plotOptions: {
+        //         pie: {
+        //             allowPointSelect: true,
+        //             cursor: 'pointer',
+        //             dataLabels: {
+        //                 enabled: false
+        //             },
+        //             showInLegend: false
+        //         }
+        //     },
+        //     series: [{
+        //         name: '비율',
+        //         colorByPoint: true,
+        //         data: [{
+        //             name: '게임1',
+        //             y: 30.5,
+        //             sliced: true,
+        //             // selected: true
+        //         }, {
+        //             name: '게임2',
+        //             y: 25.5
+        //         }, {
+        //             name: '게임3',
+        //             y: 16
+        //         }, {
+        //             name: '게임4',
+        //             y: 8
+        //         }, {
+        //             name: '게임5',
+        //             y: 4
+        //         }, {
+        //             name: '게임6',
+        //             y: 7.05
+        //         }]
+        //     }]
+        // });
 
 
         Highcharts.chart('hl-line-main', {
@@ -956,6 +958,46 @@
         });
     })
 
+</script>
+
+<script>
+    // 서버에서 받아온 데이터를 사용하여 차트 생성
+    fetch('/chart/data')
+        .then(response => response.json())
+        .then(data => {
+            Highcharts.chart('hl-pie-ref', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: false
+                    }
+                },
+                series: [{
+                    name: '비율',
+                    colorByPoint: true,
+                    data: data
+                }]
+            });
+        })
+        .catch(error => {
+            console.error('데이터를 불러오는 중 오류 발생:', error);
+        });
 </script>
 
 </body>
