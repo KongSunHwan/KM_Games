@@ -38,5 +38,17 @@
         ORDER BY
             Month;
     </select>
+    <select id="getRatios" resultType="ac.kmgames.model.dto.GameDataDTO">
+        select o.game_post_id as gid, (select game_title from game_post where game_post.game_post_id = o.game_post_id) as name, count(*) as gcount,
+               ROUND( ((count(*))/((select count(*) from order_games)) * 100) , 2)  as y,
+               ph.game_photo_id as gphid,
+               p.game_price as gprice
+        from order_games o, game_post p,
+             (select game_photo_id, game_post_id from game_photo group by game_post_id) as ph
+        where o.game_post_id = p.game_post_id and ph.game_post_id = p.game_post_id
+        group by o.game_post_id
+        order by count(*) desc;
+    </select>
+
 
 </mapper>

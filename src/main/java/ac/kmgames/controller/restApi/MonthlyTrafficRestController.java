@@ -24,18 +24,6 @@ public class MonthlyTrafficRestController {
 
     @GetMapping("/chart/data")
     public List<GameDataDTO> getPieChartData() {
-        return generateTestData();
+        return monthlyTrafficService.getRatioGames();
     }
-
-    public List<GameDataDTO> generateTestData() {
-        List<GameDataDTO> gameDataList = new ArrayList<>();
-        gameDataList.add(new GameDataDTO("게임1", 50.5));
-        gameDataList.add(new GameDataDTO("게임2", 25.5));
-        gameDataList.add(new GameDataDTO("게임3", 10));
-        gameDataList.add(new GameDataDTO("게임4", 5));
-        gameDataList.add(new GameDataDTO("게임5", 9));
-        return gameDataList;
-    }
-
-
 }

@@ -1,5 +1,6 @@
 package ac.kmgames.service;
 
+import ac.kmgames.model.dto.GameDataDTO;
 import ac.kmgames.model.dto.MonthlyTrafficDTO;
 import ac.kmgames.model.mapper.MonthlyTrafficMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +25,9 @@ final public class MonthlyTrafficService {
         String startDates = startLocalDate.format(formatter);
         String endDates = endDate + " 23:59:59";
         return monthlyTrafficMapper.getMonthlyTraffic(startDates, endDates);
+    }
+
+    public List<GameDataDTO> getRatioGames() {
+        return monthlyTrafficMapper.getRatios();
     }
 }

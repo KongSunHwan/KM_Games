@@ -119,14 +119,14 @@
                         <h6 class="card-title text-muted">누적 판매 1위 게임</h6>
                         <div class="d-flex">
                             <a class="avatar avatar-lg mr-20" href="javascript://">
-                                <img src="/img/game/game_img.png">
+                                <img id="gphid2">
                             </a>
                             <div class="flex-fill">
                                 <div class="float-right mt-10">
-                                    <button class="btn btn-outline-primary btn-sm">조회</button>
+                                    <button id="gdhl2" class="btn btn-outline-primary btn-sm">조회</button>
                                 </div>
-                                <h6 class="my-3">서든어택</h6>
-                                <small class="text-muted">75,000원</small>
+                                <h6 id="gtitle2" class="my-3">서든어택</h6>
+                                <small id="gprice2" class="text-muted">75,000원</small>
                             </div>
                         </div>
                     </div>
@@ -188,7 +188,7 @@
                             </a>
                             <div class="flex-fill">
                                 <div class="float-right mt-10">
-                                    <button class="btn btn-outline-primary btn-sm">조회</button>
+                                    <button id="gdhl1" class="btn btn-outline-primary btn-sm">조회</button>
                                 </div>
                                 <h6 id="gtitle1" class="my-3">서든어택</h6>
                                 <small id="gprice1" class="text-muted">75,000원</small>
@@ -216,7 +216,7 @@
             <div class="col-lg-4 col-12">
 
                 <div class="card mb-15">
-                    <div class="card-header bg-transparent py-15">게임 Top 5 지역 순위</div>
+                    <div class="card-header bg-transparent py-15">인기 게임 Top 5</div>
 
                     <div class="card-body">
 
@@ -225,55 +225,55 @@
                         </div>
 
                         <div class="mb-15">
-                            <a class="text-body" href="#">서든어택</a>
-                            <div class="float-right text-muted">
+                            <a id="names1" class="text-body">서든어택</a>
+                            <div id="ratio1" class="float-right text-muted">
                                 30.5%
                             </div>
                             <div class="progress progress-xs mt-5">
-                                <div class="progress-bar" style="width: 30.5%;"></div>
+                                <div id="ratiobar1" class="progress-bar" style="width: 30.5%;"></div>
                             </div>
                         </div>
 
                         <div class="mb-15">
-                            <a class="text-body" href="#">서든어택</a>
-                            <div class="float-right text-muted">
+                            <a id="names2" class="text-body">서든어택</a>
+                            <div id="ratio2" class="float-right text-muted">
                                 25.5%
                             </div>
                             <div class="progress progress-xs mt-5">
-                                <div class="progress-bar" style="width: 25.5%;"></div>
+                                <div id="ratiobar2" class="progress-bar" style="width: 25.5%;"></div>
                             </div>
                         </div>
 
                         <div class="mb-15">
-                            <a class="text-body" href="#">서든어택</a>
-                            <div class="float-right text-muted">
+                            <a id="names3" class="text-body">서든어택</a>
+                            <div id="ratio3" class="float-right text-muted">
                                 16%
                             </div>
 
                             <div class="progress progress-xs mt-5">
-                                <div class="progress-bar" style="width: 16%;"></div>
+                                <div id="ratiobar3" class="progress-bar" style="width: 16%;"></div>
                             </div>
                         </div>
 
 
                         <div class="mb-15">
-                            <a class="text-body" href="#">서든어택</a>
-                            <div class="float-right text-muted">
+                            <a id="names4" class="text-body">서든어택</a>
+                            <div id="ratio4" class="float-right text-muted">
                                 8%
                             </div>
                             <div class="progress progress-xs mt-5">
-                                <div class="progress-bar" style="width: 8%;"></div>
+                                <div id="ratiobar4" class="progress-bar" style="width: 8%;"></div>
                             </div>
                         </div>
 
 
                         <div class="mb-15">
-                            <a class="text-body" href="#">서든어택</a>
-                            <div class="float-right text-muted">
+                            <a id="names5" class="text-body">서든어택</a>
+                            <div id="ratio5" class="float-right text-muted">
                                 4%
                             </div>
                             <div class="progress progress-xs mt-5">
-                                <div class="progress-bar" style="width: 8%;"></div>
+                                <div id="ratiobar5" class="progress-bar" style="width: 8%;"></div>
                             </div>
                         </div>
 
@@ -284,297 +284,297 @@
             </div>
         </div>
 
-        <div class="row">
+<!--        <div class="row">-->
 
-            <div class="col-lg-8 col-md-12">
+<!--            <div class="col-lg-8 col-md-12">-->
 
-                <div class="card mb-15">
-                    <div class="card-header bg-transparent py-15">최근 게임 구매</div>
+<!--                <div class="card mb-15">-->
+<!--                    <div class="card-header bg-transparent py-15">최근 게임 구매</div>-->
 
-                    <div class="table-responsive">
-                        <table class="table text-center">
+<!--                    <div class="table-responsive">-->
+<!--                        <table class="table text-center">-->
 
-                            <thead>
-                            <tr>
-                                <th>이메일</th>
-                                <th>게임 이름</th>
-                                <th>게임 종류</th>
-                                <th class="text-center">시간</th>
-                                <th class="text-center">현재 상태</th>
-                                <th class="text-right">옵션</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    neha******@gmail.com
-                                </td>
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th>이메일</th>-->
+<!--                                <th>게임 이름</th>-->
+<!--                                <th>게임 종류</th>-->
+<!--                                <th class="text-center">시간</th>-->
+<!--                                <th class="text-center">현재 상태</th>-->
+<!--                                <th class="text-right">옵션</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    neha******@gmail.com-->
+<!--                                </td>-->
 
-                                <td>
-                                    휴먼 폴 플랫
-                                </td>
+<!--                                <td>-->
+<!--                                    휴먼 폴 플랫-->
+<!--                                </td>-->
 
-                                <td>
-                                    아케이드
-                                </td>
+<!--                                <td>-->
+<!--                                    아케이드-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    2023-08-03 10:10:10 AM
-                                </td>
+<!--                                <td class="text-right">-->
+<!--                                    2023-08-03 10:10:10 AM-->
+<!--                                </td>-->
 
-                                <td class="text-center">
-                                    <span class="badge bg-primary">계약 완료</span>
-                                </td>
+<!--                                <td class="text-center">-->
+<!--                                    <span class="badge bg-primary">계약 완료</span>-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    <div class="dropdown">
-                                        <button aria-expanded="false"
-                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"
-                                                id="d350ad" type="button">
-                                            <i class="mdi mdi-dots-horizontal"></i>
-                                            <div aria-labelledby="d350ad"
-                                                 class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">보기</a>
-                                                <a class="dropdown-item" href="#">수정</a>
-                                                <a class="dropdown-item" href="#">삭제</a>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+<!--                                <td class="text-right">-->
+<!--                                    <div class="dropdown">-->
+<!--                                        <button aria-expanded="false"-->
+<!--                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"-->
+<!--                                                id="d350ad" type="button">-->
+<!--                                            <i class="mdi mdi-dots-horizontal"></i>-->
+<!--                                            <div aria-labelledby="d350ad"-->
+<!--                                                 class="dropdown-menu dropdown-menu-right">-->
+<!--                                                <a class="dropdown-item" href="#">보기</a>-->
+<!--                                                <a class="dropdown-item" href="#">수정</a>-->
+<!--                                                <a class="dropdown-item" href="#">삭제</a>-->
+<!--                                            </div>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                            </tr>-->
 
-                            <tr>
-                                <td>
-                                    neha******@gmail.com
-                                </td>
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    neha******@gmail.com-->
+<!--                                </td>-->
 
-                                <td>
-                                    휴먼 폴 플랫
-                                </td>
+<!--                                <td>-->
+<!--                                    휴먼 폴 플랫-->
+<!--                                </td>-->
 
-                                <td>
-                                    아케이드
-                                </td>
+<!--                                <td>-->
+<!--                                    아케이드-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    2023-08-03 10:10:10 AM
-                                </td>
+<!--                                <td class="text-right">-->
+<!--                                    2023-08-03 10:10:10 AM-->
+<!--                                </td>-->
 
-                                <td class="text-center">
-                                    <span class="badge bg-primary">계약 완료</span>
-                                </td>
+<!--                                <td class="text-center">-->
+<!--                                    <span class="badge bg-primary">계약 완료</span>-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    <div class="dropdown">
-                                        <button aria-expanded="false"
-                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"
-                                                id="d350ad" type="button">
-                                            <i class="mdi mdi-dots-horizontal"></i>
-                                            <div aria-labelledby="d350ad"
-                                                 class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">보기</a>
-                                                <a class="dropdown-item" href="#">수정</a>
-                                                <a class="dropdown-item" href="#">삭제</a>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+<!--                                <td class="text-right">-->
+<!--                                    <div class="dropdown">-->
+<!--                                        <button aria-expanded="false"-->
+<!--                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"-->
+<!--                                                id="d350ad" type="button">-->
+<!--                                            <i class="mdi mdi-dots-horizontal"></i>-->
+<!--                                            <div aria-labelledby="d350ad"-->
+<!--                                                 class="dropdown-menu dropdown-menu-right">-->
+<!--                                                <a class="dropdown-item" href="#">보기</a>-->
+<!--                                                <a class="dropdown-item" href="#">수정</a>-->
+<!--                                                <a class="dropdown-item" href="#">삭제</a>-->
+<!--                                            </div>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                            </tr>-->
 
-                            <tr>
-                                <td>
-                                    neha******@gmail.com
-                                </td>
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    neha******@gmail.com-->
+<!--                                </td>-->
 
-                                <td>
-                                    휴먼 폴 플랫
-                                </td>
+<!--                                <td>-->
+<!--                                    휴먼 폴 플랫-->
+<!--                                </td>-->
 
-                                <td>
-                                    아케이드
-                                </td>
+<!--                                <td>-->
+<!--                                    아케이드-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    2023-08-03 10:10:10 AM
-                                </td>
+<!--                                <td class="text-right">-->
+<!--                                    2023-08-03 10:10:10 AM-->
+<!--                                </td>-->
 
-                                <td class="text-center">
-                                    <span class="badge bg-primary">계약 완료</span>
-                                </td>
+<!--                                <td class="text-center">-->
+<!--                                    <span class="badge bg-primary">계약 완료</span>-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    <div class="dropdown">
-                                        <button aria-expanded="false"
-                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"
-                                                id="d350ad" type="button">
-                                            <i class="mdi mdi-dots-horizontal"></i>
-                                            <div aria-labelledby="d350ad"
-                                                 class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">보기</a>
-                                                <a class="dropdown-item" href="#">수정</a>
-                                                <a class="dropdown-item" href="#">삭제</a>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+<!--                                <td class="text-right">-->
+<!--                                    <div class="dropdown">-->
+<!--                                        <button aria-expanded="false"-->
+<!--                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"-->
+<!--                                                id="d350ad" type="button">-->
+<!--                                            <i class="mdi mdi-dots-horizontal"></i>-->
+<!--                                            <div aria-labelledby="d350ad"-->
+<!--                                                 class="dropdown-menu dropdown-menu-right">-->
+<!--                                                <a class="dropdown-item" href="#">보기</a>-->
+<!--                                                <a class="dropdown-item" href="#">수정</a>-->
+<!--                                                <a class="dropdown-item" href="#">삭제</a>-->
+<!--                                            </div>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                            </tr>-->
 
-                            <tr>
-                                <td>
-                                    neha******@gmail.com
-                                </td>
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    neha******@gmail.com-->
+<!--                                </td>-->
 
-                                <td>
-                                    휴먼 폴 플랫
-                                </td>
+<!--                                <td>-->
+<!--                                    휴먼 폴 플랫-->
+<!--                                </td>-->
 
-                                <td>
-                                    아케이드
-                                </td>
+<!--                                <td>-->
+<!--                                    아케이드-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    2023-08-03 10:10:10 AM
-                                </td>
+<!--                                <td class="text-right">-->
+<!--                                    2023-08-03 10:10:10 AM-->
+<!--                                </td>-->
 
-                                <td class="text-center">
-                                    <span class="badge bg-primary">계약 완료</span>
-                                </td>
+<!--                                <td class="text-center">-->
+<!--                                    <span class="badge bg-primary">계약 완료</span>-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    <div class="dropdown">
-                                        <button aria-expanded="false"
-                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"
-                                                id="d350ad" type="button">
-                                            <i class="mdi mdi-dots-horizontal"></i>
-                                            <div aria-labelledby="d350ad"
-                                                 class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">보기</a>
-                                                <a class="dropdown-item" href="#">수정</a>
-                                                <a class="dropdown-item" href="#">삭제</a>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+<!--                                <td class="text-right">-->
+<!--                                    <div class="dropdown">-->
+<!--                                        <button aria-expanded="false"-->
+<!--                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"-->
+<!--                                                id="d350ad" type="button">-->
+<!--                                            <i class="mdi mdi-dots-horizontal"></i>-->
+<!--                                            <div aria-labelledby="d350ad"-->
+<!--                                                 class="dropdown-menu dropdown-menu-right">-->
+<!--                                                <a class="dropdown-item" href="#">보기</a>-->
+<!--                                                <a class="dropdown-item" href="#">수정</a>-->
+<!--                                                <a class="dropdown-item" href="#">삭제</a>-->
+<!--                                            </div>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                            </tr>-->
 
-                            <tr>
-                                <td>
-                                    neha******@gmail.com
-                                </td>
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    neha******@gmail.com-->
+<!--                                </td>-->
 
-                                <td>
-                                    휴먼 폴 플랫
-                                </td>
+<!--                                <td>-->
+<!--                                    휴먼 폴 플랫-->
+<!--                                </td>-->
 
-                                <td>
-                                    아케이드
-                                </td>
+<!--                                <td>-->
+<!--                                    아케이드-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    2023-08-03 10:10:10 AM
-                                </td>
+<!--                                <td class="text-right">-->
+<!--                                    2023-08-03 10:10:10 AM-->
+<!--                                </td>-->
 
-                                <td class="text-center">
-                                    <span class="badge bg-primary">계약 완료</span>
-                                </td>
+<!--                                <td class="text-center">-->
+<!--                                    <span class="badge bg-primary">계약 완료</span>-->
+<!--                                </td>-->
 
-                                <td class="text-right">
-                                    <div class="dropdown">
-                                        <button aria-expanded="false"
-                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"
-                                                id="d350ad" type="button">
-                                            <i class="mdi mdi-dots-horizontal"></i>
-                                            <div aria-labelledby="d350ad"
-                                                 class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="#">보기</a>
-                                                <a class="dropdown-item" href="#">수정</a>
-                                                <a class="dropdown-item" href="#">삭제</a>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+<!--                                <td class="text-right">-->
+<!--                                    <div class="dropdown">-->
+<!--                                        <button aria-expanded="false"-->
+<!--                                                aria-haspopup="true" class="btn btn-default btn-sm btn-icon btn-transparent font-xl" data-toggle="dropdown"-->
+<!--                                                id="d350ad" type="button">-->
+<!--                                            <i class="mdi mdi-dots-horizontal"></i>-->
+<!--                                            <div aria-labelledby="d350ad"-->
+<!--                                                 class="dropdown-menu dropdown-menu-right">-->
+<!--                                                <a class="dropdown-item" href="#">보기</a>-->
+<!--                                                <a class="dropdown-item" href="#">수정</a>-->
+<!--                                                <a class="dropdown-item" href="#">삭제</a>-->
+<!--                                            </div>-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                            </tr>-->
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-            </div>
-
-
-            <div class="col-lg-4 col-md-12">
-
-                <div class="card mb-15">
-                    <div class="card-header bg-transparent py-15">관리자 멤버</div>
-
-                    <div class="card-body">
-                        <div class="mb-15">
-                            <div class="d-flex">
-                                <a class="avatar avatar-lg mr-20" href="javascript://">
-                                    <img src="/img/ROPF2fQ.png">
-                                </a>
-                                <div class="flex-fill">
-                                    <div class="float-right mt-10">
-                                        <button class="btn btn-outline-primary btn-sm">채팅하기</button>
-                                    </div>
-                                    <h6 class="my-3">정성진</h6>
-                                    <small class="text-muted">Jeong***@gmail.com</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-15">
-                            <div class="d-flex">
-                                <a class="avatar avatar-lg mr-20" href="javascript://">
-                                    <img src="/img/ROPF2fQ.png">
-                                </a>
-                                <div class="flex-fill">
-                                    <div class="float-right mt-10">
-                                        <button class="btn btn-outline-primary btn-sm">채팅하기</button>
-                                    </div>
-                                    <h6 class="my-3">노승원</h6>
-                                    <small class="text-muted">No***@gmail.com</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-15">
-                            <div class="d-flex">
-                                <a class="avatar avatar-lg mr-20" href="javascript://">
-                                    <img src="/img/ROPF2fQ.png">
-                                </a>
-                                <div class="flex-fill">
-                                    <div class="float-right mt-10">
-                                        <button class="btn btn-outline-primary btn-sm">채팅하기</button>
-                                    </div>
-                                    <h6 class="my-3">공선환</h6>
-                                    <small class="text-muted">Kong***@gmail.com</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-15">
-                            <div class="d-flex">
-                                <a class="avatar avatar-lg mr-20" href="javascript://">
-                                    <img src="/img/ROPF2fQ.png">
-                                </a>
-                                <div class="flex-fill">
-                                    <div class="float-right mt-10">
-                                        <button class="btn btn-outline-primary btn-sm">채팅하기</button>
-                                    </div>
-                                    <h6 class="my-3">김재호</h6>
-                                    <small class="text-muted">Kim***@gmail.com</small>
-                                </div>
-                            </div>
-                        </div>
+<!--            </div>-->
 
 
-                    </div>
+<!--            <div class="col-lg-4 col-md-12">-->
 
-                </div>
-            </div>
-        </div>
+<!--                <div class="card mb-15">-->
+<!--                    <div class="card-header bg-transparent py-15">관리자 멤버</div>-->
+
+<!--                    <div class="card-body">-->
+<!--                        <div class="mb-15">-->
+<!--                            <div class="d-flex">-->
+<!--                                <a class="avatar avatar-lg mr-20" href="javascript://">-->
+<!--                                    <img src="/img/ROPF2fQ.png">-->
+<!--                                </a>-->
+<!--                                <div class="flex-fill">-->
+<!--                                    <div class="float-right mt-10">-->
+<!--                                        <button class="btn btn-outline-primary btn-sm">채팅하기</button>-->
+<!--                                    </div>-->
+<!--                                    <h6 class="my-3">정성진</h6>-->
+<!--                                    <small class="text-muted">Jeong***@gmail.com</small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="mb-15">-->
+<!--                            <div class="d-flex">-->
+<!--                                <a class="avatar avatar-lg mr-20" href="javascript://">-->
+<!--                                    <img src="/img/ROPF2fQ.png">-->
+<!--                                </a>-->
+<!--                                <div class="flex-fill">-->
+<!--                                    <div class="float-right mt-10">-->
+<!--                                        <button class="btn btn-outline-primary btn-sm">채팅하기</button>-->
+<!--                                    </div>-->
+<!--                                    <h6 class="my-3">노승원</h6>-->
+<!--                                    <small class="text-muted">No***@gmail.com</small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="mb-15">-->
+<!--                            <div class="d-flex">-->
+<!--                                <a class="avatar avatar-lg mr-20" href="javascript://">-->
+<!--                                    <img src="/img/ROPF2fQ.png">-->
+<!--                                </a>-->
+<!--                                <div class="flex-fill">-->
+<!--                                    <div class="float-right mt-10">-->
+<!--                                        <button class="btn btn-outline-primary btn-sm">채팅하기</button>-->
+<!--                                    </div>-->
+<!--                                    <h6 class="my-3">공선환</h6>-->
+<!--                                    <small class="text-muted">Kong***@gmail.com</small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="mb-15">-->
+<!--                            <div class="d-flex">-->
+<!--                                <a class="avatar avatar-lg mr-20" href="javascript://">-->
+<!--                                    <img src="/img/ROPF2fQ.png">-->
+<!--                                </a>-->
+<!--                                <div class="flex-fill">-->
+<!--                                    <div class="float-right mt-10">-->
+<!--                                        <button class="btn btn-outline-primary btn-sm">채팅하기</button>-->
+<!--                                    </div>-->
+<!--                                    <h6 class="my-3">김재호</h6>-->
+<!--                                    <small class="text-muted">Kim***@gmail.com</small>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
     </div>
 </div>
@@ -615,6 +615,14 @@
                 success: function (data) {
                     // 차트 생성 함수 호출
                     createMonthlyTrafficChart(data, 'hl-line-main');
+                    // for(var i=0; i<data.length; i++){
+                    //     var lastIndex = data.length -1;
+                    //     console.log(data[lastIndex]);
+                    // }
+                    var lastIndex = data.length -1;
+                    console.log(data[lastIndex]);
+                    straight(data[lastIndex]);
+
                 },
                 error: function (error) {
                     console.error('데이터 로드 중 오류가 발생했습니다:', error);
@@ -775,7 +783,10 @@
         $('#pgtitle').text('이전달 : ' + e.pgtitle);
         $('#gprice1').text(e.gprice + '원');
         $('#ghid1').attr("src", "/gallery/download/" + e.gphid);
-
+        $('#gdhl1').click(function()
+        {
+            window.location.href = "/game_detail_manage?id=" + e.gid;
+        });
     }
 </script>
 
@@ -965,6 +976,30 @@
     fetch('/chart/data')
         .then(response => response.json())
         .then(data => {
+            for(var i=0; i<1; i++){
+                console.log(data);
+                console.log(data[0].name);
+                $('#gtitle2').text(data[0].name);
+                $('#gprice2').text(data[0].gprice);
+                $('#gphid2').attr("src", "/gallery/download/" + data[0].gphid);
+                $('#gdhl2').click(function()
+                {
+                    window.location.href = "/game_detail_manage?id=" + data[0].gid;
+                });
+
+            }
+            for(var i=0; i<5; i++){
+                console.log(data[i]);
+                var x = i+1;
+                $('#names' + x).text(data[i].name).click(function()
+                {
+                    window.location.href = "/game_detail_manage?id=" + data[i].gid;
+                });
+                $('#ratio' + x).text(data[i].y + '%');
+                $('#ratiobar' + x).css('width', data[i].y+ '%');
+
+
+            }
             Highcharts.chart('hl-pie-ref', {
                 chart: {
                     plotBackgroundColor: null,
